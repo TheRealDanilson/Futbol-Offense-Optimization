@@ -19,6 +19,8 @@ bounds      4 element tuple with bounds(0) being the min x coord (-35), bounds(1
             Note: Goal Post positions are x = -4 and 4 y = 0. FOO
 """
 
+#Python sucks
+
 def Ball(self, player):
     # constructor method for Ball
     self.position = player.getPosition
