@@ -1,19 +1,19 @@
 class Ball(object):
 """
-velocity    1x2 list storing velocity with velocity(0) being velocity in the
+velocity    2 element list storing velocity with velocity(0) being velocity in the
             x-direction, and velocity(1) being velocity in the y-direction.
             Starting velocity is [0,0]
         
-position    1x2 list storing position with position(0) being position in the
+position    2 element list storing position with position(0) being position in the
             x-direction, and position(1) being position in the y-direction.
             
-oldPosition 1x2 list storing position from previous timestep with position(0) being
+oldPosition 2 element list storing position from previous timestep with position(0) being
             position in the x-direction, and position(1) being position in the
             y-direction.
 
 possession  The instance of player who possesses the ball
 
-bounds      1x4 tuple with bounds(0) being the min x coord (-35), bounds(1)
+bounds      4 element tuple with bounds(0) being the min x coord (-35), bounds(1)
             being the max x coord (35), bounds(2) being the min y coord (0), and
             bounds(3) being the max y coord (50).
             Note: Goal Post positions are x = -4 and 4 y = 0.
