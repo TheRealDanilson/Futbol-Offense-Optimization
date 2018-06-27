@@ -73,6 +73,7 @@ def shoot(self, velocity):
     # input velocity
     
     self.possession = None
+    self.velocity = velocity
     
     
 
