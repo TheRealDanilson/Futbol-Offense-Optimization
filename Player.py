@@ -15,7 +15,7 @@ class Player(object):
     carefulness - Constant number between 1 and 4 inclusive, represents how 
                 reserved a player is when making a pass
     optPassDist -  Constant number that represents the optimal distance 
-               from a teammate the offense will pass either short, medium or long 
+               from a teammate the offense will pass either short, medium or long, test 
     """
     
     def __init__(self, position, game, bounds = (-35, 35, 0, 50)):
