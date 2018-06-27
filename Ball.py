@@ -16,8 +16,9 @@ possession  The instance of player who possesses the ball
 bounds      4 element tuple with bounds(0) being the min x coord (-35), bounds(1)
             being the max x coord (35), bounds(2) being the min y coord (0), and
             bounds(3) being the max y coord (50).
-            Note: Goal Post positions are x = -4 and 4 y = 0.
+            Note: Goal Post positions are x = -4 and 4 y = 0. FOO
 """
+
 def Ball(self, player):
     # constructor method for Ball
     self.position = player.getPosition
