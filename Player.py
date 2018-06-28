@@ -1,3 +1,5 @@
+from constants import *
+
 class Player(object):
     """
     game - Stores the currently running game
@@ -18,7 +20,7 @@ class Player(object):
                from a teammate the offense will pass either short, medium or long
     """
     
-    def __init__(self, position, game, bounds = (-35, 35, 0, 50)):
+    def __init__(self, position, game, bounds = FIELD_BOUNDS):
         self.game = game
         self.ball = None
         self.position = position
@@ -56,9 +58,28 @@ class Player(object):
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
         
-    def update(self):
+    def genWeight(self, objective):
+        return 0.5
         
-    
+    def update(self):
+        Vx = self.velocity[0]
+        Vy = self.velocity[1]
+        dVx = 0
+        dVy = 0
+        for objective in Objectives:
+            weight = self.genWeight(objective)
+            if objective is Objectives.GOAL:
+                vector = self.game.playerDistGoal(self)
+                dVx += weight * vector[0]
+                dVy += weight * vector[1]
+        Vx += dVx
+        Vy += dVy
+        speed = (Vx**2 + Vy **2)**(0.5)
+        if speed > MAX_SPEED:
+            Vx *= MAX_SPEED/speed
+            Vy *= MAX_SPEED/speed
+        self.velocity = [Vx, Vy]
+            
     
         
     

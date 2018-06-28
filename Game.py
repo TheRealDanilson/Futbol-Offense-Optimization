@@ -1,24 +1,48 @@
-import Player
-import Ball
+from constants import *
+from Player import Player
+from Ball import Ball
+from math import floor
+
 
 class Game(object):
     
+    def __init__(self):
+        self.players = []
+        self.createPlayer([-10, 50])
+        self.createPlayer([-20, 35])
+        self.createBall(self.players[0])
+    
+    
     def createPlayer(self, position):
-        player = Player.Player(position, self)
+        player = Player(position, self)
         self.players += [player]
     
-        
     def createBall(self, player):
-        self.ball = Ball.Ball(player)
+        self.ball = Ball(player)
     
     
     def playerDistBall(self, player):
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
-        dx = playerPos[0] - ballPos[0]
-        dy = playerPos[1] - ballPos[1]
-        dist = (dx**2 + dy**2)**(0.5)
+        dx = ballPos[0] - playerPos[0]
+        dy = ballPos[1] - playerPos[1]
+        return (dx, dy)
         
+        
+    def playerDistGoal(self, player):
+        playerPos = player.getPosition()
+        dx = GOAL_POS[0] - playerPos[0]
+        dy = GOAL_POS[1] - playerPos[1]
+        return (dx, dy)
+    
+    
+    def playerDistPlayer(self, player1, player2):
+        player1Pos = player1.getPosition()
+        player2Pos = player2.getPosition()
+        dx = player2Pos[0] - player1Pos[0]
+        dy = player2Pos[0] - player1Pos[0]
+        return (dx, dy)
+    
         
     def changePossession(self, player):
         oldPlayer = self.ball.getPossession()
@@ -29,13 +53,40 @@ class Game(object):
     
         
     def update(self):
-        self.ball.move()
+        ballPlayer = self.ball.getPossession()
         for player in self.players:
+            player.update()
             player.move()
-            if self.ball.getPossession() is None:
-                dist = self.playerDistBall(player)
-                if dist <= self.threshold:
-                    self.changePossession(player)
+            if ballPlayer is not None:
+                self.ball.update()
+        self.ball.move()
+        self.printField()
+    
+    def printField(self):
+        field = []
+        x_min = FIELD_BOUNDS[0]
+        x_max = FIELD_BOUNDS[1]
+        y_min = FIELD_BOUNDS[2]
+        y_max = FIELD_BOUNDS[3]
+        xLength = x_max - x_min + 1
+        yLength = y_max - y_min + 1
+        field_size = xLength*yLength
+        for i in range(field_size):
+            field += ['.']
+        goalIndex = (xLength)*(y_max - GOAL_POS[1]) + GOAL_POS[0] - x_min
+        field[goalIndex] = 'G'
+        for player in self.players:
+            pos = player.getPosition()
+            x = floor(pos[0])
+            y = floor(pos[1])
+            index = (xLength)*(y_max - y) + x - x_min
+            if index < field_size - 1:
+                field[index] = 'X'
+        for y in range(yLength):
+            line = ''
+            for x in range(xLength):
+                line += field[xLength*y + x]
+            print(line)
 
-                            
+
         
