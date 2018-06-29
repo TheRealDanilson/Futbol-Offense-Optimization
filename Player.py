@@ -62,19 +62,23 @@ class Player(object):
         return 0.5
         
     def update(self):
-        Vx = self.velocity[0]
-        Vy = self.velocity[1]
-        dVx = 0
-        dVy = 0
+        Vx = 0
+        Vy = 0
+        
         for objective in Objectives:
             weight = self.genWeight(objective)
             if objective is Objectives.GOAL:
                 vector = self.game.playerDistGoal(self)
-                dVx += weight * vector[0]
-                dVy += weight * vector[1]
-        Vx += dVx
-        Vy += dVy
-        speed = (Vx**2 + Vy **2)**(0.5)
+                Vx += weight * vector[0]
+                Vy += weight * vector[1]
+            elif objective is Objectives.TEAMMATES:
+                team = self.game.playerTeam(self)
+                for teammate in team:
+                    vector = self.game.playerDistPlayer(self, teammate)
+                    Vx += weight * -vector[0]
+                    Vy += weight * -vector[1]
+                
+        speed = (Vx**2 + Vy**2)**(0.5)
         if speed > MAX_SPEED:
             Vx *= MAX_SPEED/speed
             Vy *= MAX_SPEED/speed
