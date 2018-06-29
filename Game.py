@@ -50,6 +50,10 @@ class Game(object):
             oldPlayer.removePossession()
         player.getPossession(ball)
         self.ball.setPossession(player)
+        
+    
+    def playerTeam(self, player):
+        return self.players
     
         
     def update(self):
@@ -80,7 +84,7 @@ class Game(object):
             x = floor(pos[0])
             y = floor(pos[1])
             index = (xLength)*(y_max - y) + x - x_min
-            if index < field_size - 1:
+            if index >= 0 and index < field_size - 1 and x >= x_min and x <= x_max:
                 field[index] = 'X'
         for y in range(yLength):
             line = ''
