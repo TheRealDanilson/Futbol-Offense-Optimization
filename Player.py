@@ -44,14 +44,9 @@ class Player(object):
     
     def shoot(self, position):
         """
-            Attempts to shoot the ball to a specified location
-            Returns True if the shot was made, returns False otherwise
+            Notifies the player being s
         """
-        if self.ball is None:
-            return False
-        self.ball.shoot(self, position)
-        self.ball = None
-        return True
+       
     
     def move(self):
         self.oldPosition = self.position
@@ -80,6 +75,35 @@ class Player(object):
             Vy *= MAX_SPEED/speed
         self.velocity = [Vx, Vy]
             
+    def shootPassKeep(self):
+        "Decides if player shoots the ball, passes the ball, or keeps the ball"
+        #Making sure player has the ball
+        if self.ball is not None:
+            
+            shootProb = self.calcShootProb()
+            passProb = self.calcPassProb()
+            rand = .3 #selecting randon number
+            
+                if rand <= shootProb:
+                    
+                    self.shoot(GOAL_POS)
+                    
+                else
+                    player = self.pickPlayer()
+                    self.pass(player)
+                    
+    def calcPassingProb
+        "Returns a list of length TEAM_SIZE with the probabilities range of passing to each player, including the player with the ball"
+        return (.2,.4,.6,.8,1)
+                    
+    def calcPassProb(self)
+        "Returns the probability of passing"
+        return .5
+            
+    def calcShootProb(self):
+        "Returns the probability of shooting"
+        probability = .5
+        return probability
     
         
     
