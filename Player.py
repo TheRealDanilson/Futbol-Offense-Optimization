@@ -36,25 +36,49 @@ class Player(object):
     def getBounds(self):
         return self.bounds
     
-    def removePossession(self):
-        self.ball = None
-        
     def getPossession(self, ball):
         self.ball = ball
     
-    def shoot(self, position):
-        """
-            Notifies the player being s
-        """
-       
+    def removePossession(self):
+        self.ball = None
     
+    def shoot(self, position):
+        """ Removes possession from player and shoots the ball to center of goal
+        """
+        self.removePossession()
+        
     def move(self):
+        """ Stores current position to old position and adds velocity to current
+            position
+        """
         self.oldPosition = self.position
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
         
     def genWeight(self, objective):
-        return 0.5
+        return 0.5                      #Dummy Weight
+    
+    def pickPlayer(self):
+        """Returns a list of length TEAM_SIZE with the probabilities range of
+        passing to each player, including the player with the ball"""
+        return (.2,.4,.6,.8,1)          #Dummy List
+            
+    def calcShootProb(self):
+        "Returns the probability of shooting"
+        probability = .5                #Dummy Probability
+        return probability
+        
+    def shootPassKeep(self):
+        """Decides if player shoots the ball, passes the ball, or keeps the ball
+        and performs the chosen action"""
+        if self.ball is not None:       #Making sure player has the ball
+            shootProb = self.calcShootProb()
+            rand = .3                   #Randon decimal between 0 and 1
+            if rand <= shootProb:       #Decides if to shoot
+                self.shoot(GOAL_POS)      
+            else:                       #Decides which Player instance to pass to
+                player = self.pickPlayer()
+                self.passBall(player)    
         
     def update(self):
         Vx = 0
@@ -79,35 +103,9 @@ class Player(object):
             Vy *= MAX_SPEED/speed
         self.velocity = [Vx, Vy]
             
-    def shootPassKeep(self):
-        "Decides if player shoots the ball, passes the ball, or keeps the ball"
-        #Making sure player has the ball
-        if self.ball is not None:
-            
-            shootProb = self.calcShootProb()
-            passProb = self.calcPassProb()
-            rand = .3 #selecting randon number
-            
-                if rand <= shootProb:
-                    
-                    self.shoot(GOAL_POS)
-                    
-                else
-                    player = self.pickPlayer()
-                    self.pass(player)
-                    
-    def calcPassingProb
-        "Returns a list of length TEAM_SIZE with the probabilities range of passing to each player, including the player with the ball"
-        return (.2,.4,.6,.8,1)
-                    
-    def calcPassProb(self)
-        "Returns the probability of passing"
-        return .5
-            
-    def calcShootProb(self):
-        "Returns the probability of shooting"
-        probability = .5
-        return probability
+   
+    
+    
     
         
     
