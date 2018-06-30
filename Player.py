@@ -43,14 +43,12 @@ class Player(object):
         self.ball = None
     
     def shoot(self, position):
-        """ Removes possession from player and shoots the ball to center of goal
-        """
+        # Removes possession from player and shoots the ball to center of goal
         self.removePossession()
         
     def move(self):
-        """ Stores current position to old position and adds velocity to current
-            position
-        """
+        # Stores current position to old position and adds velocity to current
+        #   position
         self.oldPosition = self.position
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
@@ -59,18 +57,18 @@ class Player(object):
         return 0.5                      #Dummy Weight
     
     def pickPlayer(self):
-        """Returns a list of length TEAM_SIZE with the probabilities range of
-        passing to each player, including the player with the ball"""
+        # Returns a list of length TEAM_SIZE with the probabilities range of
+        #   passing to each player, including the player with the ball
         return (.2,.4,.6,.8,1)          #Dummy List
             
     def calcShootProb(self):
-        "Returns the probability of shooting"
+        #Returns the probability of shooting 
         probability = .5                #Dummy Probability
         return probability
         
     def shootPassKeep(self):
-        """Decides if player shoots the ball, passes the ball, or keeps the ball
-        and performs the chosen action"""
+        # Decides if player shoots the ball, passes the ball, or keeps the ball
+        #   and performs the chosen action
         if self.ball is not None:       #Making sure player has the ball
             shootProb = self.calcShootProb()
             rand = .3                   #Randon decimal between 0 and 1
