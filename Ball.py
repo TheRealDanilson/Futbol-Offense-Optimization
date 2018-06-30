@@ -45,6 +45,9 @@ class Ball(object):
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
     
+    
+    def getPosition(self):
+        return self.position.copy()
         
     def isGoal(self):
         # returns True if the ball is a goal or False if not
@@ -74,12 +77,11 @@ class Ball(object):
         self.velocity = player.getVelocity()
     
     
-    def shoot(self, velocity):
+    def shoot(self, direction):
         # changes ball's possession to None and changes the ball velocity to
         # input velocity
-        
         self.possession = None
-        self.velocity = velocity
+        self.velocity = direction
         
         
     
