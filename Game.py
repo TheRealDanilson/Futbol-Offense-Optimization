@@ -94,9 +94,9 @@ class Game(object):
         x_max = FIELD_BOUNDS[1]
         y_min = FIELD_BOUNDS[2]
         y_max = FIELD_BOUNDS[3]
-        xLength = x_max - x_min + 1
-        yLength = y_max - y_min + 1
-        field_size = xLength*yLength
+        xLength = x_max - x_min + 1 # Adds the "zero" position for even lengths
+        yLength = y_max - y_min + 1 # Adds the "zero" position for even lengths
+        field_size = xLength*yLength 
         ballPos = self.ball.getPosition()
         for i in range(field_size):
             field += ['.']
