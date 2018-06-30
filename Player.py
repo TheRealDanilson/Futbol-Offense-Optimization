@@ -1,5 +1,10 @@
 from constants import *
-from random import random, choice
+from random import uniform, choice
+from math import exp
+
+def expcdf(x, mu):
+    return 1 - exp(-x/mu)
+
 
 class Player(object):
     """
@@ -75,12 +80,20 @@ class Player(object):
         # Returns a list of length TEAM_SIZE with the probabilities range of
         #   passing to each player, including the player with the ball
         #return (.2,.4,.6,.8,1)          #Dummy List
-        return random.choice(self.game.playerTeam(self))
+        return choice(self.game.playerTeam(self))
             
     def calcShootProb(self):
-        #Returns the probability of shooting 
-        probability = .5                #Dummy Probability
-        return probability
+        #Returns the probability of shooting
+        x = self.position[0]
+        y = self.position[1]
+        z = (x**2)/150 +(y**2)/300;
+        if z >= 4.5 or (x**2)/y > 30:
+            p = 0.0
+        elif (x**2 + y**2)**(0.5) <= 5:
+            p = 1.0
+        else:
+            p = expcdf((4.5-z),1)
+        return p
     
     
     def receive(self, ball):
@@ -108,7 +121,7 @@ class Player(object):
         #   and performs the chosen action
         if self.ball is not None:       #Making sure player has the ball
             shootProb = self.calcShootProb()
-            rand = random()                   #Randon decimal between 0 and 1
+            rand = uniform(0, 1)                   #Randon decimal between 0 and 1
             if rand <= shootProb:       #Decides if to shoot
                 self.shoot(GOAL_POS)      
             else:                       #Decides which Player instance to pass to

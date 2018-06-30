@@ -16,6 +16,9 @@ class Game(object):
         self.players = []
         self.createPlayer([-10, 50])
         self.createPlayer([-20, 35])
+        self.createPlayer([0, 30])
+        self.createPlayer([3, 23])
+        self.createPlayer([23, 2])
         self.createBall(self.players[0])
     
     
