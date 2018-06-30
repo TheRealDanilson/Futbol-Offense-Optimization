@@ -8,5 +8,5 @@ if z >= 4.5 || (xpos^2)/ypos > 30
 elseif sqrt((xpos^2)+(ypos^2))<= 5
     p = 1;
 else
-    p = expcdf((4.5-z),1);
+    p = expcdf((4.5-z),3.33);
 end
