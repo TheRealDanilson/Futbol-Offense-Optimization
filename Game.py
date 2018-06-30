@@ -8,6 +8,7 @@ from random import seed
 class Game(object):
     """
     players     List of length TEAM_SIZE that stores the player instances
+    ball        Instance of ball
     
     """
     def __init__(self):
