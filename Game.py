@@ -5,7 +5,10 @@ from math import floor
 
 
 class Game(object):
+    """
+    players     List of length TEAM_SIZE that stores the player instances
     
+    """
     def __init__(self):
         self.players = []
         self.createPlayer([-10, 50])
@@ -22,6 +25,8 @@ class Game(object):
     
     
     def playerDistBall(self, player):
+        #Returns 1x2 tuple that stores the player's distance to the ball
+        #   Entry 0 is change in x and entry 1 is change in y
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         dx = ballPos[0] - playerPos[0]
@@ -30,6 +35,8 @@ class Game(object):
         
         
     def playerDistGoal(self, player):
+        #Returns 1x2 tuple that stores the player's distance to the goal
+        #   Entry 0 is change in x and entry 1 is change in y
         playerPos = player.getPosition()
         dx = GOAL_POS[0] - playerPos[0]
         dy = GOAL_POS[1] - playerPos[1]
@@ -37,6 +44,8 @@ class Game(object):
     
     
     def playerDistPlayer(self, player1, player2):
+        #Returns 1x2 tuple that stores the player instance 1's distance to player instance 2
+        #   Entry 0 is change in x and entry 1 is change in y
         player1Pos = player1.getPosition()
         player2Pos = player2.getPosition()
         dx = player2Pos[0] - player1Pos[0]
@@ -45,6 +54,8 @@ class Game(object):
     
         
     def changePossession(self, player):
+        #Updates which player instance has possession of the ball and updates the
+        #   balls instance of who possesses it
         oldPlayer = self.ball.getPossession()
         if oldPlayer is not None:
             oldPlayer.removePossession()
@@ -53,6 +64,7 @@ class Game(object):
         
     
     def playerTeam(self, player):
+        #Returns a TEAM_SIZE length list with all player instances
         return self.players
     
         
