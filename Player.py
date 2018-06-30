@@ -154,9 +154,7 @@ class Player(object):
         self.velocity = [Vx, Vy]
             
    
-    
-    
-    
-        
+    # test for push pull
+    # can you guys read this
     
 
