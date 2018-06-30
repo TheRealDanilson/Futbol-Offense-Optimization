@@ -1,4 +1,5 @@
 from constants import *
+from random import random, choice
 
 class Player(object):
     """
@@ -23,18 +24,19 @@ class Player(object):
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
         self.game = game
         self.ball = None
-        self.position = position
+        self.position = position.copy()
         self.bounds = bounds
         self.velocity = [0, 0]
+        self.receiving = False
         
     def getPosition(self):
-        return self.position
+        return self.position.copy()
     
     def getVelocity(self):
-        return self.velocity
+        return self.velocity.copy()
     
     def getBounds(self):
-        return self.bounds
+        return self.bounds.copy()
     
     def getPossession(self, ball):
         self.ball = ball
@@ -44,12 +46,18 @@ class Player(object):
     
     def shoot(self, position):
         # Removes possession from player and shoots the ball to center of goal
+        dX = position[0] - self.position[0]
+        dY = position[1] - self.position[1]
+        magnitude = (dX**2 + dY**2)**(0.5)
+        direction = (dX/magnitude, dY/magnitude)
+        self.ball.shoot(direction)
         self.removePossession()
+        print("test")
         
     def move(self):
         # Stores current position to old position and adds velocity to current
         #   position
-        self.oldPosition = self.position
+        self.oldPosition = self.position.copy()
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
         
@@ -59,46 +67,70 @@ class Player(object):
     def pickPlayer(self):
         # Returns a list of length TEAM_SIZE with the probabilities range of
         #   passing to each player, including the player with the ball
-        return (.2,.4,.6,.8,1)          #Dummy List
+        #return (.2,.4,.6,.8,1)          #Dummy List
+        return random.choice(self.game.playerTeam(self))
             
     def calcShootProb(self):
         #Returns the probability of shooting 
         probability = .5                #Dummy Probability
         return probability
+    
+    
+    def receive(self, ball):
+        self.ball = ball
+        self.receiving = False
+    
+    
+    def hasBall(self):
+        return self.ball is not None
+    
+    
+    def setToReceive(self):
+        self.receiving = True
+    
+    
+    def passBall(self, player):
+        print("passTest")
+        if self is not player:
+            player.setToReceive()
+            self.shoot(player.getPosition())
+    
         
     def shootPassKeep(self):
         # Decides if player shoots the ball, passes the ball, or keeps the ball
         #   and performs the chosen action
         if self.ball is not None:       #Making sure player has the ball
             shootProb = self.calcShootProb()
-            rand = .3                   #Randon decimal between 0 and 1
+            rand = random()                   #Randon decimal between 0 and 1
             if rand <= shootProb:       #Decides if to shoot
                 self.shoot(GOAL_POS)      
             else:                       #Decides which Player instance to pass to
                 player = self.pickPlayer()
                 self.passBall(player)    
         
+        
     def update(self):
         Vx = 0
         Vy = 0
-        
-        for objective in Objectives:
-            weight = self.genWeight(objective)
-            if objective is Objectives.GOAL:
-                vector = self.game.playerDistGoal(self)
-                Vx += weight * vector[0]
-                Vy += weight * vector[1]
-            elif objective is Objectives.TEAMMATES:
-                team = self.game.playerTeam(self)
-                for teammate in team:
-                    vector = self.game.playerDistPlayer(self, teammate)
-                    Vx += weight * -vector[0]
-                    Vy += weight * -vector[1]
-                
-        speed = (Vx**2 + Vy**2)**(0.5)
-        if speed > MAX_SPEED:
-            Vx *= MAX_SPEED/speed
-            Vy *= MAX_SPEED/speed
+        self.shootPassKeep()
+        if self.receiving is not True:
+            for objective in Objectives:
+                weight = self.genWeight(objective)
+                if objective is Objectives.GOAL:
+                    vector = self.game.playerDistGoal(self)
+                    Vx += weight * vector[0]
+                    Vy += weight * vector[1]
+                elif objective is Objectives.TEAMMATES:
+                    team = self.game.playerTeam(self)
+                    for teammate in team:
+                        vector = self.game.playerDistPlayer(self, teammate)
+                        Vx += weight * -vector[0]
+                        Vy += weight * -vector[1]
+                    
+            speed = (Vx**2 + Vy**2)**(0.5)
+            if speed > MAX_SPEED:
+                Vx *= MAX_SPEED/speed
+                Vy *= MAX_SPEED/speed
         self.velocity = [Vx, Vy]
             
    
