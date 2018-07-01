@@ -1,5 +1,5 @@
 from constants import *
-from Player import Offender
+from Player import *
 from Ball import Ball
 from math import floor
 from random import seed
