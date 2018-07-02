@@ -2,6 +2,8 @@ from constants import *
 from random import uniform, choice
 from math import exp
 
+
+
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
 
@@ -127,31 +129,54 @@ class Player(object):
             else:                       #Decides which Player instance to pass to
                 player = self.pickPlayer()
                 self.passBall(player)    
+    
+    
+    def createVector(self, weight, vector):
+        # Returns a list of length 2 with x in 0 entry and y in 1 entry
+        # vector input is the distance between player and the corresponding objective
+        # Vector is scaled by weight and then returned
+        vector[0] *= weight 
+        vector[1] *= weight
+        return vector
+    
+    
+    def calcVector(self, objective):
+        # Returns a weighted Vector
+        # objective input is an objective in Objectives
+        weight = self.genWeight(objective)
+        if objective is Objectives.Goal:
+            return createVector(weight, self.game.playerDistGoal(self))
+        elif objective is Objectives.TEAMMATES:
+            team = self.game.playerTeam(self)
+            vector = []
+            for teammate in team:
+                mateVector = createVector(weight, self.game.playerDistPlayer(self, teammate))
+                self.addVectors(vector, mateVector)
+            return vector 
+        elif objective is Objectives.ZONE_CENTER:
+            return createVector(weight, self.game.playerDistZone(self))
         
-        
+                
+    def addVectors(self, finalVector, vector):
+        # adds Vector (list length 2) to finalVector (list length 2)
+        finalVector[0] += vector[0]
+        finalVector[1] += vector[1]
+    
+    
     def update(self):
-        Vx = 0
-        Vy = 0
         self.shootPassKeep()
         if self.receiving is not True:
+            finalVector = [0, 0]
             for objective in Objectives:
-                weight = self.genWeight(objective)
-                if objective is Objectives.GOAL:
-                    vector = self.game.playerDistGoal(self)
-                    Vx += weight * vector[0]
-                    Vy += weight * vector[1]
-                elif objective is Objectives.TEAMMATES:
-                    team = self.game.playerTeam(self)
-                    for teammate in team:
-                        vector = self.game.playerDistPlayer(self, teammate)
-                        Vx += weight * -vector[0]
-                        Vy += weight * -vector[1]
+                vector = calcVector(objective)
+                self.addVector(finalVector, vector)
                     
-            speed = (Vx**2 + Vy**2)**(0.5)
+            speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
             if speed > MAX_SPEED:
-                Vx *= MAX_SPEED/speed
-                Vy *= MAX_SPEED/speed
-        self.velocity = [Vx, Vy]
+                finalVector[0] *= MAX_SPEED/speed
+                finalVector[1] *= MAX_SPEED/speed
+        self.velocity = finalVector
+        
             
    
     # test for push pull

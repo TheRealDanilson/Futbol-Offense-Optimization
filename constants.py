@@ -10,3 +10,4 @@ class Objectives(Enum):
     TEAMMATES = auto()
     OPPONENTS = auto()
     BALL = auto()
+    ZONE_CENTER = auto()

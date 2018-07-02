@@ -30,52 +30,51 @@ class Ball(object):
         self.bound = FIELD_BOUNDS
         self.oldPosition = self.position
         
+        
+    def getPosition(self):
+        return self.position.copy()
+
+
+    def getPossession(self):
+        # returns player instance who has ball
+        return self.possession
+    
+    
+    def setPossession(self, player):
+        # changes player instance who has ball
+        self.possession = player
+        self.velocity = player.getVelocity()
+    
+          
     def isOutBounds(self):
         # returns True if ball is out of bounds or False if ball is in bounds
         # calculates the balls trajectory
         return self.position[0] < self.bound[0] or self.position[0] > self.bound[1] \
             or self.position[1] < self.bound[2] or self.position[1] > self.bound[3]
     
+    
     def update(self):
         if self.possession is not None:
             self.velocity = self.possession.getVelocity()
         
+        
     def move(self):
         # changes position by adding velocity x to position x and velocity y
-        # to position y
+        #   to position y
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
     
-    
-    def getPosition(self):
-        return self.position.copy()
-        
+
     def isGoal(self):
         # returns True if the ball is a goal or False if not
-        
         oldx = self.oldPosition[0]
         oldy = self.oldPosition[1]
         newx = self.oldPosition[0]
         newy = self.oldPosition[1]
-        
-        #calculating slope and b for y=mx+b starting with old coordinates
-        slope = (newy - oldy)/(newx - oldx)
-        b = oldy - slope*oldx
-        
-        #calculate x when y = 0
-        travelx = -b/slope
-        
+        slope = (newy - oldy)/(newx - oldx) #calculating slope (m) in y=mx+b 
+        b = oldy - slope*oldx               # calculating b in y=mx+b
+        travelx = -b/slope                  #calculate x when y = 0
         return -4 < travelx and travelx < 4
-    
-    
-    def getPossession(self):
-        # returns player instance who has ball
-        return self.possession
-    
-    def setPossession(self, player):
-        # changes player instance who has ball
-        self.possession = player
-        self.velocity = player.getVelocity()
     
     
     def shoot(self, direction):
