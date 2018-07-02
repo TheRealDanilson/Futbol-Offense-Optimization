@@ -30,8 +30,9 @@ class Game(object):
     
     
     def playerDistBall(self, player):
-        # Returns 1x2 tuple that stores the player's distance to the ball
-        #   Entry 0 is change in x and entry 1 is change in y
+        """ Returns 2 element tuple that stores the player's distance to the ball
+           Entry 0 is change in x and entry 1 is change in y
+        """
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         dx = ballPos[0] - playerPos[0]
@@ -40,8 +41,9 @@ class Game(object):
         
         
     def playerDistGoal(self, player):
-        # Returns 1x2 tuple that stores the player's distance to the goal
-        #   Entry 0 is change in x and entry 1 is change in y
+        """ Returns 2 element tuple that stores the player's distance to the goal
+           Entry 0 is change in x and entry 1 is change in y
+        """
         playerPos = player.getPosition()
         dx = GOAL_POS[0] - playerPos[0]
         dy = GOAL_POS[1] - playerPos[1]
@@ -49,7 +51,7 @@ class Game(object):
     
     
     def playerDistPlayer(self, player1, player2):
-        # Returns 1x2 tuple that stores the player instance 1's distance to
+        # Returns 2 element tuple that stores the player instance 1's distance to
         #   player instance 2. Entry 0 is change in x and entry 1 is change in y
         player1Pos = player1.getPosition()
         player2Pos = player2.getPosition()
@@ -59,8 +61,9 @@ class Game(object):
     
         
     def changePossession(self, player):
-        # Updates which player instance has possession of the ball and updates
-        #    the balls instance of who possesses it
+        """ Updates which player instance has possession of the ball and updates
+           the balls instance of who possesses it
+        """
         oldPlayer = self.ball.getPossession()
         if oldPlayer is not None:
             oldPlayer.removePossession()
@@ -69,12 +72,21 @@ class Game(object):
         
     
     def playerTeam(self, player):
-        # Returns a TEAM_SIZE length list with all player instances
+        """ Returns a TEAM_SIZE length list with all player instances """
         return self.players
     
     
     def update(self):
-#        ballPlayer = self.ball.getPossession()
+        """
+            Update method for the whole game. Updates the velocities of each player
+            and the ball, and then moves them according to their updated velocities
+            
+            This method also handles receiving the ball. If a player is within the
+            RECEIVE_THRESHOLD, the player will receive the ball
+            
+            TODO: Change this method to handle stealing
+        
+        """
         for player in self.players:
             player.update()
             player.move()
@@ -85,10 +97,12 @@ class Game(object):
                 self.ball.setPossession(player)
         self.ball.update()
         self.ball.move()
-        self.printField()
+        self.printFieldNested()
     
     
     def printField(self):
+        """ Prints a graphical representation of the field to the screen      
+        """
         field = []
         x_min = FIELD_BOUNDS[0]
         x_max = FIELD_BOUNDS[1]
@@ -100,6 +114,7 @@ class Game(object):
         ballPos = self.ball.getPosition()
         for i in range(field_size):
             field += ['.']
+    
         goalIndex = (xLength)*(y_max - GOAL_POS[1]) + GOAL_POS[0] - x_min
         ballIndex = (xLength)*(y_max - floor(ballPos[1])) + floor(ballPos[0]) - x_min
         field[goalIndex] = 'G'
@@ -120,6 +135,58 @@ class Game(object):
             for x in range(xLength):
                 line += field[xLength*y + x]
             print(line)
+            
+            
+    def inBounds(self, position):
+        """
+            Returns True if position is in bounds, returns False otherwise
+        """
+        x_min = FIELD_BOUNDS[0]
+        x_max = FIELD_BOUNDS[1]
+        y_min = FIELD_BOUNDS[2]
+        y_max = FIELD_BOUNDS[3]
+        x = position[0]
+        y = position[1]
+        return (x_min <= x) and (x <= x_max) and (y_min <= y) and (y <= y_max)
+
+    def printFieldNested(self):
+        field = []
+        x_min = FIELD_BOUNDS[0]
+        x_max = FIELD_BOUNDS[1]
+        y_min = FIELD_BOUNDS[2]
+        y_max = FIELD_BOUNDS[3]
+        xLength = x_max - x_min + 1 # Adds the "zero" position for even lengths
+        yLength = y_max - y_min + 1 # Adds the "zero" position for even lengths
+        ballPos = self.ball.getPosition()
+        
+        # Initialize the field
+        for x in range(xLength):
+            field += [[]]
+            for y in range(yLength):
+                field[x] += ['.']
+                
+        field[GOAL_POS[0] + x_min][GOAL_POS[1]] = 'G'
+        ballPos = self.ball.getPosition()
+        if self.inBounds(ballPos):
+            field[floor(ballPos[0]) + x_min][floor(ballPos[1])] = 'o'
+        for player in self.players:
+            playerPos = player.getPosition()
+            if self.inBounds(playerPos):
+                if player.hasBall():
+                   field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'Xo'
+                else:
+                    field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'X'
+                    
+        printNestedList(field)
 
 
+
+def printNestedList(lst):
+    x_length = len(lst)
+    y_length = len(lst[0])
+    for y in range(y_length):
+        string = ''
+        for x in range(x_length):
+            string += lst[x][y_length - 1 - y]
+        print(string)
         
