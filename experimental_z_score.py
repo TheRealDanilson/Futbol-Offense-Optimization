@@ -7,8 +7,6 @@ from Game import playerDistPlayer, playerTeam
         to this player.
         
         Note: This chooses who to pass to if and only if this player has chosen to pass at all.
-        
-        Output: A Player
         """
         
         # 'Constants'
