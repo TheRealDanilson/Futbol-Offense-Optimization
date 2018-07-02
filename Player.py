@@ -148,9 +148,10 @@ class Player(object):
         weight - real number
         Returns  list (vector x weight) of length 2, entry 0 is x and entry y is 1
         """
-        vector[0] *= weight 
-        vector[1] *= weight
-        return vector
+        dummy = [0, 0]
+        dummy[0] = vector[0] * weight 
+        dummy[1] = vector[0] * weight
+        return dummy
     
     
     def calcVector(self, objective):
@@ -160,25 +161,25 @@ class Player(object):
         between a player and the objective.  Entry 0 is x and entry 1 is y.
         """
         weight = self.genWeight(objective)
-        if objective is Objectives.Goal:
-            return createVector(weight, self.game.playerDistGoal(self))
+        if objective is Objectives.GOAL:
+            return self.createVector(weight, self.game.playerDistGoal(self))
         elif objective is Objectives.TEAMMATES:
             team = self.game.playerTeam(self)
-            vector = []
+            vector = [0, 0]
             for teammate in team:
-                mateVector = createVector(weight, self.game.playerDistPlayer(self, teammate))
+                mateVector = self.createVector(weight, self.game.playerDistPlayer(self, teammate))
                 self.addVectors(vector, mateVector)
-            return vector 
-        elif objective is Objectives.ZONE_CENTER:
-            return createVector(weight, self.game.playerDistZone(self))
-        
+            return vector
+        #elif objective is Objectives.ZONE_CENTER:
+        #    return self.createVector(weight, self.game.playerDistZone(self))
+        return [0, 0]
                 
     def addVectors(self, finalVector, vector):
         """
         Adds vector (list length 2) to finalVector (list length 2)
         """
-        finalVector[0] += vector[0]
-        finalVector[1] += vector[1]
+        finalVector[0] = finalVector[0] + vector[0]
+        finalVector[1] = finalVector[1] + vector[1]
     
     
     def update(self):
@@ -187,16 +188,16 @@ class Player(object):
         player's velocity if they are not receiving the ball.
         """
         self.shootPassKeep()
+        finalVector = [0, 0]
         if self.receiving is not True:
-            finalVector = [0, 0]
             for objective in Objectives:
-                vector = calcVector(objective)
-                self.addVector(finalVector, vector)
+                vector = self.calcVector(objective)
+                self.addVectors(finalVector, vector)
             speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
             if speed > MAX_SPEED:
                 finalVector[0] *= MAX_SPEED/speed
                 finalVector[1] *= MAX_SPEED/speed
-            self.velocity = finalVector
+        self.velocity = finalVector
         
             
    
@@ -212,27 +213,3 @@ class Offender(Player):
     
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
         super().__init__(position, game, bounds)
-        
-    def update(self):
-        Vx = 0
-        Vy = 0
-        self.shootPassKeep()
-        if self.receiving is not True:
-            for objective in Objectives:
-                weight = self.genWeight(objective)
-                if objective is Objectives.GOAL:
-                    vector = self.game.playerDistGoal(self)
-                    Vx += weight * vector[0]
-                    Vy += weight * vector[1]
-                elif objective is Objectives.TEAMMATES:
-                    team = self.game.playerTeam(self)
-                    for teammate in team:
-                        vector = self.game.playerDistPlayer(self, teammate)
-                        Vx += weight * -vector[0]
-                        Vy += weight * -vector[1]
-                    
-            speed = (Vx**2 + Vy**2)**(0.5)
-            if speed > MAX_SPEED:
-                Vx *= MAX_SPEED/speed
-                Vy *= MAX_SPEED/speed
-        self.velocity = [Vx, Vy]
