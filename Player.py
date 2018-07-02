@@ -54,12 +54,19 @@ class Player(object):
     
     def getPossession(self, ball):
         self.ball = ball
+        
+    def setToReceive(self):
+        self.receiving = True
+    
     
     def removePossession(self):
         self.ball = None
     
     def shoot(self, position):
-        # Removes possession from player and shoots the ball to center of goal
+        """
+        position    position of the player instance
+        Removes possession from player and shoots the ball to center of goal
+        """
         dX = position[0] - self.position[0]
         dY = position[1] - self.position[1]
         magnitude = (dX**2 + dY**2)**(0.5)
@@ -69,8 +76,10 @@ class Player(object):
         print("test")
         
     def move(self):
-        # Stores current position to old position and adds velocity to current
-        #   position
+        """
+        Stores current position to old position and adds velocity to current
+        position
+        """
         self.oldPosition = self.position.copy()
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
@@ -79,13 +88,15 @@ class Player(object):
         return 0.5                      #Dummy Weight
     
     def pickPlayer(self):
-        # Returns a list of length TEAM_SIZE with the probabilities range of
-        #   passing to each player, including the player with the ball
-        #return (.2,.4,.6,.8,1)          #Dummy List
+        """
+        Returns a Player instance to pass to
+        """
         return choice(self.game.playerTeam(self))
             
     def calcShootProb(self):
-        #Returns the probability of shooting
+        """
+        Returns the probability of shooting
+        """
         x = self.position[0]
         y = self.position[1]
         z = (x**2)/150 +(y**2)/300;
@@ -107,11 +118,9 @@ class Player(object):
         return self.ball is not None
     
     
-    def setToReceive(self):
-        self.receiving = True
-    
-    
     def passBall(self, player):
+        # player - player instance of class Player
+        
         print("passTest")
         if self is not player:
             player.setToReceive()
@@ -119,8 +128,10 @@ class Player(object):
     
         
     def shootPassKeep(self):
-        # Decides if player shoots the ball, passes the ball, or keeps the ball
-        #   and performs the chosen action
+        """
+        Decides if player shoots the ball, passes the ball, or keeps the ball
+        and performs the chosen action
+        """
         if self.ball is not None:       #Making sure player has the ball
             shootProb = self.calcShootProb()
             rand = uniform(0, 1)                   #Randon decimal between 0 and 1
@@ -132,17 +143,22 @@ class Player(object):
     
     
     def createVector(self, weight, vector):
-        # Returns a list of length 2 with x in 0 entry and y in 1 entry
-        # vector input is the distance between player and the corresponding objective
-        # Vector is scaled by weight and then returned
+        """
+        vector - list of length 2.  Entry 0 is x and entry 1 is y
+        weight - real number
+        Returns  list (vector x weight) of length 2, entry 0 is x and entry y is 1
+        """
         vector[0] *= weight 
         vector[1] *= weight
         return vector
     
     
     def calcVector(self, objective):
-        # Returns a weighted Vector
-        # objective input is an objective in Objectives
+        """
+        objective - enumerations from the Objectives Class in constants.py
+        Returns a list of length 2 that corresponds to the weighted vector
+        between a player and the objective.  Entry 0 is x and entry 1 is y.
+        """
         weight = self.genWeight(objective)
         if objective is Objectives.Goal:
             return createVector(weight, self.game.playerDistGoal(self))
@@ -158,24 +174,29 @@ class Player(object):
         
                 
     def addVectors(self, finalVector, vector):
-        # adds Vector (list length 2) to finalVector (list length 2)
+        """
+        Adds vector (list length 2) to finalVector (list length 2)
+        """
         finalVector[0] += vector[0]
         finalVector[1] += vector[1]
     
     
     def update(self):
+        """
+        First decides a players action (shoot, pass, keep) then updates the
+        player's velocity if they are not receiving the ball.
+        """
         self.shootPassKeep()
         if self.receiving is not True:
             finalVector = [0, 0]
             for objective in Objectives:
                 vector = calcVector(objective)
                 self.addVector(finalVector, vector)
-                    
             speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
             if speed > MAX_SPEED:
                 finalVector[0] *= MAX_SPEED/speed
                 finalVector[1] *= MAX_SPEED/speed
-        self.velocity = finalVector
+            self.velocity = finalVector
         
             
    
