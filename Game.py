@@ -98,43 +98,6 @@ class Game(object):
         self.ball.update()
         self.ball.move()
         self.printFieldNested()
-    
-    
-    def printField(self):
-        """ Prints a graphical representation of the field to the screen      
-        """
-        field = []
-        x_min = FIELD_BOUNDS[0]
-        x_max = FIELD_BOUNDS[1]
-        y_min = FIELD_BOUNDS[2]
-        y_max = FIELD_BOUNDS[3]
-        xLength = x_max - x_min + 1 # Adds the "zero" position for even lengths
-        yLength = y_max - y_min + 1 # Adds the "zero" position for even lengths
-        field_size = xLength*yLength 
-        ballPos = self.ball.getPosition()
-        for i in range(field_size):
-            field += ['.']
-    
-        goalIndex = (xLength)*(y_max - GOAL_POS[1]) + GOAL_POS[0] - x_min
-        ballIndex = (xLength)*(y_max - floor(ballPos[1])) + floor(ballPos[0]) - x_min
-        field[goalIndex] = 'G'
-        if ballIndex >= 0 and ballIndex < field_size - 1 and ballPos[0] >= x_min and ballPos[0] <= x_max:
-            field[ballIndex] = 'o'
-        for player in self.players:
-            pos = player.getPosition()
-            x = floor(pos[0])
-            y = floor(pos[1])
-            index = (xLength)*(y_max - y) + x - x_min
-            if index >= 0 and index < field_size - 1 and x >= x_min and x <= x_max:
-                if player.hasBall():
-                    field[index] = 'Xo'
-                else:
-                    field[index] = 'X'
-        for y in range(yLength):
-            line = ''
-            for x in range(xLength):
-                line += field[xLength*y + x]
-            print(line)
             
             
     def inBounds(self, position):
@@ -150,6 +113,9 @@ class Game(object):
         return (x_min <= x) and (x <= x_max) and (y_min <= y) and (y <= y_max)
 
     def printFieldNested(self):
+        """
+            Prints a graphical representation of the field to the screen
+        """
         field = []
         x_min = FIELD_BOUNDS[0]
         x_max = FIELD_BOUNDS[1]
@@ -157,14 +123,22 @@ class Game(object):
         y_max = FIELD_BOUNDS[3]
         xLength = x_max - x_min + 1 # Adds the "zero" position for even lengths
         yLength = y_max - y_min + 1 # Adds the "zero" position for even lengths
-        ballPos = self.ball.getPosition()
+
         
-        # Initialize the field
+        # Initialize the field using nested lists
+        # Benefit of using a nested list: Simpler Syntax
+        # To access a point on a field, just use field[x][y]
+        # No hard to read equations to calculate indices
         for x in range(xLength):
             field += [[]]
             for y in range(yLength):
                 field[x] += ['.']
                 
+        # For the field data structure, the origin is located on the bottom left corner
+        # However, we've defined the origin to be where the center of
+        # goal is for our simulation
+        # To fix this, we shift our points to the right by x_min so that the positions
+        # on the field are correct
         field[GOAL_POS[0] + x_min][GOAL_POS[1]] = 'G'
         ballPos = self.ball.getPosition()
         if self.inBounds(ballPos):
@@ -182,6 +156,10 @@ class Game(object):
 
 
 def printNestedList(lst):
+    """
+        Prints the contents of a list representing a 2D grid
+        The origin of the list will be at the bottom left corner
+    """
     x_length = len(lst)
     y_length = len(lst[0])
     for y in range(y_length):
