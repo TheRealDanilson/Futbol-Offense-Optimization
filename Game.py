@@ -12,6 +12,9 @@ class Game(object):
     
     """
     def __init__(self):
+        """
+        Constructor Method - Creates an instance of game
+        """
         seed()
         self.players = []
         self.createPlayer([-10,44], (0, 35, 50, 35))
@@ -30,23 +33,44 @@ class Game(object):
     
     
     def createPlayer(self, position, bounds):
+        """
+        position  - 2 element list with x in first entry and y in second
+        bounds    - 4 element list with x and y mins and maxs of the field
+        
+        Creates an instance of the player class
+        """
         player = Offender(position, self, bounds)
         self.players += [player]
         
     
     def createDefender(self, position, bounds):
+        """
+        position - 2 element list with x in first entry and y in second
+        bounds   - 4 element tuple with x and y mins and maxs of the field
+        
+        Creates an instance of the defender class (subclass of player)
+        """
         player = Defender(position, self, bounds)
         self.players += [player]
     
     
     def createBall(self, player):
+        """
+        player - instance of the player class
+        
+        Creates an instance of the ball class and sets the player's ball
+        attribute to this ball instance
+        """
         self.ball = Ball(player)
-        player.getPossession(self.ball)
+        player.setPossession(self.ball)
     
     
     def playerDistBall(self, player):
-        """ Returns 2 element tuple that stores the player's distance to the ball
-           Entry 0 is change in x and entry 1 is change in y
+        """
+        player - instance of player class
+        
+        Returns 2 element tuple that stores the player's distance to the ball
+        Entry 0 is change in x and entry 1 is change in y
         """
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
@@ -65,8 +89,9 @@ class Game(object):
         return (dx, dy)
     
     def playerDistZone(self, player):
-        """ Returns a 2 element tuple that represents the player's distance to the center of
-            zone, pointing from the player
+        """
+        Returns a 2 element tuple that stores the player distance to the center
+        of their zone
         """
         bounds = player.getBounds()
         playerPos = player.getPosition()
@@ -77,8 +102,10 @@ class Game(object):
     
     
     def playerDistPlayer(self, player1, player2):
-        # Returns 2 element tuple that stores the player instance 1's distance to
-        #   player instance 2. Entry 0 is change in x and entry 1 is change in y
+        """
+        Returns 2 element tuple that stores the player instance 1's distance to
+        player instance 2. Entry 0 is change in x and entry 1 is change in y
+        """
         player1Pos = player1.getPosition()
         player2Pos = player2.getPosition()
         dx = player2Pos[0] - player1Pos[0]
@@ -87,17 +114,26 @@ class Game(object):
     
         
     def changePossession(self, player):
-        """ Updates which player instance has possession of the ball and updates
-           the balls instance of who possesses it
+        """
+        player - instance of the player class
+        
+        If there is a change in possession this method changes the ball's
+        possession attribute to the input player instance and changes the player
+        instance's ball attribute to the ball instance
         """
         oldPlayer = self.ball.getPossession()
         if oldPlayer is not None:
             oldPlayer.removePossession()
-        player.getPossession(ball)
+        player.setPossession(ball)
         self.ball.setPossession(player)
     
     
     def nearestOpponent(self, player):
+        """
+        player - instance of the player class
+        
+        DANIEL SON PLEASE DO THIS
+        """
         team = type(player)
         playerPos = player.getPosition()
         minDist = float('inf')
@@ -115,6 +151,9 @@ class Game(object):
     
     
     def nearestOpponentToLine(self, team, pos1, pos2):
+        """
+        DANIEL SON PLEASE DO THIS
+        """
         minDist = float('inf')
         closest = None
         (x1, y1) = pos1
@@ -129,20 +168,31 @@ class Game(object):
         return (closest, minDist)
         
     def playerList(self):
+        """
+        Returns a copy of the tuple that stores the player instances. The tuple
+        is length of the amount of offenders and defenders there are.
+        """
         return self.players.copy()
         
     
     def playerOpponentTeam(self, player):
-        team = type(player)
+        """
+        Returns a list the length of the amount of opponents that stores all the
+        player instances of the opposing team
+        """
+        team = type(player) #Finds the type of player
         lst = []
         for member in self.players:
-            if not isinstance(member, team):
+            if not isinstance(member, team): #if member is instance of team
                 lst += [member]
         return lst
     
     
     def playerTeam(self, player):
-        """ Returns a TEAM_SIZE length list with all player instances of the same team """
+        """
+        Returns a length list the length of the amount of teammates that stores
+        all the player instances of the same team    
+        """
         team = type(player)
         lst = []
         for member in self.players:
