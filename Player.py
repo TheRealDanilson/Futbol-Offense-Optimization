@@ -2,10 +2,50 @@ from constants import *
 from random import uniform, choice
 from math import exp
 
+def swap(lst, shadowLst, i, j):
+    temp = lst[j]
+    shadowTemp = shadowLst[j]
+    lst[j] = lst[i]
+    shadowLst[j] = shadowLst[i]
+    lst[i] = temp
+    shadowLst[i] = shadowTemp
 
 
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
+
+
+def partition(lst, shadowLst, m, k):
+    pivot = lst[m]
+    i = m
+    j = m + 1
+    
+    # Precondition: Section of list <= i is less than or equal to the pivot
+    #               lst[i] is the pivot
+    #               For i < x < j, lst[x] is greater than the pivot
+    #               For j <= x, lst[x] is unsorted
+    while (j <= k):
+        if lst[j] <= pivot:
+            swap(lst, shadowLst, j, i)
+            swap(lst, shadowLst, i + 1, j)
+            i += 1
+        j += 1
+    return i
+
+
+def quickSort(lst, shadowLst, m, k):
+    if (k - m + 1) <= 1:
+        return None
+    pivot = partition(lst, shadowLst, m, k)
+    quickSort(lst, shadowLst, m, pivot)
+    quickSort(lst, shadowLst, pivot + 1, k)
+
+
+def dictSort(dct):
+    keys = list(dct.keys())
+    values = list(dct.values())
+    quickSort(values, keys, 0, len(values) - 1)
+    return (keys, values)
 
 
 class Player(object):
@@ -90,12 +130,64 @@ class Player(object):
         self.position[1] = self.position[1] + self.velocity[1]
         
         
+        
+    def calcDistProbs(self):
+        probabilities = {}
+        team = self.game.playerTeam(self)
+        playerPos = self.getPosition()
+        b = playerPos[0]**2/150 + playerPos[1]**2/300
+        for teammate in team:
+            matePos = teammate.getPosition()
+            a = matePos[0]**2/150 + playerPos[1]**2/300
+            dist = self.game.playerDistPlayer(self, teammate)
+            d = (dist[0]**2 + dist[1]**2)**(0.5)
+            z = (a - b + 16)/16 + abs(d - 15)/15
+            p = expcdf((4.5-z),1)
+            probabilities[teammate] = p
+        
+        return probabilities
+                
+    
+    def calcOpenness(self):
+        openness = {}
+        u = self.game.nearestOpponent(self)[1]
+        team = self.game.playerTeam(self)
+        for teammate in team:
+            m = self.game.nearestOpponent(self)[1]
+            p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
+            z = u**2/(m*p)
+            o = expcdf((4.5-z),1)
+            openness[teammate] = o
+        return openness
+        
+        
     def pickPlayer(self):
         """
         Returns a Player instance to pass to
         """
-        return choice(self.game.playerTeam(self))
-            
+        """
+        This function calculates *who* this player will pass to, if he is about to pass.
+        It uses a Z-score from the distances and positions of other players, with respect
+        to this player.
+
+        Note: This chooses who to pass to if and only if this player has chosen to pass at all.
+        """
+        D = self.calcDistProbs()
+        O = self.calcOpenness()
+        probabilities = {}
+        team = self.game.playerTeam(self)
+        for teammate in team:
+            probabilities[teammate] = (D[teammate] + CAREFULLNESS*O[teammate])/(1 + CAREFULLNESS)
+        (sortedTeam, sortedProbabilities) = dictSort(probabilities)
+        rand = uniform(0, 1)
+        total = 0.0
+        for i in range(len(sortedTeam)):
+            total += sortedProbabilities[i]
+            if rand <= total:
+                return sortedTeam[i]
+        return sortedTeam[i]
+        
+        
     def calcShootProb(self):
         """
         Returns the probability of shooting
@@ -232,5 +324,10 @@ class Offender(Player):
             
     """
     
+    def __init__(self, position, game, bounds = FIELD_BOUNDS):
+        super().__init__(position, game, bounds)
+
+
+class Defender(Player):
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
         super().__init__(position, game, bounds)

@@ -83,11 +83,60 @@ class Game(object):
             oldPlayer.removePossession()
         player.getPossession(ball)
         self.ball.setPossession(player)
+    
+    
+    def nearestOpponent(self, player):
+        team = type(player)
+        playerPos = player.getPosition()
+        minDist = float('inf')
+        closest = None
+        for member in self.players:
+            if not isinstance(member, team):
+                memberPos = member.getPosition()
+                dx = memberPos[0] - playerPos[0]
+                dy = memberpos[1] - playerPos[1]
+                dist = (dx**2 + dy**2)**(0.5)
+                if dist < minDist:
+                    minDist = dist
+                    closest = member
+        return (closest, minDist)
+    
+    
+    def nearestOpponentToLine(self, team, pos1, pos2):
+        minDist = float('inf')
+        closest = None
+        (x1, y1) = pos1
+        (x2, y2) = pos2
+        for member in self.players:
+            if not isinstance(member, team):
+                (x0, y0) = member.getPosition()
+                dist = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1)/((y2-y1)**2 + (x2 -x1)**2)**(0.5)
+                if dist < minDist:
+                    minDist = dist
+                    closest = member
+        return (closest, minDist)
+        
+    def playerList(self):
+        return self.players.copy()
         
     
+    def playerOpponentTeam(self, player):
+        team = type(player)
+        lst = []
+        for member in self.players:
+            if not isinstance(member, team):
+                lst += [member]
+        return lst
+    
+    
     def playerTeam(self, player):
-        """ Returns a TEAM_SIZE length list with all player instances """
-        return self.players
+        """ Returns a TEAM_SIZE length list with all player instances of the same team """
+        team = type(player)
+        lst = []
+        for member in self.players:
+            if isinstance(member, team):
+                lst += [member]
+        return lst
     
     
     def update(self):
