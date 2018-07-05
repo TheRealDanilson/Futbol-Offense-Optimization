@@ -23,65 +23,89 @@ class Ball(object):
     """
 
     def __init__(self, player):
-        # constructor method for Ball
+        """
+        Constructor method for Ball
+        """
         self.position = player.getPosition()
         self.possession = player
         self.velocity = [0,0]
-        self.bound = FIELD_BOUNDS
+        self.bounds = FIELD_BOUNDS
         self.oldPosition = self.position.copy()
         self.receiving = False
         
         
     def getPosition(self):
+        """
+        Returns a copy of the ball's position attribute (2 element list)
+        """
         return self.position.copy()
 
 
     def getPossession(self):
-        # returns player instance who has ball
+        """
+        Returns ball's possession attribute (player instance)
+        """
         return self.possession
     
     
     def setPossession(self, player):
-        # changes player instance who has ball
+        """
+        Changes ball's possession attribute to the input player instance
+        """
         self.possession = player
         self.velocity = player.getVelocity()
     
           
     def isOutBounds(self):
-        # returns True if ball is out of bounds or False if ball is in bounds
-        # calculates the balls trajectory
-        return self.position[0] < self.bound[0] or self.position[0] > self.bound[1] \
-            or self.position[1] < self.bound[2] or self.position[1] > self.bound[3]
-    
+        """
+        Returns True if ball is out of bounds or False if ball is in bounds. 
+        This is done by checking to see if the ball's x and y coordinates are
+        within the min and max x and y coordinates stored in the bounds attribute
+        """
+        return self.position[0] < self.bounds[0] \
+            or self.position[0] > self.bounds[1] \
+            or self.position[1] < self.bounds[2] \
+            or self.position[1] > self.bounds[3] 
+            
     
     def update(self):
+        """
+        If the ball is possessed, this method changes the ball's velocity to the
+        velocity of the player instance that possesses it
+        """
         if self.possession is not None:
             self.velocity = self.possession.getVelocity()
         
         
     def move(self):
-        # changes position by adding velocity x to position x and velocity y
-        #   to position y
+        """
+        Changes ball's position by adding velocity x to position x and
+        velocity y to position y
+        """
         self.oldPosition = self.position.copy()
-        self.position[0] = self.position[0] + self.velocity[0]
-        self.position[1] = self.position[1] + self.velocity[1]
+        self.position[0] = self.position[0] + self.velocity[0] #changing x
+        self.position[1] = self.position[1] + self.velocity[1] #changing y
     
 
     def isGoal(self):
-        # returns True if the ball is a goal or False if not
+        """
+        Returns True if the ball is a goal or False if it is not
+        """
         oldx = self.oldPosition[0]
         oldy = self.oldPosition[1]
         newx = self.oldPosition[0]
         newy = self.oldPosition[1]
-        slope = (newy - oldy)/(newx - oldx) #calculating slope (m) in y=mx+b 
-        b = oldy - slope*oldx               # calculating b in y=mx+b
-        travelx = -b/slope                  #calculate x when y = 0
-        return -4 < travelx and travelx < 4
+        slope = (newy - oldy)/(newx - oldx) #Calculating slope (m) in y=mx+b 
+        b = oldy - slope*oldx               #Calculating b in y=mx+b
+        travelx = -b/slope                  #Calculate x when y = 0
+        return -4 < travelx and travelx < 4 #True if ball is between goal posts
     
     
     def shoot(self, direction):
-        # changes ball's possession to None and changes the ball velocity to
-        # input velocity
+        """
+        Changes ball's possession to None and changes the ball velocity to
+        input velocity
+        """
         self.possession = None
         self.velocity = direction
         
