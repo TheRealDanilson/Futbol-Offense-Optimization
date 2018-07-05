@@ -14,11 +14,11 @@ class Game(object):
     def __init__(self):
         seed()
         self.players = []
-        self.createPlayer([-10, 45], (-20, 10, 40, 50))
-        self.createPlayer([30, 35], (-30, 10, 10, 40))
+        self.createPlayer([-10, 45], (-20,  10, 40, 50))
+        self.createPlayer([ 30, 35], (-30,  10, 10, 40))
         self.createPlayer([-23, 14], (-30, -10, 10, 20))
-        self.createPlayer([8, 35], (-10, 10, 20, 40))
-        self.createPlayer([3, 7], (-10, 10, 0, 20))
+        self.createPlayer([  8, 35], (-10,  10, 20, 40))
+        self.createPlayer([  3,  7], (-10,  10,  0, 20))
         self.createDefender([-3, 3], FIELD_BOUNDS)
         self.createDefender([10, 30], FIELD_BOUNDS)
         self.createDefender([-10, 24], FIELD_BOUNDS)
