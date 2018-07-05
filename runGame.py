@@ -7,5 +7,5 @@ game = Game()
 while True:
     print('')
     game.update()
-#    sleep(0.3)
+    sleep(0.3)
     step += 1
