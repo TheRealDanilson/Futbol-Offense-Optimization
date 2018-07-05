@@ -52,7 +52,7 @@ class Player(object):
     def getBounds(self):
         return self.bounds.copy()
     
-    def getPossession(self, ball):
+    def setPossession(self, ball):
         self.ball = ball
         
     def setToReceive(self):
