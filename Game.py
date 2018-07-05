@@ -19,11 +19,17 @@ class Game(object):
         self.createPlayer([-23, 14], (-30, -10, 10, 20))
         self.createPlayer([8, 35], (-10, 10, 20, 40))
         self.createPlayer([3, 7], (-10, 10, 0, 20))
+        self.createDefender([-3, 3], FIELD_BOUNDS)
         self.createBall(self.players[0])
     
     
     def createPlayer(self, position, bounds):
         player = Offender(position, self, bounds)
+        self.players += [player]
+        
+    
+    def createDefender(self, position, bounds):
+        player = Defender(position, self, bounds)
         self.players += [player]
     
     
@@ -94,7 +100,7 @@ class Game(object):
             if not isinstance(member, team):
                 memberPos = member.getPosition()
                 dx = memberPos[0] - playerPos[0]
-                dy = memberpos[1] - playerPos[1]
+                dy = memberPos[1] - playerPos[1]
                 dist = (dx**2 + dy**2)**(0.5)
                 if dist < minDist:
                     minDist = dist
@@ -215,6 +221,8 @@ class Game(object):
             if self.inBounds(playerPos):
                 if player.hasBall():
                    field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'Xo'
+                elif isinstance(player, Defender):
+                    field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'd'
                 else:
                     field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'X'
                     

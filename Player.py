@@ -16,6 +16,8 @@ def expcdf(x, mu):
 
 
 def partition(lst, shadowLst, m, k):
+    if (k - m + 1) <= 1:
+        return None
     pivot = lst[m]
     i = m
     j = m + 1
@@ -37,7 +39,7 @@ def quickSort(lst, shadowLst, m, k):
     if (k - m + 1) <= 1:
         return None
     pivot = partition(lst, shadowLst, m, k)
-    quickSort(lst, shadowLst, m, pivot)
+    quickSort(lst, shadowLst, m, pivot - 1)
     quickSort(lst, shadowLst, pivot + 1, k)
 
 
@@ -154,7 +156,10 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             m = self.game.nearestOpponent(self)[1]
-            p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
+            try:
+                p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
+            except:
+                p = m
             z = u**2/(m*p)
             o = expcdf((4.5-z),1)
             openness[teammate] = o
@@ -331,3 +336,6 @@ class Offender(Player):
 class Defender(Player):
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
         super().__init__(position, game, bounds)
+        
+    def shootPassKeep(self):
+        pass
