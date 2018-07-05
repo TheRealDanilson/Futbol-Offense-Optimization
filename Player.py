@@ -78,7 +78,7 @@ class Player(object):
         self.removePossession()
         self.justShot = True
         print("test")
-        sleep(3)
+        #sleep(3)
         
     def move(self):
         """

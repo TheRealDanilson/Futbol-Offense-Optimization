@@ -222,7 +222,7 @@ class Game(object):
                 self.ball.setPossession(player)
         self.ball.update()
         self.ball.move()
-        self.printFieldNested()
+        #self.printFieldNested()
             
             
     def inBounds(self, position):
