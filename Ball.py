@@ -28,7 +28,7 @@ class Ball(object):
         self.possession = player
         self.velocity = [0,0]
         self.bound = FIELD_BOUNDS
-        self.oldPosition = self.position
+        self.oldPosition = self.position.copy()
         self.receiving = False
         
         
@@ -62,6 +62,7 @@ class Ball(object):
     def move(self):
         # changes position by adding velocity x to position x and velocity y
         #   to position y
+        self.oldPosition = self.position.copy()
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
     

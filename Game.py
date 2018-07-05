@@ -15,7 +15,10 @@ class Game(object):
         seed()
         self.players = []
         self.createPlayer([-10, 45], (-20, 10, 40, 50))
-        self.createPlayer([-20, 35], (-30, 10, 10, 40))
+        self.createPlayer([30, 35], (-30, 10, 10, 40))
+        self.createPlayer([-23, 14], (-30, -10, 10, 20))
+        self.createPlayer([8, 35], (-10, 10, 20, 40))
+        self.createPlayer([3, 7], (-10, 10, 0, 20))
         self.createBall(self.players[0])
     
     
@@ -156,6 +159,10 @@ class Game(object):
             field[floor(ballPos[0]) + x_min][floor(ballPos[1])] = 'o'
         for player in self.players:
             playerPos = player.getPosition()
+            bounds = player.getBounds()
+            print(bounds)
+            zoneCenter = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
+            field[floor(zoneCenter[0]) + x_min][floor(zoneCenter[1])] = 'C'
             if self.inBounds(playerPos):
                 if player.hasBall():
                    field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'Xo'

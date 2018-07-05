@@ -89,9 +89,7 @@ class Player(object):
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
         
-    def genWeight(self, objective):
-        return uniform(0, 1)                     #Dummy Weight
-    
+        
     def pickPlayer(self):
         """
         Returns a Player instance to pass to
@@ -153,10 +151,19 @@ class Player(object):
         weight - real number
         Returns  list (vector x weight) of length 2, entry 0 is x and entry y is 1
         """
-        dummy = [0, 0]
-        dummy[0] = vector[0] * weight 
-        dummy[1] = vector[1] * weight
-        return dummy
+        return (weight * vector[0], weight * vector[1])
+    
+    def genWeight(self, objective):
+        return uniform(0, 1)
+    
+    
+    def magnitudeAndDirection(self, vector):
+        magnitude = (vector[0]**2 + vector[1]**2)**(0.5)
+        try:
+            direction = (vector[0]/magnitude, vector[1]/magnitude)
+        except:
+            direction = (0, 0)
+        return (magnitude, direction)
     
     
     def calcVector(self, objective):
@@ -167,17 +174,25 @@ class Player(object):
         """
         weight = self.genWeight(objective)
         if objective is Objectives.GOAL:
-            return self.createVector(weight, self.game.playerDistGoal(self))
+            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
+            weight = uniform(0,1)*dist
+            return self.createVector(weight, direction)
         elif objective is Objectives.TEAMMATES:
             team = self.game.playerTeam(self)
             vector = [0, 0]
             for teammate in team:
-                mateVector = self.createVector(-weight, self.game.playerDistPlayer(self, teammate))
-                self.addVectors(vector, mateVector)
-            return vector
+                if teammate is not self:
+                    (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, teammate))
+                    weight = -1/dist
+                    mateVector = self.createVector(weight, direction)
+                    self.addVectors(vector, mateVector)
+            return (vector[0], vector[1])
         elif objective is Objectives.ZONE_CENTER:
-            return self.createVector(3*weight, self.game.playerDistZone(self))
-        return [0, 0]
+            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
+            weight = uniform(0, 2)*dist
+            return self.createVector(weight, self.game.playerDistZone(self))
+        
+        return (0, 0)
                 
     def addVectors(self, finalVector, vector):
         """
