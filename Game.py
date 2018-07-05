@@ -224,12 +224,14 @@ class Game(object):
             zoneCenter = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
             field[floor(zoneCenter[0]) + x_min][floor(zoneCenter[1])] = 'C'
             if self.inBounds(playerPos):
-                if player.hasBall():
-                   field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'Xo'
-                elif isinstance(player, Defender):
-                    field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'd'
+                playerStr = ''
+                if isinstance(player, Offender):
+                    playerStr += 'X'
                 else:
-                    field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = 'X'
+                    playerStr += 'D'
+                if player.hasBall():
+                    playerStr += 'o'
+                field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = playerStr
                     
         printNestedList(field)
 
