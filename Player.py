@@ -1,6 +1,7 @@
 from constants import *
-from random import uniform, choice
+from random import uniform, choices
 from math import exp
+from time import sleep
 
 def swap(lst, shadowLst, i, j):
     temp = lst[j]
@@ -121,6 +122,7 @@ class Player(object):
         self.removePossession()
         self.justShot = True
         print("test")
+        sleep(3)
         
     def move(self):
         """
@@ -139,13 +141,14 @@ class Player(object):
         playerPos = self.getPosition()
         b = playerPos[0]**2/150 + playerPos[1]**2/300
         for teammate in team:
-            matePos = teammate.getPosition()
-            a = matePos[0]**2/150 + playerPos[1]**2/300
-            dist = self.game.playerDistPlayer(self, teammate)
-            d = (dist[0]**2 + dist[1]**2)**(0.5)
-            z = (a - b + 16)/16 + abs(d - 15)/15
-            p = expcdf((4.5-z),1)
-            probabilities[teammate] = p
+            if teammate is not self:
+                matePos = teammate.getPosition()
+                a = matePos[0]**2/150 + playerPos[1]**2/300
+                dist = self.game.playerDistPlayer(self, teammate)
+                d = (dist[0]**2 + dist[1]**2)**(0.5)
+                z = (a - b + 16)/16 + abs(d - 15)/15
+                p = expcdf((4.5-z),1)
+                probabilities[teammate] = p
         
         return probabilities
                 
@@ -155,14 +158,12 @@ class Player(object):
         u = self.game.nearestOpponent(self)[1]
         team = self.game.playerTeam(self)
         for teammate in team:
-            m = self.game.nearestOpponent(self)[1]
-            try:
+            if teammate is not self:
+                m = self.game.nearestOpponent(self)[1]
                 p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
-            except:
-                p = m
-            z = u**2/(m*p)
-            o = expcdf((4.5-z),1)
-            openness[teammate] = o
+                z = u**2/(m*p)
+                o = expcdf((4.5-z),1)
+                openness[teammate] = o
         return openness
         
         
@@ -182,15 +183,20 @@ class Player(object):
         probabilities = {}
         team = self.game.playerTeam(self)
         for teammate in team:
-            probabilities[teammate] = (D[teammate] + CAREFULLNESS*O[teammate])/(1 + CAREFULLNESS)
+            if teammate is not self:
+                probabilities[teammate] = (D[teammate] + OPENNESS*O[teammate])/(1 + OPENNESS)
+        P = 0.0
+        for teammate in probabilities:
+            P += probabilities[teammate]
+        probabilities[self] = 1 - P/(len(team) - 1)
         (sortedTeam, sortedProbabilities) = dictSort(probabilities)
         rand = uniform(0, 1)
         total = 0.0
-        for i in range(len(sortedTeam)):
-            total += sortedProbabilities[i]
-            if rand <= total:
-                return sortedTeam[i]
-        return sortedTeam[i]
+        print(sortedTeam)
+        print(sortedProbabilities)
+        a = choices(sortedTeam, weights=sortedProbabilities, k=1)[0]
+        print(a)
+        return a
         
         
     def calcShootProb(self):
