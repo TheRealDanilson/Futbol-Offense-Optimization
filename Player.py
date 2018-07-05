@@ -118,12 +118,12 @@ class Player(object):
                 m = self.game.nearestOpponent(self)[1]
                 p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
                 try:
-                    z = (60-u)/(60*m*p)
+                    z = m*p/u**2
                     print('Z is: ' + str(z))
-                    o = expcdf((60-z),1)
+                    o = expcdf((4.5-z),1)
                 except:
-                    print('Set o to 1')
-                    o = 1
+                    print('Set o to 0')
+                    o = 0
                 openness[teammate] = o
         return openness
         
