@@ -117,8 +117,11 @@ class Player(object):
             if teammate is not self:
                 m = self.game.nearestOpponent(self)[1]
                 p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
-                z = u**2/(m*p)
-                o = expcdf((10-z),1)
+                try:
+                    z = (60-u)/(60*m*p)
+                    o = expcdf((10-z),1)
+                except:
+                    o = 1
                 openness[teammate] = o
         return openness
         
@@ -299,5 +302,5 @@ class Defender(Player):
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
         super().__init__(position, game, bounds)
         
-    def shootPassKeep(self):
-        pass
+    #def shootPassKeep(self):
+    #    pass
