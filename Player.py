@@ -39,9 +39,10 @@ class Player(object):
         self.game = game
         self.ball = None
         self.position = position.copy()
-        self.bounds = bounds
+        self.bounds = list(bounds)
         self.velocity = [0, 0]
         self.receiving = False
+        self.justShot = False
         
     def getPosition(self):
         return self.position.copy()
@@ -62,6 +63,9 @@ class Player(object):
     def removePossession(self):
         self.ball = None
     
+    def justShotBall(self):
+        return self.justShot
+    
     def shoot(self, position):
         """
         position    position of the player instance
@@ -73,6 +77,7 @@ class Player(object):
         direction = (dX/magnitude, dY/magnitude)
         self.ball.shoot(direction)
         self.removePossession()
+        self.justShot = True
         print("test")
         
     def move(self):
@@ -85,7 +90,7 @@ class Player(object):
         self.position[1] = self.position[1] + self.velocity[1]
         
     def genWeight(self, objective):
-        return 0.5                      #Dummy Weight
+        return uniform(0, 1)                     #Dummy Weight
     
     def pickPlayer(self):
         """
@@ -150,7 +155,7 @@ class Player(object):
         """
         dummy = [0, 0]
         dummy[0] = vector[0] * weight 
-        dummy[1] = vector[0] * weight
+        dummy[1] = vector[1] * weight
         return dummy
     
     
@@ -167,11 +172,11 @@ class Player(object):
             team = self.game.playerTeam(self)
             vector = [0, 0]
             for teammate in team:
-                mateVector = self.createVector(weight, self.game.playerDistPlayer(self, teammate))
+                mateVector = self.createVector(-weight, self.game.playerDistPlayer(self, teammate))
                 self.addVectors(vector, mateVector)
             return vector
-        #elif objective is Objectives.ZONE_CENTER:
-        #    return self.createVector(weight, self.game.playerDistZone(self))
+        elif objective is Objectives.ZONE_CENTER:
+            return self.createVector(3*weight, self.game.playerDistZone(self))
         return [0, 0]
                 
     def addVectors(self, finalVector, vector):
@@ -187,6 +192,7 @@ class Player(object):
         First decides a players action (shoot, pass, keep) then updates the
         player's velocity if they are not receiving the ball.
         """
+        self.justShot = False
         self.shootPassKeep()
         finalVector = [0, 0]
         if self.receiving is not True:

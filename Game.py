@@ -14,13 +14,13 @@ class Game(object):
     def __init__(self):
         seed()
         self.players = []
-        self.createPlayer([-10, 50])
-        self.createPlayer([-20, 35])
+        self.createPlayer([-10, 45], (-20, 10, 40, 50))
+        self.createPlayer([-20, 35], (-30, 10, 10, 40))
         self.createBall(self.players[0])
     
     
-    def createPlayer(self, position):
-        player = Offender(position, self)
+    def createPlayer(self, position, bounds):
+        player = Offender(position, self, bounds)
         self.players += [player]
     
     
@@ -47,6 +47,17 @@ class Game(object):
         playerPos = player.getPosition()
         dx = GOAL_POS[0] - playerPos[0]
         dy = GOAL_POS[1] - playerPos[1]
+        return (dx, dy)
+    
+    def playerDistZone(self, player):
+        """ Returns a 2 element tuple that represents the player's distance to the center of
+            zone, pointing from the player
+        """
+        bounds = player.getBounds()
+        playerPos = player.getPosition()
+        center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
+        dx = center[0] - playerPos[0]
+        dy = center[1] - playerPos[1]
         return (dx, dy)
     
     
@@ -92,7 +103,7 @@ class Game(object):
             player.move()
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
-            if dist <= RECEIVE_THRESHOLD:
+            if not player.justShotBall() and dist <= RECEIVE_THRESHOLD:
                 player.receive(self.ball)
                 self.ball.setPossession(player)
         self.ball.update()

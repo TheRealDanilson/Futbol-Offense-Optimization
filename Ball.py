@@ -29,6 +29,7 @@ class Ball(object):
         self.velocity = [0,0]
         self.bound = FIELD_BOUNDS
         self.oldPosition = self.position
+        self.receiving = False
         
         
     def getPosition(self):
