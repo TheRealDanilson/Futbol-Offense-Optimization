@@ -20,6 +20,11 @@ class Game(object):
         self.createPlayer([8, 35], (-10, 10, 20, 40))
         self.createPlayer([3, 7], (-10, 10, 0, 20))
         self.createDefender([-3, 3], FIELD_BOUNDS)
+        self.createDefender([10, 30], FIELD_BOUNDS)
+        self.createDefender([-10, 24], FIELD_BOUNDS)
+        self.createDefender([20, 50], FIELD_BOUNDS)
+        self.createDefender([10, 3], FIELD_BOUNDS)
+        self.createDefender([30, 3], FIELD_BOUNDS)
         self.createBall(self.players[0])
     
     

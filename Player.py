@@ -3,53 +3,9 @@ from random import uniform, choices
 from math import exp
 from time import sleep
 
-def swap(lst, shadowLst, i, j):
-    temp = lst[j]
-    shadowTemp = shadowLst[j]
-    lst[j] = lst[i]
-    shadowLst[j] = shadowLst[i]
-    lst[i] = temp
-    shadowLst[i] = shadowTemp
-
-
+    
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
-
-
-def partition(lst, shadowLst, m, k):
-    if (k - m + 1) <= 1:
-        return None
-    pivot = lst[m]
-    i = m
-    j = m + 1
-    
-    # Precondition: Section of list <= i is less than or equal to the pivot
-    #               lst[i] is the pivot
-    #               For i < x < j, lst[x] is greater than the pivot
-    #               For j <= x, lst[x] is unsorted
-    while (j <= k):
-        if lst[j] <= pivot:
-            swap(lst, shadowLst, j, i)
-            swap(lst, shadowLst, i + 1, j)
-            i += 1
-        j += 1
-    return i
-
-
-def quickSort(lst, shadowLst, m, k):
-    if (k - m + 1) <= 1:
-        return None
-    pivot = partition(lst, shadowLst, m, k)
-    quickSort(lst, shadowLst, m, pivot - 1)
-    quickSort(lst, shadowLst, pivot + 1, k)
-
-
-def dictSort(dct):
-    keys = list(dct.keys())
-    values = list(dct.values())
-    quickSort(values, keys, 0, len(values) - 1)
-    return (keys, values)
-
 
 class Player(object):
     """
@@ -147,7 +103,7 @@ class Player(object):
                 dist = self.game.playerDistPlayer(self, teammate)
                 d = (dist[0]**2 + dist[1]**2)**(0.5)
                 z = (a - b + 16)/16 + abs(d - 15)/15
-                p = expcdf((4.5-z),1)
+                p = expcdf((6-z),1)
                 probabilities[teammate] = p
         
         return probabilities
@@ -162,7 +118,7 @@ class Player(object):
                 m = self.game.nearestOpponent(self)[1]
                 p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
                 z = u**2/(m*p)
-                o = expcdf((4.5-z),1)
+                o = expcdf((10-z),1)
                 openness[teammate] = o
         return openness
         
@@ -189,12 +145,12 @@ class Player(object):
         for teammate in probabilities:
             P += probabilities[teammate]
         probabilities[self] = 1 - P/(len(team) - 1)
-        (sortedTeam, sortedProbabilities) = dictSort(probabilities)
-        rand = uniform(0, 1)
-        total = 0.0
-        print(sortedTeam)
-        print(sortedProbabilities)
-        a = choices(sortedTeam, weights=sortedProbabilities, k=1)[0]
+        #(sortedTeam, sortedProbabilities) = dictSort(probabilities)
+        #rand = uniform(0, 1)
+        #total = 0.0
+        print(team)
+        print(list(probabilities.values()))
+        a = choices(team, weights=list(probabilities.values()), k=1)[0]
         print(a)
         return a
         
@@ -286,13 +242,13 @@ class Player(object):
             for teammate in team:
                 if teammate is not self:
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, teammate))
-                    weight = -1/dist
+                    weight = -1/(dist+1)
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
         elif objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            weight = uniform(0, 2)*dist
+            weight = dist
             return self.createVector(weight, self.game.playerDistZone(self))
         
         return (0, 0)
