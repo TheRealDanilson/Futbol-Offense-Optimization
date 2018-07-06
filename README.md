@@ -10,10 +10,10 @@ For this simulation you will need to download Python 3.
 
 ## Authors
 
-**Samad Arshad** Cornell University, 2021, Electronic and Computer 
-**Daniel Cardenas** Cornell University, 2021, Computer Science
-**Daniel Stabile** Cornell University, 2021, Computer Science
-**Thomas Taffe** Cornell University, 2021, Mechanical
+* **Samad Arshad** Cornell University, 2021, Electronic and Computer 
+* **Daniel Cardenas** Cornell University, 2021, Computer Science
+* **Daniel Stabile** Cornell University, 2021, Computer Science
+* **Thomas Taffe** Cornell University, 2021, Mechanical
 
 
 ## License
