@@ -80,8 +80,9 @@ class Game(object):
         
         
     def playerDistGoal(self, player):
-        """ Returns 2 element tuple that stores the player's distance to the goal
-           Entry 0 is change in x and entry 1 is change in y
+        """
+        Returns 2 element tuple that stores the player's distance to the goal
+        Entry 0 is change in x and entry 1 is change in y
         """
         playerPos = player.getPosition()
         dx = GOAL_POS[0] - playerPos[0]
@@ -132,7 +133,8 @@ class Game(object):
         """
         player - instance of the player class
         
-        DANIEL SON PLEASE DO THIS
+        Returns two element tuple that stores the closest opponent instance in
+        first entry and the distance of the oppenent (real number)
         """
         team = type(player)
         playerPos = player.getPosition()
@@ -152,16 +154,29 @@ class Game(object):
     
     def nearestOpponentToLine(self, team, pos1, pos2):
         """
-        DANIEL SON PLEASE DO THIS
+        team - class type of team with the ball
+        
+        pos1 - 2 element list storing x and y coordinates in first and second
+        entry, respectively, of the player who passed the ball at the time of
+        the pass
+        
+        pos2 - 2 element list storing x and y coordinates in first and second
+        entry, respectively, of the player who is receiving the ball at the time
+        of the pass
+        
+        Returns a two element tuple that stores the nearest opponent instance to
+        the pass line in the first entry and the distance of that oppenent to
+        the pass line in the second entry
         """
         minDist = float('inf')
         closest = None
-        (x1, y1) = pos1
-        (x2, y2) = pos2
+        (x1, y1) = pos1 
+        (x2, y2) = pos2 
         for member in self.players:
             if not isinstance(member, team):
                 (x0, y0) = member.getPosition()
-                dist = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1)/((y2-y1)**2 + (x2 -x1)**2)**(0.5)
+                dist = abs((y2-y1)*x0-(x2-x1)*y0+x2*y1-y2*x1)/\
+                          ((y2-y1)**2+(x2-x1)**2)**(0.5)
                 if dist < minDist:
                     minDist = dist
                     closest = member
@@ -203,11 +218,12 @@ class Game(object):
     
     def update(self):
         """
-            Update method for the whole game. Updates the velocities of each player
-            and the ball, and then moves them according to their updated velocities
+            Update method for the whole game. Updates the velocities of each
+            player and the ball, and then moves them according to their updated
+            velocities
             
-            This method also handles receiving the ball. If a player is within the
-            RECEIVE_THRESHOLD, the player will receive the ball
+            This method also handles receiving the ball. If a player is within
+            the RECEIVE_THRESHOLD, the player will receive the ball
             
             TODO: Change this method to handle stealing
         
@@ -259,11 +275,11 @@ class Game(object):
             for y in range(yLength):
                 field[x] += ['.']
                 
-        # For the field data structure, the origin is located on the bottom left corner
-        # However, we've defined the origin to be where the center of
+        # For the field data structure, the origin is located on the bottom left 
+        # corner. However, we've defined the origin to be where the center of
         # goal is for our simulation
-        # To fix this, we shift our points to the right by x_min so that the positions
-        # on the field are correct
+        # To fix this, we shift our points to the right by x_min so that the 
+        # positions on the field are correct
         field[GOAL_POS[0] + x_min][GOAL_POS[1]] = 'G'
         ballPos = self.ball.getPosition()
         if self.inBounds(ballPos):
@@ -282,7 +298,7 @@ class Game(object):
                     playerStr += 'D'
                 if player.hasBall():
                     playerStr += 'o'
-                field[floor(playerPos[0]) + x_min][floor(playerPos[1])] = playerStr
+                field[floor(playerPos[0]) + x_min][floor(playerPos[1])]=playerStr
                     
         printNestedList(field)
 

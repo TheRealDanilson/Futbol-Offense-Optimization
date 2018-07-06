@@ -32,9 +32,17 @@ class Player(object):
                 
     optPassDist Constant number that represents the optimal distance from a
                 teammate the offense will pass either short, medium or long
+                
+    receiving   Boolean: True if player is receiving ball. False otherwise
+    
+    justShot    Boolean: True if player shot/passed the ball within last
+                timestep.  False otherwise.
     """
     
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
+        """
+        Constructor Method for player class
+        """
         self.game = game
         self.ball = None
         self.position = position.copy()
@@ -44,25 +52,48 @@ class Player(object):
         self.justShot = False
         
     def getPosition(self):
+        """
+        Returns a copy of the position attribute (list of length 2) 
+        """
         return self.position.copy()
     
     def getVelocity(self):
+        """
+        Returns a copy of the velocity attribute (list of length 2) 
+        """
         return self.velocity.copy()
     
     def getBounds(self):
+        """
+        Returns a copy of the bounds attribute (4 element tuple)
+        """
         return self.bounds.copy()
     
     def setPossession(self, ball):
+        """
+        ball - game's ball instance
+        
+        Changes the ball's attribute to the game's ball instance
+        """
         self.ball = ball
         
     def setToReceive(self):
+        """
+        Changes receiving attribute to True
+        """
         self.receiving = True
     
     
     def removePossession(self):
+        """
+        Changes ball attribute to None
+        """
         self.ball = None
     
     def justShotBall(self):
+        """
+        Return the attribute justShot (Boolean)
+        """
         return self.justShot
     
     def shoot(self, position):
@@ -92,6 +123,9 @@ class Player(object):
         
         
     def calcDistProbs(self):
+        """
+        DANIELSON/TOMMYTORNADO PLEASE DO THIS
+        """
         probabilities = {}
         team = self.game.playerTeam(self)
         playerPos = self.getPosition()
@@ -110,13 +144,17 @@ class Player(object):
                 
     
     def calcOpenness(self):
+        """
+        DANIELSON/TOMMYTORNADO PLEASE DO THIS
+        """
         openness = {}
         u = self.game.nearestOpponent(self)[1]
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
                 m = self.game.nearestOpponent(self)[1]
-                p = self.game.nearestOpponentToLine(type(self), self.getPosition(), teammate.getPosition())[1]
+                p = self.game.nearestOpponentToLine(type(self),\
+                    self.getPosition(), teammate.getPosition())[1]
                 try:
                     z = m*p/u**2
                     print('Z is: ' + str(z))
@@ -131,13 +169,13 @@ class Player(object):
     def pickPlayer(self):
         """
         Returns a Player instance to pass to
-        """
-        """
-        This function calculates *who* this player will pass to, if he is about to pass.
-        It uses a Z-score from the distances and positions of other players, with respect
-        to this player.
+        
+        This function calculates *who* this player will pass to, if he is about
+        to pass.  It uses a Z-score from the distances and positions of other
+        players, with respect to this player.
 
-        Note: This chooses who to pass to if and only if this player has chosen to pass at all.
+        Note: This chooses who to pass to if and only if this player has chosen
+        to pass at all.
         """
         D = self.calcDistProbs()
         O = self.calcOpenness()
@@ -145,14 +183,13 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                probabilities[teammate] = (D[teammate] + OPENNESS*O[teammate])/(1 + OPENNESS)
+                probabilities[teammate] = (D[teammate] + OPENNESS*O\
+                                           [teammate])/(1 + OPENNESS)
         P = 0.0
         for teammate in probabilities:
             P += probabilities[teammate]
         probabilities[self] = 1 - P/(len(team) - 1)
-        #(sortedTeam, sortedProbabilities) = dictSort(probabilities)
-        #rand = uniform(0, 1)
-        #total = 0.0
+        #Debugging
         print(team)
         print(list(probabilities.values()))
         a = choices(team, weights=list(probabilities.values()), k=1)[0]
@@ -162,7 +199,7 @@ class Player(object):
         
     def calcShootProb(self):
         """
-        Returns the probability of shooting
+        Returns the probability of shooting (real number between 0 and 1)
         """
         x = self.position[0]
         y = self.position[1]
@@ -177,17 +214,30 @@ class Player(object):
     
     
     def receive(self, ball):
+        """
+        ball - current game's ball instance
+        
+        Sets ball attribute to the game's ball instance and the receiving
+        attribute to False
+        """
         self.ball = ball
         self.receiving = False
     
     
     def hasBall(self):
+        """
+        Returns True if player has ball and False otherwise
+        """
         return self.ball is not None
     
     
     def passBall(self, player):
-        # player - player instance of class Player
+        """
+        player - player instance of class Player who receives the ball
         
+        Sets the player input's attribute receiving to True and passes the ball
+        to the input player's position
+        """
         print("passTest")
         if self is not player:
             player.setToReceive()
@@ -199,12 +249,12 @@ class Player(object):
         Decides if player shoots the ball, passes the ball, or keeps the ball
         and performs the chosen action
         """
-        if self.ball is not None:       #Making sure player has the ball
+        if self.hasBall():              #Making sure player has the ball
             shootProb = self.calcShootProb()
-            rand = uniform(0, 1)                   #Randon decimal between 0 and 1
+            rand = uniform(0, 1)        #Randon decimal between 0 and 1
             if rand <= shootProb:       #Decides if to shoot
                 self.shoot(GOAL_POS)      
-            else:                       #Decides which Player instance to pass to
+            else:                       #Decides which Player inst. to pass to
                 player = self.pickPlayer()
                 self.passBall(player)    
     
@@ -213,15 +263,25 @@ class Player(object):
         """
         vector - list of length 2.  Entry 0 is x and entry 1 is y
         weight - real number
-        Returns  list (vector x weight) of length 2, entry 0 is x and entry y is 1
+        Returns list (vector x weight) of length 2, entry 0 is x and entry y is 1
         """
         return (weight * vector[0], weight * vector[1])
     
     def genWeight(self, objective):
+        """
+        Returns random number between 0 and 1
+        """
         return uniform(0, 1)
     
     
     def magnitudeAndDirection(self, vector):
+        """
+        vector - 2 element tuple representing a vector
+        
+        Returns a 2 element tuple with the magnitude (real number ) and
+        direction (unit vector pointing in direction of vector) in the first and
+        second entry, respectively.
+        """
         magnitude = (vector[0]**2 + vector[1]**2)**(0.5)
         try:
             direction = (vector[0]/magnitude, vector[1]/magnitude)
