@@ -313,7 +313,7 @@ class Player(object):
             return (vector[0], vector[1])
         elif objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            weight = dist**2
+            weight = dist**1.15
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             opponentTeam = self.game.playerOpponentTeam(self)
