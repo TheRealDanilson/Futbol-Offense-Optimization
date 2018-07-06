@@ -236,6 +236,8 @@ class Game(object):
             if not player.justShotBall() and dist <= RECEIVE_THRESHOLD:
                 player.receive(self.ball)
                 self.ball.setPossession(player)
+            elif self.ball.getPossession() is not None:
+                player.receive(None)
         self.ball.update()
         self.ball.move()
         self.printFieldNested()
