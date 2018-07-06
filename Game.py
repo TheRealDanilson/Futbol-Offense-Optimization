@@ -235,7 +235,8 @@ class Game(object):
             player.move()
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
-            if not player.justShotBall() and dist <= RECEIVE_THRESHOLD:
+            if self.ball.getPossession() is None and \
+                    not player.justShotBall() and dist <= RECEIVE_THRESHOLD:
                 player.receive(self.ball)
                 self.ball.setPossession(player)
             elif self.ball.getPossession() is not None:
