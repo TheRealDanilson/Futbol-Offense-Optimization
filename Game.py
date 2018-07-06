@@ -89,6 +89,7 @@ class Game(object):
         dy = GOAL_POS[1] - playerPos[1]
         return (dx, dy)
     
+    
     def playerDistZone(self, player):
         """
         Returns a 2 element tuple that stores the player distance to the center
@@ -182,6 +183,7 @@ class Game(object):
                     closest = member
         return (closest, minDist)
         
+        
     def playerList(self):
         """
         Returns a copy of the tuple that stores the player instances. The tuple
@@ -255,6 +257,7 @@ class Game(object):
         y = position[1]
         return (x_min <= x) and (x <= x_max) and (y_min <= y) and (y <= y_max)
 
+
     def printFieldNested(self):
         """
             Prints a graphical representation of the field to the screen
@@ -303,7 +306,6 @@ class Game(object):
                 field[floor(playerPos[0]) + x_min][floor(playerPos[1])]=playerStr
                     
         printNestedList(field)
-
 
 
 def printNestedList(lst):

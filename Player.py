@@ -7,6 +7,7 @@ from time import sleep
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
 
+
 class Player(object):
     """
     game        Stores the currently running game
@@ -51,11 +52,13 @@ class Player(object):
         self.receiving = False
         self.justShot = False
         
+        
     def getPosition(self):
         """
         Returns a copy of the position attribute (list of length 2) 
         """
         return self.position.copy()
+    
     
     def getVelocity(self):
         """
@@ -63,11 +66,13 @@ class Player(object):
         """
         return self.velocity.copy()
     
+    
     def getBounds(self):
         """
         Returns a copy of the bounds attribute (4 element tuple)
         """
         return self.bounds.copy()
+    
     
     def setPossession(self, ball):
         """
@@ -76,6 +81,7 @@ class Player(object):
         Changes the ball's attribute to the game's ball instance
         """
         self.ball = ball
+        
         
     def setToReceive(self):
         """
@@ -90,11 +96,13 @@ class Player(object):
         """
         self.ball = None
     
+    
     def justShotBall(self):
         """
         Return the attribute justShot (Boolean)
         """
         return self.justShot
+    
     
     def shoot(self, position):
         """
@@ -111,6 +119,7 @@ class Player(object):
         print("test")
         #sleep(3)
         
+        
     def move(self):
         """
         Stores current position to old position and adds velocity to current
@@ -120,8 +129,7 @@ class Player(object):
         self.position[0] = self.position[0] + self.velocity[0]
         self.position[1] = self.position[1] + self.velocity[1]
         
-        
-        
+           
     def calcDistProbs(self):
         """
         DANIELSON/TOMMYTORNADO PLEASE DO THIS
@@ -267,6 +275,7 @@ class Player(object):
         """
         return (weight * vector[0], weight * vector[1])
     
+    
     def genWeight(self, objective):
         """
         Returns random number between 0 and 1
@@ -331,6 +340,7 @@ class Player(object):
             return self.createVector(weight, direction)
         
         return (0, 0)
+              
                 
     def addVectors(self, finalVector, vector):
         """
@@ -357,12 +367,6 @@ class Player(object):
                 finalVector[0] *= MAX_SPEED/speed
                 finalVector[1] *= MAX_SPEED/speed
         self.velocity = finalVector
-        
-            
-   
-    # test for push pull
-    # can you guys read this
-    
 
 
 class Offender(Player):
@@ -396,5 +400,4 @@ class Defender(Player):
             (dist, direction) = self.magnitudeAndDirection(ballDist)
             weight = 1/(dist + 1)
             return self.createVector(weight, direction)
-        
         return (0, 0)

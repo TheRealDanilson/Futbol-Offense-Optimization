@@ -6,8 +6,6 @@ Code for the simulator used in the Fútbol Offense Optimization project for ESMI
 ### Prerequisites
 For this simulation you will need to download Python 3.
 
-### Installing
-
 ## Authors
 
 * **Samad Arshad** Cornell University, 2021, Electronic and Computer 
