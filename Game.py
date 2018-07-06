@@ -288,8 +288,8 @@ class Game(object):
             playerPos = player.getPosition()
             bounds = player.getBounds()
             print(bounds)
-            #zoneCenter = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
-            #field[floor(zoneCenter[0]) + x_min][floor(zoneCenter[1])] = 'C'
+            zoneCenter = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
+            field[floor(zoneCenter[0]) + x_min][floor(zoneCenter[1])] = 'C'
             if self.inBounds(playerPos):
                 playerStr = ''
                 if isinstance(player, Offender):
