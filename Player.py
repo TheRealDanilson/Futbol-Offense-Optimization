@@ -40,6 +40,7 @@ class Player(object):
                 timestep.  False otherwise.
     """
     
+    
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
         """
         Constructor Method for player class
@@ -370,19 +371,37 @@ class Player(object):
 
 
 class Offender(Player):
-    """ Subclass of Player
-            
     """
+    Subclass of Player    
+    """
+
     
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
+        """
+        Constructor method for offender
+        """
         super().__init__(position, game, bounds)
 
 
 class Defender(Player):
+    """
+    Subclass of Player
+    """
+    
+    
     def __init__(self, position, game, bounds = FIELD_BOUNDS):
+        """
+        Constructor method for defender
+        """
         super().__init__(position, game, bounds)
         
+        
     def calcVector(self, objective):
+        """
+        objective - enumerations from the Objectives Class in constants.py
+        Returns a list of length 2 that corresponds to the weighted vector
+        between a player and the objective.  Entry 0 is x and entry 1 is y.
+        """
         weight = self.genWeight(objective)
         if objective is Objectives.GOAL:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))

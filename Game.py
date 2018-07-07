@@ -11,6 +11,8 @@ class Game(object):
     ball        Instance of ball
     
     """
+    
+    
     def __init__(self):
         """
         Constructor Method - Creates an instance of game
@@ -220,14 +222,14 @@ class Game(object):
     
     def update(self):
         """
-            Update method for the whole game. Updates the velocities of each
-            player and the ball, and then moves them according to their updated
-            velocities
-            
-            This method also handles receiving the ball. If a player is within
-            the RECEIVE_THRESHOLD, the player will receive the ball
-            
-            TODO: Change this method to handle stealing
+        Update method for the whole game. Updates the velocities of each
+        player and the ball, and then moves them according to their updated
+        velocities
+        
+        This method also handles receiving the ball. If a player is within
+        the RECEIVE_THRESHOLD, the player will receive the ball
+        
+        TODO: Change this method to handle stealing
         
         """
         for player in self.players:
@@ -261,7 +263,7 @@ class Game(object):
 
     def printFieldNested(self):
         """
-            Prints a graphical representation of the field to the screen
+        Prints a graphical representation of the field to the screen
         """
         field = []
         x_min = FIELD_BOUNDS[0]
@@ -311,8 +313,8 @@ class Game(object):
 
 def printNestedList(lst):
     """
-        Prints the contents of a list representing a 2D grid
-        The origin of the list will be at the bottom left corner
+    Prints the contents of a list representing a 2D grid
+    The origin of the list will be at the bottom left corner
     """
     x_length = len(lst)
     y_length = len(lst[0])

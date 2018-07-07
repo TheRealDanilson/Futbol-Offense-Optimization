@@ -22,6 +22,7 @@ class Ball(object):
                  Note: Goal Post positions are x = -4 and 4 y = 0.
     """
 
+
     def __init__(self, player):
         """
         Constructor method for Ball
