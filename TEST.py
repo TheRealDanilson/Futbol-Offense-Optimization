@@ -32,7 +32,8 @@ for player in players:
     else:
         sprite = factory.from_image(RESOURCES.get_path("bluePlayer.png"))
     (x, y) = player.getPosition()
-    sprite.position = (floor((x + x_max)*10), floor((y + y_max/2)*10))
+    print(x, y)
+    sprite.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   )
     print(sprite.position)
     player_sprites[player] = sprite
     spriterenderer.render(sprite)
