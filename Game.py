@@ -33,7 +33,8 @@ class Game(object):
         self.createDefender([5,12], (-10, 20, 0, 20))
         self.createBall(self.players[0])
     
-    
+    def getBall(self):
+        return ball
     def createPlayer(self, position, bounds):
         """
         position  - 2 element list with x in first entry and y in second
