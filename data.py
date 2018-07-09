@@ -89,8 +89,55 @@ class Data:
             self.ballTimeHeld += 1
     
     
-    def player_DistTime(self,game):
+    def player_Dist(self,game):
         """
+        Adds on distance traveled for *each* player.
+        
+        -- Assumed that getOldPosition for Players has been implemented.
+        
         Parameter game: Game object
-        (Unfinished)
         """
+        hyp = []
+        
+        for i in game.players:
+            x_moved = abs(i.getPosition[0] - i.getOldPosition[0]) # TO-DO: Create getOldPosition for Player class.
+            y_moved = abs(i.getPosition[1] - i.getOldPosition[1])
+            hyp.append((x_moved**2 + y_moved**2)**(1/2))
+        
+        if len(self.whoDist) == 0:
+            self.whoDist += hyp # Make hyp the whoDist if whoDist is empty
+        else:
+            self.whoDist = [sum(x) for x in zip(hyp, self.whoDist)] # Element-wise sum
+    
+    
+    def offender_DistTime(self,game):
+        """
+        
+        < UNFINISHED>
+        
+        Adds on time and distance traveled for *each* offender either with
+        or without the ball.
+        
+        -- This is all assuming game.players list follows an offender-first
+        format with half offender and half defender; ex. in [a,b,c,d,e,f]: a,
+        b, and c are offenders, d, e, and f are defenders.
+        
+        -- Assumed that getOldPosition for Players has been implemented.
+        
+        Parameter game: Game object
+        """
+        hypHeld = []
+        hypAlone = []
+        offenders = game.players[:len(game.players)//2] # Front-half
+        
+        for i in offenders:
+            x_moved = abs(i.getPosition[0] - i.getOldPosition[0])
+            y_moved = abs(i.getPosition[1] - i.getOldPosition[1])
+            
+            if i.hasBall == False:
+                hypHeld.append(0)
+                hypAlone.append((x_moved**2 + y_moved**2)**(1/2))
+            else:
+                hypHeld.append((x_moved**2 + y_moved**2)**(1/2))
+                hypAlone.append()
+            
