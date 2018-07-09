@@ -330,14 +330,18 @@ class Player(object):
             vector = [0, 0]
             for opponent in opponentTeam:
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
-                    weight = -1/(dist + 1)
+                    weight = -10/(dist + 1)
+                    if self.hasBall():
+                        weight *= 10
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 1/(dist + 1)
+            weight = 100/(dist + 1)
+            if self.receiving:
+                weight *= 10
             return self.createVector(weight, direction)
         
         return (0, 0)
@@ -359,14 +363,13 @@ class Player(object):
         self.justShot = False
         self.shootPassKeep()
         finalVector = [0, 0]
-        if self.receiving is not True:
-            for objective in Objectives:
-                vector = self.calcVector(objective)
-                self.addVectors(finalVector, vector)
-            speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
-            if speed > MAX_SPEED:
-                finalVector[0] *= MAX_SPEED/speed
-                finalVector[1] *= MAX_SPEED/speed
+        for objective in Objectives:
+            vector = self.calcVector(objective)
+            self.addVectors(finalVector, vector)
+        speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
+        if speed > MAX_SPEED:
+            finalVector[0] *= MAX_SPEED/speed
+            finalVector[1] *= MAX_SPEED/speed
         self.velocity = finalVector
 
 
@@ -405,11 +408,11 @@ class Defender(Player):
         weight = self.genWeight(objective)
         if objective is Objectives.GOAL:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-            weight = uniform(0,1)*dist
+            weight = dist
             return self.createVector(weight, direction)
         elif objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            weight = dist**2
+            weight = dist**1.15
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             (nearestOpponent, dist) = self.game.nearestOpponent(self)
@@ -417,6 +420,6 @@ class Defender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 1/(dist + 1)
+            weight = 100/(dist + 1)
             return self.createVector(weight, direction)
         return (0, 0)
