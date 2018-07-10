@@ -111,7 +111,7 @@ class Ball(object):
         """
         self.possession = None
         self.position = self.position.copy()
-        self.velocity = direction
+        self.velocity = (direction[0] * 3*MAX_SPEED, direction[1] * 3*MAX_SPEED)
         
         
     
