@@ -55,6 +55,7 @@ class Ball(object):
         """
         self.possession = player
         self.velocity = player.getVelocity()
+        self.position = player.getPosition()
     
           
     def isOutBounds(self):
