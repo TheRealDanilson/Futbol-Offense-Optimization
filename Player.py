@@ -420,6 +420,6 @@ class Defender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 100/(dist + 1)
+            weight = 15/(dist + 1)
             return self.createVector(weight, direction)
         return (0, 0)
