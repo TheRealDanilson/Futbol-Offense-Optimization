@@ -67,12 +67,8 @@ while running:
     #processor = sdl2.ext.TestEventProcessor()
     #processor.run(window)
     #window.refresh()
-<<<<<<< HEAD
     sleep(0.0005)    
-=======
-    #sleep(0.05)    
->>>>>>> e22fdc0c1fd929a022102ff95e3b9afa6cb9df77
-    
+
 #if __name__ == "__main__":
 #    sys.exit(run())   
 
