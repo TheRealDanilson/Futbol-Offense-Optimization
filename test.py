@@ -40,7 +40,7 @@ for player in players:
     sprite.position = (floor((x + x_max)*10-spriteXSize), floor((-y + y_max)*10-spriteYSize)   ) #We need to fix this so that the origin is at the center of each image
     player_sprites[player] = sprite
     spriterenderer.render(sprite)
-    
+
 soccerball = factory.from_image(RESOURCES.get_path("ball.png"))
 ballXSize = soccerball.size[0]
 ballYSize = soccerball.size[1]
@@ -53,7 +53,7 @@ while running:
         if event.type == sdl2.SDL_QUIT:
             running = False
             break
-        
+
     spriterenderer.render(background)
     for player in players:
         sprite = player_sprites[player]
@@ -62,7 +62,7 @@ while running:
         spriteYSize = sprite.size[1]
         sprite.position = (floor((x + x_max)*10-spriteXSize), floor((-y + y_max)*10-spriteYSize)   )#We need to fix this so that the origin is at the center of each image
         spriterenderer.render(sprite)
-        
+
     (x,y) = game.ball.getPosition()
     soccerball.position = (floor((x + x_max)*10-ballXSize), floor((-y + y_max)*10-ballYSize)   )
     spriterenderer.render(soccerball)
@@ -71,7 +71,7 @@ while running:
     #window.refresh()
     game.update()
     sleep(0.05)    
-    
+
 #if __name__ == "__main__":
 #    sys.exit(run())   
 
