@@ -15,7 +15,7 @@ window.show()
 
 factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
 background = factory.from_image(RESOURCES.get_path("soccerField.png"))
-
+sprites = [background]
 game = Game()
 
 players = game.playerList()
@@ -36,33 +36,32 @@ for player in players:
     (x, y) = player.getPosition()
     sprite.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   ) #We need to fix this so that the origin is at the center of each image
     player_sprites[player] = sprite
-    spriterenderer.render(sprite)
-    
+    sprites += [sprite]
+   
 soccerball = factory.from_image(RESOURCES.get_path("ball.png"))
-
+sprites += [soccerball]
+spriterenderer.render(sprites)
 running = True
 
 while running:
+    game.update()
     events = sdl2.ext.get_events()
     for event in events:                #This for loop is not working
         if event.type == sdl2.SDL_QUIT:
             running = False
             break
         
-    spriterenderer.render(background)
     for player in players:
         sprite = player_sprites[player]
         (x, y) = player.getPosition()
         sprite.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   ) #We need to fix this so that the origin is at the center of each image
-        spriterenderer.render(sprite)
         
     (x,y) = game.ball.getPosition()
     soccerball.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   )
-    spriterenderer.render(soccerball)
+    spriterenderer.render(sprites)
     #processor = sdl2.ext.TestEventProcessor()
     #processor.run(window)
     #window.refresh()
-    game.update()
     sleep(0.05)    
     
 #if __name__ == "__main__":
