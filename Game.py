@@ -246,7 +246,7 @@ class Game(object):
                 player.receive(None)
         self.ball.update()
         self.ball.move()
-        self.printFieldNested()
+        #self.printFieldNested()
             
             
     def inBounds(self, position):

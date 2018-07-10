@@ -27,13 +27,16 @@ x_min = FIELD_BOUNDS[0]
 x_max = FIELD_BOUNDS[1]
 y_min = FIELD_BOUNDS[2] 
 y_max = FIELD_BOUNDS[3]
-while True:
+
+running = True
+
+while running:
     events = sdl2.ext.get_events()
     for event in events:                #This for loop is not working
         if event.type == sdl2.SDL_QUIT:
             running = False
             break
-    
+    spriterenderer.render(background)
     for player in players:
         if type(player) is Offender:
             sprite = factory.from_image(RESOURCES.get_path("redPlayer.png"))
@@ -51,7 +54,7 @@ while True:
     #processor.run(window)
     #window.refresh()
     game.update()
-    #sleep(0.05)    
+    sleep(0.05)    
     
 if __name__ == "__main__":
     sys.exit(run())   

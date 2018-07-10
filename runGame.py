@@ -7,5 +7,6 @@ game = Game()
 while True:
     print('')
     game.update()
+    game.printFieldNested()
     sleep(0.3)
     step += 1
