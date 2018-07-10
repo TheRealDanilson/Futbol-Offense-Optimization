@@ -34,15 +34,22 @@ for player in players:
     else:           #What about ball?
         sprite = factory.from_image(RESOURCES.get_path("bluePlayer.png"))
     (x, y) = player.getPosition()
+<<<<<<< HEAD
     spriteXSize = sprite.size[0]
     spriteYSize = sprite.size[1]
     sprite.position = (floor((x + x_max)*10-spriteXSize/2), floor((-y + y_max)*10-spriteYSize/2)   ) #We need to fix this so that the origin is at the center of each image
+=======
+    sprite.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   ) #We need to fix this so that the origin is at the center of each image
+>>>>>>> 534a606ea82409ce95be100527e9d01fd755e0b4
     player_sprites[player] = sprite
     sprites += [sprite]
    
 soccerball = factory.from_image(RESOURCES.get_path("ball.png"))
+<<<<<<< HEAD
 ballXSize = soccerball.size[0]
 ballYSize = soccerball.size[1]
+=======
+>>>>>>> 534a606ea82409ce95be100527e9d01fd755e0b4
 sprites += [soccerball]
 spriterenderer.render(sprites)
 running = True
@@ -58,6 +65,7 @@ while running:
     for player in players:
         sprite = player_sprites[player]
         (x, y) = player.getPosition()
+<<<<<<< HEAD
         sprite.position = (floor((x + x_max)*10-spriteXSize/2), floor((-y + y_max)*10-spriteYSize/2)   ) #We need to fix this so that the origin is at the center of each image
         
     player = game.ball.getPossession()
@@ -70,6 +78,12 @@ while running:
     print("ball")
     print(x,y)
     soccerball.position = (floor((x + x_max)*10-ballXSize/2), floor((-y + y_max)*10-ballYSize/2)   )
+=======
+        sprite.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   ) #We need to fix this so that the origin is at the center of each image
+        
+    (x,y) = game.ball.getPosition()
+    soccerball.position = (floor((x + x_max)*10), floor((-y + y_max)*10)   )
+>>>>>>> 534a606ea82409ce95be100527e9d01fd755e0b4
     spriterenderer.render(sprites)
     #processor = sdl2.ext.TestEventProcessor()
     #processor.run(window)
