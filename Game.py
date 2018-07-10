@@ -233,6 +233,8 @@ class Game(object):
         TODO: Change this method to handle stealing
         
         """
+        self.ball.update()
+        self.ball.move()
         for player in self.players:
             player.update()
             player.move()
@@ -244,8 +246,6 @@ class Game(object):
                 self.ball.setPossession(player)
             elif self.ball.getPossession() is not None:
                 player.receive(None)
-        self.ball.update()
-        self.ball.move()
         #self.printFieldNested()
             
             

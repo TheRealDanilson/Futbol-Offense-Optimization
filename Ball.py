@@ -27,7 +27,7 @@ class Ball(object):
         """
         Constructor method for Ball
         """
-        self.position = player.getPosition()
+        self.position = player.position
         self.possession = player
         self.velocity = [0,0]
         self.bounds = FIELD_BOUNDS
@@ -55,7 +55,7 @@ class Ball(object):
         """
         self.possession = player
         self.velocity = player.getVelocity()
-        self.position = player.getPosition()
+        self.position = player.position
     
           
     def isOutBounds(self):
@@ -85,8 +85,9 @@ class Ball(object):
         velocity y to position y
         """
         self.oldPosition = self.position.copy()
-        self.position[0] = self.position[0] + self.velocity[0] #changing x
-        self.position[1] = self.position[1] + self.velocity[1] #changing y
+        if self.possession is None:
+            self.position[0] = self.position[0] + self.velocity[0] #changing x
+            self.position[1] = self.position[1] + self.velocity[1] #changing y
     
 
     def isGoal(self):
@@ -109,6 +110,7 @@ class Ball(object):
         input velocity
         """
         self.possession = None
+        self.position = self.position.copy()
         self.velocity = direction
         
         
