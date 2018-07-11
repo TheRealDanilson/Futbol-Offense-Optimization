@@ -38,6 +38,10 @@ class Player(object):
     
     justShot    Boolean: True if player shot/passed the ball within last
                 timestep.  False otherwise.
+                
+    oldPosition 2 element list storing position from previous timestep with
+                position(0) being position in the x-direction, and position(1)
+                being position in the y-direction.
     """
     
     
@@ -52,6 +56,7 @@ class Player(object):
         self.velocity = [0, 0]
         self.receiving = False
         self.justShot = False
+        self.oldPosition = position.copy()
         
         
     def getPosition(self):
@@ -60,6 +65,11 @@ class Player(object):
         """
         return self.position.copy()
     
+    def getOldPosition(self):
+        """
+        Returns a copy of the oldPosition attribute (list of length 2)
+        """
+        return self.oldPosition.copy()
     
     def getVelocity(self):
         """
