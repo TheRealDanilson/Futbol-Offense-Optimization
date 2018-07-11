@@ -83,8 +83,14 @@ class Ball(object):
         If the ball is possessed, this method changes the ball's velocity to the
         velocity of the player instance that possesses it
         """
+        
         if self.possession is not None:
             self.velocity = self.possession.getVelocity()
+        else:
+            
+            self.velocity[0] = self.velocity[0]*dcel
+            self.velocity[1] = self.velocity[1]*dcel
+        
         
         
     def move(self):
@@ -120,7 +126,7 @@ class Ball(object):
         self.shooter = self.possession
         self.possession = None
         self.position = self.position.copy()
-        self.velocity = (direction[0] * 2*MAX_SPEED, direction[1] * 2*MAX_SPEED)
+        self.velocity = [direction[0] * 2*MAX_SPEED, direction[1] * 2*MAX_SPEED]
         
         
     

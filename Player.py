@@ -59,6 +59,7 @@ class Player(object):
         self.oldPosition = position.copy()
         
         
+        
     def getPosition(self):
         """
         Returns a copy of the position attribute (list of length 2) 
@@ -204,11 +205,11 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
-                                           [teammate])/(1 + OPENNESS)
+                                           [teammate])/(1 + OPENNESS)/len(team)
         P = 0.0
         for teammate in probabilities:
             P += probabilities[teammate]
-        probabilities[self] = 1 - P/(len(team) - 1)
+        probabilities[self] = 1 - P/(len(team) - 1)/len(team)
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -488,9 +489,9 @@ class Defender(Player):
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
                     weight = -10/(dist + 1)
                     if opponent is nearestOpponent:
-                        weight *= 2
+                        weight *= -4
                     if self.hasBall():
-                        weight *= 10
+                        weight *= -10
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
