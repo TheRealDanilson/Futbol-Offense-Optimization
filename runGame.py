@@ -8,5 +8,5 @@ while True:
     print('')
     game.update()
     game.printFieldNested()
-    sleep(0.3)
+    sleep(0.03)
     step += 1

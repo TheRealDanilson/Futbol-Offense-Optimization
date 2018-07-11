@@ -20,6 +20,8 @@ class Ball(object):
                  bounds(1) being the max x coord (35), bounds(2) being the min
                  y coord (0), and bounds(3) being the max y coord (50).
                  Note: Goal Post positions are x = -4 and 4 y = 0.
+                 
+    shooter     To add
     """
 
 
@@ -33,6 +35,7 @@ class Ball(object):
         self.bounds = FIELD_BOUNDS
         self.oldPosition = self.position.copy()
         self.receiving = False
+        self.shooter = None
         
         
     def getPosition(self):
@@ -49,6 +52,10 @@ class Ball(object):
         return self.possession
     
     
+    def getShooter(self):
+        return self.shooter
+    
+    
     def setPossession(self, player):
         """
         Changes ball's possession attribute to the input player instance
@@ -56,6 +63,7 @@ class Ball(object):
         self.possession = player
         self.velocity = player.getVelocity()
         self.position = player.position
+        self.shooter = None
     
           
     def isOutBounds(self):
@@ -109,6 +117,7 @@ class Ball(object):
         Changes ball's possession to None and changes the ball velocity to
         input velocity
         """
+        self.shooter = self.possession
         self.possession = None
         self.position = self.position.copy()
         self.velocity = (direction[0] * 2*MAX_SPEED, direction[1] * 2*MAX_SPEED)

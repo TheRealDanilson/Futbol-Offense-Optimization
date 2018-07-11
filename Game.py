@@ -235,14 +235,16 @@ class Game(object):
         """
         self.ball.update()
         self.ball.move()
+        shooter = self.ball.getShooter()
         for player in self.players:
             player.update()
             player.move()
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
-            if self.ball.getPossession() is None and \
-                    not player.justShotBall() and dist <= RECEIVE_THRESHOLD:
+            if self.ball.getPossession() is None and player is not shooter \
+                    and dist <= RECEIVE_THRESHOLD:
                 player.receive(self.ball)
+                print(player is shooter)
                 self.ball.setPossession(player)
             elif self.ball.getPossession() is not None:
                 player.receive(None)
