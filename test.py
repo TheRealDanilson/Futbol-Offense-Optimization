@@ -59,25 +59,16 @@ while running:
     for player in players:
         sprite = player_sprites[player]
         (x, y) = player.getPosition()
-
         sprite.position = (floor((x + x_max)*10-spriteXSize/2), floor((-y + y_max)*10-spriteYSize/2)   ) #We need to fix this so that the origin is at the center of each image
-        
-    player = game.ball.getPossession()
-    print("player")
-    if player is not None:
-        print(player.getPosition())
-    else:
-        print('N/A')
-    (x,y) = game.ball.getPosition()
-    print("ball")
-    print(x,y)
+    
+    (x, y) = game.ball.getPosition()    
     soccerball.position = (floor((x + x_max)*10-ballXSize/2), floor((-y + y_max)*10-ballYSize/2)   )
     spriterenderer.render(sprites)
     #processor = sdl2.ext.TestEventProcessor()
     #processor.run(window)
     #window.refresh()
-    sleep(0.05)    
-    
+    sleep(0.0005)    
+
 #if __name__ == "__main__":
 #    sys.exit(run())   
 
