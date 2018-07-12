@@ -7,6 +7,7 @@ from time import sleep
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
 
+
 def randSelect(dct):
     seed()
     temp = dct.copy()
@@ -225,7 +226,7 @@ class Player(object):
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
         probabilities[self] = 1 - P/(len(team) - 1)
-        #probabilities[self] = 0
+        probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -395,10 +396,17 @@ class Player(object):
         player's velocity if they are not receiving the ball.
         """
         self.shootPassKeep()
-        finalVector = [0, 0]
-        for objective in Objectives:
-            vector = self.calcVector(objective)
-            self.addVectors(finalVector, vector)
+        finalVector = self.velocity
+        if self.receiving:
+            ballDist = self.game.playerDistBall(self)
+            (dist, direction) = self.magnitudeAndDirection(ballDist)
+            weight = 10
+            finalVector = [weight*direction[0], weight*direction[1]]
+        else:
+            for objective in Objectives:
+                vector = self.calcVector(objective)
+                self.addVectors(finalVector, vector)
+                
         speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
         if speed > MAX_SPEED:
             finalVector[0] *= MAX_SPEED/speed
@@ -455,7 +463,7 @@ class Offender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            #weight = 15/(dist + 1)
+            weight = 15/(dist + 1)
             if self.receiving:
                 weight *= 5
                 #weight = 10
