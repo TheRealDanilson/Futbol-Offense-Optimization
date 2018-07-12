@@ -464,7 +464,7 @@ class Offender(Player):
             (dist, direction) = self.magnitudeAndDirection(ballDist)
             weight = 15/(dist + 1)
             if self.receiving:
-                weight *= 10
+                weight *= 5
                 #weight = 10
             return self.createVector(weight, direction)
         elif objective is Objectives.TEAMMATES:
@@ -484,17 +484,17 @@ class Offender(Player):
         elif objective is Objectives.Shift:
             ball = self.getPosition()
             direction = ball
-            if ball[0] > 20:
-                direction[0] = 3
-            elif ball[0] < -20:
-                direction[0] = -3 
+            if ball[0] > 10:
+                direction[0] = 1
+            elif ball[0] < -10:
+                direction[0] = -1 
             else:
                  direction[0] = 0
             if ball[1] > 30:
-                direction[1] = 4
+                direction[1] = 1
             else:
                 direction[1] = 0
-            weight = 20
+            weight = 15
             return self.createVector(weight, direction)
         return (0, 0)
 
@@ -521,7 +521,7 @@ class Defender(Player):
         weight = self.genWeight(objective)
         ballDist = self.game.playerDistBall(self)
         (forget, direction) = self.magnitudeAndDirection(ballDist)
-        if forget <= 1.5:
+        if forget <= 1:
             weight = 10
             return self.createVector(weight, direction)
         else:
@@ -559,16 +559,16 @@ class Defender(Player):
                 ball = self.getPosition()
                 direction = ball
                 if ball[0] > 20:
-                    direction[0] = 3
+                    direction[0] = 1
                 elif ball[0] < -20:
-                    direction[0] = -3 
+                    direction[0] = -1 
                 else:
                      direction[0] = 0
                 if ball[1] > 30:
-                    direction[1] = 3
+                    direction[1] = 1
                 else:
                     direction[1] = 0
-                weight = 20
+                weight = 15
                 return self.createVector(weight, direction)
             return (0, 0)
             return (0, 0)
