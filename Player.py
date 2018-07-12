@@ -153,11 +153,11 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 matePos = teammate.getPosition()
-                a = matePos[0]**2/150 + playerPos[1]**2/300
+                a = matePos[0]**2/600 + playerPos[1]**2/150
                 dist = self.game.playerDistPlayer(self, teammate)
                 d = (dist[0]**2 + dist[1]**2)**(0.5)
-                z = (a - b + 16)/16 + abs(d - 15)/15
-                p = expcdf((6-z),1)
+                z = (a - b + 25)/25 + abs(d - 10)/10
+                p = expcdf((8-z),1)
                 probabilities[teammate] = p
         
         return probabilities
@@ -342,10 +342,25 @@ class Player(object):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 15/(dist + 1)
+            #weight = 15/(dist + 1)
             if self.receiving:
-                weight *= 10
+                #weight *= 10
+                weight = 10
             return self.createVector(weight, direction)
+        ##elif objective is Objectives.Shift:
+        #    ballPos = self.ball.getPosition()
+        #    if ballPos[0] > 20:
+        #        direction[0] = 2
+        #    elif ballPos[0] < -20:
+        #        direction[0] = -2 
+        #    else:
+        #         direction[0] = 0
+        #    if ballPos[1] > 30:
+        #        direction[1] = 1
+        #    else:
+        #        direction[1] = 0
+        #    weight = 15
+        ##    return self.createVector(weight, direction)
         
         return (0, 0)
               
@@ -447,8 +462,25 @@ class Offender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 10
+            #weight = 15/(dist + 1)
+            if self.receiving:
+                #weight *= 10
+                weight = 10
             return self.createVector(weight, direction)
+        elif objective is Objectives.TEAMMATES:
+            Team = self.game.playerTeam(self)
+            vector = [0, 0]
+            nearestTeammate = self.game.nearestTeammate(self)[0]
+            for mate in Team:
+                    (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
+                    weight = -10/(dist + 1)
+                    if mate is nearestTeammate:
+                        weight *= -2
+                    if self.hasBall():
+                        weight *= -10
+                    mateVector = self.createVector(weight, direction)
+                    self.addVectors(vector, mateVector)
+            return (vector[0], vector[1])
         
         return (0, 0)
 
@@ -473,13 +505,13 @@ class Defender(Player):
         between a player and the objective.  Entry 0 is x and entry 1 is y.
         """
         weight = self.genWeight(objective)
-        if objective is Objectives.GOAL:
-            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-            weight = dist
-            return self.createVector(weight, direction)
-        elif objective is Objectives.ZONE_CENTER:
+        #if objective is Objectives.GOAL:
+          #  (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
+         #   weight = dist
+        #    return self.createVector(weight, direction)
+        if objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            weight = dist**1.35
+            weight = dist**1.5
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             opponentTeam = self.game.playerOpponentTeam(self)
@@ -498,6 +530,10 @@ class Defender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 15/(dist + 1)
+            if dist <= 5:
+                weight = 15
+            else:    
+                weight = 15/(dist + 1)
+            
             return self.createVector(weight, direction)
         return (0, 0)

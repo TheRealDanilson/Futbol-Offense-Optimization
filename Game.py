@@ -19,10 +19,10 @@ class Game(object):
         """
         seed()
         self.players = []
-        #self.createPlayer([-25,54], (-10, -35, 35, 51))
-        #self.createPlayer([25,54], (10, 35, 35, 51))
-        #self.createPlayer([-5,60], (10, -20, 40, 60))
-        #self.createPlayer([5,60], (-10, 20, 40, 60))
+        self.createPlayer([-25,54], (-30, -35, 35, 51))
+        self.createPlayer([25,54], (30, 35, 35, 51))
+        self.createPlayer([-5,60], (10, -20, 55, 60))
+        self.createPlayer([5,60], (-10, 20, 55, 60))
         self.createPlayer([-10,44], (0, 35, 40, 30))
         self.createPlayer([10,44], (0, -35, 40, 30))
         self.createPlayer([-25,21], (-10, -35, 0, 40))
@@ -35,10 +35,10 @@ class Game(object):
         self.createDefender([25,21], (10, 35, 0, 25))
         self.createDefender([-5,12], (10, -20, 0, 20))
         self.createDefender([5,12], (-10, 20, 0, 20))
-        #self.createDefender([-25,51], (-10, -35, 35, 45))
-        #self.createDefender([25,51], (10, 35, 35, 45))
-        #self.createDefender([-3,54], (-15, 15, 35, 45))
-        #self.createDefender([2,55], (-20, 20, 40, 60))
+        self.createDefender([-25,51], (-10, -35, 35, 45))
+        self.createDefender([25,51], (10, 35, 35, 45))
+        self.createDefender([-3,54], (-15, 15, 35, 45))
+        self.createDefender([2,55], (-20, 20, 40, 60))
         self.createBall(self.players[0])
     
     def getBall(self):
