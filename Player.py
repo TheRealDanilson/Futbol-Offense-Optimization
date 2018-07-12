@@ -342,10 +342,9 @@ class Player(object):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            #weight = 15/(dist + 1)
+            weight = 15/(dist + 1)
             if self.receiving:
-                #weight *= 10
-                weight = 10
+                weight *= 10
             return self.createVector(weight, direction)
         ##elif objective is Objectives.Shift:
         #    ballPos = self.ball.getPosition()
