@@ -43,7 +43,9 @@ class Ball(object):
         Returns a copy of the ball's position attribute (2 element list)
         """
         return self.position.copy()
-
+    
+    def getOldPosition(self):
+        return self.oldPosition
 
     def getPossession(self):
         """
@@ -110,8 +112,8 @@ class Ball(object):
         """
         oldx = self.oldPosition[0]
         oldy = self.oldPosition[1]
-        newx = self.oldPosition[0]
-        newy = self.oldPosition[1]
+        newx = self.position[0]
+        newy = self.position[1]
         slope = (newy - oldy)/(newx - oldx) #Calculating slope (m) in y=mx+b 
         b = oldy - slope*oldx               #Calculating b in y=mx+b
         travelx = -b/slope                  #Calculate x when y = 0

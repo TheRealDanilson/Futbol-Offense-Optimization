@@ -5,6 +5,7 @@ from Player import *
 from constants import *
 from math import floor
 from Ball import *
+from Data import Data
 
 RESOURCES = sdl2.ext.Resources(__file__, "Images")
 
@@ -17,6 +18,7 @@ factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
 background = factory.from_image(RESOURCES.get_path("soccerField.png"))
 sprites = [background]
 game = Game()
+data = Data()
 
 players = game.playerList()
 spriterenderer = factory.create_sprite_render_system(window)
@@ -50,6 +52,10 @@ running = True
 
 while running:
     game.update()
+    #data.offender_DistTime(game)
+    #data.win_loss(game)
+    #data.player_Dist(game)
+    #data.ball_DistTime(game)
     events = sdl2.ext.get_events()
     for event in events:                #This for loop is not working
         if event.type == sdl2.SDL_QUIT:
