@@ -209,7 +209,7 @@ class Player(object):
         P = 0.0
         for teammate in probabilities:
             P += probabilities[teammate]
-        probabilities[self] = 1 - P/(len(team) - 1)/len(team)/3
+        probabilities[self] = 1 - P/(len(team) - 1)/len(team)
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -326,7 +326,7 @@ class Player(object):
        #     return self.createVector(weight, direction)
         if objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            weight = dist**1.35
+            weight = dist
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             opponentTeam = self.game.playerOpponentTeam(self)
@@ -428,7 +428,7 @@ class Offender(Player):
             if dist < ZONE_THRESHOLD:
                weight = 0
             else:
-                weight = dist**1.35
+                weight = dist**1.5
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             opponentTeam = self.game.playerOpponentTeam(self)
@@ -449,21 +449,6 @@ class Offender(Player):
             (dist, direction) = self.magnitudeAndDirection(ballDist)
             weight = 10
             return self.createVector(weight, direction)
-        elif objective is Objectives.TEAMMATES:
-            playerTeam = self.game.playerTeam(self)
-            vector = [0, 0]
-            nearestTeammate = self.game.nearestTeammate(self)[0]
-            for teammate in playerTeam:
-                    (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, teammate))
-                    weight = -10/(dist + 1)
-                    if teammate is nearestTeammate:
-                        weight *= -2
-                    if self.hasBall():
-                        weight *= -10
-                    mateVector = self.createVector(weight, direction)
-                    self.addVectors(vector, mateVector)
-            return (vector[0], vector[1])
-            
         
         return (0, 0)
 
