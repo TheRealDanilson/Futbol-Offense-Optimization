@@ -5,8 +5,8 @@ FIELD_BOUNDS = (-45, 45, 0, 60)
 MAX_SPEED = 0.03
 RECEIVE_THRESHOLD = MAX_SPEED*.5
 OPENNESS = 15
-ZONE_THRESHOLD = 20
-dcel = .999
+ZONE_THRESHOLD = 15
+dcel = .998
 
 class Objectives(Enum):
     GOAL = auto()

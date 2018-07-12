@@ -349,9 +349,9 @@ class Player(object):
             return self.createVector(weight, direction)
         elif objective is Objectives.Shift:
             ballPos = self.ball.getPosition()
-            if ballPos[0] > 20:
+            if ballPos[0] > 10:
                 direction[0] = 2
-            elif ballPos[0] < -20:
+            elif ballPos[0] < -10:
                 direction[0] = -2 
             else:
                  direction[0] = 0
@@ -527,7 +527,7 @@ class Defender(Player):
         else:
             if objective is Objectives.GOAL:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-                weight = 10
+                weight = 15
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
@@ -558,9 +558,9 @@ class Defender(Player):
             elif objective is Objectives.Shift:
                 ball = self.getPosition()
                 direction = ball
-                if ball[0] > 20:
+                if ball[0] > 10:
                     direction[0] = 1
-                elif ball[0] < -20:
+                elif ball[0] < -10:
                     direction[0] = -1 
                 else:
                      direction[0] = 0

@@ -35,10 +35,10 @@ class Game(object):
         self.createDefender([25,21], (10, 35, 0, 25))
         self.createDefender([-5,12], (10, -20, 0, 20))
         self.createDefender([5,12], (-10, 20, 0, 20))
-        self.createDefender([-25,51], (-10, -35, 35, 45))
-        self.createDefender([25,51], (10, 35, 35, 45))
-        self.createDefender([-3,54], (-15, 15, 35, 45))
-        self.createDefender([2,55], (-20, 20, 40, 60))
+        self.createDefender([-25,51], (-10, -35, 35, 35))
+        self.createDefender([25,51], (10, 35, 35, 35))
+        self.createDefender([-3,54], (-15, 15, 35, 35))
+        self.createDefender([2,55], (-20, 20, 40, 50))
         self.createBall(self.players[0])
     
     def getBall(self):
