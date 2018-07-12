@@ -1,11 +1,27 @@
 from constants import *
-from random import uniform, choices
+from random import uniform, choices, seed
 from math import exp
 from time import sleep
 
     
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
+
+def randSelect(dct):
+    seed()
+    temp = dct.copy()
+    W = sum(temp.values())
+    for key in temp:
+        temp[key] /= W
+    randNumber = uniform(0, 1)
+    for key in temp:
+        p = temp[key]
+        print(randNumber)
+        print(p)
+        if randNumber <= p:
+            return key
+        randNumber -= p
+    return key
 
 
 class Player(object):
@@ -206,16 +222,15 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
-                                           [teammate])/(1 + OPENNESS)/len(team)
-        P = 0.0
-        for teammate in probabilities:
-            P += probabilities[teammate]
-        #probabilities[self] = 1 - P/(len(team) - 1)/len(team)
-        probabilities[self] = 0
+                                           [teammate])/(1 + OPENNESS)
+        P = sum(probabilities.values())
+        probabilities[self] = 1 - P/(len(team) - 1)
+        #probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
-        a = choices(team, weights=list(probabilities.values()), k=1)[0]
+        #a = choices(team, weights=list(probabilities.values()), k=1)[0]
+        a = randSelect(probabilities)
         print(a is self)
         return a
         
