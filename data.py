@@ -26,6 +26,8 @@ class Data:
                     possession for each offender.
     whoTimeHeld     List of total number of timesteps the ball has been in
                     possession for each offender.
+    wins            Number of wins for the offending team.
+    losses          Number of losses for the offending team.
     """
     
     def __init__(self):
@@ -40,6 +42,9 @@ class Data:
         self.whoDistHeld = []
         self.whoTimeAlone = []
         self.whoTimeHeld = []
+        
+        self.wins = 0
+        self.losses = 0
 
 
     #-----------
@@ -48,26 +53,90 @@ class Data:
     
     
     def get_ballDist(self):
-        return self.BallDist
+        """
+        Float, total ball distance traveled.
+        """
+        return self.ballDist
     
     def get_ballDistAlone(self):
-        return self.BallDistAlone
+        """
+        Float, total ball distance traveled without a possessor.
+        """
+        return self.ballDistAlone
     
     def get_ballDistHeld(self):
+        """
+        Float, total ball distance traveled with a possessor.
+        """
         return self.ballDistHeld
     
     def get_ballTimeAlone(self):
+        """
+        Int, total ball time without a possessor.
+        """
         return self.ballTimeAlone
     
     def get_ballTimeHeld(self):
+        """
+        Int, total ball time with a possessor.
+        """
         return self.ballTimeHeld
     
+    def get_whoDist(self):
+        """
+        List of distances traveled, in order of players.
+        """
+        return self.whoDist
     
-    # Note: Made the following methods assuming they would be placed right
-    # after game.update() in runGame.py
+    def get_whoDistAlone(self):
+        """
+        List of distances traveled by offenders without the ball.
+        """
+        return self.whoDistAlone
+    
+    def get_whoDistHeld(self):
+        """
+        List of distances traveled by offenders with the ball.
+        """
+        return self.whoDistHeld
+    
+    def get_whoTimeAlone(self):
+        """
+        List of each offender's time without the ball.
+        """
+        return self.whoTimeAlone
+    
+    def get_whoTimeHeld(self):
+        """
+        List of each offender's time with the ball.
+        """
+        return self.whoTimeHeld
+    
+    def get_wins(self):
+        """
+        Int, number of wins for offenders.
+        """
+        return self.wins
+    
+    def get_losses(self):
+        """
+        Int, number of losses for offenders.
+        """
+        return self.losses
+    
+    def get_winrate(self):
+        """
+        Float, percent wins.
+        """
+        return (self.wins/self.losses)*100
+
+
+    #-----------
+    # While-Loop Methods
+    #-----------
     
     
-    def ball_DistTime(self, ball):
+    def ball_DistTime(self, game):
         """
         Adds on time and distance traveled by the ball while being possessed by
         a player or not. Also adds on total distance traveled by ball.
@@ -75,13 +144,13 @@ class Data:
         Parameter ball: Ball object
         """
         
-        x_moved = abs(ball.getPosition()[0] - ball.getOldPosition()[0])
-        y_moved = abs(ball.getPosition()[1] - ball.getOldPosition()[1])
+        x_moved = abs(game.ball.getPosition()[0] - game.ball.getOldPosition()[0])
+        y_moved = abs(game.ball.getPosition()[1] - game.ball.getOldPosition()[1])
         hyp = (x_moved**2 + y_moved**2)**(1/2)
         
         self.ballDist += hyp
         
-        if ball.getPossession() == None:
+        if game.ball.getPossession() == None:
             self.ballDistAlone += hyp
             self.ballTimeAlone += 1
         else:
@@ -132,7 +201,7 @@ class Data:
             y_moved = abs(i.getPosition()[1] - i.getOldPosition()[1])
             hyp = (x_moved**2 + y_moved**2)**(1/2)
             
-            if game.ball.getPossession() != i: #If the Offender 'i' is not the one holding the ball, his distance for holding the ball is 0 and his dist. w/o the ball is the formula/
+            if i.hasBall() == True: #If the Offender 'i' is not the one holding the ball, his distance for holding the ball is 0 and his dist. w/o the ball is the formula/
                 distHeld.append(0)
                 timeHeld.append(0)
                 distAlone.append(hyp)
@@ -162,3 +231,20 @@ class Data:
             self.whoTimeAlone += timeAlone
         else:
             self.whoTimeAlone = [sum(x) for x in zip(timeAlone, self.whoTimeAlone)]
+
+
+    def win_loss(self,game):
+        """
+        Records a win or a loss for the offending team. Only intercepts count
+        as losses.
+        
+        Parameter game: Game object
+        """
+        defenders = game.players[len(game.players)//2:] # End-half of players list
+        
+        for i in defenders:
+            if i.hasBall() == True:
+                self.losses += 1
+        
+        if game.ball.isGoal() == True:
+            self.wins += 1
