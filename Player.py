@@ -1,27 +1,11 @@
 from constants import *
-from random import uniform, choices, seed
+from random import uniform, choices
 from math import exp
 from time import sleep
 
     
 def expcdf(x, mu):
     return 1 - exp(-x/mu)
-
-def randSelect(dct):
-    seed()
-    temp = dct.copy()
-    W = sum(temp.values())
-    for key in temp:
-        temp[key] /= W
-    randNumber = uniform(0, 1)
-    for key in temp:
-        p = temp[key]
-        print(randNumber)
-        print(p)
-        if randNumber <= p:
-            return key
-        randNumber -= p
-    return key
 
 
 class Player(object):
@@ -222,15 +206,16 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
-                                           [teammate])/(1 + OPENNESS)
-        P = sum(probabilities.values())
-        probabilities[self] = 1 - P/(len(team) - 1)
-        #probabilities[self] = 0
+                                           [teammate])/(1 + OPENNESS)/len(team)
+        P = 0.0
+        for teammate in probabilities:
+            P += probabilities[teammate]
+        #probabilities[self] = 1 - P/(len(team) - 1)/len(team)
+        probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
-        #a = choices(team, weights=list(probabilities.values()), k=1)[0]
-        a = randSelect(probabilities)
+        a = choices(team, weights=list(probabilities.values()), k=1)[0]
         print(a is self)
         return a
         
@@ -394,23 +379,11 @@ class Player(object):
         First decides a players action (shoot, pass, keep) then updates the
         player's velocity if they are not receiving the ball.
         """
-    def update(self):
-        """
-        First decides a players action (shoot, pass, keep) then updates the
-        player's velocity if they are not receiving the ball.
-        """
-        self.justShot = False
         self.shootPassKeep()
-        finalVector = self.velocity
-        if self.receiving:
-            ballDist = self.game.playerDistBall(self)
-            (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 10
-            finalVector = [weight*direction[0], weight*direction[1]]
-        else:
-            for objective in Objectives:
-                vector = self.calcVector(objective)
-                self.addVectors(finalVector, vector)
+        finalVector = [0, 0]
+        for objective in Objectives:
+            vector = self.calcVector(objective)
+            self.addVectors(finalVector, vector)
         speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
         if speed > MAX_SPEED:
             finalVector[0] *= MAX_SPEED/speed
@@ -429,6 +402,30 @@ class Offender(Player):
         Constructor method for offender
         """
         super().__init__(position, game, bounds)
+        
+        
+    def update(self):
+        """
+        First decides a players action (shoot, pass, keep) then updates the
+        player's velocity if they are not receiving the ball.
+        """
+        self.justShot = False
+        self.shootPassKeep()
+        finalVector = [0, 0]
+        if self.receiving:
+            ballDist = self.game.playerDistBall(self)
+            (dist, direction) = self.magnitudeAndDirection(ballDist)
+            weight = 10
+            finalVector = [weight*direction[0], weight*direction[1]]
+        else:
+            for objective in Objectives:
+                vector = self.calcVector(objective)
+                self.addVectors(finalVector, vector)
+        speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
+        if speed > MAX_SPEED:
+            finalVector[0] *= MAX_SPEED/speed
+            finalVector[1] *= MAX_SPEED/speed
+        self.velocity = finalVector
         
         
     def calcVector(self, objective):
@@ -486,6 +483,8 @@ class Offender(Player):
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
         elif objective is Objectives.Shift:
+            # shift belongs to both offender and defender and shifts there formation to
+            # the side the ball is on either left,right,up or a combination of them
             ball = self.getPosition()
             direction = ball
             if ball[0] > 20:
