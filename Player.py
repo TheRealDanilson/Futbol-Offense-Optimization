@@ -404,29 +404,6 @@ class Offender(Player):
         super().__init__(position, game, bounds)
         
         
-    def update(self):
-        """
-        First decides a players action (shoot, pass, keep) then updates the
-        player's velocity if they are not receiving the ball.
-        """
-        self.justShot = False
-        self.shootPassKeep()
-        finalVector = [0, 0]
-        if self.receiving:
-            ballDist = self.game.playerDistBall(self)
-            (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 10
-            finalVector = [weight*direction[0], weight*direction[1]]
-        else:
-            for objective in Objectives:
-                vector = self.calcVector(objective)
-                self.addVectors(finalVector, vector)
-        speed = (finalVector[0]**2 + finalVector[1]**2)**(0.5)
-        if speed > MAX_SPEED:
-            finalVector[0] *= MAX_SPEED/speed
-            finalVector[1] *= MAX_SPEED/speed
-        self.velocity = finalVector
-        
         
     def calcVector(self, objective):
         """
