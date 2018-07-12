@@ -486,15 +486,15 @@ class Offender(Player):
             ball = self.getPosition()
             direction = ball
             if ball[0] > 20:
-                direction[0] = 3*abs(ball[0])
+                direction[0] = abs(ball[0])/20
             elif ball[0] < -20:
-                direction[0] = 3*abs(ball[0])
+                direction[0] = abs(ball[0])/20
             else:
                  direction[0] = 0
             if ball[1] > 30:
-                direction[1] = ball[1]
+                direction[1] = ball[1]/20
             elif ball[1] < 20:
-                direction[1] = -ball[1]
+                direction[1] = ball[1]/20
             else:
                 direction[1] = 0
             weight = 15
