@@ -492,9 +492,9 @@ class Offender(Player):
             else:
                  direction[0] = 0
             if ball[1] > 30:
-                direction[1] = 4*ball[1]
+                direction[1] = ball[1]
             elif ball[1] < 20:
-                direction[1] = 4*ball[1]
+                direction[1] = -ball[1]
             else:
                 direction[1] = 0
             weight = 15
