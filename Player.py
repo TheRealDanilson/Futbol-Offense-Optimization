@@ -447,19 +447,23 @@ class Offender(Player):
                 weight = dist**1.15
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
-            opponentTeam = self.game.playerOpponentTeam(self)
-            vector = [0, 0]
+            #opponentTeam = self.game.playerOpponentTeam(self)
             nearestOpponent = self.game.nearestOpponent(self)[0]
-            for opponent in opponentTeam:
-                    (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
-                    weight = -10/(dist + 1)
-                    if opponent is nearestOpponent:
-                        weight *= 2
-                    if self.hasBall():
-                        weight *= 10
-                    mateVector = self.createVector(weight, direction)
-                    self.addVectors(vector, mateVector)
-            return (vector[0], vector[1])
+            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, nearestOpponent))
+            weight = -20/(dist + 1)
+            if self.hasBall():
+                weight *= 10
+            return (direction[0] * weight, direction[1] * weight)
+            # for opponent in opponentTeam:
+            #         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
+            #         weight = -10/(dist + 1)
+            #         if opponent is nearestOpponent:
+            #             weight *= 2
+            #         if self.hasBall():
+            #             weight *= 10
+            #         mateVector = self.createVector(weight, direction)
+            #         self.addVectors(vector, mateVector)
+            # return (vector[0], vector[1])
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
