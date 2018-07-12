@@ -6,7 +6,7 @@ MAX_SPEED = 0.03
 RECEIVE_THRESHOLD = MAX_SPEED*.5
 OPENNESS = 15
 ZONE_THRESHOLD = 10
-dcel = .9999999999
+dcel = .999
 
 class Objectives(Enum):
     GOAL = auto()

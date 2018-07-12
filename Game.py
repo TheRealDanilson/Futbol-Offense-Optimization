@@ -155,6 +155,28 @@ class Game(object):
                     closest = member
         return (closest, minDist)
     
+    def nearestTeammate(self, player):
+        """
+        player - instance of the player class
+        
+        Returns two element tuple that stores the closest opponent instance in
+        first entry and the distance of the oppenent (real number)
+        """
+        team = type(player)
+        playerPos = player.getPosition()
+        minDist = float('inf')
+        closest = None
+        for member in self.players:
+            if isinstance(member, team):
+                memberPos = member.getPosition()
+                dx = memberPos[0] - playerPos[0]
+                dy = memberPos[1] - playerPos[1]
+                dist = (dx**2 + dy**2)**(0.5)
+                if dist < minDist:
+                    minDist = dist
+                    closest = member
+        return (closest, minDist)
+    
     
     def nearestOpponentToLine(self, team, pos1, pos2):
         """
