@@ -153,10 +153,10 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 matePos = teammate.getPosition()
-                a = matePos[0]**2/600 + playerPos[1]**2/150
+                a = matePos[0]**2/300 + playerPos[1]**2/150
                 dist = self.game.playerDistPlayer(self, teammate)
                 d = (dist[0]**2 + dist[1]**2)**(0.5)
-                z = (a - b + 25)/25 - 3*abs(d - 10)/10
+                z = (a - b + 25)/25 - 10*abs(d - 5)/15
                 p = expcdf((2-z),1)
                 probabilities[teammate] = p
         
@@ -172,12 +172,13 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                m = self.game.nearestOpponent(self)[1]
-                p = self.game.nearestOpponentToLine(type(self),\
+                m = .1*self.game.nearestOpponent(self)[1]
+                p = 10*self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
                 try:
                     z = m*p/u**2
                     #z = (m+p-u/2)/3
+                    #z = p/u
                     print('Z is: ' + str(z))
                     o = expcdf((4.5-z),1)
                 except:
@@ -231,7 +232,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 5:
             p = 1.0
         else:
-            p = expcdf((4.5-z),1)/3
+            p = expcdf((z),1)/5
         return p
     
     
@@ -350,13 +351,13 @@ class Player(object):
         elif objective is Objectives.Shift:
             ballPos = self.ball.getPosition()
             if ballPos[0] > 10:
-                direction[0] = 2
+                direction[0] = 4
             elif ballPos[0] < -10:
-                direction[0] = -2 
+                direction[0] = -4 
             else:
                  direction[0] = 0
             if ballPos[1] > 30:
-                direction[1] = 1
+                direction[1] = 4
             else:
                 direction[1] = 0
             weight = 100
@@ -443,7 +444,7 @@ class Offender(Player):
             if dist < ZONE_THRESHOLD:
                weight = 0
             else:
-                weight = dist**1.5
+                weight = dist**1.15
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             opponentTeam = self.game.playerOpponentTeam(self)
@@ -462,7 +463,7 @@ class Offender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 15/(dist + 1)
+            #weight = 15/(dist + 1)
             if self.receiving:
                 weight *= 5
                 #weight = 10
@@ -484,14 +485,16 @@ class Offender(Player):
         elif objective is Objectives.Shift:
             ball = self.getPosition()
             direction = ball
-            if ball[0] > 10:
-                direction[0] = 1
-            elif ball[0] < -10:
-                direction[0] = -1 
+            if ball[0] > 20:
+                direction[0] = 3*abs(ball[0])
+            elif ball[0] < -20:
+                direction[0] = 3*abs(ball[0])
             else:
                  direction[0] = 0
             if ball[1] > 30:
-                direction[1] = 1
+                direction[1] = 4*ball[1]
+            elif ball[1] < 20:
+                direction[1] = 4*ball[1]
             else:
                 direction[1] = 0
             weight = 15
@@ -531,7 +534,7 @@ class Defender(Player):
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-                weight = dist**1.5
+                weight = dist**1.35
                 return self.createVector(weight, direction)
             elif objective is Objectives.OPPONENTS:
                 opponentTeam = self.game.playerOpponentTeam(self)
@@ -558,14 +561,16 @@ class Defender(Player):
             elif objective is Objectives.Shift:
                 ball = self.getPosition()
                 direction = ball
-                if ball[0] > 10:
-                    direction[0] = 1
-                elif ball[0] < -10:
-                    direction[0] = -1 
+                if ball[0] > 20:
+                    direction[0] = 2/ball[0]
+                elif ball[0] < -20:
+                    direction[0] = 2/ball[0] 
                 else:
                      direction[0] = 0
                 if ball[1] > 30:
-                    direction[1] = 1
+                    direction[1] = -4/ball[1]
+                elif ball[1] < 20:
+                    direction[1] = 4/ball[1]
                 else:
                     direction[1] = 0
                 weight = 15
