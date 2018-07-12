@@ -485,16 +485,16 @@ class Offender(Player):
             ball = self.getPosition()
             direction = ball
             if ball[0] > 20:
-                direction[0] = 2
+                direction[0] = 3
             elif ball[0] < -20:
-                direction[0] = -2 
+                direction[0] = -3 
             else:
                  direction[0] = 0
             if ball[1] > 30:
-                direction[1] = 1
+                direction[1] = 4
             else:
                 direction[1] = 0
-            weight = 15
+            weight = 20
             return self.createVector(weight, direction)
         return (0, 0)
 
@@ -559,16 +559,16 @@ class Defender(Player):
                 ball = self.getPosition()
                 direction = ball
                 if ball[0] > 20:
-                    direction[0] = 2
+                    direction[0] = 3
                 elif ball[0] < -20:
-                    direction[0] = -2 
+                    direction[0] = -3 
                 else:
                      direction[0] = 0
                 if ball[1] > 30:
-                    direction[1] = 1
+                    direction[1] = 3
                 else:
                     direction[1] = 0
-                weight = 15
+                weight = 20
                 return self.createVector(weight, direction)
             return (0, 0)
             return (0, 0)
