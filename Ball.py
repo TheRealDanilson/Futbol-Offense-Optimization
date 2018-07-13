@@ -43,7 +43,9 @@ class Ball(object):
         Returns a copy of the ball's position attribute (2 element list)
         """
         return self.position.copy()
-
+    
+    def getOldPosition(self):
+        return self.oldPosition
 
     def getPossession(self):
         """
