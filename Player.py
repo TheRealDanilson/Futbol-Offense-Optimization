@@ -519,7 +519,11 @@ class Defender(Player):
         Constructor method for defender
         """
         super().__init__(position, game, bounds)
-        
+
+
+    def shootPassKeep(self):
+        pass
+    
         
     def calcVector(self, objective):
         """

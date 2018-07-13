@@ -108,7 +108,17 @@ class Game(object):
         """
         bounds = player.getBounds()
         playerPos = player.getPosition()
-        center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
+        ballPos = self.ball.getPosition()
+        if ballPos[0] > 10:
+            center = ((bounds[0] + bounds[1])/2 + shift, (bounds[2] + bounds[3])/2)
+        elif ballPos[0] < -10:
+            center = ((bounds[0] + bounds[1])/2 - shift, (bounds[2] + bounds[3])/2)
+        else:
+             center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
+        if ballPos[1] > 30:
+            center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2 + shift)
+        else:
+            center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
         dx = center[0] - playerPos[0]
         dy = center[1] - playerPos[1]
         return (dx, dy)
