@@ -5,7 +5,7 @@ from Player import *
 from constants import *
 from math import floor
 from Ball import *
-from data import Data
+from Data import Data
 
 RESOURCES = sdl2.ext.Resources(__file__, "Images")
 
