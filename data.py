@@ -54,7 +54,7 @@ class Data:
         
         self.whoIntercepts = []
         self.whoPasses = []
-        self.Passes
+        self.Passes = 0
 
 
     #-----------
