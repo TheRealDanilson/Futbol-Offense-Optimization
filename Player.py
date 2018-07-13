@@ -197,11 +197,11 @@ class Player(object):
                 print("P is: " + str(u))
                 try:
                     #z = m*p/u**2
-                    #z = (m+p-u/2)/3
+                    z = u-m-p
                     #z = p/u
-                    z = u**2/(m*p)
+                    #z = u**2/(m*p)
                     print('Z is: ' + str(z))
-                    o = expcdf((4.5-z),1)
+                    o = expcdf((25-z),1)
                 except:
                     print('Set o to 0')
                     o = 0
