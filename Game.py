@@ -112,10 +112,12 @@ class Game(object):
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
         dX = 0
         dY = 0
-        if ballPos[0] > 5:
+        if ballPos[0] > 20:
             dX = 3*shift
-        elif ballPos[0] < -5:
+        elif ballPos[0] < -20:
             dX = -3*shift
+        else:
+            dX = 0
         if ballPos[1] > 30:
             dY = shift
         center = (center[0] + dX, center[1] + dY)
@@ -222,7 +224,7 @@ class Game(object):
                 dist = abs((y2-y1)*x0-(x2-x1)*y0+x2*y1-y2*x1)/\
                           ((y2-y1)**2+(x2-x1)**2)**(0.5)
                 if dist < minDist:
-                    minDist = dist
+                    minDist = dist 
                     closest = member
         return (closest, minDist)
         

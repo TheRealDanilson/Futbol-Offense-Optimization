@@ -189,8 +189,8 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                m = (1/3)*self.game.nearestOpponent(teammate)[1]
-                p = 3*self.game.nearestOpponentToLine(type(self),\
+                m = .1*self.game.nearestOpponent(teammate)[1]
+                p = 10*self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
                 print("M is: " + str(m))
                 print("P is: " + str(p))
@@ -542,7 +542,7 @@ class Defender(Player):
         weight = self.genWeight(objective)
         ballDist = self.game.playerDistBall(self)
         (forget, direction) = self.magnitudeAndDirection(ballDist)
-        if forget <= 1:
+        if forget <= 5:
             weight = 10
             return self.createVector(weight, direction)
         else:
