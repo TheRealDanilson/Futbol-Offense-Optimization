@@ -189,8 +189,8 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                m = .1*self.game.nearestOpponent(self)[1]
-                p = 10*self.game.nearestOpponentToLine(type(self),\
+                m = self.game.nearestOpponent(self)[1]
+                p = self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
                 try:
                     z = m*p/u**2
@@ -226,7 +226,7 @@ class Player(object):
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
         probabilities[self] = 1 - P/(len(team) - 1)
-        probabilities[self] = 0
+        #probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -448,7 +448,7 @@ class Offender(Player):
             if dist < ZONE_THRESHOLD:
                weight = 0
             else:
-                weight = dist**1.15
+                weight = dist**1.35
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             #opponentTeam = self.game.playerOpponentTeam(self)
@@ -482,7 +482,7 @@ class Offender(Player):
             nearestTeammate = self.game.nearestTeammate(self)[0]
             for mate in Team:
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                    weight = 10/(dist + 1)**2
+                    weight = -(10/(dist + 1))**2
                     if mate is nearestTeammate:
                         weight *= 2
                     if self.hasBall():
@@ -490,25 +490,25 @@ class Offender(Player):
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
-        elif objective is Objectives.Shift:
-            # shift belongs to both offender and defender and shifts there formation to
-            # the side the ball is on either left,right,up or a combination of them
-            ball = self.getPosition()
-            direction = ball
-            if ball[0] > 20:
-                direction[0] = abs(ball[0])/20
-            elif ball[0] < -20:
-                direction[0] = abs(ball[0])/20
-            else:
-                 direction[0] = 0
-            if ball[1] > 30:
-                direction[1] = ball[1]/20
-            elif ball[1] < 20:
-                direction[1] = ball[1]/20
-            else:
-                direction[1] = 0
-            weight = 15
-            return self.createVector(weight, direction)
+        # elif objective is Objectives.Shift:
+        #     # shift belongs to both offender and defender and shifts there formation to
+        #     # the side the ball is on either left,right,up or a combination of them
+        #     ball = self.getPosition()
+        #     direction = ball
+        #     if ball[0] > 20:
+        #         direction[0] = 2
+        #     elif ball[0] < -20:
+        #         direction[0] = 2
+        #     else:
+        #          direction[0] = 0
+        #     if ball[1] > 30:
+        #         direction[1] = 2
+        #     elif ball[1] < 20:
+        #         direction[1] = 0
+        #     else:
+        #         direction[1] = 0
+        #     weight = 20
+        #     return self.createVector(weight, direction)
         return (0, 0)
 
 
@@ -572,22 +572,24 @@ class Defender(Player):
                 else:    
                     weight = 15/(dist + 1)
                 return self.createVector(weight, direction)
-            elif objective is Objectives.Shift:
-                ball = self.getPosition()
-                direction = ball
-                if ball[0] > 20:
-                    direction[0] = 2/ball[0]
-                elif ball[0] < -20:
-                    direction[0] = 2/ball[0] 
-                else:
-                     direction[0] = 0
-                if ball[1] > 30:
-                    direction[1] = -4/ball[1]
-                elif ball[1] < 20:
-                    direction[1] = 4/ball[1]
-                else:
-                    direction[1] = 0
-                weight = 15
-                return self.createVector(weight, direction)
+            # elif objective is Objectives.Shift:
+            # # shift belongs to both offender and defender and shifts there formation to
+            # # the side the ball is on either left,right,up or a combination of them
+            #     ball = self.getPosition()
+            #     direction = ball
+            #     if ball[0] > 20:
+            #         direction[0] = 2
+            #     elif ball[0] < -20:
+            #         direction[0] = 2
+            #     else:
+            #          direction[0] = 0
+            #     if ball[1] > 30:
+            #         direction[1] = 2
+            #     elif ball[1] < 20:
+            #         direction[1] = 0
+            #     else:
+            #         direction[1] = 0
+            #     weight = 20
+            #     return self.createVector(weight, direction)
             return (0, 0)
-            return (0, 0)
+        
