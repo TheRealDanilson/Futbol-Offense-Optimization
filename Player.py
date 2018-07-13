@@ -189,13 +189,17 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                m = self.game.nearestOpponent(self)[1]
-                p = self.game.nearestOpponentToLine(type(self),\
+                m = (1/3)*self.game.nearestOpponent(teammate)[1]
+                p = 3*self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
+                print("M is: " + str(m))
+                print("P is: " + str(p))
+                print("P is: " + str(u))
                 try:
-                    z = m*p/u**2
+                    #z = m*p/u**2
                     #z = (m+p-u/2)/3
                     #z = p/u
+                    z = u**2/(m*p)
                     print('Z is: ' + str(z))
                     o = expcdf((4.5-z),1)
                 except:
