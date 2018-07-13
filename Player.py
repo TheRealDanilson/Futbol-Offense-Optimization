@@ -411,6 +411,10 @@ class Player(object):
         if speed > MAX_SPEED:
             finalVector[0] *= MAX_SPEED/speed
             finalVector[1] *= MAX_SPEED/speed
+            
+        #if speed <= MAX_SPEED*.2:
+        #    finalVector[0] += 100*MAX_SPEED
+        #    finalVector[1] += 100*MAX_SPEED
         self.velocity = finalVector
 
 
