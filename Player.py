@@ -495,7 +495,7 @@ class Offender(Player):
             nearestTeammate = self.game.nearestTeammate(self)[0]
             for mate in Team:
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                    weight = -(10/(dist + 1))**2
+                    weight = -(75/(dist + 1))**2
                     if mate is nearestTeammate:
                         weight *= 2
                     if self.hasBall():
@@ -571,12 +571,13 @@ class Defender(Player):
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
                         weight = -10/(dist + 1)
                         if opponent is nearestOpponent:
-                            weight *= -4
+                            weight *= -4000
                         if self.hasBall():
                             weight *= -10
                         mateVector = self.createVector(weight, direction)
                         self.addVectors(vector, mateVector)
                 return (vector[0], vector[1])
+            
             elif objective is Objectives.BALL:
                 ballDist = self.game.playerDistBall(self)
                 (dist, direction) = self.magnitudeAndDirection(ballDist)
@@ -585,6 +586,20 @@ class Defender(Player):
                 else:    
                     weight = 15/(dist + 1)
                 return self.createVector(weight, direction)
+            elif objective is Objectives.TEAMMATES:
+                Team = self.game.playerTeam(self)
+                vector = [0, 0]
+                nearestTeammate = self.game.nearestTeammate(self)[0]
+                for mate in Team:
+                        (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
+                        weight = -(20/(dist + 1))**2
+                        if mate is nearestTeammate:
+                            weight *= 2
+                        if self.hasBall():
+                            weight *= 10
+                        mateVector = self.createVector(weight, direction)
+                        self.addVectors(vector, mateVector)
+                return (vector[0], vector[1])   
             # elif objective is Objectives.Shift:
             # # shift belongs to both offender and defender and shifts there formation to
             # # the side the ball is on either left,right,up or a combination of them
