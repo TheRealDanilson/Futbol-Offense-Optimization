@@ -419,6 +419,15 @@ class Player(object):
         #if speed <= MAX_SPEED*.2:
         #    finalVector[0] += 100*MAX_SPEED
         #    finalVector[1] += 100*MAX_SPEED
+        
+        futureX = self.position[0] + finalVector[0]
+        futureY = self.position[1] + finalVector[1]
+        
+        if futureX < FIELD_BOUNDS[0] or futureX > FIELD_BOUNDS[1]:
+            finalVector[0] = -finalVector[0]
+        elif futureY < FIELD_BOUNDS[2] or futureY > FIELD_BOUNDS[3]:
+            finalVector[1] = -finalVector[1]
+    
         self.velocity = finalVector
 
 
