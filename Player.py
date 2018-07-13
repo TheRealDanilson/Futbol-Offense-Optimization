@@ -194,14 +194,17 @@ class Player(object):
                     self.getPosition(), teammate.getPosition())[1]
                 print("M is: " + str(m))
                 print("P is: " + str(p))
-                print("P is: " + str(u))
+                print("U is: " + str(u))
                 try:
                     #z = m*p/u**2
-                    z = u-m-p
+                    z = (p+m-u)/5
                     #z = p/u
                     #z = u**2/(m*p)
                     print('Z is: ' + str(z))
-                    o = expcdf((25-z),1)
+                    if z > 0:
+                        o = expcdf((z),1)
+                    else:
+                        o = 0
                 except:
                     print('Set o to 0')
                     o = 0
@@ -229,7 +232,7 @@ class Player(object):
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
-        probabilities[self] = 1 - P/(len(team) - 1)
+        probabilities[self] = 1 - P/((len(team) - 1)**2)
         #probabilities[self] = 0
         #Debugging
         print(team)
