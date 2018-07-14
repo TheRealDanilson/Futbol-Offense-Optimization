@@ -234,8 +234,8 @@ class Player(object):
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
-        probabilities[self] = 1 - P/((len(team) - 1)**2)
-        #probabilities[self] = 0
+        #probabilities[self] = 1 - P/((len(team) - 1)**2)
+        probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -268,8 +268,7 @@ class Player(object):
         Sets ball attribute to the game's ball instance and the receiving
         attribute to False
         """
-        if self.ball is None:
-            self.ball = ball
+        self.ball = ball
         if ball is not None:
             self.receiving = False
     
@@ -412,11 +411,16 @@ class Player(object):
         else:
             self.shootPassKeep()
         finalVector = self.velocity
+        (dist, direction) = self.magnitudeAndDirection(self.game.playerDistBall(self))
         if self.receiving:
-            ballDist = self.game.playerDistBall(self)
-            (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = .1
-            finalVector = [weight*direction[0], weight*direction[1]]
+            if dist < 2*ZONE_THRESHOLD:
+                #ballDist = self.game.playerDistBall(self)
+                #(dist, direction) = self.magnitudeAndDirection(ballDist)
+                weight = .01
+                finalVector = [weight*direction[0], weight*direction[1]]
+            else:
+                weight = 1
+                finalVector = [weight*direction[0], weight*direction[1]]
         
         else:
             for objective in Objectives:

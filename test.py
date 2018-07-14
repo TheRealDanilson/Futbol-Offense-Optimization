@@ -17,6 +17,7 @@ window.show()
 factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
 background = factory.from_image(RESOURCES.get_path("soccerField.png"))
 sprites = [background]
+
 game = Game('Off testing.txt', 'Def testing.txt')
 #data = Data()
 
@@ -52,10 +53,12 @@ running = True
 
 while running:
     game.update()
-    #data.offender_DistTime(game)
-    #data.win_loss(game)
-    #data.player_Dist(game)
-    #data.ball_DistTime(game)
+    # Functions for data collection
+    data.offender_DistTime()
+    data.WinLoss()
+    data.player_Dist()
+    data.ball_DistTime()
+    
     events = sdl2.ext.get_events()
     for event in events:                #This for loop is not working
         if event.type == sdl2.SDL_QUIT:
