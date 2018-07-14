@@ -74,9 +74,12 @@ class Player(object):
         self.receiving = False
         self.justShot = False
         self.oldPosition = position.copy()
+<<<<<<< HEAD
         self.keeping = 0
         self.randomCount = 0
         self.randomVector = [1,1]
+=======
+>>>>>>> 23d961fd190525b3a6ae40ef94067355b2c8bb26
         
     # def getRandonVector(self):
     #     return self.randomVector
@@ -317,8 +320,6 @@ class Player(object):
                 self.shoot(GOAL_POS)      
             else:                       #Decides which Player inst. to pass to
                 player = self.pickPlayer()
-                if player is self:
-                    self.keeping = int(uniform(50, 100))
                 self.passBall(player)    
     
     
@@ -418,22 +419,13 @@ class Player(object):
         First decides a players action (shoot, pass, keep) then updates the
         player's velocity if they are not receiving the ball.
         """
-        if self.keeping > 0:
-            self.keeping -= 1
-        else:
-            self.shootPassKeep()
+        self.shootPassKeep()
         finalVector = self.velocity
-        (dist, direction) = self.magnitudeAndDirection(self.game.playerDistBall(self))
         if self.receiving:
-            if dist < 2*ZONE_THRESHOLD:
-                #ballDist = self.game.playerDistBall(self)
-                #(dist, direction) = self.magnitudeAndDirection(ballDist)
-                weight = .01
-                finalVector = [weight*direction[0], weight*direction[1]]
-            else:
-                weight = 1
-                finalVector = [weight*direction[0], weight*direction[1]]
-        
+            ballDist = self.game.playerDistBall(self)
+            (dist, direction) = self.magnitudeAndDirection(ballDist)
+            weight = 10
+            finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
                 vector = self.calcVector(objective)
@@ -533,6 +525,7 @@ class Offender(Player):
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
+<<<<<<< HEAD
         # elif objective is Objectives.Shift:
         #     # shift belongs to both offender and defender and shifts there formation to
         #     # the side the ball is on either left,right,up or a combination of them
@@ -565,6 +558,8 @@ class Offender(Player):
                 self.randomCount += 1
                 return(self.randomVector)
                 
+=======
+>>>>>>> 23d961fd190525b3a6ae40ef94067355b2c8bb26
         return (0, 0)
 
 
@@ -642,24 +637,5 @@ class Defender(Player):
                         mateVector = self.createVector(weight, direction)
                         self.addVectors(vector, mateVector)
                 return (vector[0], vector[1])   
-            # elif objective is Objectives.Shift:
-            # # shift belongs to both offender and defender and shifts there formation to
-            # # the side the ball is on either left,right,up or a combination of them
-            #     ball = self.getPosition()
-            #     direction = ball
-            #     if ball[0] > 20:
-            #         direction[0] = 2
-            #     elif ball[0] < -20:
-            #         direction[0] = 2
-            #     else:
-            #          direction[0] = 0
-            #     if ball[1] > 30:
-            #         direction[1] = 2
-            #     elif ball[1] < 20:
-            #         direction[1] = 0
-            #     else:
-            #         direction[1] = 0
-            #     weight = 20
-            #     return self.createVector(weight, direction)
             return (0, 0)
         
