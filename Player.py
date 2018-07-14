@@ -75,8 +75,20 @@ class Player(object):
         self.justShot = False
         self.oldPosition = position.copy()
         self.keeping = 0
+        self.randomCount = 0
+        self.randomVector = [1,1]
         
-        
+    # def getRandonVector(self):
+    #     return self.randomVector
+    # 
+    # def setRandomVector(self, vector):
+    #     self.randomVector = vector
+    #     
+    # def getRandom(self):
+    #     return self.random
+    # 
+    # def setRandom(self, integer):
+    #     self.random = integer
         
     def getPosition(self):
         """
@@ -540,6 +552,19 @@ class Offender(Player):
         #         direction[1] = 0
         #     weight = 20
         #     return self.createVector(weight, direction)
+        elif objective is Objectives.RANDOM:
+            print(self.randomVector)
+            print(self.randomCount)
+            if self.randomCount > 200:
+                vector = (uniform(-1,1),uniform(-1,1))
+                weight = 100
+                self.randomVector = self.createVector(weight, vector)
+                self.randomCount = 0
+                return self.randomVector
+            else:
+                self.randomCount += 1
+                return(self.randomVector)
+                
         return (0, 0)
 
 
