@@ -74,8 +74,24 @@ class Player(object):
         self.receiving = False
         self.justShot = False
         self.oldPosition = position.copy()
+<<<<<<< HEAD
+        self.keeping = 0
+        self.randomCount = 0
+        self.randomVector = [1,1]
+=======
+>>>>>>> 23d961fd190525b3a6ae40ef94067355b2c8bb26
         
-        
+    # def getRandonVector(self):
+    #     return self.randomVector
+    # 
+    # def setRandomVector(self, vector):
+    #     self.randomVector = vector
+    #     
+    # def getRandom(self):
+    #     return self.random
+    # 
+    # def setRandom(self, integer):
+    #     self.random = integer
         
     def getPosition(self):
         """
@@ -509,6 +525,41 @@ class Offender(Player):
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
+<<<<<<< HEAD
+        # elif objective is Objectives.Shift:
+        #     # shift belongs to both offender and defender and shifts there formation to
+        #     # the side the ball is on either left,right,up or a combination of them
+        #     ball = self.getPosition()
+        #     direction = ball
+        #     if ball[0] > 20:
+        #         direction[0] = 2
+        #     elif ball[0] < -20:
+        #         direction[0] = 2
+        #     else:
+        #          direction[0] = 0
+        #     if ball[1] > 30:
+        #         direction[1] = 2
+        #     elif ball[1] < 20:
+        #         direction[1] = 0
+        #     else:
+        #         direction[1] = 0
+        #     weight = 20
+        #     return self.createVector(weight, direction)
+        elif objective is Objectives.RANDOM:
+            print(self.randomVector)
+            print(self.randomCount)
+            if self.randomCount > 200:
+                vector = (uniform(-1,1),uniform(-1,1))
+                weight = 100
+                self.randomVector = self.createVector(weight, vector)
+                self.randomCount = 0
+                return self.randomVector
+            else:
+                self.randomCount += 1
+                return(self.randomVector)
+                
+=======
+>>>>>>> 23d961fd190525b3a6ae40ef94067355b2c8bb26
         return (0, 0)
 
 

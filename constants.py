@@ -17,3 +17,4 @@ class Objectives(Enum):
     BALL = auto()
     ZONE_CENTER = auto()
     Shift = auto()
+    RANDOM = auto()
