@@ -408,7 +408,7 @@ class Player(object):
         if self.receiving:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 10
+            weight = .1
             finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
