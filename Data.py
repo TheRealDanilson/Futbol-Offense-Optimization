@@ -51,10 +51,13 @@ class Data:
         
         self.Wins = 0
         self.Losses = 0
-        self.Passes = 0
+        
+        # Past time-step helper
+        self.oldPossession = self.game.players[1]
         
         self.whoIntercepts = []
         self.whoPasses = []
+        self.Passes = 0
 
 
     #-----------
@@ -155,13 +158,19 @@ class Data:
         print(self.whoIntercepts)
         return self.whoIntercepts
 
+    def get_Passes(self):
+        """
+        Int, number of passes overall.
+        """
+        print(self.Passes)
+        return self.Passes
 
-    #def get_avgPassLength(self):
+    def get_avgPassLength(self):
         """
         Float, average pass length.
         """
-        #print(self.get_ballDistAlone()/self.offender_Passes())
-        #return self.get_ballDistAlone()/self.offender_Passes()
+        print(self.get_ballDistAlone()/self.get_Passes())
+        return self.get_ballDistAlone()/self.get_Passes()
 
     #-----------
     # While-Loop Methods
@@ -289,14 +298,13 @@ class Data:
         if self.game.ball.isGoal() == True: # Unrelated to above. This is for wins.
             self.Wins += 1 
 
-"""
-    def offender_Passes(self):
-        # Whole team's number of passes
-        
-        for i in self.offenders: # To-Do: Get a marker for a recieve.
 
-
-    def offender_whoPasses(self): 
-        # Which player has passed/recieved?
+    def handle_Passes(self):
+        """
+        Record number of passes. Does not count interceptions or goal shots.
+        """
         
-"""
+        if (self.oldPossession == None) and isinstance(self.game.ball.getPossession, type(self.offenders[0])):
+            self.Passes += 1
+        
+        self.oldPossession = self.game.ball.getPossession()
