@@ -189,25 +189,26 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                m = .1*self.game.nearestOpponent(teammate)[1]
-                p = 10*self.game.nearestOpponentToLine(type(self),\
+                m = self.game.nearestOpponent(teammate)[1]/2
+                p = self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
                 print("M is: " + str(m))
                 print("P is: " + str(p))
                 print("U is: " + str(u))
                 try:
                     #z = m*p/u**2
-                    z = (p+m-u)/5
+                    z = (p + m - u + 10)/7
                     #z = p/u
                     #z = u**2/(m*p)
                     print('Z is: ' + str(z))
                     if z > 0:
-                        o = expcdf((z),1)
+                        o = expcdf((z),.5)
                     else:
                         o = 0
                 except:
                     print('Set o to 0')
                     o = 0
+                print('O is: ' + str(o))
                 openness[teammate] = o
         return openness
         
@@ -255,7 +256,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 5:
             p = 1.0
         else:
-            p = expcdf((z),1)/5
+            p = expcdf((z),1)/3
         return p
     
     
@@ -457,9 +458,9 @@ class Offender(Player):
         weight = self.genWeight(objective)
         if objective is Objectives.GOAL:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-            weight = dist
+            weight = (dist/10)**2
             return self.createVector(weight, direction)
-        elif objective is Objectives.ZONE_CENTER:
+        if objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
             if dist < ZONE_THRESHOLD:
                weight = 0
@@ -554,17 +555,17 @@ class Defender(Player):
         weight = self.genWeight(objective)
         ballDist = self.game.playerDistBall(self)
         (forget, direction) = self.magnitudeAndDirection(ballDist)
-        if forget <= 5:
+        if forget <= 3:
             weight = 10
             return self.createVector(weight, direction)
         else:
             if objective is Objectives.GOAL:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-                weight = 15
+                weight = (dist/10)**2
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-                weight = dist**1.35
+                weight = dist**1.5
                 return self.createVector(weight, direction)
             elif objective is Objectives.OPPONENTS:
                 opponentTeam = self.game.playerOpponentTeam(self)
@@ -595,7 +596,7 @@ class Defender(Player):
                 nearestTeammate = self.game.nearestTeammate(self)[0]
                 for mate in Team:
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                        weight = -(20/(dist + 1))**2
+                        weight = -(30/(dist + 1))**2
                         if mate is nearestTeammate:
                             weight *= 2
                         if self.hasBall():
