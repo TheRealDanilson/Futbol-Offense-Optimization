@@ -173,8 +173,8 @@ class Player(object):
                 a = matePos[0]**2/300 + playerPos[1]**2/150
                 dist = self.game.playerDistPlayer(self, teammate)
                 d = (dist[0]**2 + dist[1]**2)**(0.5)
-                z = (a - b + 25)/25 - 10*abs(d - 5)/15
-                p = expcdf((2-z),1)
+                z = (a - b + 25)/50 - abs(d - opt_pass)/(((2*FIELD_BOUNDS[1])**2 + FIELD_BOUNDS[3]**2)**.5 - opt_pass) + 1
+                p = expcdf((z),1)
                 probabilities[teammate] = p
         
         return probabilities
@@ -190,14 +190,14 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 m = self.game.nearestOpponent(teammate)[1]
-                p = 2*self.game.nearestOpponentToLine(type(self),\
+                p = self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
                 print("M is: " + str(m))
                 print("P is: " + str(p))
                 print("U is: " + str(u))
                 try:
                     #z = m*p/u**2
-                    z = (p + m - u + 10)/7
+                    z = p*(m - u + 10)/pass_factor
                     #z = p/u
                     #z = u**2/(m*p)
                     print('Z is: ' + str(z))
@@ -233,8 +233,8 @@ class Player(object):
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
-        probabilities[self] = 1 - P/((len(team) - 1)**2)
-        #probabilities[self] = 0
+        #probabilities[self] = 1 - P/((len(team) - 1)**2)
+        probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -256,7 +256,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 5:
             p = 1.0
         else:
-            p = expcdf((z),1)/3
+            p = expcdf((4.5 - z),1)/3
         return p
     
     

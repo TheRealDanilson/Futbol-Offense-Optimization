@@ -8,6 +8,8 @@ OPENNESS = 10
 ZONE_THRESHOLD = 20
 dcel = .999
 shift = 5
+pass_factor = 40
+opt_pass = 15
 class Objectives(Enum):
     GOAL = auto()
     TEAMMATES = auto()
