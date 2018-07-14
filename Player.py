@@ -462,10 +462,10 @@ class Offender(Player):
             return self.createVector(weight, direction)
         if objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            if dist < ZONE_THRESHOLD:
-               weight = 0
-            else:
-                weight = dist**1.35
+            # if dist < ZONE_THRESHOLD/2:
+            #    weight = 0
+            # else:
+            weight = dist**2
             return self.createVector(weight, direction)
         elif objective is Objectives.OPPONENTS:
             #opponentTeam = self.game.playerOpponentTeam(self)
@@ -488,10 +488,12 @@ class Offender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 15/(dist + 1)
-            if self.receiving:
-                weight *= 5
-                #weight = 10
+            #weight = 15/(dist + 1)
+            # if dist <= 2*ZONE_THRESHOLD:
+            #     weight = 15 
+            # if self.receiving:
+            #     weight = 2
+            #     #weight = 10
             return self.createVector(weight, direction)
         elif objective is Objectives.TEAMMATES:
             Team = self.game.playerTeam(self)
@@ -565,7 +567,7 @@ class Defender(Player):
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-                weight = dist**1.5
+                weight = dist**2
                 return self.createVector(weight, direction)
             elif objective is Objectives.OPPONENTS:
                 opponentTeam = self.game.playerOpponentTeam(self)
@@ -584,10 +586,10 @@ class Defender(Player):
             elif objective is Objectives.BALL:
                 ballDist = self.game.playerDistBall(self)
                 (dist, direction) = self.magnitudeAndDirection(ballDist)
-                if dist <= 10:
+                if dist <= 2*ZONE_THRESHOLD:
                     weight = 15
-                else:    
-                    weight = 15/(dist + 1)
+                # else:    
+                #     weight = 15/(dist + 1)
                 return self.createVector(weight, direction)
             elif objective is Objectives.TEAMMATES:
                 Team = self.game.playerTeam(self)
