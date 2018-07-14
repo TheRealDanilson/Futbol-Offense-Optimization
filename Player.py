@@ -577,7 +577,7 @@ class Defender(Player):
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
                         weight = -10/(dist + 1)
                         if opponent is nearestOpponent:
-                            weight *= -40
+                            weight *= -4
                         if self.hasBall():
                             weight *= -10
                         mateVector = self.createVector(weight, direction)
