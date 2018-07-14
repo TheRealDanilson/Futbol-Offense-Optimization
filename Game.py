@@ -32,10 +32,10 @@ class Game(object):
         self.createDefender([-18,12], (-18, -18, 12, 12))
         self.createDefender([0,12], (0, 0, 12, 12))
         self.createDefender([18,12], (18, 18, 12, 12))
-        self.createDefender([-31,28], (-31, -31, 28, 28))
-        self.createDefender([-10,25], (10, -10, 25, 25))
-        self.createDefender([10,25], (10, 10, 25, 25))
-        self.createDefender([31,28], (31, 31, 28, 28))
+        self.createDefender([-31,30], (-31, -31, 30, 30))
+        self.createDefender([-10,27], (10, -10, 27, 27))
+        self.createDefender([10,27], (10, 10, 27, 27))
+        self.createDefender([31,30], (31, 31, 30, 30))
         self.createDefender([-20,40], (-20, -20, 40, 40))
         self.createDefender([0,45], (0, 0, 45, 45))
         self.createDefender([20,40], (20, 20, 40, 40))
@@ -110,8 +110,11 @@ class Game(object):
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
-        dX = (ballPos[0] * shift)/7.5
-        dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/15
+        if abs(ballPos[0]) > 10:
+            dX = (ballPos[0] * shift)/7.5
+        else:
+            dX = 0
+        dY = (ballPos[1] - FIELD_BOUNDS[3]/1.5) * shift/15
         # if ballPos[0] > 10:
         #     dX = shift
         # elif ballPos[0] < -10:

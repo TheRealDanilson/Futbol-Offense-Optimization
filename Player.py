@@ -173,8 +173,8 @@ class Player(object):
                 a = matePos[0]**2/300 + playerPos[1]**2/150
                 dist = self.game.playerDistPlayer(self, teammate)
                 d = (dist[0]**2 + dist[1]**2)**(0.5)
-                z = (a - b + 25)/50 - abs(d - opt_pass)/(((2*FIELD_BOUNDS[1])**2 + FIELD_BOUNDS[3]**2)**.5 - opt_pass) + 1
-                p = expcdf((z),1)
+                z = (a - b + 25)/25 - abs(d - opt_pass)/(((2*FIELD_BOUNDS[1])**2 + FIELD_BOUNDS[3]**2)**.5 - opt_pass)
+                p = expcdf((z),.5)
                 probabilities[teammate] = p
         
         return probabilities
@@ -251,12 +251,12 @@ class Player(object):
         x = self.position[0]
         y = self.position[1]
         z = (x**2)/150 +(y**2)/300;
-        if z >= 4.5 or (x**2)/y > 30:
+        if z >= 3.5 or (x**2)/y > 30:
             p = 0.0
         elif (x**2 + y**2)**(0.5) <= 5:
             p = 1.0
         else:
-            p = expcdf((4.5 - z),1)/3
+            p = expcdf((3.5 - z),.25)/3
         return p
     
     
