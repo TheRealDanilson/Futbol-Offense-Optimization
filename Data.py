@@ -31,9 +31,9 @@ class Data:
     whoIntercepts   List of each defender's intercepts.
     """
     
-    def __init__(self):
+    def __init__(self,game):
         
-        self.game = Game()
+        self.game = game
         self.offenders = self.game.players[:len(self.game.players)//2]
         self.defenders = self.game.players[len(self.game.players)//2:]
         
@@ -131,26 +131,21 @@ class Data:
         print(self.whoTimeHeld)
         return self.whoTimeHeld
     
-    def get_Wins(self):
+    def get_WinLoss(self):
         """
-        Int, number of wins for offenders.
+        Tuple of ints, wins to losses.
         """
-        print(self.Wins)
-        return self.Wins
-    
-    def get_Losses(self):
-        """
-        Int, number of losses for offenders.
-        """
-        print(self.Losses)
-        return self.Losses
+        tup = (self.Wins, self.Losses)
+        print(tup)
+        return tup
     
     def get_Winrate(self):
         """
         Float, percent wins.
         """
-        print((self.Wins/self.Losses)*100)
-        return (self.Wins/self.Losses)*100
+        if self.Losses != 0:
+            print((self.Wins/self.Losses)*100)
+            return (self.Wins/self.Losses)*100
 
     def get_whoIntercepts(self):
         """
@@ -236,16 +231,17 @@ class Data:
             y_moved = abs(i.getPosition()[1] - i.getOldPosition()[1])
             hyp = (x_moved**2 + y_moved**2)**(1/2)
             
-            if i.hasBall() == True: #If the Offender 'i' is not the one holding the ball, his distance for holding the ball is 0 and his dist. w/o the ball is the formula/
-                distHeld.append(0)
-                timeHeld.append(0)
-                distAlone.append(hyp)
-                timeAlone.append(1)
-            else:
+            if i.hasBall() == True:
+                #If the Offender 'i' is not the one holding the ball, his distance for holding the ball is 0 and his dist. w/o the ball is the formula/
                 distHeld.append(hyp)
                 timeHeld.append(1)
                 distAlone.append(0)
                 timeAlone.append(0)
+            else:
+                distHeld.append(0)
+                timeHeld.append(0)
+                distAlone.append(hyp)
+                timeAlone.append(1)
         
         if len(self.whoDistHeld) == 0:
             self.whoDistHeld += distHeld
@@ -301,5 +297,5 @@ class Data:
 
     def offender_whoPasses(self): 
         # Which player has passed/recieved?
-        f
+        
 """
