@@ -13,36 +13,39 @@ class Game(object):
     """
     
     
-    def __init__(self):
+    def __init__(self, offenseFormation, defenseFormation):
         """
         Constructor Method - Creates an instance of game
         """
-        seed()
         self.players = []
-        self.createPlayer([-35, 57], (-35, -35, 47, 47))
-        self.createPlayer([-10, 60], (-10, -10, 50, 50))
-        self.createPlayer([10, 60], (10, 10, 50, 50))
-        self.createPlayer([35, 57], (35, 35, 47, 47))
-        self.createPlayer([-7, 49], (-7, -7, 39, 39))
-        self.createPlayer([7, 49], (7, 7, 39, 39))
-        self.createPlayer([-25, 37], (-25, -25, 27, 27))
-        self.createPlayer([0, 35], (0, 0, 25, 25))
-        self.createPlayer([25, 37], (25, 25, 27, 27))
-        self.createPlayer([0, 27], (0, 0, 17, 17))
-        self.createDefender([-18,12], (-18, -18, 12, 12))
-        self.createDefender([0,12], (0, 0, 12, 12))
-        self.createDefender([18,12], (18, 18, 12, 12))
-        self.createDefender([-31,30], (-31, -31, 30, 30))
-        self.createDefender([-10,27], (10, -10, 27, 27))
-        self.createDefender([10,27], (10, 10, 27, 27))
-        self.createDefender([31,30], (31, 31, 30, 30))
-        self.createDefender([-20,40], (-20, -20, 40, 40))
-        self.createDefender([0,45], (0, 0, 45, 45))
-        self.createDefender([20,40], (20, 20, 40, 40))
-        self.createBall(self.players[0])
+        self.readFormation(offenseFormation)
+        self.readFormation(defenseFormation)
+        self.createBall(self.players[1])
+        
+        
+    def readFormation(self, filename):
+        f = open(filename, 'r')
+        f.readline() # First line is not a player
+        line = f.readline()
+        while line is not '':
+            data = line.split(';')
+            team = data[0].strip()[0].lower()
+            position = data[1].split(',')
+            position = [float(position[0]), float(position[1])]
+            bounds = data[2][:-1].split(',')
+            bounds = [float(bounds[0]), float(bounds[1]), float(bounds[2]), float(bounds[3])]
+            if team == 'o':
+                self.createPlayer(position, bounds)
+            else:
+                self.createDefender(position, bounds)
+            line = f.readline()
+        f.close()
+            
     
     def getBall(self):
         return ball
+    
+    
     def createPlayer(self, position, bounds):
         """
         position  - 2 element list with x in first entry and y in second
