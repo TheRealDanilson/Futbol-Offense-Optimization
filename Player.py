@@ -74,6 +74,7 @@ class Player(object):
         self.receiving = False
         self.justShot = False
         self.oldPosition = position.copy()
+        self.keeping = 0
         
         
         
@@ -304,6 +305,8 @@ class Player(object):
                 self.shoot(GOAL_POS)      
             else:                       #Decides which Player inst. to pass to
                 player = self.pickPlayer()
+                if player is self:
+                    self.keeping = int(uniform(50, 100))
                 self.passBall(player)    
     
     
@@ -403,7 +406,10 @@ class Player(object):
         First decides a players action (shoot, pass, keep) then updates the
         player's velocity if they are not receiving the ball.
         """
-        self.shootPassKeep()
+        if self.keeping > 0:
+            self.keeping -= 1
+        else:
+            self.shootPassKeep()
         finalVector = self.velocity
         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
         if self.receiving and dist < 3*ZONE_THRESHOLD:
@@ -411,6 +417,7 @@ class Player(object):
             (dist, direction) = self.magnitudeAndDirection(ballDist)
             weight = .1
             finalVector = [weight*direction[0], weight*direction[1]]
+        
         else:
             for objective in Objectives:
                 vector = self.calcVector(objective)
