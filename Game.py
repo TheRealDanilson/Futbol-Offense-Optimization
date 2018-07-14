@@ -110,11 +110,8 @@ class Game(object):
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
-        dX = (ballPos[0] * shift)/7
-        if ballPos[1] < 35:
-            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/15
-        else:
-            dY = 0
+        dX = (ballPos[0] * shift)/8.5
+        dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/15
         # if ballPos[0] > 10:
         #     dX = shift
         # elif ballPos[0] < -10:
