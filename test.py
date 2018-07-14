@@ -5,7 +5,7 @@ from Player import *
 from constants import *
 from math import floor
 from Ball import *
-from Data import Data
+#from Data import Data
 
 RESOURCES = sdl2.ext.Resources(__file__, "Images")
 
@@ -17,8 +17,8 @@ window.show()
 factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
 background = factory.from_image(RESOURCES.get_path("soccerField.png"))
 sprites = [background]
-game = Game()
-data = Data()
+game = Game('Off testing.txt', 'Def testing.txt')
+#data = Data()
 
 players = game.playerList()
 spriterenderer = factory.create_sprite_render_system(window)
