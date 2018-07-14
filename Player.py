@@ -166,7 +166,7 @@ class Player(object):
         probabilities = {}
         team = self.game.playerTeam(self)
         playerPos = self.getPosition()
-        b = playerPos[0]**2/150 + playerPos[1]**2/300
+        b = playerPos[0]**2/300 + playerPos[1]**2/150
         for teammate in team:
             if teammate is not self:
                 matePos = teammate.getPosition()
@@ -189,8 +189,8 @@ class Player(object):
         team = self.game.playerTeam(self)
         for teammate in team:
             if teammate is not self:
-                m = self.game.nearestOpponent(teammate)[1]/2
-                p = self.game.nearestOpponentToLine(type(self),\
+                m = self.game.nearestOpponent(teammate)[1]
+                p = 2*self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
                 print("M is: " + str(m))
                 print("P is: " + str(p))
