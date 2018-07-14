@@ -51,6 +51,7 @@ class Data:
         
         self.Wins = 0
         self.Losses = 0
+        self.Passes = 0
         
         self.whoIntercepts = []
         self.whoPasses = []
@@ -154,13 +155,13 @@ class Data:
         print(self.whoIntercepts)
         return self.whoIntercepts
 
-    def get_avgPassLength(self):
+
+    #def get_avgPassLength(self):
         """
         Float, average pass length.
         """
-        print(self.get_ballDistAlone()/self.offender_Passes())
-        return self.get_ballDistAlone()/self.offender_Passes()
-
+        #print(self.get_ballDistAlone()/self.offender_Passes())
+        #return self.get_ballDistAlone()/self.offender_Passes()
 
     #-----------
     # While-Loop Methods
