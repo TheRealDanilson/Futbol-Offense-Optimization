@@ -1,0 +1,3011 @@
+True
+M is: 18.027756377319946
+P is: 16.084604783488135
+U is: 22.67156809750927
+Z is: 2.153804290667648
+O is: 0.9865342867214326
+M is: 18.027756377319946
+P is: 14.301587262611395
+U is: 22.67156809750927
+Z is: 1.9150498519672206
+O is: 0.9782925487963422
+M is: 22.67156809750927
+P is: 12.0
+U is: 22.67156809750927
+Z is: 3.0
+O is: 0.9975212478233336
+M is: 8.06225774829855
+P is: 1.2362450755382013
+U is: 22.67156809750927
+Z is: -0.14245593052097547
+O is: 0
+M is: 8.06225774829855
+P is: 5.239139020919866
+U is: 22.67156809750927
+Z is: -0.6037204427519913
+O is: 0
+M is: 5.830951894845301
+P is: 4.919349550499537
+U is: 22.67156809750927
+Z is: -0.8412845560428709
+O is: 0
+M is: 10.0
+P is: 1.4513769415045796
+U is: 22.67156809750927
+Z is: -0.09693630835960529
+O is: 0
+M is: 5.830951894845301
+P is: 0.31622776601683794
+U is: 22.67156809750927
+Z is: -0.05407981949867528
+O is: 0
+M is: 10.0
+P is: 0.32539568672798425
+U is: 22.67156809750927
+Z is: -0.021732918393240073
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9350021708701907, 0.885847694081094, 0.7218269189460944, 0.27307995476853547, 0.2431419242019198, 0.291506714100229, 0.2605723588515136, 0.15668518951904595, 0.2605723588515136, 1000]
+0.7114131419207912
+0.0009312508732441557
+0.710481891047547
+0.0008822936078389815
+0.709599597439708
+0.0007189308961433553
+0.7088806665435646
+0.00027198433786201264
+0.7086086822057026
+0.00024216642088068218
+0.7083665157848219
+0.00029033716767708033
+0.7080761786171448
+0.0002595269233417112
+0.707816651693803
+0.0001560565569898502
+0.7076605951368132
+0.0002595269233417112
+0.7074010682134715
+0.9959879262926804
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 18.00874754021697
+P is: 16.046913708055058
+U is: 22.65642393747992
+Z is: 2.1472068747676945
+O is: 0.9863554315123931
+M is: 17.982750007636874
+P is: 14.267728521973135
+U is: 22.65642393747992
+Z is: 1.8998643597126859
+O is: 0.9776231585647481
+M is: 22.659582614492127
+P is: 11.960035113758009
+U is: 22.65642393747992
+Z is: 2.990953225638977
+O is: 0.9974759901992253
+M is: 8.072526544597036
+P is: 1.2319760860689788
+U is: 22.65642393747992
+Z is: -0.14118129922564132
+O is: 0
+M is: 8.017011010636782
+P is: 5.194663436844755
+U is: 22.65642393747992
+Z is: -0.6025047174874242
+O is: 0
+M is: 5.8356239291060215
+P is: 4.912347353912842
+U is: 22.65642393747992
+Z is: -0.8376534718176055
+O is: 0
+M is: 10.036138456259625
+P is: 1.4417020446936974
+U is: 22.65642393747992
+Z is: -0.09444177339891277
+O is: 0
+M is: 5.837973211778583
+P is: 0.26970874558886127
+U is: 22.65642393747992
+Z is: -0.045974894802209225
+O is: 0
+M is: 9.951101528747266
+P is: 0.2502830450532553
+U is: 22.65642393747992
+Z is: -0.01692740825771041
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9349039636559414, 0.8854760245902673, 0.7221081122387355, 0.27310868550813705, 0.24320168903971148, 0.29151437519661394, 0.26061433229139946, 0.15685662670060407, 0.2605113483298218, 1000]
+0.8207114040301546
+0.0009311530045169067
+0.8197802510256377
+0.0008819233769216824
+0.818898327648716
+0.0007192109183789715
+0.8181791167303369
+0.0002720129371107824
+0.8179071037932262
+0.0002422259314928455
+0.8176648778617334
+0.00029034478072240957
+0.8173745330810109
+0.00025956871290216385
+0.8171149643681088
+0.00015622729703647473
+0.8169587370710724
+0.0002594661421259474
+0.8166992709289465
+0.9959878668987918
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.988740769093365
+P is: 16.00897212504253
+U is: 22.641295654014446
+Z is: 2.1401774946873315
+O is: 0.9861622510393729
+M is: 17.938805424117355
+P is: 14.233712281669941
+U is: 22.641295654014446
+Z is: 1.8850807469245072
+O is: 0.9769516591786167
+M is: 22.64761002050638
+P is: 11.920054959884437
+U is: 22.641295654014446
+Z is: 2.9818954298616274
+O is: 0.9974298495982953
+M is: 8.081326666859816
+P is: 1.2277853273380361
+U is: 22.641295654014446
+Z is: -0.1399665753886235
+O is: 0
+M is: 7.97352503732667
+P is: 5.150553690162199
+U is: 22.641295654014446
+Z is: -0.6010400793652976
+O is: 0
+M is: 5.84028985805057
+P is: 4.905381372502768
+U is: 22.641295654014446
+Z is: -0.8340381786451138
+O is: 0
+M is: 10.08617937327343
+P is: 1.4215651068896786
+U is: 22.641295654014446
+Z is: -0.09080660371867902
+O is: 0
+M is: 5.845012935453475
+P is: 0.2238075663181958
+U is: 22.641295654014446
+Z is: -0.03802648738128856
+O is: 0
+M is: 9.902426908117024
+P is: 0.17523162867207526
+U is: 22.641295654014446
+Z is: -0.011998410776566238
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9347961961701746, 0.8851028723963626, 0.722388326517185, 0.27313740338197606, 0.24326141976241455, 0.2915220355736892, 0.26064168640786556, 0.15702790179220924, 0.26045072241856587, 1000]
+0.9789237294607146
+0.0009310456384301075
+0.9779926838222844
+0.0008815516925323215
+0.9771111321297521
+0.0007194899844609664
+0.9763916421452912
+0.00027204153071309586
+0.976119600614578
+0.00024228541450641591
+0.9758773152000716
+0.0002903524007041845
+0.9755869627993674
+0.0002595959486327803
+0.9753273668507346
+0.00015639787974581438
+0.9751709689709888
+0.00025940575082275167
+0.974911563220166
+0.9959878337594515
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.967896708856316
+P is: 15.97091053790234
+U is: 22.62616357228324
+Z is: 2.1328085510389263
+O is: 0.9859568016283291
+M is: 17.901707050279438
+P is: 14.204902277814886
+U is: 22.62616357228324
+Z is: 1.8734644891824914
+O is: 0.9764099196240724
+M is: 22.63565594392873
+P is: 11.880182435332838
+U is: 22.62616357228324
+Z is: 2.972864886505519
+O is: 0.9973830081586861
+M is: 8.088821459924871
+P is: 1.2236808953451763
+U is: 22.62616357228324
+Z is: -0.13880647146345154
+O is: 0
+M is: 7.931746219265704
+P is: 5.106898857316326
+U is: 22.62616357228324
+Z is: -0.5993478653972795
+O is: 0
+M is: 5.844990279772837
+P is: 4.898401781353494
+U is: 22.62616357228324
+Z is: -0.8304227833924923
+O is: 0
+M is: 10.136024086340125
+P is: 1.4015086691795713
+U is: 22.62616357228324
+Z is: -0.08724880192539089
+O is: 0
+M is: 5.852089444276411
+P is: 0.17857890234677187
+U is: 22.62616357228324
+Z is: -0.03024266805487814
+O is: 0
+M is: 9.853996238444562
+P is: 0.10026762599666061
+U is: 22.62616357228324
+Z is: -0.006948965935737407
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.934680237984841, 0.884816150487357, 0.7226677096732071, 0.2731661091927557, 0.24332111491324468, 0.2915296844822944, 0.2606692769534173, 0.15719897528048773, 0.2603905237334052, 1000]
+0.25920788642937664
+0.0009309300423672572
+0.25827695638700937
+0.0008812660233796318
+0.25739569036362975
+0.0007197681669551234
+0.2566759221966746
+0.00027207009121362765
+0.256403852105461
+0.00024234484330534103
+0.2561615072621557
+0.00029035998676032456
+0.2558711472753954
+0.0002596233997214593
+0.25561152387567393
+0.0001565682495154319
+0.2554549556261585
+0.00025934576493646017
+0.25519560986122203
+0.9959877234318454
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.946356720500667
+P is: 15.93285669529919
+U is: 22.611060889039763
+Z is: 2.125162597742343
+O is: 0.9857404040013058
+M is: 17.859966124964586
+P is: 14.170942684162958
+U is: 22.611060889039763
+Z is: 1.859548381322338
+O is: 0.9757441332408134
+M is: 22.6237149838651
+P is: 11.840511876211066
+U is: 22.611060889039763
+Z is: 2.963873743054319
+O is: 0.9973355229942192
+M is: 8.09512183030144
+P is: 1.2196354152858226
+U is: 22.611060889039763
+Z is: -0.1376949802327445
+O is: 0
+M is: 7.891640828173438
+P is: 5.06377336953054
+U is: 22.611060889039763
+Z is: -0.5974518405960774
+O is: 0
+M is: 5.849669739374491
+P is: 4.891441647350522
+U is: 22.611060889039763
+Z is: -0.8268237565874985
+O is: 0
+M is: 10.18555453718121
+P is: 1.381520935679419
+U is: 22.611060889039763
+Z is: -0.08377219511790006
+O is: 0
+M is: 5.859182990457894
+P is: 0.1340992845407619
+U is: 22.611060889039763
+Z is: -0.02263554988766028
+O is: 0
+M is: 9.8058392334778
+P is: 0.025370030074565265
+U is: 22.611060889039763
+Z is: -0.0017792139441857196
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9345569768074089, 0.8844466595310183, 0.7229462761513451, 0.2731947999943464, 0.2433807701096212, 0.2915373338481402, 0.2606971168561324, 0.15736988903366433, 0.2603308047401867, 1000]
+0.010903780249652106
+0.000930807256423514
+0.009972972993228593
+0.0008808979966351073
+0.009092074996593485
+0.0007200456007988307
+0.008372029395794654
+0.00027209866125081856
+0.008099930734543835
+0.00024240425411607987
+0.007857526480427755
+0.0002903675994065535
+0.007567158881021201
+0.00025965112253223627
+0.007307507758488965
+0.00015673847426135517
+0.00715076928422761
+0.00025928628016938445
+0.0068914830040582254
+0.9959877027544062
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.924234919812612
+P is: 15.89488164676669
+U is: 22.595956890440476
+Z is: 2.1173087164484334
+O is: 0.9855146492434489
+M is: 17.825168643521422
+P is: 14.1424592589493
+U is: 22.595956890440476
+Z is: 1.8488478543591533
+O is: 0.9752194376347418
+M is: 22.611789644936483
+P is: 11.801120485966475
+U is: 22.595956890440476
+Z is: 2.9549512275774212
+O is: 0.9972875485398598
+M is: 8.100366604395344
+P is: 1.21564203079015
+U is: 22.595956890440476
+Z is: -0.1366257126232094
+O is: 0
+M is: 7.85313277268834
+P is: 5.021230454510409
+U is: 22.595956890440476
+Z is: -0.5953703225110871
+O is: 0
+M is: 5.854368999232122
+P is: 4.884481775618256
+U is: 22.595956890440476
+Z is: -0.8232290798333979
+O is: 0
+M is: 10.234681088909085
+P is: 1.361626853431843
+U is: 22.595956890440476
+Z is: -0.08037941349309854
+O is: 0
+M is: 5.866313776859076
+P is: 0.09038142705070529
+U is: 22.595956890440476
+Z is: -0.015205868703685963
+O is: 0
+M is: 9.757970892728979
+P is: 0.049445597872501426
+U is: 22.595956890440476
+Z is: -0.003508147860265811
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.934427464785662, 0.8841711467784886, 0.7232241378918135, 0.2732234749889344, 0.24344039075353427, 0.29154497753725944, 0.26072521312795477, 0.1575405995240502, 0.26027160632286767, 1000]
+0.8139492326713959
+0.000930678163576004
+0.8130185545078199
+0.0008806234942585344
+0.8121379310135614
+0.0007203222699167818
+0.8114176087436445
+0.00027212719181673767
+0.8111454815518279
+0.00024246360937035734
+0.8109030179424576
+0.00029037518108098674
+0.8106126427613766
+0.00025967907804116854
+0.8103529636833354
+0.0001569084828722764
+0.8101960552004631
+0.00025922729129018637
+0.809936827909173
+0.9959875952377769
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.901652413363024
+P is: 15.857069658064832
+U is: 22.58086980142616
+Z is: 2.1093005128225744
+O is: 0.9852807780781015
+M is: 17.785592779072125
+P is: 14.108882357415103
+U is: 22.58086980142616
+Z is: 1.8358206048635537
+O is: 0.9745653079910513
+M is: 22.59988470117806
+P is: 11.762069241884502
+U is: 22.58086980142616
+Z is: 2.9461086746588583
+O is: 0.9972391518598895
+M is: 8.104700894537615
+P is: 1.2117575086637569
+U is: 22.58086980142616
+Z is: -0.13560078207423593
+O is: 0
+M is: 7.816141576381934
+P is: 4.979307193737746
+U is: 22.58086980142616
+Z is: -0.5931261381792
+O is: 0
+M is: 5.859076200768776
+P is: 4.87753989850286
+U is: 22.58086980142616
+Z is: -0.8196454119176899
+O is: 0
+M is: 10.28333952818645
+P is: 1.3418207429463216
+U is: 22.58086980142616
+Z is: -0.07707184445450432
+O is: 0
+M is: 5.873466746793533
+P is: 0.047448924933329945
+U is: 22.58086980142616
+Z is: -0.007956476600921289
+O is: 0
+M is: 9.710420088957738
+P is: 0.12418347476681517
+U is: 22.58086980142616
+Z is: -0.008911560485943356
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9342925341295213, 0.8838092741855466, 0.7235013625199631, 0.273252139987898, 0.24349998349564905, 0.29155261340082955, 0.260753563805513, 0.15771113875474585, 0.26021298404649434, 1000]
+0.11209563061715622
+0.0009305437589473359
+0.11116508685820888
+0.000880263059106413
+0.11028482379910247
+0.0007205983703060532
+0.10956422542879642
+0.00027215573730517714
+0.10929206969149124
+0.00024252295899674143
+0.1090495467324945
+0.00029038278151039644
+0.10875916395098412
+0.0002597073106749866
+0.10849945664030913
+0.00015707833523623244
+0.1083423783050729
+0.00025916889994965977
+0.10808320940512324
+0.995987578787967
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.878703128809406
+P is: 15.819463296603935
+U is: 22.56578261316553
+Z is: 2.101188777375058
+O is: 0.9850400336347442
+M is: 17.75297180447727
+P is: 14.080974241085999
+U is: 22.56578261316553
+Z is: 1.8260169346625073
+O is: 0.974061680059448
+M is: 22.587994150775586
+P is: 11.723388920586968
+U is: 22.56578261316553
+Z is: 2.937357092494915
+O is: 0.9971904028951968
+M is: 8.108238259371019
+P is: 1.2079374642753753
+U is: 22.56578261316553
+Z is: -0.134610870590439
+O is: 0
+M is: 7.780562066922015
+P is: 4.9380049244205955
+U is: 22.56578261316553
+Z is: -0.5907360655447272
+O is: 0
+M is: 5.863801440829274
+P is: 4.8705930283382814
+U is: 22.56578261316553
+Z is: -0.8160655693508849
+O is: 0
+M is: 10.331491049937831
+P is: 1.3220948790663125
+U is: 22.56578261316553
+Z is: -0.0738486358521102
+O is: 0
+M is: 5.880650673228936
+P is: 0.005283635173968371
+U is: 22.56578261316553
+Z is: -0.0008830449565117103
+O is: 0
+M is: 9.663208452245458
+P is: 0.19883177396137205
+U is: 22.56578261316553
+Z is: -0.01442809923675448
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9341530096568164, 0.8835476571820114, 0.723777973484195, 0.27328079044522896, 0.24355954067080368, 0.29156024390561325, 0.26078216293955064, 0.15788148825144596, 0.26015497795105097, 1000]
+0.44018152700321644
+0.0009304046902865586
+0.4392511223129299
+0.000880002393436431
+0.43837111991949346
+0.0007208737907970639
+0.4376502461286964
+0.00027218424237467087
+0.4373780618863217
+0.00024258225008278443
+0.43713547963623894
+0.0002903903489328079
+0.43684508928730614
+0.0002597357660188544
+0.4365853535212873
+0.0001572479836387108
+0.4364281055376486
+0.0002591110976305442
+0.43616899444001805
+0.9959874674368016
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.855474950837912
+P is: 15.78211290251815
+U is: 22.55070813448547
+Z is: 2.093010720430151
+O is: 0.9847933347029414
+M is: 17.715396413532048
+P is: 14.04796797630855
+U is: 22.55070813448547
+Z is: 1.8138343887915618
+O is: 0.9734219283591783
+M is: 22.576122264015392
+P is: 11.685108333448962
+U is: 22.55070813448547
+Z is: 2.9287012547811773
+O is: 0.9971413406121771
+M is: 8.111081241340669
+P is: 1.2041875136114932
+U is: 22.55070813448547
+Z is: -0.13365358174546887
+O is: 0
+M is: 7.746308767919843
+P is: 4.89732872525425
+U is: 22.55070813448547
+Z is: -0.5882180756368791
+O is: 0
+M is: 5.868524420697577
+P is: 4.863688357996363
+U is: 22.55070813448547
+Z is: -0.8125014783685769
+O is: 0
+M is: 10.379093802791338
+P is: 1.3024626634078842
+U is: 22.55070813448547
+Z is: -0.07071116465882672
+O is: 0
+M is: 5.887852567841689
+P is: 0.0361171421256244
+U is: 22.55070813448547
+Z is: -0.006016082536574525
+O is: 0
+M is: 9.616375830606714
+P is: 0.27335983918973866
+U is: 22.55070813448547
+Z is: -0.020053215167938794
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9340095083458916, 0.8831952184094071, 0.7240540128015835, 0.27330942680678133, 0.24361906378530515, 0.29156787298191383, 0.26081102807969375, 0.15805167472410916, 0.2600976731400305, 1000]
+0.2202946563088629
+0.0009302617484403589
+0.21936439456042256
+0.0008796513533858326
+0.21848474320703673
+0.0007211487098315704
+0.21776359449720517
+0.00027221275905079176
+0.21749138173815438
+0.00024264153009713644
+0.21724874020805723
+0.0002903979422966917
+0.21695834226576055
+0.0002597645107742234
+0.21669857775498633
+0.00015741748446775693
+0.21654116027051856
+0.00025905401820696365
+0.2162821062523116
+0.9959874499434487
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.832025811330023
+P is: 15.745049422151117
+U is: 22.535630468934546
+Z is: 2.0848001606316946
+O is: 0.984541562701926
+M is: 17.684798114016942
+P is: 14.020779559395956
+U is: 22.535630468934546
+Z is: 1.804883611651857
+O is: 0.9729418553611487
+M is: 22.564265430220978
+P is: 11.647249279905179
+U is: 22.535630468934546
+Z is: 2.9201502832818824
+O is: 0.9970920315436403
+M is: 8.113303663475259
+P is: 1.2005130209454027
+U is: 22.535630468934546
+Z is: -0.13272652282074401
+O is: 0
+M is: 7.713324130547307
+P is: 4.857290200952462
+U is: 22.535630468934546
+Z is: -0.5855835330859821
+O is: 0
+M is: 5.873262505018781
+P is: 4.856784328354048
+U is: 22.535630468934546
+Z is: -0.8089421079218537
+O is: 0
+M is: 10.426123505985478
+P is: 1.2829353146274078
+U is: 22.535630468934546
+Z is: -0.06765902448049424
+O is: 0
+M is: 5.8950913747989535
+P is: 0.07677029457393486
+U is: 22.535630468934546
+Z is: -0.012744903559662995
+O is: 0
+M is: 9.569947922150153
+P is: 0.34778823161692013
+U is: 22.535630468934546
+Z is: -0.025785737212082698
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9338626162582514, 0.8829491526108219, 0.7243295090776426, 0.27333804953481894, 0.2436785558076998, 0.2915754992459836, 0.26084014835368, 0.1582216581619039, 0.26004112796325557, 1000]
+0.6534682382964249
+0.0009301153338223362
+0.6525381229626025
+0.0008794061690993481
+0.6516587167935032
+0.000721423013839556
+0.6509372937796636
+0.00027224123416363173
+0.6506650525455
+0.00024270075419503213
+0.6504223517913049
+0.000290405503008801
+0.6501319462882961
+0.00025979348293470907
+0.6498721528053614
+0.00015758676687244733
+0.6497145660384889
+0.0002589976687493761
+0.6494555683697395
+0.9959873300733147
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.80841521424116
+P is: 15.70828673414453
+U is: 22.520576552543663
+Z is: 2.0765721475459835
+O is: 0.9842850736459647
+M is: 17.64906865586061
+P is: 13.988445306250172
+U is: 22.520576552543663
+Z is: 1.7934907822696258
+O is: 0.9723182399474115
+M is: 22.552422431721396
+P is: 11.609812975926792
+U is: 22.520576552543663
+Z is: 2.9116963615143843
+O is: 0.9970424460574202
+M is: 8.114991210128158
+P is: 1.1968964408952345
+U is: 22.520576552543663
+Z is: -0.13182573540993325
+O is: 0
+M is: 7.681508242740895
+P is: 4.817862253700455
+U is: 22.520576552543663
+Z is: -0.5828491138219204
+O is: 0
+M is: 5.878004617950405
+P is: 4.849882618715474
+U is: 22.520576552543663
+Z is: -0.8053923542287764
+O is: 0
+M is: 10.472572207766037
+P is: 1.263500615433309
+U is: 22.520576552543663
+Z is: -0.06469136875091552
+O is: 0
+M is: 5.902356262566702
+P is: 0.11670233076903927
+U is: 22.520576552543663
+Z is: -0.019309043334581458
+O is: 0
+M is: 9.523959639058756
+P is: 0.42208938301422116
+U is: 22.520576552543663
+Z is: -0.031621004603570604
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9337125700196623, 0.8826073198167027, 0.7246044396299577, 0.2733666569014837, 0.2437380083014177, 0.2915831165735947, 0.2608695268106347, 0.15839146135415716, 0.2599854066105655, 1000]
+0.480040965129367
+0.0009299658691175615
+0.4791109992602494
+0.0008790656885400793
+0.47823193357170934
+0.000721696825236836
+0.4775102367464725
+0.0002722697207212248
+0.4772379670257513
+0.00024275996276052928
+0.47699520706299076
+0.00029041308335247114
+0.4767047939796383
+0.0002598227377635391
+0.47644497124187474
+0.00015775588521413776
+0.4762872153566606
+0.00025894216526546897
+0.4760282731913951
+0.9959873080620282
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.78468888537352
+P is: 15.671823868702063
+U is: 22.50552798545934
+Z is: 2.068351994949842
+O is: 0.9840245800305986
+M is: 17.620266507863278
+P is: 13.962014120125778
+U is: 22.50552798545934
+Z is: 1.7853012867638753
+O is: 0.9718611071811826
+M is: 22.540598023774656
+P is: 11.572794984638499
+U is: 22.50552798545934
+Z is: 2.9033452052477884
+O is: 0.9969926332304422
+M is: 8.116226677466098
+P is: 1.1933381936457064
+U is: 22.50552798545934
+Z is: -0.1309480223561848
+O is: 0
+M is: 7.650762823196248
+P is: 4.779017240227064
+U is: 22.50552798545934
+Z is: -0.5800251601927264
+O is: 0
+M is: 5.882748683144086
+P is: 4.8429904714123
+U is: 22.50552798545934
+Z is: -0.8018514263844845
+O is: 0
+M is: 10.518450120510888
+P is: 1.2441616455820625
+U is: 22.50552798545934
+Z is: -0.061806151658848986
+O is: 0
+M is: 5.9096435107909215
+P is: 0.15595301521844865
+U is: 22.50552798545934
+Z is: -0.025716201796427328
+O is: 0
+M is: 9.478455933855406
+P is: 0.49624936281079435
+U is: 22.50552798545934
+Z is: -0.037554564419770425
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9335598422115905, 0.8823764002945343, 0.7248788574955776, 0.2733952489037711, 0.2437974222465847, 0.29159073343261255, 0.26089915397201985, 0.15856109171690072, 0.25993060372025717, 1000]
+0.7262322633406052
+0.0009298136329831031
+0.7253024497076221
+0.000878835581094394
+0.7244236141265278
+0.0007219700478588518
+0.7237016440786689
+0.00027229816250592265
+0.7234293459161629
+0.00024281910665094176
+0.723186526809512
+0.00029042063179891456
+0.722896106177713
+0.00025985221217555277
+0.7226362539655375
+0.00015792481432126888
+0.7224783291512162
+0.0002588875485432947
+0.7222194416026729
+0.9959871782620677
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.76089213113026
+P is: 15.635682955988534
+U is: 22.490490370502386
+Z is: 2.06015827449653
+O is: 0.9837606269289486
+M is: 17.586154906057914
+P is: 13.930368555329217
+U is: 22.490490370502386
+Z is: 1.7746121253652247
+O is: 0.9712530685822389
+M is: 22.52878444450664
+P is: 11.536190014343209
+U is: 22.490490370502386
+Z is: 2.8950916964392124
+O is: 0.9969425785843089
+M is: 8.11706607719754
+P is: 1.1898514362308548
+U is: 22.490490370502386
+Z is: -0.13009312941589204
+O is: 0
+M is: 7.621031405179697
+P is: 4.740754205579571
+U is: 22.490490370502386
+Z is: -0.5771227017187671
+O is: 0
+M is: 5.887501760377132
+P is: 4.8361272249140965
+U is: 22.490490370502386
+Z is: -0.7983223245806105
+O is: 0
+M is: 10.563747355060796
+P is: 1.2249245417618606
+U is: 22.490490370502386
+Z is: -0.059002870132066364
+O is: 0
+M is: 5.916957802290993
+P is: 0.19454673174011428
+U is: 22.490490370502386
+Z is: -0.03197148192831815
+O is: 0
+M is: 9.4334747871563
+P is: 0.5702609693105086
+U is: 22.490490370502386
+Z is: -0.04358241674390672
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9334048014741548, 0.8820448031879581, 0.725152720229425, 0.273423826781894, 0.24385680981195978, 0.29159834432045406, 0.26092903826116437, 0.15873053931828132, 0.25987679791140444, 1000]
+0.9907722985873325
+0.0009296591881674482
+0.9898426393991651
+0.0008785052898420717
+0.9889641341093229
+0.0007222427912532764
+0.9882418913180696
+0.0002723266180227924
+0.9879695647000468
+0.00024287824905212636
+0.9877266864509947
+0.0002904282039515859
+0.9874362582470432
+0.00025988196921215834
+0.9871763762778311
+0.00015809357749923744
+0.9870182827003319
+0.00025883395134491586
+0.9867594487489869
+0.9959871501616543
+True
+second: True
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+M is: 17.737045382311322
+P is: 15.599844426977432
+U is: 22.47545916064501
+Z is: 2.0519981624280623
+O is: 0.9834934222311045
+M is: 17.558965985854396
+P is: 13.904708818642359
+U is: 22.47545916064501
+Z is: 1.7671170545529395
+O is: 0.970818902029856
+M is: 22.516992590210464
+P is: 11.499993139596848
+U is: 22.47545916064501
+Z is: 2.8869391387758787
+O is: 0.996892318339477
+M is: 8.117571968127546
+P is: 1.186445353366645
+U is: 22.47545916064501
+Z is: -0.12925987525145893
+O is: 0
+M is: 7.592232988174897
+P is: 4.70304040748669
+U is: 22.47545916064501
+Z is: -0.5741502502005879
+O is: 0
+M is: 5.892273286306826
+P is: 4.829242520314901
+U is: 22.47545916064501
+Z is: -0.7947950285872597
+O is: 0
+M is: 10.608482740512365
+P is: 1.2057868019738542
+U is: 22.47545916064501
+Z is: -0.05627938817480841
+O is: 0
+M is: 5.92429526670683
+P is: 0.23252057193764233
+U is: 22.47545916064501
+Z is: -0.03808200938689345
+O is: 0
+M is: 9.389070391462166
+P is: 0.6440819709087793
+U is: 22.47545916064501
+Z is: -0.04969718403615018
+O is: 0
+[<Player.Offender object at 0x7fe56c1c44e0>, <Player.Offender object at 0x7fe56b97f6d8>, <Player.Offender object at 0x7fe56b97f748>, <Player.Offender object at 0x7fe56b97f7b8>, <Player.Offender object at 0x7fe56b97f828>, <Player.Offender object at 0x7fe56b97f898>, <Player.Offender object at 0x7fe56b97f908>, <Player.Offender object at 0x7fe56b97f978>, <Player.Offender object at 0x7fe56b97f9e8>, <Player.Offender object at 0x7fe56b97fa58>]
+[0.9332475798858343, 0.8818290398084073, 0.7254260992182108, 0.2734523913519277, 0.24391616717208872, 0.29160594689902497, 0.26095916651250634, 0.15889981193060598, 0.25982410123876964, 1000]
+0.001377645757270618
+0.0009295024654495586
+0.0004481432918210594
+0.0008782902675270824
+False
+test
+second: False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False

@@ -233,8 +233,8 @@ class Player(object):
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
-        #probabilities[self] = 1 - P/((len(team) - 1)**2)
-        probabilities[self] = 0
+        probabilities[self] = 1 - P/((len(team) - 1)**2)
+        #probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
@@ -267,7 +267,8 @@ class Player(object):
         Sets ball attribute to the game's ball instance and the receiving
         attribute to False
         """
-        self.ball = ball
+        if self.ball is None:
+            self.ball = ball
         if ball is not None:
             self.receiving = False
     
