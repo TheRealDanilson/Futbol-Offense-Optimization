@@ -183,8 +183,9 @@ class Player(object):
                 a = matePos[0]**2/300 + playerPos[1]**2/150
                 dist = self.game.playerDistPlayer(self, teammate)
                 d = (dist[0]**2 + dist[1]**2)**(0.5)
-                z = (b - a + 25)/25 - abs(d - opt_pass)/(((2*FIELD_BOUNDS[1])**2 + FIELD_BOUNDS[3]**2)**.5 - opt_pass)
-                p = expcdf((z),.5)
+                f = (b - a + 7)/7
+                l = 2 - 4*abs(d - opt_pass)/(((2*FIELD_BOUNDS[1])**2 + FIELD_BOUNDS[3]**2)**.5 - opt_pass) 
+                p = FORWARDNESS*expcdf((f),1.44) + LENGTHINESS*expcdf((l),1.44)
                 probabilities[teammate] = p
         
         return probabilities
@@ -204,11 +205,11 @@ class Player(object):
                     self.getPosition(), teammate.getPosition())[1]
                 try:
                     #z = m*p/u**2
-                    z = p*(m - u + 10)/pass_factor
+                    z = p*(2*m - u + 20)/pass_factor
                     #z = p/u
                     #z = u**2/(m*p)
                     if z > 0:
-                        o = expcdf((z),.5)
+                        o = expcdf((z),1.44)
                     else:
                         o = 0
                 except:
@@ -235,7 +236,7 @@ class Player(object):
         for teammate in team:
             if teammate is not self:
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
-                                           [teammate])/(1 + OPENNESS)
+                                           [teammate])/(LENGTHINESS + OPENNESS + FORWARDNESS)
         P = sum(probabilities.values())
         probabilities[self] = len(team)-P
         #probabilities[self] = 0
@@ -252,14 +253,14 @@ class Player(object):
         x = self.position[0]
         y = self.position[1]
         z = (x**2)/150 +(y**2)/300;
-        if z >= 3.5 or (x**2)/y > 30:
+        if z >= 4.5 or (x**2)/y > 50:
             p = 0.0
-        elif (x**2 + y**2)**(0.5) <= 5:
+        elif (x**2 + y**2)**(0.5) <= 10:
             p = 1.0
         else:
-            p = expcdf((3.5 - z),.25)/2
+            p = expcdf((4.5 - z),4.3)/1.5
         return p
-    
+     
     
     def receive(self, ball):
         """
@@ -302,11 +303,11 @@ class Player(object):
             shootProb = self.calcShootProb()
             rand = uniform(0, 1)        #Randon decimal between 0 and 1
             if rand <= shootProb:       #Decides if to shoot
-                self.shoot(GOAL_POS)      
+                self.shoot(GOAL_POS)
             else:                       #Decides which Player inst. to pass to
                 player = self.pickPlayer()
                 if player is self:
-                    self.keeping = int(uniform(50, 100))
+                    self.keeping = int(uniform(50, 150))
                 self.passBall(player)    
     
     
@@ -539,7 +540,7 @@ class Offender(Player):
         #     weight = 20
         #     return self.createVector(weight, direction)
         elif objective is Objectives.RANDOM:
-            if self.randomCount > 200:
+            if self.randomCount > 100:
                 vector = (uniform(-1,1),uniform(-1,1))
                 weight = 50
                 self.randomVector = self.createVector(weight, vector)

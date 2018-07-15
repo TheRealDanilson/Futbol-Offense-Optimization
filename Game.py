@@ -113,7 +113,7 @@ class Game(object):
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
-        if abs(ballPos[0]) > 10:
+        if abs(ballPos[0]) > 15:
             dX = (ballPos[0] * shift)/7.5
         else:
             dX = 0
