@@ -17,8 +17,6 @@ def randSelect(dct):
     randNumber = uniform(0, 1)
     for key in temp:
         p = temp[key]
-        print(randNumber)
-        print(p)
         if randNumber <= p:
             return key
         randNumber -= p
@@ -158,7 +156,6 @@ class Player(object):
         self.ball.shoot(direction)
         self.removePossession()
         self.justShot = True
-        print("test")
         #sleep(3)
         
         
@@ -205,23 +202,17 @@ class Player(object):
                 m = self.game.nearestOpponent(teammate)[1]
                 p = self.game.nearestOpponentToLine(type(self),\
                     self.getPosition(), teammate.getPosition())[1]
-                print("M is: " + str(m))
-                print("P is: " + str(p))
-                print("U is: " + str(u))
                 try:
                     #z = m*p/u**2
                     z = p*(m - u + 10)/pass_factor
                     #z = p/u
                     #z = u**2/(m*p)
-                    print('Z is: ' + str(z))
                     if z > 0:
                         o = expcdf((z),.5)
                     else:
                         o = 0
                 except:
-                    print('Set o to 0')
                     o = 0
-                print('O is: ' + str(o))
                 openness[teammate] = o
         return openness
         
@@ -249,11 +240,8 @@ class Player(object):
         #probabilities[self] = 1 - P/((len(team) - 1)**2)
         probabilities[self] = 0
         #Debugging
-        print(team)
-        print(list(probabilities.values()))
         #a = choices(team, weights=list(probabilities.values()), k=1)[0]
         a = randSelect(probabilities)
-        print(a is self)
         return a
         
         
@@ -299,7 +287,6 @@ class Player(object):
         Sets the player input's attribute receiving to True and passes the ball
         to the input player's position
         """
-        print("passTest")
         if self is not player:
             player.setToReceive()
             self.shoot(player.getPosition())
@@ -542,8 +529,6 @@ class Offender(Player):
         #     weight = 20
         #     return self.createVector(weight, direction)
         elif objective is Objectives.RANDOM:
-            print(self.randomVector)
-            print(self.randomCount)
             if self.randomCount > 200:
                 vector = (uniform(-1,1),uniform(-1,1))
                 weight = 100
