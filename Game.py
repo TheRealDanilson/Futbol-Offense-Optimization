@@ -46,6 +46,9 @@ class Game(object):
         return ball
     
     
+    # def passPlayers(self,player):
+    #     player.setPlayers(self.players)
+    
     def createPlayer(self, position, bounds):
         """
         position  - 2 element list with x in first entry and y in second
@@ -285,6 +288,7 @@ class Game(object):
         self.ball.move()
         shooter = self.ball.getShooter()
         for player in self.players:
+            player.setPlayers(self.players)
             player.update()
             player.move()
             distBall = self.playerDistBall(player)

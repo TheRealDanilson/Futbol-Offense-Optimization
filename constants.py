@@ -21,3 +21,4 @@ class Objectives(Enum):
     ZONE_CENTER = auto()
     Shift = auto()
     RANDOM = auto()
+    OFF_SIDES = auto()

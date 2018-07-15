@@ -75,6 +75,7 @@ class Player(object):
         self.keeping = 0
         self.randomCount = 0
         self.randomVector = [1,1]
+        self.players = []
         
     # def getRandonVector(self):
     #     return self.randomVector
@@ -87,6 +88,8 @@ class Player(object):
     # 
     # def setRandom(self, integer):
     #     self.random = integer
+    def setPlayers(self,playerlist):
+        self.players = playerlist
         
     def getPosition(self):
         """
@@ -552,8 +555,19 @@ class Offender(Player):
             else:
                 self.randomCount += 1
                 return(self.randomVector)
+        elif objective is Objectives.OFF_SIDES:
+            defendMinY = float('inf')
+            for member in self.players:
+                if isinstance(member, Defender):
+                    memberY = member.getPosition()[1]
+                    if memberY < defendMinY:
+                        defendMinY = memberY
+            if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
+                weight = 100
+                vector = [0, weight]
+                return(vector)
+            
         return (0, 0)
-
 
 class Defender(Player):
     """
