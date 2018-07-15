@@ -8,6 +8,8 @@ from Game import Game
 
 class Data:
     """
+    I made everything in this file assuming that all data collected 
+    
     ballDist        Total units of distance that the ball has traveled.
     ballDistAlone   Total units of distance the ball has traveled while not
                     being possessed by a player.
@@ -26,9 +28,11 @@ class Data:
                     possession for each offender.
     whoTimeHeld     List of total number of timesteps the ball has been in
                     possession for each offender.
-    wins            Number of wins for the offending team.
-    losses          Number of losses for the offending team.
+    Wins            Number of wins for the offending team.
+    Losses          Number of losses for the offending team.
+    Passes          Number of passes made by the offending team.
     whoIntercepts   List of each defender's intercepts.
+    whoRecieves     Dictionary of each Offender's number of recieves.
     """
     
     def __init__(self,game):
@@ -52,12 +56,22 @@ class Data:
         self.Wins = 0
         self.Losses = 0
         
-        # Past time-step helper
-        self.oldPossession = self.game.players[1]
-        
-        self.whoIntercepts = []
-        self.whoPasses = []
+        self.whoRecieves = {}
+        for i in self.offenders:
+            self.whoRecieves[i] = 0
+        self.whereRecieves = {}
+        for i in self.offenders:
+            self.whereRecieves[i] = []
+        self.whoIntercepts = {}
+        for i in self.defenders:
+            self.whoIntercepts[i] = []
+        self.whereIntercepts = {}
+        for i in self.defenders:
+            self.whereIntercepts[i] = []
         self.Passes = 0
+        
+        # Past time-step helper
+        self.whohadBall = self.game.players[1]
 
 
     #-----------
@@ -71,106 +85,95 @@ class Data:
         """
         print(self.ballDist)
         return self.ballDist
-    
     def get_ballDistAlone(self):
         """
         Float, total ball distance traveled without a possessor.
         """
         print(self.ballDistAlone)
         return self.ballDistAlone
-    
     def get_ballDistHeld(self):
         """
         Float, total ball distance traveled with a possessor.
         """
         print(self.ballDistHeld)
         return self.ballDistHeld
-    
     def get_ballTimeAlone(self):
         """
         Int, total ball time without a possessor.
         """
         print(self.ballTimeAlone)
         return self.ballTimeAlone
-    
     def get_ballTimeHeld(self):
         """
         Int, total ball time with a possessor.
         """
         print(self.ballTimeHeld)
         return self.ballTimeHeld
-    
     def get_whoDist(self):
         """
         List of distances traveled, in order of players.
         """
         print(self.whoDist)
         return self.whoDist
-    
     def get_whoDistAlone(self):
         """
         List of distances traveled by offenders without the ball.
         """
         print(self.whoDistAlone)
         return self.whoDistAlone
-    
     def get_whoDistHeld(self):
         """
         List of distances traveled by offenders with the ball.
         """
         print(self.whoDistHeld)
         return self.whoDistHeld
-    
     def get_whoTimeAlone(self):
         """
         List of each offender's time without the ball.
         """
         print(self.whoTimeAlone)
         return self.whoTimeAlone
-    
     def get_whoTimeHeld(self):
         """
         List of each offender's time with the ball.
         """
         print(self.whoTimeHeld)
         return self.whoTimeHeld
-    
     def get_WinLoss(self):
         """
-        Tuple of ints, wins to losses.
+        List of ints, wins to losses.
         """
-        tup = (self.Wins, self.Losses)
-        print(tup)
-        return tup
-    
+        wl = [self.Wins, self.Losses]
+        print(wl)
+        return wl
     def get_Winrate(self):
         """
         Float, percent wins.
         """
-        if self.Losses != 0:
+        try:
             print((self.Wins/self.Losses)*100)
             return (self.Wins/self.Losses)*100
-
+        except ZeroDivisionError:
+            print('Zero Division -- Undefeated')
     def get_whoIntercepts(self):
         """
         List of each Defender's number of intercepts.
         """
         print(self.whoIntercepts)
         return self.whoIntercepts
-
     def get_Passes(self):
         """
         Int, number of passes overall.
         """
         print(self.Passes)
         return self.Passes
-
     def get_avgPassLength(self):
         """
         Float, average pass length.
         """
         print(self.get_ballDistAlone()/self.get_Passes())
         return self.get_ballDistAlone()/self.get_Passes()
+
 
     #-----------
     # While-Loop Methods
@@ -274,37 +277,35 @@ class Data:
             self.whoTimeAlone = [sum(x) for x in zip(timeAlone, self.whoTimeAlone)]
 
 
-    def WinLoss(self):
+    def handle_WinLoss(self):
         """
         Records a win or a loss for the offending team. Only intercepts count
-        as losses. This function deals with whoIntercepts as well.
+        as losses. This function handles interceptions as well.
         
         Parameter game: Game object
         """
         intercepts = []
         
         for i in self.defenders:
-            if i.hasBall() == True:
+            if i.hasBall() and not self.whohadBall.hasBall():
                 self.Losses += 1
-                intercepts.append(1)
-            else:
-                intercepts.append(0)
+                self.whoIntercepts[i] += 1
+                self.whereIntercepts[i] += [tuple(i.getPosition())]
+                self.whohadBall = i
         
-        if len(self.whoIntercepts) == 0:
-            self.whoIntercepts += intercepts
-        else:
-            self.whoIntercepts = [sum(x) for x in zip(intercepts, self.whoIntercepts)]
-        
-        if self.game.ball.isGoal() == True: # Unrelated to above. This is for wins.
+        if self.game.ball.isGoal(): # Unrelated to above. This is for wins.
             self.Wins += 1 
 
 
     def handle_Passes(self):
         """
-        Record number of passes. Does not count interceptions or goal shots.
+        Handles data regarding passing interactions.
         """
         
-        if (self.oldPossession == None) and isinstance(self.game.ball.getPossession, type(self.offenders[0])):
-            self.Passes += 1
-        
-        self.oldPossession = self.game.ball.getPossession()
+        for i in self.offenders:
+            if i.hasBall() and not self.whohadBall.hasBall():
+                self.Passes += 1
+                self.whoRecieves[i] += 1
+                self.whereRecieves[i] += [tuple(i.getPosition())]
+                self.whohadBall = i
+    
