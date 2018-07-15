@@ -246,8 +246,8 @@ class Player(object):
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
-        #probabilities[self] = 1 - P/((len(team) - 1)**2)
-        probabilities[self] = 0
+        probabilities[self] = 1 - P/len(team)
+        #probabilities[self] = 0
         #Debugging
         print(team)
         print(list(probabilities.values()))
