@@ -89,9 +89,13 @@ class Ball(object):
         if self.possession is not None:
             self.velocity = self.possession.getVelocity()
         else:
-            
-            self.velocity[0] = self.velocity[0]*dcel
-            self.velocity[1] = self.velocity[1]*dcel
+            try:
+                speed = (self.velocity[0]**2 + self.velocity[1]**2)**(0.5)
+                accel = self.velocity[0]*dcel/speed, self.velocity[1]*dcel/speed
+                self.velocity[0] = self.velocity[0] + accel[0]
+                self.velocity[1] = self.velocity[1] + accel[1]
+            except:
+                pass
         
         
         

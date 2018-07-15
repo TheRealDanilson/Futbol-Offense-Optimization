@@ -74,12 +74,10 @@ class Player(object):
         self.receiving = False
         self.justShot = False
         self.oldPosition = position.copy()
-<<<<<<< HEAD
         self.keeping = 0
         self.randomCount = 0
         self.randomVector = [1,1]
-=======
->>>>>>> 23d961fd190525b3a6ae40ef94067355b2c8bb26
+
         
     # def getRandonVector(self):
     #     return self.randomVector
@@ -525,7 +523,6 @@ class Offender(Player):
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
-<<<<<<< HEAD
         # elif objective is Objectives.Shift:
         #     # shift belongs to both offender and defender and shifts there formation to
         #     # the side the ball is on either left,right,up or a combination of them
@@ -557,9 +554,7 @@ class Offender(Player):
             else:
                 self.randomCount += 1
                 return(self.randomVector)
-                
-=======
->>>>>>> 23d961fd190525b3a6ae40ef94067355b2c8bb26
+
         return (0, 0)
 
 
