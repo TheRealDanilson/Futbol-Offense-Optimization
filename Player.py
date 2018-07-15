@@ -259,8 +259,6 @@ class Player(object):
             p = 1.0
         else:
             p = expcdf((5.5 - z),4.3)
-            print("Z is " + str(z))
-            print("P is " + str(p))
         return p
      
     
