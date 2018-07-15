@@ -416,10 +416,10 @@ class Player(object):
         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistBall(self))
         if self.receiving:
              if dist < 2*ZONE_THRESHOLD:
-                 weight = .01
+                 weight = .03
                  finalVector = [weight*direction[0], weight*direction[1]]
              else:
-                 weight = 1
+                 weight = .8
                  finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
@@ -514,7 +514,7 @@ class Offender(Player):
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
                     weight = -(75/(dist + 1))**2
                     if mate is nearestTeammate:
-                        weight *= 2
+                        weight *= 10
                     if self.hasBall():
                         weight *= 10
                     mateVector = self.createVector(weight, direction)
