@@ -237,7 +237,7 @@ class Player(object):
                 probabilities[teammate] = (D[teammate] + OPENNESS*O\
                                            [teammate])/(1 + OPENNESS)
         P = sum(probabilities.values())
-        probabilities[self] = 1 - P/len(team)
+        probabilities[self] = len(team)-P
         #probabilities[self] = 0
         #Debugging
         #a = choices(team, weights=list(probabilities.values()), k=1)[0]
@@ -257,7 +257,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 5:
             p = 1.0
         else:
-            p = expcdf((3.5 - z),.25)/3
+            p = expcdf((3.5 - z),.25)/2
         return p
     
     
@@ -541,7 +541,7 @@ class Offender(Player):
         elif objective is Objectives.RANDOM:
             if self.randomCount > 200:
                 vector = (uniform(-1,1),uniform(-1,1))
-                weight = 100
+                weight = 50
                 self.randomVector = self.createVector(weight, vector)
                 self.randomCount = 0
                 return self.randomVector
@@ -577,7 +577,7 @@ class Defender(Player):
         weight = self.genWeight(objective)
         ballDist = self.game.playerDistBall(self)
         (forget, direction) = self.magnitudeAndDirection(ballDist)
-        if forget <= 3:
+        if forget <= 5:
             weight = 10
             return self.createVector(weight, direction)
         else:
