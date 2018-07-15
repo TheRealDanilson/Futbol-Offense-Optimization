@@ -268,7 +268,8 @@ class Player(object):
         Sets ball attribute to the game's ball instance and the receiving
         attribute to False
         """
-        self.ball = ball
+        if self.ball is None:
+            self.ball = ball
         if ball is not None:
             self.receiving = False
     
@@ -304,6 +305,8 @@ class Player(object):
                 self.shoot(GOAL_POS)      
             else:                       #Decides which Player inst. to pass to
                 player = self.pickPlayer()
+                if player is self:
+                    self.keeping = int(uniform(50, 100))
                 self.passBall(player)    
     
     
@@ -403,7 +406,11 @@ class Player(object):
         First decides a players action (shoot, pass, keep) then updates the
         player's velocity if they are not receiving the ball.
         """
-        self.shootPassKeep()
+        if self.keeping > 0:
+            self.keeping -= 1
+        else:
+            self.shootPassKeep()
+
         finalVector = self.velocity
         if self.receiving:
             ballDist = self.game.playerDistBall(self)
