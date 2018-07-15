@@ -151,8 +151,12 @@ class Player(object):
         """
         dX = position[0] - self.position[0]
         dY = position[1] - self.position[1]
-        magnitude = (dX**2 + dY**2)**(0.5)
-        direction = (dX/magnitude, dY/magnitude)
+        if position[1] == 0 and abs(position[0]) < 6:
+            magnitude = .5*(dX**2 + dY**2)**(0.5)
+            direction = (dX/magnitude, dY/magnitude)
+        else:
+            magnitude = (dX**2 + dY**2)**(0.5)
+            direction = (dX/magnitude, dY/magnitude)
         self.ball.shoot(direction)
         self.removePossession()
         self.justShot = True
