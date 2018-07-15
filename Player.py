@@ -149,12 +149,14 @@ class Player(object):
         position    position of the player instance
         Removes possession from player and shoots the ball to center of goal
         """
-        dX = position[0] - self.position[0]
-        dY = position[1] - self.position[1]
-        if position[1] == 0 and abs(position[0]) < 6:
+        if position[1] == 0 and abs(position[0]) < 4:
+            dX = position[0] - self.position[0] + uniform(-2,2)
+            dY = position[1] - self.position[1]
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             direction = (dX/magnitude, dY/magnitude)
         else:
+            dX = position[0] - self.position[0]
+            dY = position[1] - self.position[1]
             magnitude = (dX**2 + dY**2)**(0.5)
             direction = (dX/magnitude, dY/magnitude)
         self.ball.shoot(direction)
