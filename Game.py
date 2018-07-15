@@ -289,11 +289,15 @@ class Game(object):
             player.move()
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
-            if self.ball.getPossession() is None and player is not shooter \
-                    and dist <= RECEIVE_THRESHOLD:
-                player.receive(self.ball)
-                print(player is shooter)
-                self.ball.setPossession(player)
+            if self.ball.getPossession() is None and player is not shooter:
+                    if isinstance(player, Defender) and dist <= 3*RECEIVE_THRESHOLD:
+                        player.receive(self.ball)
+                        print(player is shooter)
+                        self.ball.setPossession(player)
+                    elif isinstance(player, Offender) and dist <= RECEIVE_THRESHOLD:
+                        player.receive(self.ball)
+                        print(player is shooter)
+                        self.ball.setPossession(player)
             elif self.ball.getPossession() is not None:
                 player.receive(None)
         #self.printFieldNested()
