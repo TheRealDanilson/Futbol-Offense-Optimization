@@ -252,13 +252,15 @@ class Player(object):
         """
         x = self.position[0]
         y = self.position[1]
-        z = (x**2)/150 +(y**2)/300;
-        if z >= 4.5 or (x**2)/y > 50:
+        z = (x**2)/300 +(y**2)/150;
+        if z >= 5.5 or (x**2)/y > 50:
             p = 0.0
         elif (x**2 + y**2)**(0.5) <= 10:
             p = 1.0
         else:
-            p = expcdf((4.5 - z),4.3)/1.5
+            p = expcdf((5.5 - z),4.3)
+            print("Z is " + str(z))
+            print("P is " + str(p))
         return p
      
     
@@ -416,10 +418,10 @@ class Player(object):
         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistBall(self))
         if self.receiving:
              if dist < 2*ZONE_THRESHOLD:
-                 weight = .03
+                 weight = .02
                  finalVector = [weight*direction[0], weight*direction[1]]
              else:
-                 weight = .8
+                 weight = .9
                  finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
@@ -469,7 +471,10 @@ class Offender(Player):
         weight = self.genWeight(objective)
         if objective is Objectives.GOAL:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-            weight = (dist/10)**2
+            if dist > 20:
+                weight = (dist/10)**2
+            else:
+                weight = 0
             return self.createVector(weight, direction)
         if objective is Objectives.ZONE_CENTER:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
@@ -540,7 +545,7 @@ class Offender(Player):
         #     weight = 20
         #     return self.createVector(weight, direction)
         elif objective is Objectives.RANDOM:
-            if self.randomCount > 100:
+            if self.randomCount > RANDOM_TIME:
                 vector = (uniform(-1,1),uniform(-1,1))
                 weight = 50
                 self.randomVector = self.createVector(weight, vector)
