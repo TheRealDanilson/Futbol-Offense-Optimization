@@ -77,7 +77,10 @@ class Player(object):
         self.keeping = 0
         self.randomCount = 0
         self.randomVector = [1,1]
+<<<<<<< HEAD
 
+=======
+>>>>>>> c70441674a245801221aa80500b6222b507fb134
         
     # def getRandonVector(self):
     #     return self.randomVector
@@ -554,7 +557,10 @@ class Offender(Player):
             else:
                 self.randomCount += 1
                 return(self.randomVector)
+<<<<<<< HEAD
 
+=======
+>>>>>>> c70441674a245801221aa80500b6222b507fb134
         return (0, 0)
 
 
