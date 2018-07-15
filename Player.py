@@ -412,11 +412,14 @@ class Player(object):
             self.shootPassKeep()
 
         finalVector = self.velocity
+        (dist, direction) = self.magnitudeAndDirection(self.game.playerDistBall(self))
         if self.receiving:
-            ballDist = self.game.playerDistBall(self)
-            (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 10
-            finalVector = [weight*direction[0], weight*direction[1]]
+             if dist < 2*ZONE_THRESHOLD:
+                 weight = .01
+                 finalVector = [weight*direction[0], weight*direction[1]]
+             else:
+                 weight = 1
+                 finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
                 vector = self.calcVector(objective)
