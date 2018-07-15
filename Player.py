@@ -153,7 +153,7 @@ class Player(object):
         Removes possession from player and shoots the ball to center of goal
         """
         if position[1] == 0 and abs(position[0]) < 4:
-            dX = position[0] - self.position[0] + uniform(-2,2)
+            dX = position[0] - self.position[0] + uniform(-4,4)**2
             dY = position[1] - self.position[1]
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             direction = (dX/magnitude, dY/magnitude)
