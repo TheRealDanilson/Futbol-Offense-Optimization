@@ -214,7 +214,7 @@ class Player(object):
                     self.getPosition(), teammate.getPosition())[1]
                 try:
                     #z = m*p/u**2
-                    z = p*(2*m - u + 20)/pass_factor
+                    z = p*(m - u + 20)/pass_factor
                     #z = p/u
                     #z = u**2/(m*p)
                     if z > 0:
@@ -267,7 +267,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 10:
             p = 1.0
         else:
-            p = expcdf((5.5 - z),4.3)
+            p = expcdf((5.5 - z),4.3)/3
         return p
      
     
@@ -476,99 +476,110 @@ class Offender(Player):
         between a player and the objective.  Entry 0 is x and entry 1 is y.
         """
         weight = self.genWeight(objective)
-        if objective is Objectives.GOAL:
-            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-            weight = (dist/10)**2
-            return self.createVector(weight, direction)
-        if objective is Objectives.ZONE_CENTER:
-            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-            # if dist < ZONE_THRESHOLD/2:
-            #    weight = 0
-            # else:
-            weight = dist**2
-            return self.createVector(weight, direction)
-        elif objective is Objectives.OPPONENTS:
-            #opponentTeam = self.game.playerOpponentTeam(self)
-            nearestOpponent = self.game.nearestOpponent(self)[0]
-            (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, nearestOpponent))
-            weight = -20/(dist + 1)
-            if self.hasBall():
-                weight *= 10
-            return (direction[0] * weight, direction[1] * weight)
-            # for opponent in opponentTeam:
-            #         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
-            #         weight = -10/(dist + 1)
-            #         if opponent is nearestOpponent:
-            #             weight *= 2
-            #         if self.hasBall():
-            #             weight *= 10
-            #         mateVector = self.createVector(weight, direction)
-            #         self.addVectors(vector, mateVector)
-            # return (vector[0], vector[1])
-        elif objective is Objectives.BALL:
+        if self.game.getBlocked is True:
             ballDist = self.game.playerDistBall(self)
-            (dist, direction) = self.magnitudeAndDirection(ballDist)
-            weight = 15/(dist + 1)
-            if dist <= 2*ZONE_THRESHOLD:
-                weight = 15 
-            if self.receiving:
-                weight = 10 
-        elif objective is Objectives.TEAMMATES:
-            Team = self.game.playerTeam(self)
-            vector = [0, 0]
-            nearestTeammate = self.game.nearestTeammate(self)[0]
-            for mate in Team:
-                    (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                    weight = -1*(75/(dist + 1))**2
-                    if mate is nearestTeammate:
-                        weight *= 10
-                    if self.hasBall():
-                        weight *= 20
-                    mateVector = self.createVector(weight, direction)
-                    self.addVectors(vector, mateVector)
-            return (vector[0], vector[1])
-        # elif objective is Objectives.Shift:
-        #     # shift belongs to both offender and defender and shifts there formation to
-        #     # the side the ball is on either left,right,up or a combination of them
-        #     ball = self.getPosition()
-        #     direction = ball
-        #     if ball[0] > 20:
-        #         direction[0] = 2
-        #     elif ball[0] < -20:
-        #         direction[0] = 2
-        #     else:
-        #          direction[0] = 0
-        #     if ball[1] > 30:
-        #         direction[1] = 2
-        #     elif ball[1] < 20:
-        #         direction[1] = 0
-        #     else:
-        #         direction[1] = 0
-        #     weight = 20
-        #     return self.createVector(weight, direction)
-        elif objective is Objectives.RANDOM:
-            if self.randomCount > RANDOM_TIME:
-                vector = (uniform(-1,1),uniform(-1,1))
-                weight = 50
-                self.randomVector = self.createVector(weight, vector)
-                self.randomCount = 0
-                return self.randomVector
-            else:
-                self.randomCount += 1
-                return(self.randomVector)
-        elif objective is Objectives.OFF_SIDES:
-            defendMinY = float('inf')
-            for member in self.players:
-                if isinstance(member, Defender):
-                    memberY = member.getPosition()[1]
-                    if memberY < defendMinY:
-                        defendMinY = memberY
-            if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
-                weight = 100
-                vector = [0, weight]
-                return(vector)
-            
-        return (0, 0)
+            (forget, direction) = self.magnitudeAndDirection(ballDist)
+            if forget <= 10:
+                recieving = True
+                weight = 1000
+                return self.createVector(weight, direction)
+            if self.hasBall():
+                Blocked = False
+        else:
+            if objective is Objectives.GOAL:
+                (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
+                weight = (dist)**2
+                direction = (0,0)
+                return self.createVector(weight, direction)
+            if objective is Objectives.ZONE_CENTER:
+                (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
+                # if dist < ZONE_THRESHOLD/2:
+                #    weight = 0
+                # else:
+                weight = dist**3
+                return self.createVector(weight, direction)
+            elif objective is Objectives.OPPONENTS:
+                #opponentTeam = self.game.playerOpponentTeam(self)
+                nearestOpponent = self.game.nearestOpponent(self)[0]
+                (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, nearestOpponent))
+                weight = -20/(dist + 1)
+                if self.hasBall():
+                    weight *= 10
+                return (direction[0] * weight, direction[1] * weight)
+                # for opponent in opponentTeam:
+                #         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
+                #         weight = -10/(dist + 1)
+                #         if opponent is nearestOpponent:
+                #             weight *= 2
+                #         if self.hasBall():
+                #             weight *= 10
+                #         mateVector = self.createVector(weight, direction)
+                #         self.addVectors(vector, mateVector)
+                # return (vector[0], vector[1])
+            elif objective is Objectives.BALL:
+                ballDist = self.game.playerDistBall(self)
+                (dist, direction) = self.magnitudeAndDirection(ballDist)
+                weight = 15/(dist + 1)
+                if dist <= 2*ZONE_THRESHOLD:
+                    weight = 15 
+                if self.receiving:
+                    weight = 10 
+            elif objective is Objectives.TEAMMATES:
+                Team = self.game.playerTeam(self)
+                vector = [0, 0]
+                nearestTeammate = self.game.nearestTeammate(self)[0]
+                for mate in Team:
+                        (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
+                        weight = -1*(75/(dist + 1))**2
+                        if mate is nearestTeammate:
+                            weight *= 20
+                        if self.hasBall():
+                            weight *= 20
+                        mateVector = self.createVector(weight, direction)
+                        self.addVectors(vector, mateVector)
+                return (vector[0], vector[1])
+            # elif objective is Objectives.Shift:
+            #     # shift belongs to both offender and defender and shifts there formation to
+            #     # the side the ball is on either left,right,up or a combination of them
+            #     ball = self.getPosition()
+            #     direction = ball
+            #     if ball[0] > 20:
+            #         direction[0] = 2
+            #     elif ball[0] < -20:
+            #         direction[0] = 2
+            #     else:
+            #          direction[0] = 0
+            #     if ball[1] > 30:
+            #         direction[1] = 2
+            #     elif ball[1] < 20:
+            #         direction[1] = 0
+            #     else:
+            #         direction[1] = 0
+            #     weight = 20
+            #     return self.createVector(weight, direction)
+            elif objective is Objectives.RANDOM:
+                if self.randomCount > RANDOM_TIME:
+                    vector = (uniform(-1,1),uniform(-1,1))
+                    weight = 50
+                    self.randomVector = self.createVector(weight, vector)
+                    self.randomCount = 0
+                    return self.randomVector
+                else:
+                    self.randomCount += 1
+                    return(self.randomVector)
+            elif objective is Objectives.OFF_SIDES:
+                defendMinY = float('inf')
+                for member in self.players:
+                    if isinstance(member, Defender):
+                        memberY = member.getPosition()[1]
+                        if memberY < defendMinY:
+                            defendMinY = memberY
+                if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
+                    weight = 100
+                    vector = [0, weight]
+                    return(vector)
+                
+            return (0, 0)
 
 class Defender(Player):
     """
@@ -583,7 +594,8 @@ class Defender(Player):
         super().__init__(position, game, bounds)
 
 
-    #def shootPassKeep(self):
+    def shootPassKeep(self):
+        pass
         # rand = uniform(0,100)
         # if self.hasBall():
         #     if self.ball.getSpeed() > 3*MAX_SPEED:
