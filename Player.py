@@ -153,7 +153,7 @@ class Player(object):
         Removes possession from player and shoots the ball to center of goal
         """
         if position[1] == 0 and abs(position[0]) < 4:
-            dX = position[0] - self.position[0] + uniform(-4,4)**2
+            dX = position[0] - self.position[0] + (self.position[0]/7.5 + uniform(-6,6))
             dY = position[1] - self.position[1]
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             direction = (dX/magnitude, dY/magnitude)
@@ -425,7 +425,7 @@ class Player(object):
         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistBall(self))
         if self.receiving:
              if dist < 2*ZONE_THRESHOLD:
-                 weight = .02
+                 weight = .01
                  finalVector = [weight*direction[0], weight*direction[1]]
              else:
                  weight = .9
@@ -478,7 +478,7 @@ class Offender(Player):
         weight = self.genWeight(objective)
         if objective is Objectives.GOAL:
             (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-            if dist > 20:
+            if dist > 10:
                 weight = (dist/10)**2
             else:
                 weight = 0
@@ -511,12 +511,9 @@ class Offender(Player):
         elif objective is Objectives.BALL:
             ballDist = self.game.playerDistBall(self)
             (dist, direction) = self.magnitudeAndDirection(ballDist)
-            #weight = 15/(dist + 1)
-            # if dist <= 2*ZONE_THRESHOLD:
-            #     weight = 15 
-            # if self.receiving:
-            #     weight = 2
-            #     #weight = 10
+            weight = 15
+            if dist <= ZONE_THRESHOLD:
+                weight = -100 
             return self.createVector(weight, direction)
         elif objective is Objectives.TEAMMATES:
             Team = self.game.playerTeam(self)
@@ -524,11 +521,11 @@ class Offender(Player):
             nearestTeammate = self.game.nearestTeammate(self)[0]
             for mate in Team:
                     (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                    weight = -(75/(dist + 1))**2
+                    weight = -1*(75/(dist + 1))**2
                     if mate is nearestTeammate:
                         weight *= 10
                     if self.hasBall():
-                        weight *= 10
+                        weight *= 20
                     mateVector = self.createVector(weight, direction)
                     self.addVectors(vector, mateVector)
             return (vector[0], vector[1])
@@ -588,8 +585,16 @@ class Defender(Player):
         super().__init__(position, game, bounds)
 
 
-    def shootPassKeep(self):
-        pass
+    #def shootPassKeep(self):
+        # rand = uniform(0,100)
+        # if self.hasBall():
+        #     if self.ball.getSpeed() > 3*MAX_SPEED:
+        #         self.shoot(uniform(-35,35),uniform(0,60))
+        #     elif self.ball.getSpeed() >= 2*MAX_SPEED and rand >= 50:
+        #         self.shoot(uniform(-35,35),uniform(0,60))
+        #     else:
+        #         self.keeping = int(uniform(50, 150))
+            
     
         
     def calcVector(self, objective):
@@ -641,11 +646,11 @@ class Defender(Player):
                 nearestTeammate = self.game.nearestTeammate(self)[0]
                 for mate in Team:
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                        weight = -(30/(dist + 1))**2
+                        weight = -(75/(dist + 1))**2
                         if mate is nearestTeammate:
-                            weight *= 2
-                        if self.hasBall():
                             weight *= 10
+                        if self.hasBall():
+                            weight *= 20
                         mateVector = self.createVector(weight, direction)
                         self.addVectors(vector, mateVector)
                 return (vector[0], vector[1])   

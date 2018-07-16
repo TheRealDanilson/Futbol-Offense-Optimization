@@ -30,6 +30,9 @@ class Data:
     Passes          Number of passes made by the offending team.
     whoIntercepts   List of each defender's intercepts.
     whoRecieves     Dictionary of each Offender's number of recieves.
+    whereIntercepts
+    whereRecieves
+    whohadBall      Last PLAYER that had the ball.
     """
     
     def __init__(self,game):
@@ -61,7 +64,7 @@ class Data:
             self.whereRecieves[i] = []
         self.whoIntercepts = {}
         for i in self.defenders:
-            self.whoIntercepts[i] = []
+            self.whoIntercepts[i] = 0
         self.whereIntercepts = {}
         for i in self.defenders:
             self.whereIntercepts[i] = []
@@ -105,36 +108,38 @@ class Data:
         """
         List of distances traveled, in order of players.
         """
-        return self.whoDist
+        return self.whoDist.copy()
     def get_whoDistAlone(self):
         """
         List of distances traveled by offenders without the ball.
         """
-        return self.whoDistAlone
+        return self.whoDistAlone.copy()
     def get_whoDistHeld(self):
         """
         List of distances traveled by offenders with the ball.
         """
-        return self.whoDistHeld
+        return self.whoDistHeld.copy()
     def get_whoTimeAlone(self):
         """
         List of each offender's time without the ball.
         """
-        return self.whoTimeAlone
+        return self.whoTimeAlone.copy()
     def get_whoTimeHeld(self):
         """
         List of each offender's time with the ball.
         """
-        return self.whoTimeHeld
+        return self.whoTimeHeld.copy()
     def get_WinLoss(self):
         """
         List of ints, wins to losses.
         """
         wl = [self.Wins, self.Losses]
-        return wl
+        return wl.copy()
     def get_Winrate(self):
         """
         Float, percent wins.
+        
+        Winrate is not an attribute.
         """
         try:
             return (self.Wins/self.Losses)*100
@@ -144,17 +149,12 @@ class Data:
         """
         List of each Defender's number of intercepts.
         """
-        return self.whoIntercepts
+        return self.whoIntercepts.copy()
     def get_Passes(self):
         """
         Int, number of passes overall.
         """
         return self.Passes
-    def get_avgPassLength(self):
-        """
-        Float, average pass length.
-        """
-        return self.get_ballDistAlone()/self.get_Passes()
 
 
     #-----------
@@ -292,6 +292,3 @@ class Data:
                 self.whoRecieves[i] += 1
                 self.whereRecieves[i] += [tuple(i.getPosition())]
                 self.whohadBall = i
-    
-    
-    
