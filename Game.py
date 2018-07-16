@@ -120,7 +120,10 @@ class Game(object):
             dX = (ballPos[0] * shift)/7.5
         else:
             dX = 0
-        dY = (ballPos[1] - FIELD_BOUNDS[3]/1.5) * shift/15
+        if abs(ballPos[1] - FIELD_BOUNDS[3]/2) > 15:
+            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/15
+        else:
+            dY = 0
         # if ballPos[0] > 10:
         #     dX = shift
         # elif ballPos[0] < -10:
