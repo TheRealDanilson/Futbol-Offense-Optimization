@@ -21,6 +21,7 @@ class Game(object):
         self.readFormation(offenseFormation)
         self.readFormation(defenseFormation)
         self.createBall(self.players[1])
+        self.blocked = False
         
         
     def readFormation(self, filename):
@@ -50,7 +51,7 @@ class Game(object):
     
 
     def getBlocked(self):
-        return self.Blocked
+        return self.blocked
     
     
     # def passPlayers(self,player):
@@ -302,7 +303,7 @@ class Game(object):
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
             if self.ball.getPossession() is None and player is not shooter:
-                    if isinstance(player, Defender) and dist <= 3*RECEIVE_THRESHOLD and self.getBlocked is False:
+                    if isinstance(player, Defender) and dist <= 3*RECEIVE_THRESHOLD:
                         rand = uniform(0,100)
                         if self.ball.getSpeed() > 1.9*MAX_SPEED:
                             x = uniform(-1,1)
@@ -310,29 +311,28 @@ class Game(object):
                             magnitude = (x**2  + y**2)**.5
                             direction = (x/magnitude,y/magnitude)
                             self.ball.shoot(direction)
-                            self.Blocked = True
+                            self.blocked = True
                         elif self.ball.getSpeed() >= .5*MAX_SPEED and rand > 50:
                             x = uniform(-1,1)
                             y = uniform(-1,1)
                             magnitude = (x**2  + y**2)**.5
                             direction = (x/magnitude,y/magnitude)
                             self.ball.shoot(direction)
-                            self.Blocked = True
+                            self.blocked = True
                         else:
                             player.receive(self.ball)
                             print(player is shooter)
                             self.ball.setPossession(player)
-                            self.Blocked = False
+                            self.blocked = False
                     elif isinstance(player, Offender) and dist <= RECEIVE_THRESHOLD:
                         player.receive(self.ball)
                         print(player is shooter)
                         self.ball.setPossession(player)
-                        self.Blocked = False
-                    elif dist <= 3*RECEIVE_THRESHOLD and self.getBlocked is True:
+                    elif dist <= 3*RECEIVE_THRESHOLD and self.getBlocked():
                         player.receive(self.ball)
                         print(player is shooter)
                         self.ball.setPossession(player)
-                        self.Blocked = False 
+                        self.blocked = False 
             elif self.ball.getPossession() is not None:
                 player.receive(None)
         self.ball.update()

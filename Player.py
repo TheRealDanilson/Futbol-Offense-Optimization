@@ -476,15 +476,13 @@ class Offender(Player):
         between a player and the objective.  Entry 0 is x and entry 1 is y.
         """
         weight = self.genWeight(objective)
-        if self.game.getBlocked is True:
+        if self.game.getBlocked():
             ballDist = self.game.playerDistBall(self)
             (forget, direction) = self.magnitudeAndDirection(ballDist)
             if forget <= 10:
-                recieving = True
                 weight = 1000
                 return self.createVector(weight, direction)
-            if self.hasBall():
-                Blocked = False
+
         else:
             if objective is Objectives.GOAL:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
@@ -579,7 +577,7 @@ class Offender(Player):
                     vector = [0, weight]
                     return(vector)
                 
-            return (0, 0)
+        return (0, 0)
 
 class Defender(Player):
     """
