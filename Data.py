@@ -4,9 +4,7 @@
 # moved by defenders.
 
 class Data:
-    """
-    I made everything in this file assuming that all data collected 
-    
+    """ 
     ballDist        Total units of distance that the ball has traveled.
     ballDistAlone   Total units of distance the ball has traveled while not
                     being possessed by a player.
@@ -16,21 +14,21 @@ class Data:
                     a player.
     ballTimeHeld    Total number of timesteps the ball has been possessed by a
                     player.
-    whoDist         List of total units of distances moved by each player.
-    whoDistAlone    List of total units of distances moved by each offender
+    whoDist         Dict of total units of distances moved by each player.
+    whoDistAlone    Dict of total units of distances moved by each offender
                     while not possessing the ball.
-    whoDistHeld     List of total units of distances moved by each offender
+    whoDistHeld     Dict of total units of distances moved by each offender
                     while possessing the ball.
-    whoTimeAlone    List of total number of timesteps the ball has not been in
+    whoTimeAlone    Dict of total number of timesteps the ball has not been in
                     possession for each offender.
-    whoTimeHeld     List of total number of timesteps the ball has been in
+    whoTimeHeld     Dict of total number of timesteps the ball has been in
                     possession for each offender.
     Wins            Number of wins for the offending team.
     Losses          Number of losses for the offending team.
     Passes          Number of passes made by the offending team.
     whoIntercepts   List of each defender's intercepts.
-    whoRecieves     Dictionary of each Offender's number of recieves.
-    whereIntercepts
+    whoRecieves     Dict of each offender's number of recieves.
+    whereIntercepts 
     whereRecieves
     whohadBall      Last PLAYER that had the ball -- Excludes None
     pastBall        Last possessor of the ball -- Includes None
