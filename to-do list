@@ -1,6 +1,11 @@
+In Data:
 - Change lists to dictionaries
 - Implement shot recording
 - Clean up comments and specifications
 - Number of decisions to keep
 - Change when (self.whohadBall) updates
 - Change timesteps and distances with the ball to account for the past timestep
+
+In Game/Ball/Player:
+- Termination conditions
+- Tweak weights
