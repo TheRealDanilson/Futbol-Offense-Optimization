@@ -79,7 +79,7 @@ class Data:
             self.whoRecieves[i] = 0
             self.whereRecieves[i] = []
         for i in self.defenders:
-            self.whoIntercepts = 0
+            self.whoIntercepts[i] = 0
             self.whereIntercepts = []
 
         # Past Time-Step Helper Attributes
