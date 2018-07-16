@@ -1,6 +1,3 @@
-from Ball import Ball
-from Game import Game
-
 # passes complete (by each player/all), shot from where, time posession
 # (each player/all), which defender intercepted the most, number of decisions
 # to keep (player), no. goals, no. shots, distance moved by offenders, distance
@@ -83,95 +80,80 @@ class Data:
         """
         Float, total ball distance traveled.
         """
-        print(self.ballDist)
         return self.ballDist
     def get_ballDistAlone(self):
         """
         Float, total ball distance traveled without a possessor.
         """
-        print(self.ballDistAlone)
         return self.ballDistAlone
     def get_ballDistHeld(self):
         """
         Float, total ball distance traveled with a possessor.
         """
-        print(self.ballDistHeld)
         return self.ballDistHeld
     def get_ballTimeAlone(self):
         """
         Int, total ball time without a possessor.
         """
-        print(self.ballTimeAlone)
         return self.ballTimeAlone
     def get_ballTimeHeld(self):
         """
         Int, total ball time with a possessor.
         """
-        print(self.ballTimeHeld)
         return self.ballTimeHeld
     def get_whoDist(self):
         """
         List of distances traveled, in order of players.
         """
-        print(self.whoDist)
         return self.whoDist
     def get_whoDistAlone(self):
         """
         List of distances traveled by offenders without the ball.
         """
-        print(self.whoDistAlone)
         return self.whoDistAlone
     def get_whoDistHeld(self):
         """
         List of distances traveled by offenders with the ball.
         """
-        print(self.whoDistHeld)
         return self.whoDistHeld
     def get_whoTimeAlone(self):
         """
         List of each offender's time without the ball.
         """
-        print(self.whoTimeAlone)
         return self.whoTimeAlone
     def get_whoTimeHeld(self):
         """
         List of each offender's time with the ball.
         """
-        print(self.whoTimeHeld)
         return self.whoTimeHeld
     def get_WinLoss(self):
         """
         List of ints, wins to losses.
         """
         wl = [self.Wins, self.Losses]
-        print(wl)
         return wl
     def get_Winrate(self):
         """
         Float, percent wins.
         """
         try:
-            print((self.Wins/self.Losses)*100)
             return (self.Wins/self.Losses)*100
         except ZeroDivisionError:
-            print('Zero Division -- Undefeated')
+            return 100
     def get_whoIntercepts(self):
         """
         List of each Defender's number of intercepts.
         """
-        print(self.whoIntercepts)
         return self.whoIntercepts
     def get_Passes(self):
         """
         Int, number of passes overall.
         """
-        print(self.Passes)
         return self.Passes
     def get_avgPassLength(self):
         """
         Float, average pass length.
         """
-        print(self.get_ballDistAlone()/self.get_Passes())
         return self.get_ballDistAlone()/self.get_Passes()
 
 
