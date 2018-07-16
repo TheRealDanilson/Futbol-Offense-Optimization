@@ -276,7 +276,9 @@ class Data:
                 self.whohadBall = i
         
         if self.game.ball.isGoal(): # Unrelated to above. This is for wins.
-            self.Wins += 1 
+            self.Wins += 1
+        elif self.game.ball.isOutBounds():
+            self.Losses += 1
 
 
     def handle_Passes(self):
@@ -290,4 +292,6 @@ class Data:
                 self.whoRecieves[i] += 1
                 self.whereRecieves[i] += [tuple(i.getPosition())]
                 self.whohadBall = i
+    
+    
     
