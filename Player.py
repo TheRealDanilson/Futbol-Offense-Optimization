@@ -267,7 +267,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 10:
             p = 1.0
         else:
-            p = expcdf((5.5 - z),4.3)/3
+            p = expcdf((5.5 - z),4.3)/2
         return p
      
     
@@ -479,7 +479,7 @@ class Offender(Player):
         if self.game.getBlocked():
             ballDist = self.game.playerDistBall(self)
             (forget, direction) = self.magnitudeAndDirection(ballDist)
-            if forget <= 10:
+            if forget <= 5:
                 weight = 1000
                 return self.createVector(weight, direction)
 

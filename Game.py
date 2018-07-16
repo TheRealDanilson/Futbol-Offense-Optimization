@@ -307,14 +307,14 @@ class Game(object):
                         rand = uniform(0,100)
                         if self.ball.getSpeed() > 1.9*MAX_SPEED:
                             x = uniform(-1,1)
-                            y = uniform(-1,1)
+                            y = uniform(-1,0)
                             magnitude = (x**2  + y**2)**.5
                             direction = (x/magnitude,y/magnitude)
                             self.ball.shoot(direction)
                             self.blocked = True
                         elif self.ball.getSpeed() >= .5*MAX_SPEED and rand > 50:
                             x = uniform(-1,1)
-                            y = uniform(-1,1)
+                            y = uniform(-1,0)
                             magnitude = (x**2  + y**2)**.5
                             direction = (x/magnitude,y/magnitude)
                             self.ball.shoot(direction)
@@ -328,7 +328,7 @@ class Game(object):
                         player.receive(self.ball)
                         print(player is shooter)
                         self.ball.setPossession(player)
-                    elif dist <= 3*RECEIVE_THRESHOLD and self.getBlocked():
+                    elif dist <= 5*RECEIVE_THRESHOLD and self.getBlocked():
                         player.receive(self.ball)
                         print(player is shooter)
                         self.ball.setPossession(player)
