@@ -4,9 +4,7 @@
 # moved by defenders.
 
 class Data:
-    """
-    I made everything in this file assuming that all data collected 
-    
+    """ 
     ballDist        Total units of distance that the ball has traveled.
     ballDistAlone   Total units of distance the ball has traveled while not
                     being possessed by a player.
@@ -16,62 +14,75 @@ class Data:
                     a player.
     ballTimeHeld    Total number of timesteps the ball has been possessed by a
                     player.
-    whoDist         List of total units of distances moved by each player.
-    whoDistAlone    List of total units of distances moved by each offender
+    whoDist         Dict of total units of distances moved by each player.
+    whoDistAlone    Dict of total units of distances moved by each offender
                     while not possessing the ball.
-    whoDistHeld     List of total units of distances moved by each offender
+    whoDistHeld     Dict of total units of distances moved by each offender
                     while possessing the ball.
-    whoTimeAlone    List of total number of timesteps the ball has not been in
+    whoTimeAlone    Dict of total number of timesteps the ball has not been in
                     possession for each offender.
-    whoTimeHeld     List of total number of timesteps the ball has been in
+    whoTimeHeld     Dict of total number of timesteps the ball has been in
                     possession for each offender.
     Wins            Number of wins for the offending team.
     Losses          Number of losses for the offending team.
     Passes          Number of passes made by the offending team.
     whoIntercepts   List of each defender's intercepts.
-    whoRecieves     Dictionary of each Offender's number of recieves.
-    whereIntercepts
+    whoRecieves     Dict of each offender's number of recieves.
+    whereIntercepts 
     whereRecieves
-    whohadBall      Last PLAYER that had the ball.
+    whohadBall      Last PLAYER that had the ball -- Excludes None
+    pastBall        Last possessor of the ball -- Includes None
     """
     
     def __init__(self,game):
         
+        # Initial Initials
         self.game = game
         self.offenders = self.game.players[:len(self.game.players)//2]
         self.defenders = self.game.players[len(self.game.players)//2:]
         
+        # Ball kinematics
         self.ballDist = 0
         self.ballDistAlone = 0
         self.ballDistHeld = 0
         self.ballTimeAlone = 0
         self.ballTimeHeld = 0 
         
-        self.whoDist = []
-        self.whoDistAlone = []
-        self.whoDistHeld = []
-        self.whoTimeAlone = []
-        self.whoTimeHeld = []
+        # Player Kinematics
+        self.whoDist = {}
+        self.whoDistAlone = {}
+        self.whoDistHeld = {}
+        self.whoTimeAlone = {}
+        self.whoTimeHeld = {}
         
+        # Wins and Losses
         self.Wins = 0
         self.Losses = 0
         
+        # Player-Ball Interactions
         self.whoRecieves = {}
-        for i in self.offenders:
-            self.whoRecieves[i] = 0
         self.whereRecieves = {}
-        for i in self.offenders:
-            self.whereRecieves[i] = []
         self.whoIntercepts = {}
-        for i in self.defenders:
-            self.whoIntercepts[i] = 0
         self.whereIntercepts = {}
-        for i in self.defenders:
-            self.whereIntercepts[i] = []
         self.Passes = 0
         
-        # Past time-step helper
+        # For-loops to initialize dictionaries
+        for i in self.game.players:
+            self.whoDist[i] = 0
+        for i in self.offenders:
+            self.whoDistAlone[i] = 0
+            self.whoDistHeld[i] = 0
+            self.whoTimeAlone[i] = 0
+            self.whoTimeHeld[i] = 0
+            self.whoRecieves[i] = 0
+            self.whereRecieves[i] = []
+        for i in self.defenders:
+            self.whoIntercepts[i] = 0
+            self.whereIntercepts = []
+
+        # Past Time-Step Helper Attributes
         self.whohadBall = self.game.players[1]
+        self.pastBall = self.game.players[1]
 
 
     #-----------
@@ -166,8 +177,6 @@ class Data:
         """
         Adds on time and distance traveled by the ball while being possessed by
         a player or not. Also adds on total distance traveled by ball.
-        
-        Parameter game: Game object
         """
         
         x_moved = abs(self.game.ball.getPosition()[0] - self.game.ball.getOldPosition()[0])
@@ -176,10 +185,10 @@ class Data:
         
         self.ballDist += hyp
         
-        if self.game.ball.getPossession() == None:
+        if (self.game.ball.getPossession() == None) or (self.pastBall == None): # Alone ---> Player , Player ---> Alone , and Alone ---> Alone all count as Alone Time/Dist.
             self.ballDistAlone += hyp
             self.ballTimeAlone += 1
-        else:
+        elif (self.game.ball.getPossession() != None) and (self.pastBall != None): # Player ---> Player
             self.ballDistHeld += hyp
             self.ballTimeHeld += 1
     
@@ -192,17 +201,11 @@ class Data:
         
         Parameter game: Game object
         """
-        dist = []
-        
         for i in self.game.players:
             x_moved = abs(i.getPosition()[0] - i.getOldPosition()[0])
             y_moved = abs(i.getPosition()[1] - i.getOldPosition()[1])
-            dist.append((x_moved**2 + y_moved**2)**(1/2))
-        
-        if len(self.whoDist) == 0:
-            self.whoDist += dist # Make dist the whoDist if whoDist is empty
-        else:
-            self.whoDist = [sum(x) for x in zip(dist, self.whoDist)] # Element-wise sum
+            hyp = (x_moved**2 + y_moved**2)**(1/2)
+            self.whoDist[i] += hyp
     
     
     def offender_DistTime(self):
@@ -216,47 +219,20 @@ class Data:
         
         Parameter game: Game object
         """
-        distHeld = []
-        distAlone = []
-        timeHeld = []
-        timeAlone = []
-        
         for i in self.offenders:
             x_moved = abs(i.getPosition()[0] - i.getOldPosition()[0])
             y_moved = abs(i.getPosition()[1] - i.getOldPosition()[1])
             hyp = (x_moved**2 + y_moved**2)**(1/2)
             
-            if i.hasBall() == True:
-                #If the Offender 'i' is not the one holding the ball, his distance for holding the ball is 0 and his dist. w/o the ball is the formula/
-                distHeld.append(hyp)
-                timeHeld.append(1)
-                distAlone.append(0)
-                timeAlone.append(0)
+            if i.hasBall():
+                self.whoTimeHeld[i] += 1
             else:
-                distHeld.append(0)
-                timeHeld.append(0)
-                distAlone.append(hyp)
-                timeAlone.append(1)
-        
-        if len(self.whoDistHeld) == 0:
-            self.whoDistHeld += distHeld
-        else:
-            self.whoDistHeld = [sum(x) for x in zip(distHeld, self.whoDistHeld)]
-        
-        if len(self.whoTimeHeld) == 0:
-            self.whoTimeHeld += timeHeld
-        else:
-            self.whoTimeHeld = [sum(x) for x in zip(timeHeld, self.whoTimeHeld)]
-        
-        if len(self.whoDistAlone) == 0:
-            self.whoDistAlone += distAlone
-        else:
-            self.whoDistAlone = [sum(x) for x in zip(distAlone, self.whoDistAlone)]
-        
-        if len(self.whoTimeAlone) == 0:
-            self.whoTimeAlone += timeAlone
-        else:
-            self.whoTimeAlone = [sum(x) for x in zip(timeAlone, self.whoTimeAlone)]
+                self.whoTimeAlone[i] += 1
+                
+            if i.hasBall() and (self.pastBall == i):
+                self.whoDistHeld[i] += hyp
+            else:
+                self.whoDistAlone[i] += hyp
 
 
     def handle_WinLoss(self):
@@ -266,14 +242,11 @@ class Data:
         
         Parameter game: Game object
         """
-        intercepts = []
-        
         for i in self.defenders:
             if i.hasBall() and not self.whohadBall.hasBall():
                 self.Losses += 1
                 self.whoIntercepts[i] += 1
                 self.whereIntercepts[i] += [tuple(i.getPosition())]
-                self.whohadBall = i
         
         if self.game.ball.isGoal(): # Unrelated to above. This is for wins.
             self.Wins += 1
@@ -285,10 +258,27 @@ class Data:
         """
         Handles data regarding passing interactions.
         """
-        
         for i in self.offenders:
-            if i.hasBall() and not self.whohadBall.hasBall():
+            if i.hasBall() and (i != self.pastBall):
                 self.Passes += 1
                 self.whoRecieves[i] += 1
                 self.whereRecieves[i] += [tuple(i.getPosition())]
+    
+    
+    def handle_Past(self):
+        """
+        Handles remembering stuff from the past timestep, that I need.
+        
+        This is the only thing that needs to be 'in order' in the while loop, last. (I think it needs to).
+        
+        whohadBall: Last PLAYER that had the ball. (Basically does not include None, keeps the last Player)
+        pastBall: ball.getPossession --- Includes None
+        """
+        for i in self.game.players:
+            if i.hasBall():
                 self.whohadBall = i
+        
+        if self.game.ball.getPossession() is None:
+            self.pastBall = None
+        else:
+            self.pastBall = self.whohadBall
