@@ -32,7 +32,10 @@ class Game(object):
             team = data[0].strip()[0].lower()
             position = data[2].split(',')
             position = [float(position[0]), float(position[1])]
-            bounds = data[3][:-1].split(',')
+            if data[3][-1] == '\n':
+                bounds = data[3][:-1].split(',')
+            else:
+                bounds = data[3].split(',')
             bounds = [float(bounds[0]), float(bounds[1]), float(bounds[2]), float(bounds[3])]
             if team == 'o':
                 self.createPlayer(position, bounds)
