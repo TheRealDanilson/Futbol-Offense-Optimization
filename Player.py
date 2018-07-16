@@ -585,14 +585,15 @@ class Defender(Player):
         super().__init__(position, game, bounds)
 
 
-    def shootPassKeep(self):
-        rand = uniform(0,100)
-        if ball.getVelocity() > 3*MAX_SPEED:
-            self.shoot(uniform(-35,35),uniform(0,60))
-        elif ball.getVelocity() >= 2*MAX_SPEED and rand >= 50:
-            self.shoot(uniform(-35,35),uniform(0,60))
-        else:
-            self.keeping = int(uniform(50, 150))
+    #def shootPassKeep(self):
+        # rand = uniform(0,100)
+        # if self.hasBall():
+        #     if self.ball.getSpeed() > 3*MAX_SPEED:
+        #         self.shoot(uniform(-35,35),uniform(0,60))
+        #     elif self.ball.getSpeed() >= 2*MAX_SPEED and rand >= 50:
+        #         self.shoot(uniform(-35,35),uniform(0,60))
+        #     else:
+        #         self.keeping = int(uniform(50, 150))
             
     
         

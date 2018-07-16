@@ -44,8 +44,9 @@ class Ball(object):
         """
         return self.position.copy()
     
-    def getVelocity(self):
-        return self.velocity
+    def getSpeed(self):
+        speed = (self.velocity[0]**2 + self.velocity[1]**2)**(0.5)
+        return speed
     
     def getOldPosition(self):
         return self.oldPosition
