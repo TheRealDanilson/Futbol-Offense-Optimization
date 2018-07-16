@@ -11,39 +11,46 @@ RESOURCES = sdl2.ext.Resources(__file__, "Images")
 class Graphics(object):
     
     def __init__(self, game):
+        #SDL2 Specific
         sdl2.ext.init()
         window = sdl2.ext.Window("Futbol Offense Optimization", size=(910, 610))
         window.show()
         factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
-        background = factory.from_image(RESOURCES.get_path("soccerField.png"))
-        
+        # Creating Attributes
         self.game = game
         self.players = self.game.playerList()
         self.player_sprites = {}
-        self.sprites = [background]
+        self.sprites = []
+        self.background = factory.from_image(RESOURCES.get_path("soccerField.png"))
         self.ball = factory.from_image(RESOURCES.get_path("ball.png"))
         self.running = True
-        
+        # Creating and Adding Sprites
+        self.addSprite(self.background)
         self.createSprites(self.players, factory)
         self.addSprite(self.ball)
-        
+        # Rendering
         self.spriterenderer = factory.create_sprite_render_system(window)       
-        self.spriterenderer.render(self.sprites)
             
             
     def getSize(self, sprite):
-        """ Returns a 2 element list with the width and height in first and second
-            entry, respectively
         """
-        xSize = sprite.size[0]
-        ySize = sprite.size[1]
-        return (xSize, ySize)
+        sprite - object used to represent an image
+        Returns a 2 element tuple with the width and height in first and second
+        entry, respectively
+        """
+        width = sprite.size[0]
+        height = sprite.size[1]
+        return (width, height)
     
-    def move(self, sprite, x = None, y = None):
-        """Changes a sprite's position to the input X and Y
+    
+    def move(self, sprite, x, y):
         """
-        if x is None and y is None:
-            (x, y) = sprite.getPosition()
+        sprite - object used to represent an image
+        x - real number
+        y - real number
+        Changes a sprite's position to the input x and y and uses the size of
+        the sprite to realign sprite so it is printed in it's "center"
+        """
         (xSize, ySize) = self.getSize(sprite)
         
         x_min = FIELD_BOUNDS[0]
@@ -54,11 +61,23 @@ class Graphics(object):
         sprite.position = (floor(( x + x_max)*10-xSize/2), \
                            floor((-y + y_max)*10-ySize/2)  )
         
+        
     def addSprite(self, sprite):
+        """
+        sprite - object used to represent an image
+        Adds the input sprite (sprite) to the sprites attribute (list)
+        """
         self.sprites += [sprite]
         
         
     def createSprites(self, players, factory):
+        """
+        players - list of players
+        factory - special object that creates sprite from image
+        Assigns a sprite depending on if player is offender or defender and then
+        adds the sprite to the player_sprites attribute (dictionary) and to
+        sprite attribute (list)
+        """
         for player in players:
             if type(player) is Offender:
                 sprite = factory.from_image(RESOURCES.get_path("redPlayer.png"))
@@ -67,8 +86,15 @@ class Graphics(object):
                 
             self.player_sprites[player] = sprite
             self.addSprite(sprite)
+           
             
     def update(self):
+        """
+        First for loop is used to check if user closes application window, and
+        if so then quits.
+        Second for loop moves each sprite to their associated player's position.
+        At the end all sprites are rendered.
+        """
         events = sdl2.ext.get_events()
         for event in events:                #This for loop is not working
             if event.type == sdl2.SDL_QUIT:
