@@ -482,7 +482,8 @@ class Offender(Player):
             if forget <= 10:
                 weight = 1000
                 return self.createVector(weight, direction)
-
+            if self.hasBall():
+                Blocked = False
         else:
             if objective is Objectives.GOAL:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
