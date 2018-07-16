@@ -300,7 +300,7 @@ class Game(object):
             if self.ball.getPossession() is None and player is not shooter:
                     if isinstance(player, Defender) and dist <= 10*RECEIVE_THRESHOLD:
                         rand = uniform(0,100)
-                        if self.ball.getSpeed() > 2*MAX_SPEED:
+                        if self.ball.getSpeed() > 1.9*MAX_SPEED:
                             x = uniform(-45,45)
                             y = uniform(0,60)
                             magnitude = (x**2  + y**2)**.5
