@@ -586,7 +586,14 @@ class Defender(Player):
 
 
     def shootPassKeep(self):
-        pass
+        rand = uniform(0,100)
+        if ball.getVelocity() > 3*MAX_SPEED:
+            self.shoot(uniform(-35,35),uniform(0,60))
+        elif ball.getVelocity() >= 2*MAX_SPEED and rand >= 50:
+            self.shoot(uniform(-35,35),uniform(0,60))
+        else:
+            self.keeping = int(uniform(50, 150))
+            
     
         
     def calcVector(self, objective):
