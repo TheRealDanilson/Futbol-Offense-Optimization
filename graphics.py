@@ -6,10 +6,11 @@ from constants import *
 from math import floor
 from Ball import *
 
+RESOURCES = sdl2.ext.Resources(__file__, "Images")
+
 class Graphics(object):
     
     def __init__(self, game):
-        RESOURCES = sdl2.ext.Resources(__file__, "Images")
         sdl2.ext.init()
         window = sdl2.ext.Window("Futbol Offense Optimization", size=(910, 610))
         window.show()
@@ -23,17 +24,11 @@ class Graphics(object):
         self.ball = factory.from_image(RESOURCES.get_path("ball.png"))
         self.running = True
         
-        self.createSprites(players)
-        self.addSprite(ball)
+        self.createSprites(self.players, factory)
+        self.addSprite(self.ball)
         
-        spriterenderer = factory.create_sprite_render_system(window)       
-        spriterenderer.render(self.sprites)
-        
-        
-        while running:
-            game.update()
-            ###
-            self.update()
+        self.spriterenderer = factory.create_sprite_render_system(window)       
+        self.spriterenderer.render(self.sprites)
             
             
     def getSize(self, sprite):
@@ -42,14 +37,14 @@ class Graphics(object):
         """
         xSize = sprite.size[0]
         ySize = sprite.size[1]
-        return[xSize, ySize]
+        return (xSize, ySize)
     
     def move(self, sprite, x = None, y = None):
         """Changes a sprite's position to the input X and Y
         """
         if x is None and y is None:
             (x, y) = sprite.getPosition()
-        (xSize, ySize) = getSize(sprite)
+        (xSize, ySize) = self.getSize(sprite)
         
         x_min = FIELD_BOUNDS[0]
         x_max = FIELD_BOUNDS[1]
@@ -63,9 +58,9 @@ class Graphics(object):
         self.sprites += [sprite]
         
         
-    def createSprites(self, players):
+    def createSprites(self, players, factory):
         for player in players:
-            if type(i) is Offender:
+            if type(player) is Offender:
                 sprite = factory.from_image(RESOURCES.get_path("redPlayer.png"))
             else: 
                 sprite = factory.from_image(RESOURCES.get_path("bluePlayer.png"))
@@ -85,6 +80,6 @@ class Graphics(object):
             (x, y) = player.getPosition()
             self.move(sprite, x, y)
             
-        (x, y) = game.ball.getPosition()    
+        (x, y) = self.game.ball.getPosition()    
         self.move(self.ball, x, y)
-        spriterenderer.render(sprites)
+        self.spriterenderer.render(self.sprites)

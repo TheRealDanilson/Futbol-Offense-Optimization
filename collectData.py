@@ -19,11 +19,11 @@ def infoDump(data):
     print('List of distances travelled by each offender: ' + str(data.get_whoDist()))
     print('List of distances travelled by each offender when they didn\'t have the ball: ' + \
           str(data.get_whoDistAlone()))
-    print('List of distances travelled by each offender when they had: ' + \
+    print('List of distances travelled by each offender when they held: ' + \
           str(data.get_whoDistHeld()))
     print('List of the number of time steps that each offender was without the ball: ' + \
           str(data.get_whoTimeAlone()))
-    print('List of the number of time steps that each offender was without the ball: ' + \
+    print('List of the number of time steps that each offender was with the ball: ' + \
           str(data.get_whoTimeHeld()))
     print('List of Wins, Losses: ' + str(Winloss))
     print('Winrate for offenders: ' + str(data.get_Winrate()))
