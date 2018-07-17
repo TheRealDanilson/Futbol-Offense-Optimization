@@ -32,6 +32,7 @@ class Data:
     Keeps           Dict of # of decisions to keep the ball by each offender.
     whoIntercepts   Dict of each defender's intercepts.
     whoReceives     Dict of each offender's number of receives.
+    whoBlocks       Dict of each defender's # blocks.
     whereIntercepts Dict of the locations of each defender's intercepts.
     whereReceives   Dict of the locations of each offender's receives.
     whoSteals       Dict of the # of steals made by each defender.
@@ -106,6 +107,7 @@ class Data:
             self.whoIntercepts[i] = 0
             self.whereIntercepts[i] = []
             self.whoSteals[i] = 0
+            self.whoBlocks[i] = 0
         
         # Past Time-Step Helper Attributes
         self.wherehadBall = tuple(self.game.players[1].getPosition())
@@ -266,6 +268,12 @@ class Data:
         """
         return self.whereAttempts.copy()
     
+    def get_whoBlocks(self):
+        """
+        Dict of # of blocks by each defender.
+        """
+        return self.whoBlocks.copy()
+    
     
     #-----------
     # While-Loop Methods
@@ -332,7 +340,7 @@ class Data:
     def handle_WinLoss(self):
         """
         Records a win or a loss for the offending team. Interceptions,steals,
-        and out of bounds count as losses. Also deals with goals/steals.
+        and out of bounds count as losses. Also deals with goals.
         """
         for i in self.defenders:
             if i.hasBall():
@@ -353,7 +361,8 @@ class Data:
 
     def handle_Passes(self):
         """
-        Handles data regarding passing interactions.
+        Handles data regarding passing interactions, and some other ball-player
+        interactions.
         """
         for i in self.offenders:
             if i.hasBall() and (i != self.pastBall):
@@ -362,6 +371,10 @@ class Data:
             
             if (self.pastBall == i) and (self.game.ball.getPossession == None):
                 self.whoPasses[i] += 1
+        
+        if self.game.getBlocked():
+            self.whoBlocks[self.game.getBlocker()] += 1
+        
         
         if self.game.ball.towardGoal:
             self.whereAttempts[self.whohadBall] += [tuple(self.whohadBall.getPosition())]
