@@ -28,12 +28,13 @@ class Data:
                     possession for each offender.
     Wins            Number of wins for the offending team.
     Losses          Number of losses for the offending team.
-    Passes          Number of passes made by the offending team.
+    whoPasses       Dict of # passes attempted by each member of the offending team.
     Keeps           Dict of # of decisions to keep the ball by each offender.
     whoIntercepts   Dict of each defender's intercepts.
     whoReceives     Dict of each offender's number of receives.
     whereIntercepts Dict of the locations of each defender's intercepts.
     whereReceives   Dict of the locations of each offender's receives.
+    whoSteals       Dict of the # of steals made by each defender.
     whoGoals        Dict of # of goals made for each offender.
     whereGoals      Dict of locations of where the ball was shot into the goal
                     for each offender.
@@ -72,7 +73,8 @@ class Data:
         self.whereReceives = {}
         self.whoIntercepts = {}
         self.whereIntercepts = {}
-        self.Passes = 0
+        self.whoSteals = {}
+        self.whoPasses = {}
         self.Keeps = {}
         
         # Goals
@@ -92,9 +94,11 @@ class Data:
             self.Keeps[i] = 0
             self.whoGoals[i] = 0
             self.whereGoals[i] = []
+            self.whoPasses[i] = 0
         for i in self.defenders:
             self.whoIntercepts[i] = 0
             self.whereIntercepts[i] = []
+            self.whoSteals[i] = 0
         
         # Past Time-Step Helper Attributes
         self.wherehadBall = tuple(self.game.players[1].getPosition())
@@ -172,7 +176,7 @@ class Data:
         Tuple of ints, wins to losses.
         """
         wl = (self.Wins, self.Losses)
-        return wl
+        return wl.copy()
     
     def get_Winrate(self):
         """
@@ -208,12 +212,6 @@ class Data:
         Dict of the locations of each offender's receives.
         """
         return self.whereReceives.copy()
-    
-    def get_Passes(self):
-        """
-        Int, number of passes overall.
-        """
-        return self.Passes
 
     def get_Keeps(self):
         """
@@ -233,7 +231,21 @@ class Data:
         """
         return self.whereGoals.copy()
     
+    def get_Names(self):
+        """
+        Dict of names.
+        """
+        playerList = self.game.players
+        names = {}
+        for player in playerList:
+            names[player] = player.name
+        return names
 
+    def get_whoPasses(self):
+        """
+        Dict of # of passes each offender has attempted.
+        """
+        return self.whoPasses.copy()
     #-----------
     # While-Loop Methods
     #-----------
@@ -298,16 +310,19 @@ class Data:
 
     def handle_WinLoss(self):
         """
-        Records a win or a loss for the offending team. Interceptions and out
-        of bounds count as losses. Also deals with goals.
+        Records a win or a loss for the offending team. Interceptions,steals,
+        and out of bounds count as losses. Also deals with goals/steals.
         """
         for i in self.defenders:
-            if i.hasBall(): #and not self.whohadBall.hasBall():
+            if i.hasBall():
+                if self.pastBall == None:
+                    self.whoIntercepts[i] += 1
+                    self.whereIntercepts[i] += [tuple(i.getPosition())]
+                else:
+                    self.whoSteals[i] += 1
                 self.Losses += 1
-                self.whoIntercepts[i] += 1
-                self.whereIntercepts[i] += [tuple(i.getPosition())]
         
-        if self.game.ball.isGoal(): # Unrelated to above. This is for wins.
+        if self.game.ball.isGoal():
             self.whereGoals[self.whohadBall] += [self.wherehadBall]
             self.whoGoals[self.whohadBall] += 1
             self.Wins += 1
@@ -321,9 +336,11 @@ class Data:
         """
         for i in self.offenders:
             if i.hasBall() and (i != self.pastBall):
-                self.Passes += 1
                 self.whoReceives[i] += 1
                 self.whereReceives[i] += [tuple(i.getPosition())]
+            
+            if (self.pastBall == i) and (self.game.ball.getPossession == None):
+                self.whoPasses[i] += 1
     
 
     def handle_Past(self):
