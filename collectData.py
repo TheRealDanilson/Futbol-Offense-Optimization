@@ -60,11 +60,15 @@ EDIT: I actually commented out formationCombo() because it seemed pretty useless
 From what I understood with out talk before you wanted it, but again, it didn't
 seem like it was doing much.  Anyway, I just put three for loops in
 runSimulations().  Of course, change it as needed.  I wasn't sure what the directory
-in getFormations() should be, so I leave it to you.  Hoped this helped.
+in getFormations() should be, so I leave it to you.  Hope this helped.
 """
 
 
 def runSimulations(self):
+    """
+    This method pairs up all the different formations and runs 1000 simulations
+    of each matchup
+    """
     allFormations = self.getFormations()
     offenderFormations = allFormations[0]
     defenderFormations = allFormations[1]
@@ -82,6 +86,12 @@ def runSimulations(self):
 
 
 def match(self,offenderFormation, defenderFormation):
+    """
+    offenderFormation - textfile with formation details
+    defenderFormation - textfile with formation details
+    This method is what actually runs each simulation, terminates each
+    simulation, and collects data
+    """
     game = Game(offenderFormation, defenderFormation)
     movingPictures = Graphics(game)
     data = Data(game)
@@ -100,9 +110,13 @@ def match(self,offenderFormation, defenderFormation):
             Winloss = curWinLoss
     
 def getFormations(self):
+    """
+    Goes into current directory and searches for the formation files,  adding
+    each one to it's respective list (offenderFormations or defenderFormations)
+    """
     offenderFormations = []
     defenderFormations = []
-    for root, dirs, files in walk("DIRECTORY"):
+    for root, dirs, files in walk("./"):
         for file in files:
             if file.startswith('Off'):
                 offenderFormations += file
