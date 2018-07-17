@@ -22,6 +22,7 @@ class Game(object):
         self.readFormation(defenseFormation)
         self.createBall(self.players[1])
         self.blocked = False
+        self.blocker = None
         
         
     def readFormation(self, filename):
@@ -53,6 +54,9 @@ class Game(object):
 
     def getBlocked(self):
         return self.blocked
+    
+    def getBlocker(self):
+        return self.blocker
     
     
     # def passPlayers(self,player):
@@ -293,6 +297,7 @@ class Game(object):
         TODO: Change this method to handle stealing
         
         """
+        self.blocker = None
         shooter = self.ball.getShooter()
         for player in self.players:
             player.setPlayers(self.players)
@@ -310,7 +315,7 @@ class Game(object):
                             direction = (x/magnitude,y/magnitude)
                             self.ball.shoot(direction, True)
                             self.blocked = True
-                            print(self.blocked)
+                            self.blocker = player
                         elif self.ball.getSpeed() >= 1.25*MAX_SPEED and rand > 50:
                             x = uniform(-45,45)
                             y = uniform(-60,60)
@@ -318,7 +323,7 @@ class Game(object):
                             direction = (x/magnitude,y/magnitude)
                             self.ball.shoot(direction)
                             self.blocked = True
-                            print(self.blocked)
+                            self.blocker = player
                         else:
                             player.receive(self.ball)
                             self.ball.setPossession(player)
