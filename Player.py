@@ -326,7 +326,7 @@ class Player(object):
             else:                       #Decides which Player inst. to pass to
                 player = self.pickPlayer()
                 if player is self:
-                    self.keeping = int(uniform(50, 150))
+                    self.keeping = int(uniform(50, 100))
                 self.passBall(player)    
     
     
@@ -504,7 +504,7 @@ class Offender(Player):
             elif objective is Objectives.BALL:
                 ballDist = self.game.playerDistBall(self)
                 (dist, direction) = self.magnitudeAndDirection(ballDist)
-                if dist <= ZONE_THRESHOLD:
+                if dist <= 2*ZONE_THRESHOLD:
                     weight = 15
                 return self.createVector(weight, direction)
             if self.hasBall():
@@ -563,11 +563,19 @@ class Offender(Player):
                 return (vector[0], vector[1])
             elif ball[0] > 25 and playerPos[0] > 25:
                 direction = (0,-1)
-                weight = 50
+                weight = 60
                 return self.createVector(weight, direction)
             elif ball[0] < -25 and playerPos[0] < -25:
                 direction = (0,-1)
-                weight = 50
+                weight = 60
+                return self.createVector(weight, direction)
+            elif ball[0] > 15 and playerPos[0] > 25:
+                direction = (0,-1)
+                weight = 30
+                return self.createVector(weight, direction)
+            elif ball[0] < -15 and playerPos[0] < -25:
+                direction = (0,-1)
+                weight = 30
                 return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:

@@ -129,11 +129,8 @@ class Game(object):
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
-        if abs(ballPos[0]) > 15:
-            dX = (ballPos[0] * shift)/7.5
-        else:
-            dX = 0
-        dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/15
+        dX = (ballPos[0] * shift)/15
+        dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/10
         # if ballPos[0] > 10:
         #     dX = shift
         # elif ballPos[0] < -10:
@@ -316,7 +313,7 @@ class Game(object):
                             self.ball.shoot(direction, True)
                             self.blocked = True
                             self.blocker = player
-                        elif self.ball.getSpeed() >= 1.25*MAX_SPEED and rand > 50:
+                        elif self.ball.getSpeed() >= 1.45*MAX_SPEED and rand > 50:
                             x = uniform(-45,45)
                             y = uniform(-60,60)
                             magnitude = (x**2  + y**2)**(.5)
