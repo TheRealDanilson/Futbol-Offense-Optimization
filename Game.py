@@ -31,6 +31,7 @@ class Game(object):
         while line is not '':
             data = line.split(';')
             team = data[0].strip()[0].lower()
+            name = data[1].strip()
             position = data[2].split(',')
             position = [float(position[0]), float(position[1])]
             if data[3][-1] == '\n':
@@ -39,9 +40,9 @@ class Game(object):
                 bounds = data[3].split(',')
             bounds = [float(bounds[0]), float(bounds[1]), float(bounds[2]), float(bounds[3])]
             if team == 'o':
-                self.createPlayer(position, bounds)
+                self.createPlayer(position, bounds, name)
             else:
-                self.createDefender(position, bounds)
+                self.createDefender(position, bounds, name)
             line = f.readline()
         f.close()
             
@@ -57,25 +58,25 @@ class Game(object):
     # def passPlayers(self,player):
     #     player.setPlayers(self.players)
     
-    def createPlayer(self, position, bounds):
+    def createPlayer(self, position, bounds, name):
         """
         position  - 2 element list with x in first entry and y in second
         bounds    - 4 element list with x and y mins and maxs of the field
         
         Creates an instance of the player class
         """
-        player = Offender(position, self, bounds)
+        player = Offender(position, self, bounds, name)
         self.players += [player]
         
     
-    def createDefender(self, position, bounds):
+    def createDefender(self, position, bounds, name):
         """
         position - 2 element list with x in first entry and y in second
         bounds   - 4 element tuple with x and y mins and maxs of the field
         
         Creates an instance of the defender class (subclass of player)
         """
-        player = Defender(position, self, bounds)
+        player = Defender(position, self, bounds, name)
         self.players += [player]
     
     
@@ -307,7 +308,7 @@ class Game(object):
                             y = uniform(-60,60)
                             magnitude = (x**2  + y**2)**(.5)
                             direction = (x/magnitude,y/magnitude)
-                            self.ball.shoot(direction)
+                            self.ball.shoot(direction, True)
                             self.blocked = True
                             print(self.blocked)
                         elif self.ball.getSpeed() >= .75*MAX_SPEED and rand > 50:
@@ -320,16 +321,13 @@ class Game(object):
                             print(self.blocked)
                         else:
                             player.receive(self.ball)
-                            print(player is shooter)
                             self.ball.setPossession(player)
                             self.blocked = False
                     elif isinstance(player, Offender) and dist <= RECEIVE_THRESHOLD:
                         player.receive(self.ball)
-                        print(player is shooter)
                         self.ball.setPossession(player)
                     elif dist <= 2*RECEIVE_THRESHOLD and self.getBlocked():
                         player.receive(self.ball)
-                        print(player is shooter)
                         self.ball.setPossession(player)
                         self.blocked = False 
             elif self.ball.getPossession() is not None:

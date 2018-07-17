@@ -36,6 +36,7 @@ class Ball(object):
         self.oldPosition = self.position.copy()
         self.receiving = False
         self.shooter = None
+        self.towardGoal = False
         
         
     def getPosition(self):
@@ -132,12 +133,13 @@ class Ball(object):
             return -4 < newx and newx < 4 and newy <= 0
     
     
-    def shoot(self, direction):
+    def shoot(self, direction, blocked = False):
         """
         Changes ball's possession to None and changes the ball velocity to
         input velocity
         """
-        self.shooter = self.possession
+        if not blocked:
+            self.shooter = self.possession
         self.possession = None
         self.position = self.position.copy()
         self.velocity = [direction[0] * 2*MAX_SPEED, direction[1] * 2*MAX_SPEED]
