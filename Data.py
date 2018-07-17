@@ -172,7 +172,7 @@ class Data:
         Tuple of ints, wins to losses.
         """
         wl = (self.Wins, self.Losses)
-        return wl.copy()
+        return wl
     
     def get_Winrate(self):
         """
@@ -302,7 +302,7 @@ class Data:
         of bounds count as losses. Also deals with goals.
         """
         for i in self.defenders:
-            if i.hasBall() and not self.whohadBall.hasBall():
+            if i.hasBall(): #and not self.whohadBall.hasBall():
                 self.Losses += 1
                 self.whoIntercepts[i] += 1
                 self.whereIntercepts[i] += [tuple(i.getPosition())]

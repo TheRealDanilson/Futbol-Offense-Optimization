@@ -60,11 +60,12 @@ class Player(object):
     """
     
     
-    def __init__(self, position, game, bounds = FIELD_BOUNDS):
+    def __init__(self, position, game, bounds = FIELD_BOUNDS, name = 'N/A'):
         """
         Constructor Method for player class
         """
         self.game = game
+        self.name = name
         self.ball = None
         self.position = position.copy()
         self.bounds = list(bounds)
@@ -157,6 +158,7 @@ class Player(object):
             dY = position[1] - self.position[1]
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             direction = (dX/magnitude, dY/magnitude)
+            self.ball.towardGoal = True
         else:
             dX = position[0] - self.position[0]
             dY = position[1] - self.position[1]
@@ -461,11 +463,11 @@ class Offender(Player):
     """
 
     
-    def __init__(self, position, game, bounds = FIELD_BOUNDS):
+    def __init__(self, position, game, bounds = FIELD_BOUNDS, name = 'N/A'):
         """
         Constructor method for offender
         """
-        super().__init__(position, game, bounds)
+        super().__init__(position, game, bounds, name)
         
         
         
@@ -483,7 +485,7 @@ class Offender(Player):
                 weight = 1000
                 return self.createVector(weight, direction)
             if self.hasBall():
-                Blocked = False
+                self.game.blocked = False
         else:
             if objective is Objectives.GOAL:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
@@ -586,11 +588,11 @@ class Defender(Player):
     """
     
     
-    def __init__(self, position, game, bounds = FIELD_BOUNDS):
+    def __init__(self, position, game, bounds = FIELD_BOUNDS, name = 'N/A'):
         """
         Constructor method for defender
         """
-        super().__init__(position, game, bounds)
+        super().__init__(position, game, bounds, name)
 
 
     def shootPassKeep(self):
