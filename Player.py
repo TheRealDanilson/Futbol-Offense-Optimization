@@ -277,7 +277,7 @@ class Player(object):
         elif (x**2 + y**2)**(0.5) <= 10:
             p = 1.0
         else:
-            p = expcdf((5.5 - z),4.3)/2.5
+            p = expcdf((5.5 - z),4.3)/2.75
         return p
      
     

@@ -311,7 +311,7 @@ class Game(object):
                             self.ball.shoot(direction, True)
                             self.blocked = True
                             print(self.blocked)
-                        elif self.ball.getSpeed() >= MAX_SPEED and rand > 50:
+                        elif self.ball.getSpeed() >= 1.25*MAX_SPEED and rand > 50:
                             x = uniform(-45,45)
                             y = uniform(-60,60)
                             magnitude = (x**2  + y**2)**(.5)
