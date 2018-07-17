@@ -38,6 +38,9 @@ class Data:
     whoGoals        Dict of # of goals made for each offender.
     whereGoals      Dict of locations of where the ball was shot into the goal
                     for each offender.
+    whoAttempts     Dict of # of attempts to goal for each player.
+    whereAttempts   Dict of locations of where the ball was attempted to be shot
+                    into the goal.
     whohadBall      Last possessor of the ball -- Excludes None.
     pastBall        Last possessor of the ball -- Includes None.
     wherehadBall    Last location of the last possessor -- Excludes None.
@@ -80,6 +83,8 @@ class Data:
         # Goals
         self.whoGoals = {}
         self.whereGoals = {}
+        self.whoAttempts = {}
+        self.whereAttempts = {}
         
         # For-loops to initialize dictionaries
         for i in self.game.players:
@@ -95,6 +100,8 @@ class Data:
             self.whoGoals[i] = 0
             self.whereGoals[i] = []
             self.whoPasses[i] = 0
+            self.whoAttempts[i] = 0
+            self.whereAttempts[i] = []
         for i in self.defenders:
             self.whoIntercepts[i] = 0
             self.whereIntercepts[i] = []
@@ -246,6 +253,20 @@ class Data:
         Dict of # of passes each offender has attempted.
         """
         return self.whoPasses.copy()
+    
+    def get_whoAttempts(self):
+        """
+        Dict of # of attempted goals for each offender.
+        """
+        return self.whoAttempts.copy()
+    
+    def get_whereAttempts(self):
+        """
+        Dict of where goaling attempts were made for each offender.
+        """
+        return self.whereAttempts.copy()
+    
+    
     #-----------
     # While-Loop Methods
     #-----------
@@ -341,6 +362,10 @@ class Data:
             
             if (self.pastBall == i) and (self.game.ball.getPossession == None):
                 self.whoPasses[i] += 1
+        
+        if self.game.ball.towardGoal:
+            self.whereAttempts[self.whohadBall] += [tuple(self.whohadBall.getPosition())]
+            self.whoAttempts[self.whohadBall] += 1
     
 
     def handle_Past(self):
