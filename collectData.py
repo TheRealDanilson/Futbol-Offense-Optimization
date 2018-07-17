@@ -65,8 +65,9 @@ in getFormations() should be, so I leave it to you.  Hoped this helped.
 
 
 def runSimulations(self):
-    offenderFormations = self.getFormations()[0]
-    defenderFormations = self.getFormations()[1]
+    allFormations = self.getFormations()
+    offenderFormations = allFormations[0]
+    defenderFormations = allFormations[1]
     
     for i in offenderForm:
         for j in defenderForm:
