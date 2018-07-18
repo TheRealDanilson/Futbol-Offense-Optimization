@@ -309,9 +309,9 @@ class Game(object):
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
             if self.ball.getPossession() is None and player is not shooter:
-                    if isinstance(player, Defender) and dist <= 2*RECEIVE_THRESHOLD:
+                    if isinstance(player, Defender) and dist <= 3*RECEIVE_THRESHOLD:
                         rand = uniform(0,100)
-                        if self.ball.getSpeed() > 2*MAX_SPEED:
+                        if self.ball.getSpeed() > 1.5*MAX_SPEED:
                             x = uniform(-45,45)
                             y = uniform(-60,60)
                             magnitude = (x**2  + y**2)**(.5)
@@ -319,7 +319,7 @@ class Game(object):
                             self.ball.shoot(direction, True)
                             self.blocked = True
                             self.blocker = player
-                        elif self.ball.getSpeed() >= MAX_SPEED and rand > 50:
+                        elif self.ball.getSpeed() >= .75*MAX_SPEED and rand > 50:
                             x = uniform(-45,45)
                             y = uniform(-60,60)
                             magnitude = (x**2  + y**2)**(.5)
@@ -334,7 +334,7 @@ class Game(object):
                     elif isinstance(player, Offender) and dist <= RECEIVE_THRESHOLD:
                         player.receive(self.ball)
                         self.ball.setPossession(player)
-                    elif dist <= 2*RECEIVE_THRESHOLD and self.getBlocked():
+                    elif dist <= 3*RECEIVE_THRESHOLD and self.getBlocked():
                         player.receive(self.ball)
                         self.ball.setPossession(player)
                         self.blocked = False 

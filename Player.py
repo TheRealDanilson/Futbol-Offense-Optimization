@@ -154,8 +154,8 @@ class Player(object):
         Removes possession from player and shoots the ball to center of goal
         """
         if position[1] == 0 and abs(position[0]) < 4:
-            dX = position[0] - self.position[0] + (self.position[0]/7.5 + uniform(-5,5))
-            dY = position[1] - self.position[1]
+            dX = position[0] - self.position[0] + (self.position[0]/7.5 + uniform(-4.5,4.5))
+            dY = position[1] - self.position[1] + self.position[1]/10
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             direction = (dX/magnitude, dY/magnitude)
             self.ball.towardGoal = True
@@ -276,12 +276,12 @@ class Player(object):
             p = 0.0
         elif (x**2 + y**2)**(0.5) <= 12:
             p = 1.0
-        elif z > 3:
+        elif z > 2.5:
             p = expcdf((5.5 - z),4.3)/3
             print(z)
             print(p)
         else:
-            p = expcdf((5.5 - z),4.3)/1.5
+            p = expcdf((5.5 - z),4.3)
             print(z)
             print(p)
         return p
@@ -654,7 +654,7 @@ class Defender(Player):
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-                weight = dist**3
+                weight = dist**2
                 return self.createVector(weight, direction)
             elif objective is Objectives.OPPONENTS:
                 opponentTeam = self.game.playerOpponentTeam(self)
