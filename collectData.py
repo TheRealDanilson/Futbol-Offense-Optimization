@@ -141,7 +141,7 @@ def dataWrite(DataList, dataWriter):
         
     
 def dump(DataList, offenderFormation, defenderFormation):
-    name = (offenderFormation + ' ' + defenderFormation + '.csv').replace('.txt', '')
+    name = ('DATA ' + offenderFormation + ' ' + defenderFormation + '.csv').replace('.txt', '')
     file = open(name, 'w')
     dataWriter = csv.writer(file, delimiter = ';')
     dataWrite(DataList, dataWriter)
@@ -255,9 +255,9 @@ def getFormations():
     defenderFormations = []
     for root, dirs, files in walk("./"):
         for file in files:
-            if file.startswith('Off'):
+            if file.startswith('Off') and file.endswith('txt'):
                 offenderFormations += [file]
-            elif file.startswith('Def'):
+            elif file.startswith('Def') and file.endswith('txt'):
                 defenderFormations += [file]
     return (offenderFormations, defenderFormations)
 
