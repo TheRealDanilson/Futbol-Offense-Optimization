@@ -71,7 +71,7 @@ def dataWrite(DataList, dataWriter):
         interceptLocations = data.get_whereIntercepts()
         receiveLocations = data.get_whereReceives()
         keeps = data.get_Keeps()
-        goals = data.get_Goals()
+        goals = data.get_whoGoals()
         goalLocations = data.get_whereGoals()
         passes = data.get_whoPasses()
         for player in distances.keys():
@@ -101,7 +101,7 @@ def dataWrite(DataList, dataWriter):
             InterceptLocations[title] += [interceptLocations[player]]
         
     
-def dump(DataList, offenderFormation, defenderFomration):
+def dump(DataList, offenderFormation, defenderFormation):
     name = (offenderFormation + ' ' + defenderFormation + '.csv').replace('.txt', '')
     file = open(name, 'w')
     dataWriter = csv.writer(file)
