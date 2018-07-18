@@ -33,6 +33,9 @@ def dataWrite(DataList, dataWriter):
     playerGoals = {}
     playerGoalLocations = {}
     playerPasses = {}
+    playerAttempts = {}
+    playerAttemptLocations = {}
+    playerBlocks = {}
     for player in names.keys():
         if isinstance(player, Offender):
             team = 'Offender'
@@ -50,9 +53,12 @@ def dataWrite(DataList, dataWriter):
             playerGoals[title] = [title + ' number of goals']
             playerGoalLocations[title] = [title + ' location of goal shots']
             playerPasses[title] = [title + ' number of passes']
+            playerAttempts[title] = [title + ' number of goal attempts']
+            playerAttemptLocations[title] = [title + ' locations of goal attempts']
         else:
             playerInterceptions[title] = [title + ' interceptions']
             InterceptLocations[title] = [title + ' interception locations']
+            playerBlocks[title] = [title + ' number of blocks']
         
         
     for data in DataList:
@@ -74,6 +80,9 @@ def dataWrite(DataList, dataWriter):
         goals = data.get_whoGoals()
         goalLocations = data.get_whereGoals()
         passes = data.get_whoPasses()
+        attempts = data.get_whoAttempts()
+        attemptLocations = data.get_whereAttempts()
+        blocks = data.get_whoBlocks()
         for player in distances.keys():
             if isinstance(player, Offender):
                 team = 'Offender'
@@ -94,17 +103,46 @@ def dataWrite(DataList, dataWriter):
             playerGoals[title] += [goals[player]]
             playerGoalLocations[title] += [goalLocations[player]]
             playerPasses[title] += [passes[player]]
+            playerAttempts[title] += [attempts[player]]
+            playerAttemptLocations[title] += [attemptLocations[player]]
+            
             
         for player in interceptions.keys():
             title = 'Defender' + ' ' + names[player]
             playerInterceptions[title] += [interceptions[player]]
             InterceptLocations[title] += [interceptLocations[player]]
+            playerBlocks[title] += [blocks[player]]
+            
+    dataWriter.writerow(BallDist)
+    dataWriter.writerow(BallDistAlone)
+    dataWriter.writerow(BallDistHeld)       
+    dataWriter.writerow(BallTimeAlone)
+    dataWriter.writerow(BallTimeHeld)
+    for player in playerDistancesAlone.keys():
+        dataWriter.writerow(playerDistances[player])
+        dataWriter.writerow(playerDistancesAlone[player])
+        dataWriter.writerow(playerDistancesHeld[player])                
+        dataWriter.writerow(playerTimeAlone[player])
+        dataWriter.writerow(playerTimeHeld[player])
+        dataWriter.writerow(playerReceives[player])
+        dataWriter.writerow(playerKeeps[player])
+        dataWriter.writerow(playerGoals[player])
+        dataWriter.writerow(playerGoalLocations[player])
+        dataWriter.writerow(playerPasses[player])
+        dataWriter.writerow(playerAttempts[player])
+        dataWriter.writerow(playerAttemptLocations[player])
+        
+    for player in playerInterceptions.keys():
+        dataWriter.writerow(playerDistances[player])
+        dataWriter.writerow(playerInterceptions[player])
+        dataWriter.writerow(InterceptLocations[player])
+        dataWriter.writerow(playerBlocks[player])
         
     
 def dump(DataList, offenderFormation, defenderFormation):
     name = (offenderFormation + ' ' + defenderFormation + '.csv').replace('.txt', '')
     file = open(name, 'w')
-    dataWriter = csv.writer(file)
+    dataWriter = csv.writer(file, delimiter = ';')
     dataWrite(DataList, dataWriter)
     file.close()
     
