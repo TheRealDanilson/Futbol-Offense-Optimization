@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from Game import Game
 from Data import Data
-from graphics import Graphics
+#from graphics import Graphics
 from os import walk
 import csv
 from Player import *
@@ -228,8 +228,9 @@ def match(offenderFormation, defenderFormation, DataList):
     This method is what actually runs each simulation, terminates each
     simulation, and collects data
     """
+    print(offenderFormation, defenderFormation)
     game = Game(offenderFormation, defenderFormation)
-    movingPictures = Graphics(game)
+    #movingPictures = Graphics(game)
     data = Data(game)
     DataList += [data]
     
@@ -239,7 +240,7 @@ def match(offenderFormation, defenderFormation, DataList):
     while not reachedTermination:
         game.update()
         #game.printFieldNested()
-        movingPictures.update()
+        #movingPictures.update()
         update(data)
         curWinLoss = data.get_WinLoss()
         reachedTermination = Winloss != curWinLoss
