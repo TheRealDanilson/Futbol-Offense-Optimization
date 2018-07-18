@@ -563,11 +563,11 @@ class Offender(Player):
                         mateVector = self.createVector(weight, direction)
                         self.addVectors(vector, mateVector)
                 return (vector[0], vector[1])
-            elif ball[0] > 25 and playerPos[0] > 25:
+            elif ball[0] > 20 and playerPos[0] > 25:
                 direction = (0,-1)
                 weight = 40
                 return self.createVector(weight, direction)
-            elif ball[0] < -25 and playerPos[0] < -25:
+            elif ball[0] < -20 and playerPos[0] < -25:
                 direction = (0,-1)
                 weight = 40
                 return self.createVector(weight, direction)
