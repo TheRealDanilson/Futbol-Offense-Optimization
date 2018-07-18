@@ -94,7 +94,6 @@ def dataWrite(DataList, dataWriter):
             
         for player in distancesAlone.keys():
             title = 'Offender' + ' ' + names[player]
-            playerDistances[title] += [distances[player]]
             playerDistancesAlone[title] += [distancesAlone[player]]
             playerDistancesHeld[title] += [distancesHeld[player]]
             playerTimeAlone[title] += [timeAlone[player]]
