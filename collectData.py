@@ -211,7 +211,7 @@ def runSimulations():
         for j in defenderFormations:
             DataList = []
             #self.formationCombo(i,j)
-            for k in range(500):
+            for k in range(2):
                 match(i,j, DataList)
             dump(DataList, i, j)
         
