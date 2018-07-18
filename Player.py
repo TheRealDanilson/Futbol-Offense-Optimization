@@ -272,7 +272,7 @@ class Player(object):
         x = self.position[0]
         y = self.position[1]
         z = (x**2)/300 +(y**2)/150;
-        if z >= 5.5 or (x**2)/y > 50 or abs(x) > 25:
+        if z >= 5.5 or (x**2)/y > 50 or abs(x) > 20:
             p = 0.0
         elif (x**2 + y**2)**(0.5) <= 12:
             p = 1.0
@@ -577,11 +577,11 @@ class Offender(Player):
                 return self.createVector(weight, direction)
             elif ball[0] > 15 and playerPos[0] > 25:
                 direction = (0,-1)
-                weight = 10
+                weight = 30
                 return self.createVector(weight, direction)
             elif ball[0] < -15 and playerPos[0] < -25:
                 direction = (0,-1)
-                weight = 10
+                weight = 30
                 return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
