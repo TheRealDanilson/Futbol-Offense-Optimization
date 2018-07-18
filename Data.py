@@ -80,6 +80,7 @@ class Data:
         self.whoSteals = {}
         self.whoPasses = {}
         self.Keeps = {}
+        self.whoBlocks = {}
         
         # Goals
         self.whoGoals = {}
@@ -185,7 +186,7 @@ class Data:
         Tuple of ints, wins to losses.
         """
         wl = (self.Wins, self.Losses)
-        return wl.copy()
+        return wl
     
     def get_Winrate(self):
         """
@@ -372,7 +373,7 @@ class Data:
             if (self.pastBall == i) and (self.game.ball.getPossession == None):
                 self.whoPasses[i] += 1
         
-        if self.game.getBlocked():
+        if self.game.getBlocked() and self.game.getBlocker() is not None:
             self.whoBlocks[self.game.getBlocker()] += 1
         
         

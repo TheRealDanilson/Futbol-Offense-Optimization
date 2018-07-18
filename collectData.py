@@ -4,6 +4,7 @@ from Data import Data
 from graphics import Graphics
 from os import walk
 import csv
+from Player import *
 
 def update(data):
     data.ball_DistTime()
@@ -14,7 +15,91 @@ def update(data):
     
 
 def dataWrite(DataList, dataWriter):
-    pass
+    BallDist = ['Distance Ball Traveled']
+    BallDistAlone = ['Distance Ball Traveled Alone']
+    BallDistHeld = ['Distance Ball was held']
+    BallTimeAlone = ['Time steps the ball was alone']
+    BallTimeHeld = ['Time steps the ball was held']
+    names = DataList[0].get_Names()
+    playerDistances = {}
+    playerDistancesAlone = {}
+    playerDistancesHeld = {}
+    playerTimeAlone = {}
+    playerTimeHeld = {}
+    playerInterceptions = {}
+    InterceptLocations = {}
+    playerReceives = {}
+    playerKeeps = {}
+    playerGoals = {}
+    playerGoalLocations = {}
+    playerPasses = {}
+    for player in names.keys():
+        if isinstance(player, Offender):
+            team = 'Offender'
+        else:
+            team = 'Defender'
+        title = team + ' ' + names[player]
+        playerDistances[title] = [title + ' distance traveled']
+        if isinstance(player, Offender):
+            playerDistancesAlone[title] = [title + ' distance traveled without ball']
+            playerDistancesHeld[title] = [title + ' distance traveled with ball']
+            playerTimeAlone[title] = [title + ' time steps without ball']
+            playerTimeHeld[title] = [title + ' time steps with ball']
+            playerReceives[title] = [title + ' receive locations']
+            playerKeeps[title] = [title + ' number of keeps']
+            playerGoals[title] = [title + ' number of goals']
+            playerGoalLocations[title] = [title + ' location of goal shots']
+            playerPasses[title] = [title + ' number of passes']
+        else:
+            playerInterceptions[title] = [title + ' interceptions']
+            InterceptLocations[title] = [title + ' interception locations']
+        
+        
+    for data in DataList:
+        names = data.get_Names()
+        BallDist += [data.get_ballDist()]
+        BallDistAlone += [data.get_ballDistAlone()]
+        BallDistHeld += [data.get_ballDistHeld()]
+        BallTimeAlone += [data.get_ballTimeAlone()]
+        BallTimeHeld += [data.get_ballTimeHeld()]
+        distances = data.get_whoDist()
+        distancesAlone = data.get_whoDistAlone()
+        distancesHeld = data.get_whoDistHeld()
+        timeAlone = data.get_whoTimeAlone()
+        timeHeld = data.get_whoTimeHeld()
+        interceptions = data.get_whoIntercepts()
+        interceptLocations = data.get_whereIntercepts()
+        receiveLocations = data.get_whereReceives()
+        keeps = data.get_Keeps()
+        goals = data.get_Goals()
+        goalLocations = data.get_whereGoals()
+        passes = data.get_whoPasses()
+        for player in distances.keys():
+            if isinstance(player, Offender):
+                team = 'Offender'
+            else:
+                team = 'Defender'
+            title = team + ' ' + names[player]
+            playerDistances[title] += [distances[player]]
+            
+        for player in distancesAlone.keys():
+            title = 'Offender' + ' ' + names[player]
+            playerDistances[title] += [distances[player]]
+            playerDistancesAlone[title] += [distancesAlone[player]]
+            playerDistancesHeld[title] += [distancesHeld[player]]
+            playerTimeAlone[title] += [timeAlone[player]]
+            playerTimeHeld[title] += [timeHeld[player]]
+            playerReceives[title] += [receiveLocations[player]]
+            playerKeeps[title] += [keeps[player]]
+            playerGoals[title] += [goals[player]]
+            playerGoalLocations[title] += [goalLocations[player]]
+            playerPasses[title] += [passes[player]]
+            
+        for player in interceptions.keys():
+            title = 'Defender' + ' ' + names[player]
+            playerInterceptions[title] += [interceptions[player]]
+            InterceptLocations[title] += [interceptLocations[player]]
+        
     
 def dump(DataList, offenderFormation, defenderFomration):
     name = (offenderFormation + ' ' + defenderFormation + '.csv').replace('.txt', '')
@@ -87,7 +172,7 @@ def runSimulations():
         for j in defenderFormations:
             DataList = []
             #self.formationCombo(i,j)
-            for k in range(1000):
+            for k in range(2):
                 match(i,j, DataList)
             dump(DataList, i, j)
         
