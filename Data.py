@@ -59,7 +59,7 @@ class Data:
         self.ballDistAlone = 0
         self.ballDistHeld = 0
         self.ballTimeAlone = 0
-        self.ballTimeHeld = 0 
+        self.ballTimeHeld = 0
         
         # Player Kinematics
         self.whoDist = {}
@@ -114,7 +114,7 @@ class Data:
         self.wherehadBall = tuple(self.game.players[1].getPosition())
         self.whohadBall = self.game.players[1]
         self.pastBall = self.game.players[1]
-
+        self.wasTowardGoal = False
 
     #-----------
     # Getter methods
@@ -377,7 +377,7 @@ class Data:
             self.whoBlocks[self.game.getBlocker()] += 1
         
         
-        if self.game.ball.towardGoal:
+        if self.game.ball.towardGoal and not self.wasTowardGoal:
             self.whereAttempts[self.whohadBall] += [tuple(self.whohadBall.getPosition())]
             self.whoAttempts[self.whohadBall] += 1
     
@@ -400,3 +400,6 @@ class Data:
             self.pastBall = None
         else:
             self.pastBall = self.whohadBall
+        
+        if self.game.ball.towardGoal:
+            self.wasTowardGoal = True
