@@ -569,19 +569,19 @@ class Offender(Player):
                 return (vector[0], vector[1])
             elif ball[0] > 25 and playerPos[0] > 25:
                 direction = (0,-1)
-                weight = 60
+                weight = 40
                 return self.createVector(weight, direction)
             elif ball[0] < -25 and playerPos[0] < -25:
                 direction = (0,-1)
-                weight = 60
+                weight = 40
                 return self.createVector(weight, direction)
-            elif ball[0] > 15 and playerPos[0] > 25:
-                direction = (0,-1)
-                weight = 30
-                return self.createVector(weight, direction)
-            elif ball[0] < -15 and playerPos[0] < -25:
-                direction = (0,-1)
-                weight = 30
+            # elif ball[0] > 15 and playerPos[0] > 25:
+            #     direction = (0,-1)
+            #     weight = 30
+            #     return self.createVector(weight, direction)
+            # elif ball[0] < -15 and playerPos[0] < -25:
+            #     direction = (0,-1)
+            #     weight = 30
                 return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
