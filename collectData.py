@@ -10,8 +10,9 @@ def update(data):
     data.ball_DistTime()
     data.player_Dist()
     data.offender_DistTime()
-    data.handle_WinLoss()
     data.handle_Passes()
+    data.handle_WinLoss()
+    data.handle_Past()
     
 
 def dataWrite(DataList, dataWriter):
