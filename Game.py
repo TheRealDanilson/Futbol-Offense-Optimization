@@ -129,10 +129,7 @@ class Game(object):
         playerPos = player.getPosition()
         ballPos = self.ball.getPosition()
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
-        if abs(ballPos[0]) > 15:
-            dX = (ballPos[0] * shift)/8
-        else:
-            dX = 0
+        dX = (ballPos[0] * shift)/8
         if (ballPos[1] - FIELD_BOUNDS[3]/2) < 30:
             dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/13
         else:
@@ -309,7 +306,7 @@ class Game(object):
             distBall = self.playerDistBall(player)
             dist = (distBall[0]**2 + distBall[1]**2)**(0.5)
             if self.ball.getPossession() is None and player is not shooter:
-                    if isinstance(player, Defender) and dist <= 3*RECEIVE_THRESHOLD:
+                    if isinstance(player, Defender) and dist <= 2*RECEIVE_THRESHOLD:
                         rand = uniform(0,100)
                         if self.ball.getSpeed() > 1.5*MAX_SPEED:
                             x = uniform(-45,45)
@@ -334,7 +331,7 @@ class Game(object):
                     elif isinstance(player, Offender) and dist <= RECEIVE_THRESHOLD:
                         player.receive(self.ball)
                         self.ball.setPossession(player)
-                    elif dist <= 3*RECEIVE_THRESHOLD and self.getBlocked():
+                    elif dist <= 2*RECEIVE_THRESHOLD and self.getBlocked():
                         player.receive(self.ball)
                         self.ball.setPossession(player)
                         self.blocked = False 
