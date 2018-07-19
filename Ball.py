@@ -50,7 +50,7 @@ class Ball(object):
         return speed
     
     def getOldPosition(self):
-        return self.oldPosition
+        return self.oldPosition.copy()
 
     def getPossession(self):
         """
@@ -69,7 +69,7 @@ class Ball(object):
         """
         self.possession = player
         self.velocity = player.getVelocity()
-        self.position = player.position
+        self.position = player.position.copy()
         self.shooter = None
     
           
@@ -110,9 +110,9 @@ class Ball(object):
         velocity y to position y
         """
         self.oldPosition = self.position.copy()
-        if self.possession is None:
-            self.position[0] = self.position[0] + self.velocity[0] #changing x
-            self.position[1] = self.position[1] + self.velocity[1] #changing y
+        #if self.possession is None:
+        self.position[0] = self.position[0] + self.velocity[0] #changing x
+        self.position[1] = self.position[1] + self.velocity[1] #changing y
     
 
     def isGoal(self):

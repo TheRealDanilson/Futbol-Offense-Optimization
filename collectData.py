@@ -239,6 +239,7 @@ def match(offenderFormation, defenderFormation, DataList):
     reachedTermination = False
     
     Winloss = data.get_WinLoss()
+    i = 0
     while not reachedTermination:
         game.update()
         #game.printFieldNested()
@@ -246,8 +247,13 @@ def match(offenderFormation, defenderFormation, DataList):
         update(data)
         curWinLoss = data.get_WinLoss()
         reachedTermination = Winloss != curWinLoss
+        i += 1
         if reachedTermination:
             Winloss = curWinLoss
+        elif i >= 200000:
+            Winloss = (0, 1)
+            reachedTermination = True
+            
     
 def getFormations():
     """

@@ -288,16 +288,16 @@ class Data:
         a player or not. Also adds on total distance traveled by ball.
         """
         
-        x_moved = abs(self.game.ball.getPosition()[0] - self.game.ball.getOldPosition()[0])
-        y_moved = abs(self.game.ball.getPosition()[1] - self.game.ball.getOldPosition()[1])
+        x_moved = self.game.ball.getPosition()[0] - self.game.ball.getOldPosition()[0]
+        y_moved = self.game.ball.getPosition()[1] - self.game.ball.getOldPosition()[1]
         hyp = (x_moved**2 + y_moved**2)**(1/2)
         
         self.ballDist += hyp
         
-        if (self.game.ball.getPossession() == None) or (self.pastBall == None): # Alone ---> Player , Player ---> Alone , and Alone ---> Alone all count as Alone Time/Dist.
+        if self.game.ball.getPossession() is None: # Alone ---> Player , Player ---> Alone , and Alone ---> Alone all count as Alone Time/Dist.
             self.ballDistAlone += hyp
             self.ballTimeAlone += 1
-        elif (self.game.ball.getPossession() != None) and (self.pastBall != None): # Player ---> Player
+        elif self.game.ball.getPossession() is not None: # Player ---> Player
             self.ballDistHeld += hyp
             self.ballTimeHeld += 1
     
