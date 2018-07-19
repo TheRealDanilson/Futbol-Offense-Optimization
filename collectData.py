@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from Game import Game
 from Data import Data
-#from graphics import Graphics
+from graphics import Graphics
 from os import walk
 import csv
 from Player import *
@@ -16,6 +16,7 @@ def update(data):
     
 
 def dataWrite(DataList, dataWriter):
+    Won = ['Game won?']
     BallDist = ['Distance Ball Traveled']
     BallDistAlone = ['Distance Ball Traveled Alone']
     BallDistHeld = ['Distance Ball was held']
@@ -63,6 +64,7 @@ def dataWrite(DataList, dataWriter):
         
         
     for data in DataList:
+        Won += [data.get_WinLoss()[0]]
         names = data.get_Names()
         BallDist += [data.get_ballDist()]
         BallDistAlone += [data.get_ballDistAlone()]
@@ -113,6 +115,7 @@ def dataWrite(DataList, dataWriter):
             InterceptLocations[title] += [interceptLocations[player]]
             playerBlocks[title] += [blocks[player]]
             
+    dataWriter.writerow(Won)
     dataWriter.writerow(BallDist)
     dataWriter.writerow(BallDistAlone)
     dataWriter.writerow(BallDistHeld)       
@@ -162,10 +165,10 @@ def infoDump(data):
           str(data.get_whoTimeAlone()))
     print('List of the number of time steps that each offender was with the ball: ' + \
           str(data.get_whoTimeHeld()))
-    print('List of Wins, Losses: ' + str(Winloss))
+    #print('List of Wins, Losses: ' + str(Winloss))
     print('Winrate for offenders: ' + str(data.get_Winrate()))
     print('List of interceptions for each defender: ' + str(data.get_whoIntercepts()))
-    print('Number of passes: ' + str(data.get_Passes()))
+    print('Number of passes: ' + str(data.get_whoPasses()))
 
 #game = Game('Off testing.txt', 'Def testing.txt')
 # movingPictures = Graphics(game)
@@ -229,7 +232,7 @@ def match(offenderFormation, defenderFormation, DataList):
     simulation, and collects data
     """
     game = Game(offenderFormation, defenderFormation)
-    #movingPictures = Graphics(game)
+    movingPictures = Graphics(game)
     data = Data(game)
     DataList += [data]
     
@@ -239,7 +242,7 @@ def match(offenderFormation, defenderFormation, DataList):
     while not reachedTermination:
         game.update()
         #game.printFieldNested()
-        #movingPictures.update()
+        movingPictures.update()
         update(data)
         curWinLoss = data.get_WinLoss()
         reachedTermination = Winloss != curWinLoss

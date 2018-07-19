@@ -121,14 +121,14 @@ class Ball(object):
         """
         oldx = self.oldPosition[0]
         oldy = self.oldPosition[1]
-        newx = self.oldPosition[0]
-        newy = self.oldPosition[1]
+        newx = self.position[0]
+        newy = self.position[1]
         
         try:
             slope = (newy - oldy)/(newx - oldx) #Calculating slope (m) in y=mx+b 
             b = oldy - slope*oldx               #Calculating b in y=mx+b
             travelx = -b/slope                  #Calculate x when y = 0
-            return -4 < travelx and travelx < 4 #True if ball is between goal posts
+            return -4 < travelx and travelx < 4 and newy <= 0 #True if ball is between goal posts
         except:
             return -4 < newx and newx < 4 and newy <= 0
     
