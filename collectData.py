@@ -210,6 +210,7 @@ def runSimulations():
         for j in defenderFormations:
             DataList = []
             #self.formationCombo(i,j)
+            print(i, j)
             for k in range(500):
                 match(i,j, DataList)
             dump(DataList, i, j)
@@ -227,7 +228,6 @@ def match(offenderFormation, defenderFormation, DataList):
     This method is what actually runs each simulation, terminates each
     simulation, and collects data
     """
-    print(offenderFormation, defenderFormation)
     game = Game(offenderFormation, defenderFormation)
     #movingPictures = Graphics(game)
     data = Data(game)
