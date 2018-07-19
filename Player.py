@@ -157,13 +157,19 @@ class Player(object):
             dX = position[0] - self.position[0] + (self.position[0]/7.5 + uniform(-4.5,4.5))
             dY = position[1] - self.position[1] + self.position[1]/20
             magnitude = .5*(dX**2 + dY**2)**(0.5)
-            direction = (dX/magnitude, dY/magnitude)
+            try:
+                direction = (dX/magnitude, dY/magnitude)
+            except:
+                direction = (0, 0)
             self.ball.towardGoal = True
         else:
             dX = position[0] - self.position[0]
             dY = position[1] - self.position[1]
             magnitude = (dX**2 + dY**2)**(0.5)
-            direction = (dX/magnitude, dY/magnitude)
+            try:
+                direction = (dX/magnitude, dY/magnitude)
+            except:
+                direction = (0, 0)
         self.ball.shoot(direction)
         self.removePossession()
         self.justShot = True
