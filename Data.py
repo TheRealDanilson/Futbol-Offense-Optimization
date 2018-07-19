@@ -59,7 +59,7 @@ class Data:
         self.ballDistAlone = 0
         self.ballDistHeld = 0
         self.ballTimeAlone = 0
-        self.ballTimeHeld = 0 
+        self.ballTimeHeld = 0
         
         # Player Kinematics
         self.whoDist = {}
@@ -114,7 +114,8 @@ class Data:
         self.wherehadBall = tuple(self.game.players[1].getPosition())
         self.whohadBall = self.game.players[1]
         self.pastBall = self.game.players[1]
-
+        self.wasTowardGoal = False
+        self.whoBlocked = None
 
     #-----------
     # Getter methods
@@ -344,12 +345,12 @@ class Data:
         and out of bounds count as losses. Also deals with goals.
         """
         for i in self.defenders:
-            if i.hasBall():
-                if self.pastBall == None:
-                    self.whoIntercepts[i] += 1
-                    self.whereIntercepts[i] += [tuple(i.getPosition())]
-                else:
-                    self.whoSteals[i] += 1
+            if i.hasBall() and (self.pastBall == None):
+                self.whoIntercepts[i] += 1
+                self.whereIntercepts[i] += [tuple(i.getPosition())]
+                self.Losses += 1
+            elif i.hasBall() and (self.pastBall != None):
+                self.whoSteals[i] += 1
                 self.Losses += 1
         
         if self.game.ball.isGoal():
@@ -370,14 +371,14 @@ class Data:
                 self.whoReceives[i] += 1
                 self.whereReceives[i] += [tuple(i.getPosition())]
             
-            if (self.pastBall == i) and (self.game.ball.getPossession == None):
+            if (self.pastBall == i) and (self.game.ball.getPossession() == None):
                 self.whoPasses[i] += 1
         
-        if self.game.getBlocked() and self.game.getBlocker() is not None:
+        if self.game.getBlocked() and (self.game.getBlocker() is not None) and (self.game.getBlocker() is not self.whoBlocked):
             self.whoBlocks[self.game.getBlocker()] += 1
         
         
-        if self.game.ball.towardGoal:
+        if self.game.ball.towardGoal and not self.wasTowardGoal:
             self.whereAttempts[self.whohadBall] += [tuple(self.whohadBall.getPosition())]
             self.whoAttempts[self.whohadBall] += 1
     
@@ -400,3 +401,8 @@ class Data:
             self.pastBall = None
         else:
             self.pastBall = self.whohadBall
+        
+        if self.game.ball.towardGoal:
+            self.wasTowardGoal = True
+        
+        self.whoBlocked = self.game.getBlocker()
