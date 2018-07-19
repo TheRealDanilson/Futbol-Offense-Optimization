@@ -465,9 +465,9 @@ class Player(object):
         futureX = self.position[0] + finalVector[0]
         futureY = self.position[1] + finalVector[1]
         
-        if futureX < FIELD_BOUNDS[0] or futureX > FIELD_BOUNDS[1]:
+        if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
             finalVector[0] = -finalVector[0]
-        elif futureY < FIELD_BOUNDS[2] or futureY > FIELD_BOUNDS[3]:
+        elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
             finalVector[1] = -finalVector[1]
     
         self.velocity = finalVector
