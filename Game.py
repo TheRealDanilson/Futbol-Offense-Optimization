@@ -239,12 +239,15 @@ class Game(object):
         minDist = float('inf')
         closest = None
         (x1, y1) = pos1 
-        (x2, y2) = pos2 
+        (x2, y2) = pos2
+        k = ((y2-y1)**2+(x2-x1)**2)**(0.5)
         for member in self.players:
             if not isinstance(member, team):
                 (x0, y0) = member.getPosition()
-                dist = abs((y2-y1)*x0-(x2-x1)*y0+x2*y1-y2*x1)/\
-                          ((y2-y1)**2+(x2-x1)**2)**(0.5)
+                if k != 0:
+                    dist = abs((y2-y1)*x0-(x2-x1)*y0+x2*y1-y2*x1)/k
+                else:
+                    dist = ((x0 - x1)**2 + (y0 - y1)**2)**(0.5)
                 if dist < minDist:
                     minDist = dist 
                     closest = member
