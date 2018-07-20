@@ -446,7 +446,7 @@ class Player(object):
                  weight = .01
                  finalVector = [weight*direction[0], weight*direction[1]]
              else:
-                 weight = .9
+                 weight = 1
                  finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
@@ -464,11 +464,16 @@ class Player(object):
         
         futureX = self.position[0] + finalVector[0]
         futureY = self.position[1] + finalVector[1]
-        
-        if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
-            finalVector[0] = -finalVector[0]
-        elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
-            finalVector[1] = -finalVector[1]
+        if isinstance(player, Offender):
+            if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
+                finalVector[0] = -finalVector[0]
+            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
+                finalVector[1] = -finalVector[1]
+        elif isinstance(player, Defender):
+            if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 6:
+                finalVector[0] = -finalVector[0]
+            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
+                finalVector[1] = -finalVector[1]
     
         self.velocity = finalVector
 
@@ -577,13 +582,13 @@ class Offender(Player):
                 direction = (0,-1)
                 weight = 40
                 return self.createVector(weight, direction)
-            # elif ball[0] > 15 and playerPos[0] > 25:
-            #     direction = (0,-1)
-            #     weight = 30
-            #     return self.createVector(weight, direction)
-            # elif ball[0] < -15 and playerPos[0] < -25:
-            #     direction = (0,-1)
-            #     weight = 30
+             elif ball[1] > 25 and playerPos[0] > 25:
+                 direction = (-1,0)
+                 weight = 30
+                 return self.createVector(weight, direction)
+             elif ball[0] < 25 and playerPos[0] < -25:
+                 direction = (1,0)
+                 weight = 30
                 return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
