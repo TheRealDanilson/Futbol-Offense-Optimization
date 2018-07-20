@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from Game import Game
 from Data import Data
-from graphics import Graphics
+#from graphics import Graphics
 from os import walk
 import csv
 from Player import *
@@ -214,7 +214,7 @@ def runSimulations():
             DataList = []
             #self.formationCombo(i,j)
             print(i, j)
-            for k in range(500):
+            for k in range(250):
                 match(i,j, DataList)
             dump(DataList, i, j)
         
@@ -232,7 +232,7 @@ def match(offenderFormation, defenderFormation, DataList):
     simulation, and collects data
     """
     game = Game(offenderFormation, defenderFormation)
-    movingPictures = Graphics(game)
+    #movingPictures = Graphics(game)
     data = Data(game)
     DataList += [data]
     
@@ -243,7 +243,7 @@ def match(offenderFormation, defenderFormation, DataList):
     while not reachedTermination:
         game.update()
         #game.printFieldNested()
-        movingPictures.update()
+        #movingPictures.update()
         update(data)
         curWinLoss = data.get_WinLoss()
         reachedTermination = Winloss != curWinLoss
