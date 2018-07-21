@@ -33,7 +33,7 @@ class Ball(object):
         self.possession = player
         self.velocity = [0,0]
         self.bounds = FIELD_BOUNDS
-        self.oldPosition = self.position.copy()
+        self.oldPosition = self.position
         self.receiving = False
         self.shooter = None
         self.towardGoal = False
@@ -69,7 +69,7 @@ class Ball(object):
         """
         self.possession = player
         self.velocity = player.getVelocity()
-        self.position = player.position.copy()
+        self.position = player.position
         self.shooter = None
     
           
@@ -110,9 +110,9 @@ class Ball(object):
         velocity y to position y
         """
         self.oldPosition = self.position.copy()
-        #if self.possession is None:
-        self.position[0] = self.position[0] + self.velocity[0] #changing x
-        self.position[1] = self.position[1] + self.velocity[1] #changing y
+        if self.possession is None:
+            self.position[0] = self.position[0] + self.velocity[0] #changing x
+            self.position[1] = self.position[1] + self.velocity[1] #changing y
     
 
     def isGoal(self):

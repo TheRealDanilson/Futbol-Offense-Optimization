@@ -464,15 +464,15 @@ class Player(object):
         
         futureX = self.position[0] + finalVector[0]
         futureY = self.position[1] + finalVector[1]
-        if isinstance(player, Offender):
+        if isinstance(self, Offender):
             if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
                 finalVector[0] = -finalVector[0]
             elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
                 finalVector[1] = -finalVector[1]
-        elif isinstance(player, Defender):
-            if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 6:
+        elif isinstance(self, Defender):
+            if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
                 finalVector[0] = -finalVector[0]
-            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
+            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 2.5:
                 finalVector[1] = -finalVector[1]
     
         self.velocity = finalVector
@@ -582,14 +582,14 @@ class Offender(Player):
                 direction = (0,-1)
                 weight = 40
                 return self.createVector(weight, direction)
-             elif ball[1] > 25 and playerPos[0] > 25:
+            elif ball[1] > 25 and playerPos[0] > 25:
                  direction = (-1,0)
                  weight = 30
                  return self.createVector(weight, direction)
-             elif ball[0] < 25 and playerPos[0] < -25:
+            elif ball[0] < 25 and playerPos[0] < -25:
                  direction = (1,0)
                  weight = 30
-                return self.createVector(weight, direction)
+                 return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
                     vector = (uniform(-1,1),uniform(-1,1))
