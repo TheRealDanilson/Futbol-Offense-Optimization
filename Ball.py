@@ -50,7 +50,7 @@ class Ball(object):
         return speed
     
     def getOldPosition(self):
-        return self.oldPosition.copy()
+        return self.oldPosition
 
     def getPossession(self):
         """

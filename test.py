@@ -18,7 +18,7 @@ factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
 background = factory.from_image(RESOURCES.get_path("soccerField.png"))
 sprites = [background]
 
-game = Game('Off 3-5-2V.txt', 'Def 3-5-2 P.txt')
+game = Game('Off 3-5-2.txt', 'Def 3-5-2 V.txt')
 #data = Data()
 
 players = game.playerList()

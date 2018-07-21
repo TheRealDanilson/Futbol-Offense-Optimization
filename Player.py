@@ -155,7 +155,7 @@ class Player(object):
         """
         if position[1] == 0 and abs(position[0]) < 4:
             dX = position[0] - self.position[0] + (self.position[0]/7.5 + uniform(-4.5,4.5))
-            dY = position[1] - self.position[1] + self.position[1]/20
+            dY = position[1] - self.position[1] +self.position[1]/18
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             try:
                 direction = (dX/magnitude, dY/magnitude)
@@ -467,12 +467,12 @@ class Player(object):
         if isinstance(self, Offender):
             if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
                 finalVector[0] = -finalVector[0]
-            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
+            elif futureY < FIELD_BOUNDS[2] or futureY > FIELD_BOUNDS[3] - 1:
                 finalVector[1] = -finalVector[1]
         elif isinstance(self, Defender):
             if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
                 finalVector[0] = -finalVector[0]
-            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 2.5:
+            elif futureY < FIELD_BOUNDS[2] or futureY > FIELD_BOUNDS[3] - 4:
                 finalVector[1] = -finalVector[1]
     
         self.velocity = finalVector
@@ -582,11 +582,11 @@ class Offender(Player):
                 direction = (0,-1)
                 weight = 40
                 return self.createVector(weight, direction)
-            elif ball[1] > 25 and playerPos[0] > 25:
+            elif ball[1] < 25 and playerPos[0] > 25:
                  direction = (-1,0)
                  weight = 30
                  return self.createVector(weight, direction)
-            elif ball[0] < 25 and playerPos[0] < -25:
+            elif ball[1] < 25 and playerPos[0] < -25:
                  direction = (1,0)
                  weight = 30
                  return self.createVector(weight, direction)
@@ -610,7 +610,7 @@ class Offender(Player):
                         if memberY < defendMinY:
                             defendMinY = memberY
                 if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
-                    weight = 150
+                    weight = 200
                     vector = [0, weight]
                     return(vector)
                 
@@ -650,6 +650,7 @@ class Defender(Player):
         """
         weight = self.genWeight(objective)
         ballDist = self.game.playerDistBall(self)
+        playerPos = self.getPosition()
         (forget, direction) = self.magnitudeAndDirection(ballDist)
         if forget <= 5:
             weight = 10
@@ -674,6 +675,10 @@ class Defender(Player):
                             weight *= -4
                         if self.hasBall():
                             weight *= -10
+                        if playerPos[1] > 40:
+                            weight *= 0
+                        if playerPos[1] < 20:
+                            weight *= 15
                         mateVector = self.createVector(weight, direction)
                         self.addVectors(vector, mateVector)
                 return (vector[0], vector[1])           
@@ -682,6 +687,10 @@ class Defender(Player):
                 (dist, direction) = self.magnitudeAndDirection(ballDist)
                 if dist <= 2*ZONE_THRESHOLD:
                     weight = 15
+                if playerPos[1] > 40:
+                            weight *= 0
+                if playerPos[1] < 20:
+                            weight *= 1
                 # else:    
                 #     weight = 15/(dist + 1)
                 return self.createVector(weight, direction)
@@ -698,6 +707,17 @@ class Defender(Player):
                             weight *= 10
                         mateVector = self.createVector(weight, direction)
                         self.addVectors(vector, mateVector)
-                return (vector[0], vector[1])   
+                return (vector[0], vector[1])
+            elif objective is Objectives.OFF_SIDES:
+                defendMinY = float('inf')
+                for member in self.players:
+                    if isinstance(member, Defender):
+                        memberY = member.getPosition()[1]
+                        if memberY < defendMinY:
+                            defendMinY = memberY
+                if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
+                    weight = 200
+                    vector = [0, weight]
+                    return(vector)
             return (0, 0)
         
