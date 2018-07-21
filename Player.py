@@ -652,7 +652,7 @@ class Defender(Player):
         ballDist = self.game.playerDistBall(self)
         playerPos = self.getPosition()
         (forget, direction) = self.magnitudeAndDirection(ballDist)
-        if forget <= 5:
+        if forget <= 5 and playerPos[1] < 50:
             weight = 10
             return self.createVector(weight, direction)
         else:
@@ -662,7 +662,7 @@ class Defender(Player):
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
-                weight = dist**2
+                weight = dist**3
                 return self.createVector(weight, direction)
             elif objective is Objectives.OPPONENTS:
                 opponentTeam = self.game.playerOpponentTeam(self)
@@ -715,8 +715,8 @@ class Defender(Player):
                         memberY = member.getPosition()[1]
                         if memberY < defendMinY:
                             defendMinY = memberY
-                if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
-                    weight = 200
+                if  playerPos[1] == defendMinY:
+                    weight = 50
                     vector = [0, weight]
                     return(vector)
             return (0, 0)
