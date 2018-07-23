@@ -45,6 +45,7 @@ class Data:
     whohadBall      Last possessor of the ball -- Excludes None.
     pastBall        Last possessor of the ball -- Includes None.
     wherehadBall    Last location of the last possessor -- Excludes None.
+    initialHolder   First possessor of the ball.
     """
     
     def __init__(self,game):
@@ -116,11 +117,19 @@ class Data:
         self.pastBall = self.game.ball.getPossession() # Changed for same reason.
         self.wasTowardGoal = False
         self.whoBlocked = None
+        
+        # Constant
+        self.initialHolder = self.game.ball.getPossession()
 
     #-----------
     # Getter methods
     #-----------
     
+    def get_initialHolder(self):
+        """
+        Player object, returns initial holder/possessor of the ball.
+        """
+        return self.initialHolder
     
     def get_ballDist(self):
         """
