@@ -154,8 +154,8 @@ class Player(object):
         Removes possession from player and shoots the ball to center of goal
         """
         if position[1] == 0 and abs(position[0]) < 4:
-            dX = position[0] - self.position[0] + (self.position[0]/7.5 + uniform(-4.5,4.5))
-            dY = position[1] - self.position[1] +self.position[1]/18
+            dX = position[0] - self.position[0] + (self.position[0]/10 + uniform(-4.25,4.25))
+            dY = position[1] - self.position[1] +self.position[1]/20
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             try:
                 direction = (dX/magnitude, dY/magnitude)
@@ -282,7 +282,7 @@ class Player(object):
             p = 0.0
         elif (x**2 + y**2)**(0.5) <= 12:
             p = 1.0
-        elif z > 2.5:
+        elif z > 2:
             p = expcdf((5.5 - z),4.3)/3
         else:
             p = expcdf((5.5 - z),4.3)
@@ -446,7 +446,7 @@ class Player(object):
                  weight = .01
                  finalVector = [weight*direction[0], weight*direction[1]]
              else:
-                 weight = 1
+                 weight = .9
                  finalVector = [weight*direction[0], weight*direction[1]]
         else:
             for objective in Objectives:
@@ -467,12 +467,12 @@ class Player(object):
         if isinstance(self, Offender):
             if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
                 finalVector[0] = -finalVector[0]
-            elif futureY < FIELD_BOUNDS[2] or futureY > FIELD_BOUNDS[3] - 1:
+            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 1:
                 finalVector[1] = -finalVector[1]
         elif isinstance(self, Defender):
             if futureX < FIELD_BOUNDS[0] + 1 or futureX > FIELD_BOUNDS[1] - 1:
                 finalVector[0] = -finalVector[0]
-            elif futureY < FIELD_BOUNDS[2] or futureY > FIELD_BOUNDS[3] - 4:
+            elif futureY < FIELD_BOUNDS[2] + 1 or futureY > FIELD_BOUNDS[3] - 4:
                 finalVector[1] = -finalVector[1]
     
         self.velocity = finalVector
@@ -576,19 +576,19 @@ class Offender(Player):
                 return (vector[0], vector[1])
             elif ball[0] > 20 and playerPos[0] > 25:
                 direction = (0,-1)
-                weight = 40
+                weight = 60
                 return self.createVector(weight, direction)
             elif ball[0] < -20 and playerPos[0] < -25:
                 direction = (0,-1)
-                weight = 40
+                weight = 60
                 return self.createVector(weight, direction)
             elif ball[1] < 25 and playerPos[0] > 25:
                  direction = (-1,0)
-                 weight = 30
+                 weight = 40
                  return self.createVector(weight, direction)
             elif ball[1] < 25 and playerPos[0] < -25:
                  direction = (1,0)
-                 weight = 30
+                 weight = 40
                  return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
@@ -610,7 +610,7 @@ class Offender(Player):
                         if memberY < defendMinY:
                             defendMinY = memberY
                 if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
-                    weight = 200
+                    weight = 250
                     vector = [0, weight]
                     return(vector)
                 
@@ -716,7 +716,7 @@ class Defender(Player):
                         if memberY < defendMinY:
                             defendMinY = memberY
                 if  playerPos[1] == defendMinY:
-                    weight = 50
+                    weight = 150
                     vector = [0, weight]
                     return(vector)
             return (0, 0)

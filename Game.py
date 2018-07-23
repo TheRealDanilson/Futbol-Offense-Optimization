@@ -20,7 +20,10 @@ class Game(object):
         self.players = []
         self.readFormation(offenseFormation)
         num = int(offenseFormation[4])
-        starting = choice(self.players[:num])
+        if num > 3:
+            starting = choice(self.players[1:num-1])
+        else:
+            starting = choice(self.players[:num])
         self.readFormation(defenseFormation)
         self.createBall(starting)
         self.blocked = False
@@ -132,7 +135,10 @@ class Game(object):
         ballPos = self.ball.getPosition()
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
         dX = (ballPos[0] * shift)/7
-        dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/12
+        if ballPos[1] > 30:
+            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/12
+        else:
+            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/6
          #   dY = 0
         # if ballPos[0] > 10:
         #     dX = shift
