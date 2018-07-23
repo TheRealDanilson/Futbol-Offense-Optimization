@@ -576,24 +576,24 @@ class Offender(Player):
                 return (vector[0], vector[1])
             elif ball[0] > 20 and playerPos[0] > 25:
                 direction = (0,-1)
-                weight = 60
+                weight = 50
                 return self.createVector(weight, direction)
             elif ball[0] < -20 and playerPos[0] < -25:
                 direction = (0,-1)
-                weight = 60
+                weight = 50
                 return self.createVector(weight, direction)
             elif ball[1] < 25 and playerPos[0] > 25:
                  direction = (-1,0)
-                 weight = 40
+                 weight = 30
                  return self.createVector(weight, direction)
             elif ball[1] < 25 and playerPos[0] < -25:
                  direction = (1,0)
-                 weight = 40
+                 weight = 30
                  return self.createVector(weight, direction)
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
                     vector = (uniform(-1,1),uniform(-1,1))
-                    weight = 60
+                    weight = 80
                     self.randomVector = self.createVector(weight, vector)
                     self.randomCount = 0
                     return self.randomVector
@@ -610,7 +610,7 @@ class Offender(Player):
                         if memberY < defendMinY:
                             defendMinY = memberY
                 if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
-                    weight = 250
+                    weight = 500
                     vector = [0, weight]
                     return(vector)
                 
@@ -658,7 +658,7 @@ class Defender(Player):
         else:
             if objective is Objectives.GOAL:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistGoal(self))
-                weight = (dist/5)**2
+                weight = (dist)**2
                 return self.createVector(weight, direction)
             elif objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
@@ -672,7 +672,7 @@ class Defender(Player):
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
                         weight = -15/(dist + 1)
                         if opponent is nearestOpponent:
-                            weight *= -4
+                            weight *= -10
                         if self.hasBall():
                             weight *= -10
                         if playerPos[1] > 40:
@@ -700,9 +700,9 @@ class Defender(Player):
                 nearestTeammate = self.game.nearestTeammate(self)[0]
                 for mate in Team:
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                        weight = -(30/(dist + 1))**2
+                        weight = -(100/(dist + 1))**2
                         if mate is nearestTeammate:
-                            weight *= 2
+                            weight *= 20
                         if self.hasBall():
                             weight *= 10
                         mateVector = self.createVector(weight, direction)

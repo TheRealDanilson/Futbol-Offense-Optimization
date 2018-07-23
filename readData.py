@@ -3,7 +3,7 @@ import csv
 import ast
 
 
-def readData():
+def readDataFiles():
     dataSet = {}
     for root, dirs, files in walk("./"):
         for file in files:
@@ -12,21 +12,32 @@ def readData():
                 reader = csv.reader(f, delimiter=';')
                 dataDict = {}
                 for row in reader:
-                    for i in range(len(row) - 1):
-                        row[i+1] = ast.literal_eval(row[i+1])
-                    dataDict[row[0]] = row[1:]
+                    if len(row) > 0 and not 'sep' in row[0]:
+                        for i in range(len(row) - 1):
+                            row[i+1] = ast.literal_eval(row[i+1])
+                        
+                        dataDict[row[0]] = row[1:]
                 dataSet[file] = dataDict
     return dataSet
 
 
 def shots(dataSet):
+    """
+        Returns a tuple of two dictionaries: shotsTaken, and shotsMade
+        
+        shotsTaken - A dictionary with Offense Formations as keys, and the total shots
+            taken throughout all simulations and matchups for that formation as values
+        shotsTaken - A dictionary with Offense Formations as keys, and the total shots made
+            throughout all simulations and matchups for that formation as values
+    
+    """
     shotsTaken = {}
     shotsMade = {}
     for matchup in dataSet.keys():
         offEnd = matchup.index('D', 1) - 2
         defEnd = matchup.index('.') - 1
         offFormation = matchup[5:offEnd + 1]
-        defFormation = matchup[offend + 2:defEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
         data = dataSet[matchup]
         
         for point in data.keys():
@@ -42,3 +53,71 @@ def shots(dataSet):
                     shotsMade[offFormation] = sum(data[point])
                     
     return (shotsTaken, shotsMade)
+
+
+def bestFormation(dataSet):
+    gamesWon = {}
+    for matchup in dataSet.keys():
+        offEnd = matchup.index('D', 1) - 2
+        defEnd = matchup.index('.') - 1
+        offFormation = matchup[5:offEnd + 1]
+        defFormation = matchup[offend + 2:defEnd + 1]
+        data = dataSet[matchup]
+        
+        for point in data.keys():
+            if 'Game won?' in point:
+                try:
+                    gamesWon[offFormation] += sum(data[point])
+                except:
+                    gamesWon[offFormation] = sum(data[point])
+                break
+    return dictSort(gamesWon)[0][-1]
+
+
+def swap(lst, shadowLst, i, j):
+    temp = lst[j]
+    shadowTemp = shadowLst[j]
+    lst[j] = lst[i]
+    shadowLst[j] = shadowLst[i]
+    lst[i] = temp
+    shadowLst[i] = shadowTemp
+
+
+def expcdf(x, mu):
+    return 1 - exp(-x/mu)
+
+
+def partition(lst, shadowLst, m, k):
+    if (k - m + 1) <= 1:
+        return None
+    pivot = lst[m]
+    i = m
+    j = m + 1
+    
+    # Precondition: Section of list <= i is less than or equal to the pivot
+    #               lst[i] is the pivot
+    #               For i < x < j, lst[x] is greater than the pivot
+    #               For j <= x, lst[x] is unsorted
+    while (j <= k):
+        if lst[j] <= pivot:
+            swap(lst, shadowLst, j, i)
+            swap(lst, shadowLst, i + 1, j)
+            i += 1
+        j += 1
+    return i
+
+
+def quickSort(lst, shadowLst, m, k):
+    if (k - m + 1) <= 1:
+        return None
+    pivot = partition(lst, shadowLst, m, k)
+    quickSort(lst, shadowLst, m, pivot - 1)
+    quickSort(lst, shadowLst, pivot + 1, k)
+
+
+def dictSort(dct):
+    keys = list(dct.keys())
+    values = list(dct.values())
+    quickSort(values, keys, 0, len(values) - 1)
+    return (keys, values)
+        

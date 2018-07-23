@@ -138,7 +138,7 @@ class Game(object):
         if ballPos[1] > 30:
             dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/12
         else:
-            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/6
+            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/12
          #   dY = 0
         # if ballPos[0] > 10:
         #     dX = shift
@@ -329,7 +329,7 @@ class Game(object):
                             self.ball.shoot(direction, True)
                             self.blocked = True
                             self.blocker = player
-                        elif self.ball.getSpeed() >= MAX_SPEED and rand > 50:
+                        elif self.ball.getSpeed() >= 1.25*MAX_SPEED and rand > 50:
                             x = uniform(-45,45)
                             y = uniform(-60,60)
                             magnitude = (x**2  + y**2)**(.5)
