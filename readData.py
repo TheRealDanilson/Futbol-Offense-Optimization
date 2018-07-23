@@ -12,9 +12,11 @@ def readDataFiles():
                 reader = csv.reader(f, delimiter=';')
                 dataDict = {}
                 for row in reader:
-                    for i in range(len(row) - 1):
-                        row[i+1] = ast.literal_eval(row[i+1])
-                    dataDict[row[0]] = row[1:]
+                    if len(row) > 0 and not 'sep' in row[0]:
+                        for i in range(len(row) - 1):
+                            row[i+1] = ast.literal_eval(row[i+1])
+                        
+                        dataDict[row[0]] = row[1:]
                 dataSet[file] = dataDict
     return dataSet
 
@@ -35,7 +37,7 @@ def shots(dataSet):
         offEnd = matchup.index('D', 1) - 2
         defEnd = matchup.index('.') - 1
         offFormation = matchup[5:offEnd + 1]
-        defFormation = matchup[offend + 2:defEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
         data = dataSet[matchup]
         
         for point in data.keys():
