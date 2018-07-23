@@ -2,7 +2,7 @@ from constants import *
 from Player import *
 from Ball import Ball
 from math import floor
-from random import seed
+from random import seed, choice
 
 
 class Game(object):
@@ -19,8 +19,10 @@ class Game(object):
         """
         self.players = []
         self.readFormation(offenseFormation)
+        num = int(offenseFormation[4])
+        starting = choice(self.players[:num])
         self.readFormation(defenseFormation)
-        self.createBall(self.players[1])
+        self.createBall(starting)
         self.blocked = False
         self.blocker = None
         
