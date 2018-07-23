@@ -2,6 +2,8 @@ from os import walk
 import csv
 import ast
 
+NUM_SIMULATIONS = 250
+
 
 def readDataFiles():
     dataSet = {}
@@ -29,10 +31,16 @@ def shots(dataSet):
             taken throughout all simulations and matchups for that formation as values
         shotsTaken - A dictionary with Offense Formations as keys, and the total shots made
             throughout all simulations and matchups for that formation as values
-    
+        offRangeTaken - A dictionary with Offense Formations as keys, and values as lists
+            The list value has the following format:
+                [ [defFormation, maxShotsTaken] , [defFormation, minShotsTaken] ]
+        offRangeMade - Same as offRangeTaken, but with shots made instead
+        
     """
     shotsTaken = {}
     shotsMade = {}
+    offRangeTaken = {}
+    offRangeMade = {}
     for matchup in dataSet.keys():
         offEnd = matchup.index('D', 1) - 2
         defEnd = matchup.index('.') - 1
@@ -43,16 +51,34 @@ def shots(dataSet):
         for point in data.keys():
             if 'number of goal attempts' in point:
                 try:
-                    shotsTaken[offFormation] += sum(data[point])
+                    taken = sum(data[point])
+                    shotsTaken[offFormation] += taken
+                    if taken > offRangeTaken[offFormation][0][1]:
+                        offRangeTaken[offFormation][0] = [defFormation, taken]
+                    if taken < offRange[offFormation][1][1]:
+                        offRangeTaken[offFormation][1] = [defFormation, taken]
+
                 except:
-                    shotsTaken[offFormation] = sum(data[point])
+                    taken = sum(data[point])
+                    shotsTaken[offFormation] = taken
+                    offRangeTaken[offFormation] = [[defFormation, taken], [defFormation, taken]]
             elif 'number of goals' in point:
                 try:
-                    shotsMade[offFormation] += sum(data[point])
+                    made = sum(data[point])
+                    shotsMade[offFormation] += made
+                    if made > offRangeMade[offFormation][0][1]:
+                        offRangeMade[offFormation][0] = [defFormation, made]
+                    if made < offRangeMade[offFormation][1][1]:
+                        offRangeMade[offFormation][1] = [defFormation, made]
                 except:
-                    shotsMade[offFormation] = sum(data[point])
+                    made = sum(data[point])
+                    shotsMade[offFormation] = madeif taken > offRange[offFormation][0][1]:
+                        offRange[offFormation][0] = [defFormation, taken]
+                    if taken < offRange[offFormation][1][1]:
+                        offRange[offFormation][1] = [defFormation, taken]
+                    offRangeMade[offFormation] = [[defFormation, made], [defFormation, made]]
                     
-    return (shotsTaken, shotsMade)
+    return (shotsTaken, shotsMade, offRangeTaken, offRangeMade)
 
 
 def bestFormation(dataSet):
@@ -72,6 +98,7 @@ def bestFormation(dataSet):
                     gamesWon[offFormation] = sum(data[point])
                 break
     return dictSort(gamesWon)[0][-1]
+
 
 
 def swap(lst, shadowLst, i, j):
