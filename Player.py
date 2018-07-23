@@ -610,7 +610,7 @@ class Offender(Player):
                         if memberY < defendMinY:
                             defendMinY = memberY
                 if  not self.receiving and not self.hasBall() and self.getPosition()[1] < defendMinY:
-                    weight = 500
+                    weight = 700
                     vector = [0, weight]
                     return(vector)
                 
@@ -702,7 +702,7 @@ class Defender(Player):
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
                         weight = -(100/(dist + 1))**2
                         if mate is nearestTeammate:
-                            weight *= 20
+                            weight *= 50
                         if self.hasBall():
                             weight *= 10
                         mateVector = self.createVector(weight, direction)
