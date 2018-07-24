@@ -87,15 +87,15 @@ def passes(dataSet):
         offFormation = matchup[5:offEnd + 1]
         defFormation = matchup[offEnd + 2:defEnd + 1]
         data = dataSet[matchup]
-        if offFormation not in passesMade.keys():
-            passesMade[offFormation] = {}
+        if defFormation not in passesMade.keys():
+            passesMade[defFormation] = {}
         for point in data.keys():
             if 'number of passes' in point:
                 num = sum(data[point])
                 try:
-                    passesMade[offFormation][defFormation] += num
+                    passesMade[defFormation][offFormation] += num
                 except Exception as e:
-                    passesMade[offFormation][defFormation] = num
+                    passesMade[defFormation][offFormation] = num
     
     return passesMade
 
