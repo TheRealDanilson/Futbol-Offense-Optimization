@@ -53,14 +53,11 @@ def shots(dataSet):
                 try:
                     taken = sum(data[point])
                     shotsTaken[offFormation] += taken
-                    try:
-                        if taken > offRangeTaken[offFormation][0][1]:
-                            offRangeTaken[offFormation][0] = [defFormation, taken]
-                        if taken < offRangeTaken[offFormation][1][1]:
-                            offRangeTaken[offFormation][1] = [defFormation, taken]
-                    except Exception as e:
-                        print(e)
-
+                    if taken > offRangeTaken[offFormation][0][1]:
+                        offRangeTaken[offFormation][0] = [defFormation, taken]
+                    if taken < offRangeTaken[offFormation][1][1]:
+                        offRangeTaken[offFormation][1] = [defFormation, taken]
+                            
                 except:
                     taken = sum(data[point])
                     shotsTaken[offFormation] = taken
