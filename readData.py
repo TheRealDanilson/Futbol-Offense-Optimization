@@ -75,8 +75,29 @@ def shots(dataSet):
                     made = sum(data[point])
                     shotsMade[offFormation] = made
                     offRangeMade[offFormation] = [[defFormation, made], [defFormation, made]]
-                     
+
     return (shotsTaken, shotsMade, offRangeTaken, offRangeMade)
+
+
+def passes(dataSet):
+    passesMade = {}
+    for matchup in dataSet.keys():
+        offEnd = matchup.index('D', 1) - 2
+        defEnd = matchup.index('.') - 1
+        offFormation = matchup[5:offEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
+        data = dataSet[matchup]
+        if offFormation not in passesMade.keys():
+            passesMade[offFormation] = {}
+        for point in data.keys():
+            if 'number of passes' in point:
+                num = sum(data[point])
+                try:
+                    passesMade[offFormation][defFormation] += num
+                except Exception as e:
+                    passesMade[offFormation][defFormation] = num
+    
+    return passesMade
 
 
 def bestFormation(dataSet):
