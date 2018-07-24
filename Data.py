@@ -2,6 +2,7 @@
 # (each player/all), which defender intercepted the most, number of decisions
 # to keep (player), no. goals, no. shots, distance moved by offenders, distance
 # moved by defenders.
+from Player import Offender
 
 class Data:
     """
@@ -52,8 +53,11 @@ class Data:
         
         # Initial Initials
         self.game = game
-        self.offenders = self.game.players[:len(self.game.players)//2]
-        self.defenders = self.game.players[len(self.game.players)//2:]
+        offenderEnd = 0
+        while isinstance(game.players[offenderEnd + 1], Offender):
+            offenderEnd += 1
+        self.offenders = self.game.players[:offenderEnd + 1]
+        self.defenders = self.game.players[offenderEnd:]
         
         # Ball kinematics
         self.ballDist = 0
