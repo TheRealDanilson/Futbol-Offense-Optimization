@@ -1,1 +1,1 @@
-rm -rf Game.pyc constants.pyc __pycache__
+rm -rf *.pyc __pycache__
