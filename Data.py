@@ -57,7 +57,7 @@ class Data:
         while isinstance(game.players[offenderEnd + 1], Offender):
             offenderEnd += 1
         self.offenders = self.game.players[:offenderEnd + 1]
-        self.defenders = self.game.players[offenderEnd:]
+        self.defenders = self.game.players[offenderEnd + 1:]
         
         # Ball kinematics
         self.ballDist = 0

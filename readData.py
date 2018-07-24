@@ -53,15 +53,19 @@ def shots(dataSet):
                 try:
                     taken = sum(data[point])
                     shotsTaken[offFormation] += taken
-                    if taken > offRangeTaken[offFormation][0][1]:
-                        offRangeTaken[offFormation][0] = [defFormation, taken]
-                    if taken < offRange[offFormation][1][1]:
-                        offRangeTaken[offFormation][1] = [defFormation, taken]
+                    try:
+                        if taken > offRangeTaken[offFormation][0][1]:
+                            offRangeTaken[offFormation][0] = [defFormation, taken]
+                        if taken < offRangeTaken[offFormation][1][1]:
+                            offRangeTaken[offFormation][1] = [defFormation, taken]
+                    except Exception as e:
+                        print(e)
 
                 except:
                     taken = sum(data[point])
                     shotsTaken[offFormation] = taken
                     offRangeTaken[offFormation] = [[defFormation, taken], [defFormation, taken]]
+                     
             elif 'number of goals' in point:
                 try:
                     made = sum(data[point])
@@ -70,12 +74,11 @@ def shots(dataSet):
                         offRangeMade[offFormation][0] = [defFormation, made]
                     if made < offRangeMade[offFormation][1][1]:
                         offRangeMade[offFormation][1] = [defFormation, made]
-
                 except:
                     made = sum(data[point])
                     shotsMade[offFormation] = made
                     offRangeMade[offFormation] = [[defFormation, made], [defFormation, made]]
-                    
+                     
     return (shotsTaken, shotsMade, offRangeTaken, offRangeMade)
 
 
