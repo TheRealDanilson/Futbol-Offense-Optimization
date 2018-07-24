@@ -58,27 +58,39 @@ def shotsTakenMade():
 def formationPasses():
     
     formationLabels = []
-    for i in tuple(passes.items()):
-            formationLabels += [i[0]]
+    formationPasses = []
+    
+    for offFormation in passInformation[list(passInformation.keys())[0]]:
+        formationLabels += [offFormation]
+    print(formationLabels)
 
     N = len(formationLabels)        
     ind = np.arange(N)
     width = .5
     
-    formationPasses = [] * N
-    for i in range(N):
-        for j in tuple(passes.items()):
-            formationPasses[i] += [j[1][i]]
+
+    allPasses = [None]*N
+    i = 0
+    for defFormation in passInformation.keys():
+        defDict = passInformation[defFormation]
+        for offFormation in defDict.keys():
+            num = defDict[offFormation]
+            try:
+                allPasses[i].append(num)
+            except:
+                allPasses[i] = []
+        i += 1
+    print(allPasses)    
+    
         
     fig, ax = plt.subplots()
-    
-    allRects = [] 
-    for i in range(formationPasses):
+    allRects = []
+    for i in range(N):
         if i == 0:
-            rects = ax.barh(ind, tuple(i[i]), width, color ='#AC3931')
+            newRect = ax.barh(ind, tuple(allPasses[i]), width, color ='#AC3931')
         else:
-            rects = ax.barh(ind,tuple(i[i]), width, color = 'r', bottom = formationPasses[i-1])
-        allRects.append(rects)
+            newRect = ax.barh(ind,tuple(allPasses[i]), width, color = 'r', bottom = formationPasses[i-1])
+        allRects.append(newRect)
     
     graphLabels(ax,'Total Passes per Formation','Passes','Formations',ind, width, xTick = formationLabels)
     
@@ -90,6 +102,10 @@ def formationPasses():
 #Using readData
 dataSet = readDataFiles()
 shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
-shotsTakenMade()
+passInformation = passes(dataSet)
+
+#shotsTakenMade()
+formationPasses()
+
 #fig.savefig('filename'.png)
 # horizontal bar =  barh
