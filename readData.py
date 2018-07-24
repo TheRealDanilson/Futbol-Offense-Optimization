@@ -70,6 +70,7 @@ def shots(dataSet):
                         offRangeMade[offFormation][0] = [defFormation, made]
                     if made < offRangeMade[offFormation][1][1]:
                         offRangeMade[offFormation][1] = [defFormation, made]
+
                 except:
                     made = sum(data[point])
                     shotsMade[offFormation] = made
