@@ -43,7 +43,7 @@ def shotsTakenMade():
     rects1 = ax.bar(ind, tuple(formationShotsTaken), width, color ='#AC3931')
     rects2 = ax.bar(ind, tuple(formationShotsMade), width, color = '#0B4F6C')
     
-    graphLabels(ax,'Goals','Formations','Shots',ind, width, xTick = formationLabels)
+    graphLabels(ax,'Average Shots over all Matchups','Formations','Shots Average',ind, width, xTick = formationLabels)
     
     ax.legend((rects1[0],rects2[0]), ('Shots Taken', 'Goals Made'),frameon=False)
 
@@ -68,6 +68,7 @@ def formationPasses():
     ind = np.arange(N)
     width = .5
     
+    print(passInformation.items())
 
     allPasses = [None]*N
     i = 0
@@ -85,11 +86,12 @@ def formationPasses():
         
     fig, ax = plt.subplots()
     allRects = []
-    for i in range(N):
+    for i in range(5):
         if i == 0:
-            newRect = ax.barh(ind, tuple(allPasses[i]), width, color ='#AC3931')
+            print(tuple(allPasses[i]))
+            newRect = ax.bar(ind, tuple(allPasses[i]), width, color ='#AC3931')
         else:
-            newRect = ax.barh(ind,tuple(allPasses[i]), width, color = 'r', bottom = formationPasses[i-1])
+            newRect = ax.bar(ind,tuple(allPasses[i]), width, color = 'r', bottom = allPasses[i-1])
         allRects.append(newRect)
     
     graphLabels(ax,'Total Passes per Formation','Passes','Formations',ind, width, xTick = formationLabels)
@@ -98,13 +100,13 @@ def formationPasses():
 
     for i in allRects:
         barLabels(ax, i)
-    
+
 #Using readData
 dataSet = readDataFiles()
 shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
 passInformation = passes(dataSet)
 
-#shotsTakenMade()
+shotsTakenMade()
 formationPasses()
 
 #fig.savefig('filename'.png)
