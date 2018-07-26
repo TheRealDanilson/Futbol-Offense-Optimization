@@ -19,7 +19,7 @@ def barLabels(ax, rects):
     """
     for rect in rects:
         height = rect.get_height()
-        ax.text(rect.get_x() + rect.get_width()/2., .5 + height, \
+        ax.text(rect.get_x() + rect.get_width()/2., rect.get_y() + .5 + height, \
                 '%d' % int(height), ha='center', va= 'bottom')
 
 
@@ -40,6 +40,7 @@ def shotsTakenMade():
     width = .5
     
     fig, ax = plt.subplots()
+    print(formationShotsTaken, formationShotsMade)
     rects1 = ax.bar(ind, tuple(formationShotsTaken), width, color ='#AC3931')
     rects2 = ax.bar(ind, tuple(formationShotsMade), width, color = '#0B4F6C')
     
@@ -56,7 +57,7 @@ def shotsTakenMade():
     
     
 def formationPasses():
-    
+    colors = ('#AC3931', '#0B4F6C')
     formationLabels = []
     formationPasses = []
     
@@ -79,34 +80,42 @@ def formationPasses():
             try:
                 allPasses[i].append(num)
             except:
-                allPasses[i] = []
+                allPasses[i] = [num]
         i += 1
     print(allPasses)    
     
         
     fig, ax = plt.subplots()
     allRects = []
-    for i in range(5):
+    allPasses[:N - 3]
+    bottoms = [0]*N
+    for i in range(N):
         if i == 0:
-            print(tuple(allPasses[i]))
-            newRect = ax.bar(ind, tuple(allPasses[i]), width, color ='#AC3931')
+            newRect = ax.bar(ind, tuple(allPasses[i]), width, color = colors[i % 2])
         else:
-            newRect = ax.bar(ind,tuple(allPasses[i]), width, color = 'r', bottom = allPasses[i-1])
+            newRect = ax.bar(ind,tuple(allPasses[i]), width, bottom = bottoms)
+        listAdd(bottoms, allPasses[i])
         allRects.append(newRect)
     
     graphLabels(ax,'Total Passes per Formation','Passes','Formations',ind, width, xTick = formationLabels)
     
-    ax.legend((rects1[0],rects2[0]), ('Shots Taken', 'Goals Made'),frameon=False)
+    ax.legend(allRects, tuple(passInformation.keys()),frameon=False, loc=(1, 1))
 
     for i in allRects:
         barLabels(ax, i)
+        
+    plt.show()
+    
+def listAdd(lst1, lst2):
+    for i in range(len(lst1)):
+        lst1[i] += lst2[i]
 
 #Using readData
 dataSet = readDataFiles()
-shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
+#shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
 passInformation = passes(dataSet)
 
-shotsTakenMade()
+#shotsTakenMade()
 formationPasses()
 
 #fig.savefig('filename'.png)
