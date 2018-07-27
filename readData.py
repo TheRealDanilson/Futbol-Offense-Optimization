@@ -106,7 +106,7 @@ def bestFormation(dataSet):
         offEnd = matchup.index('D', 1) - 2
         defEnd = matchup.index('.') - 1
         offFormation = matchup[5:offEnd + 1]
-        defFormation = matchup[offend + 2:defEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
         data = dataSet[matchup]
         
         for point in data.keys():
@@ -119,6 +119,34 @@ def bestFormation(dataSet):
     return dictSort(gamesWon)[0][-1]
 
 
+def shotMapData(dataSet, formation):
+    shotsMap = {}
+    for matchup in dataSet.keys():
+        offEnd = matchup.index('D', 1) - 2
+        defEnd = matchup.index('.') - 1
+        offFormation = matchup[5:offEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
+        data = dataSet[matchup]
+        if offFormation == formation:
+            shotsMap[defFormation] = {}
+            defMap = shotsMap[defFormation]
+            for point in data.keys():
+                if 'locations of goal attempts' in point:
+                    attempts = data[point]
+                    index = point.index('locations of goal attempts')
+                    player = point[:index]
+                    for i in range(len(attempts)):
+                        attemptList = attempts[i]
+                        goalPoint = player + 'number of goals'
+                        goals = data[goalPoint][i]
+                        for attempt in attemptList:
+                            defMap[tuple(attempt)] = 'o'
+                        if goals > 0:
+                            defMap[tuple(attempt)] = 'x'
+                            
+    return shotsMap
+                    
+                
 
 def swap(lst, shadowLst, i, j):
     temp = lst[j]

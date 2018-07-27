@@ -109,14 +109,63 @@ def formationPasses():
 def listAdd(lst1, lst2):
     for i in range(len(lst1)):
         lst1[i] += lst2[i]
+        
+        
+        
+def shotMapMissed():
+    fig, ax = plt.subplots()
+    background = plt.imread('Images/soccerField.png')
+    ax.imshow(background, extent = (-45, 45, 0, 60))
+    colors = ('r', 'g', 'b', 'k', 'm', 'y')
+    i = 0
+    for defFormation in shotsMap.keys():
+        color = colors[i]
+        positions = tuple(shotsMap[defFormation].keys())
+        x = []
+        y = []
+        for position in positions:
+            if shotsMap[defFormation][position] == 'o':
+                x += [position[0]]
+                y += [position[1]]
+                
+        plt.scatter(x, y, marker = '.', color = color)
+        i += 1
+        
+    plt.show()
+    
+def shotMapMade():
+    fig, ax = plt.subplots()
+    background = plt.imread('Images/soccerField.png')
+    ax.imshow(background, extent = (-45, 45, 0, 60))
+    colors = ('r', 'g', 'b', 'k', 'm', 'y')
+    i = 0
+    for defFormation in shotsMap.keys():
+        color = colors[i]
+        positions = tuple(shotsMap[defFormation].keys())
+        x = []
+        y = []
+        for position in positions:
+            if shotsMap[defFormation][position] == 'x':
+                x += [position[0]]
+                y += [position[1]]
+                
+        plt.scatter(x, y, marker = 'x', color = color)
+        i += 1
+        
+    plt.show()
+    
 
 #Using readData
 dataSet = readDataFiles()
-#shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
+shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
 passInformation = passes(dataSet)
 
-#shotsTakenMade()
+shotsTakenMade()
 formationPasses()
-
+best = bestFormation(dataSet)
+shotsMap = shotMapData(dataSet, best)
+shotMapMissed()
+shotMapMade()
+print(best)
 #fig.savefig('filename'.png)
 # horizontal bar =  barh
