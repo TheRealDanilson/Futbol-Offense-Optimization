@@ -55,13 +55,14 @@ def shots(dataSet):
                     shotsTaken[offFormation] += taken
                     if taken > offRangeTaken[offFormation][0][1]:
                         offRangeTaken[offFormation][0] = [defFormation, taken]
-                    if taken < offRange[offFormation][1][1]:
+                    if taken < offRangeTaken[offFormation][1][1]:
                         offRangeTaken[offFormation][1] = [defFormation, taken]
-
+                            
                 except:
                     taken = sum(data[point])
                     shotsTaken[offFormation] = taken
                     offRangeTaken[offFormation] = [[defFormation, taken], [defFormation, taken]]
+                     
             elif 'number of goals' in point:
                 try:
                     made = sum(data[point])
@@ -70,13 +71,33 @@ def shots(dataSet):
                         offRangeMade[offFormation][0] = [defFormation, made]
                     if made < offRangeMade[offFormation][1][1]:
                         offRangeMade[offFormation][1] = [defFormation, made]
-
                 except:
                     made = sum(data[point])
                     shotsMade[offFormation] = made
                     offRangeMade[offFormation] = [[defFormation, made], [defFormation, made]]
-                    
+
     return (shotsTaken, shotsMade, offRangeTaken, offRangeMade)
+
+
+def passes(dataSet):
+    passesMade = {}
+    for matchup in dataSet.keys():
+        offEnd = matchup.index('D', 1) - 2
+        defEnd = matchup.index('.') - 1
+        offFormation = matchup[5:offEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
+        data = dataSet[matchup]
+        if defFormation not in passesMade.keys():
+            passesMade[defFormation] = {}
+        for point in data.keys():
+            if 'number of passes' in point:
+                num = sum(data[point])
+                try:
+                    passesMade[defFormation][offFormation] += num
+                except Exception as e:
+                    passesMade[defFormation][offFormation] = num
+    
+    return passesMade
 
 
 def bestFormation(dataSet):
