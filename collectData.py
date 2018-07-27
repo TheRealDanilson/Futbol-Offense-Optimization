@@ -214,7 +214,7 @@ def runSimulations():
             DataList = []
             #self.formationCombo(i,j)
             print(i, j)
-            for k in range(250):
+            for k in range(500):
                 match(i,j, DataList)
             dump(DataList, i, j)
         
