@@ -41,13 +41,15 @@ def shots(dataSet):
     shotsMade = {}
     offRangeTaken = {}
     offRangeMade = {}
+    shotsByFormation = {}
     for matchup in dataSet.keys():
         offEnd = matchup.index('D', 1) - 2
         defEnd = matchup.index('.') - 1
         offFormation = matchup[5:offEnd + 1]
         defFormation = matchup[offEnd + 2:defEnd + 1]
         data = dataSet[matchup]
-        
+        if offFormation not in shotsByFormation.keys():
+            shotsByFormation[offFormation] = {}
         for point in data.keys():
             if 'number of goal attempts' in point:
                 try:
@@ -67,6 +69,7 @@ def shots(dataSet):
                 try:
                     made = sum(data[point])
                     shotsMade[offFormation] += made
+                    shotsByFormation[offFormation][defFormation] += made
                     if made > offRangeMade[offFormation][0][1]:
                         offRangeMade[offFormation][0] = [defFormation, made]
                     if made < offRangeMade[offFormation][1][1]:
@@ -74,9 +77,10 @@ def shots(dataSet):
                 except:
                     made = sum(data[point])
                     shotsMade[offFormation] = made
+                    shotsByFormation[offFormation][defFormation] = made
                     offRangeMade[offFormation] = [[defFormation, made], [defFormation, made]]
 
-    return (shotsTaken, shotsMade, offRangeTaken, offRangeMade)
+    return (shotsTaken, shotsMade, offRangeTaken, offRangeMade, shotsByFormation)
 
 
 def passes(dataSet):
@@ -98,6 +102,27 @@ def passes(dataSet):
                     passesMade[defFormation][offFormation] = num
     
     return passesMade
+
+
+def interceptions(dataSet):
+    interceptionsMade = {}
+    for matchup in dataSet.keys():
+        offEnd = matchup.index('D', 1) - 2
+        defEnd = matchup.index('.') - 1
+        offFormation = matchup[5:offEnd + 1]
+        defFormation = matchup[offEnd + 2:defEnd + 1]
+        data = dataSet[matchup]
+        if offFormation not in interceptionsMade.keys():
+            interceptionsMade[offFormation] = {}
+        for point in data.keys():
+            if 'interceptions' in point:
+                num = sum(data[point])
+                try:
+                    interceptionsMade[offFormation][defFormation] += num
+                except Exception as e:
+                    interceptionsMade[offFormation][defFormation] = num
+    
+    return interceptionsMade
 
 
 def bestFormation(dataSet):

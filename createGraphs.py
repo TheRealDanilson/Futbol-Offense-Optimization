@@ -53,7 +53,6 @@ def shotsTakenMade():
     
     #fig.savefig('test.png')
     
-    plt.show()
     
     
 def formationPasses():
@@ -97,14 +96,13 @@ def formationPasses():
         listAdd(bottoms, allPasses[i])
         allRects.append(newRect)
     
-    graphLabels(ax,'Total Passes per Formation','Passes','Formations',ind, width, xTick = formationLabels)
+    graphLabels(ax,'Total Passes per Formation','Formations','Passes',ind, width, xTick = formationLabels)
     
     ax.legend(allRects, tuple(passInformation.keys()),frameon=False, loc=(1, 1))
 
     for i in allRects:
         barLabels(ax, i)
         
-    plt.show()
     
 def listAdd(lst1, lst2):
     for i in range(len(lst1)):
@@ -131,7 +129,6 @@ def shotMapMissed():
         plt.scatter(x, y, marker = '.', color = color)
         i += 1
         
-    plt.show()
     
 def shotMapMade():
     fig, ax = plt.subplots()
@@ -152,20 +149,104 @@ def shotMapMade():
         plt.scatter(x, y, marker = 'x', color = color)
         i += 1
         
-    plt.show()
     
+    
+def formationInterceptions():
+    colors = ('#AC3931', '#0B4F6C')
+    formationLabels = []
+    formationInterceptions = []
+    
+    for defFormation in interceptionInformation[list(interceptionInformation.keys())[0]]:
+        formationLabels += [defFormation]
+    print(formationLabels)
+
+    N = len(formationLabels)        
+    ind = np.arange(N)
+    width = .5
+    
+    print(interceptionInformation.items())
+
+    allInterceptions = [None]*N
+    i = 0
+    for offFormation in interceptionInformation.keys():
+        offDict = interceptionInformation[offFormation]
+        for defFormation in offDict.keys():
+            num = offDict[defFormation]
+            try:
+                allInterceptions[i].append(num)
+            except:
+                allInterceptions[i] = [num]
+        i += 1
+    print(allInterceptions)    
+    
+        
+    fig, ax = plt.subplots()
+    allRects = []
+    bottoms = [0]*N
+    for i in range(N):
+        if i == 0:
+            newRect = ax.bar(ind, tuple(allInterceptions[i]), width, color = colors[i % 2])
+        else:
+            newRect = ax.bar(ind,tuple(allInterceptions[i]), width, bottom = bottoms)
+        listAdd(bottoms, allInterceptions[i])
+        allRects.append(newRect)
+    
+    graphLabels(ax,'Total Interceptions per Formation','Formations','Interceptions',ind, width, xTick = formationLabels)
+    
+    ax.legend(allRects, tuple(interceptionInformation.keys()),frameon=False, loc=(1, 1))
+
+    for i in allRects:
+        barLabels(ax, i)
+        
+    
+
+def heatMap():
+    lst = shotsByFormation.items()
+    side = np.linspace(0, 5, 6)
+    x, y = np.meshgrid(side, side)
+    i = 0
+    z = np.zeros((6,6))
+    fig, ax = plt.subplots()
+    for tup in lst:
+        offFormation = tup[0]
+        offDict = tup[1]
+        j = 0
+        total = sum(offDict.values())
+        for shot in offDict.values():
+            zVal = int(shot/total * 1000)/10
+            z[i][j] = zVal
+            ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=24)
+            j += 1
+        i += 1
+    ax.set_xticks(np.arange(6))
+    ax.set_yticks(np.arange(6))
+    ax.set_xticklabels(shotsByFormation.keys())
+    ax.set_yticklabels(shotsByFormation[tup[0]].keys())
+    
+    
+    plt.imshow(z.T, cmap = 'RdYlGn')
+    plt.colorbar()
+    #X, Y = np.meshgrid(xedges, yedges)
+    #ax.pcolormesh(X, Y, heatmap.T)
+        
+
 
 #Using readData
 dataSet = readDataFiles()
-shotsTaken, shotsMade, rangeTaken, rangeMade = shots(dataSet)
+shotsTaken, shotsMade, rangeTaken, rangeMade, shotsByFormation = shots(dataSet)
 passInformation = passes(dataSet)
+interceptionInformation = interceptions(dataSet)
 
 shotsTakenMade()
 formationPasses()
+formationInterceptions()
 best = bestFormation(dataSet)
 shotsMap = shotMapData(dataSet, best)
 shotMapMissed()
 shotMapMade()
 print(best)
+heatMap()
+plt.show()
+
 #fig.savefig('filename'.png)
 # horizontal bar =  barh
