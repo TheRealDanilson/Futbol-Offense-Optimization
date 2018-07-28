@@ -31,9 +31,9 @@ def shotsTakenMade():
     #creating data points to be graphed
     for i in tuple(shotsTaken.items()):
         formationLabels += [i[0]]
-        formationShotsTaken += [i[1]/6]
+        formationShotsTaken += [i[1]]
     for i in tuple(shotsMade.items()):
-        formationShotsMade += [i[1]/6]
+        formationShotsMade += [i[1]]
         
     N = len(shotsTaken)        
     ind = np.arange(N)
