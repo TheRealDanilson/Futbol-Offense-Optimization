@@ -136,9 +136,9 @@ class Game(object):
         center = ((bounds[0] + bounds[1])/2, (bounds[2] + bounds[3])/2)
         dX = (ballPos[0] * shift)/7
         if ballPos[1] > 30:
-            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/12
+            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/8
         else:
-            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/12
+            dY = (ballPos[1] - FIELD_BOUNDS[3]/2) * shift/8
          #   dY = 0
         # if ballPos[0] > 10:
         #     dX = shift
