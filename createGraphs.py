@@ -213,7 +213,10 @@ def heatMap():
         j = 0
         total = sum(offDict.values())
         for shot in offDict.values():
-            zVal = int(shot/total * 1000)/10
+            if total ==0:
+                zVal = 0
+            else:
+                zVal = int(shot/total * 1000)/10
             z[i][j] = zVal
             ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=24)
             j += 1

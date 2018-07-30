@@ -116,19 +116,19 @@ def dataWrite(DataList, dataWriter):
             playerBlocks[title] += [blocks[player]]
             
     dataWriter.writerow(Won)
-    dataWriter.writerow(BallDist)
-    dataWriter.writerow(BallDistAlone)
-    dataWriter.writerow(BallDistHeld)       
-    dataWriter.writerow(BallTimeAlone)
-    dataWriter.writerow(BallTimeHeld)
+    # dataWriter.writerow(BallDist)
+    # dataWriter.writerow(BallDistAlone)
+    # dataWriter.writerow(BallDistHeld)       
+    # dataWriter.writerow(BallTimeAlone)
+    # dataWriter.writerow(BallTimeHeld)
     for player in playerDistancesAlone.keys():
-        dataWriter.writerow(playerDistances[player])
-        dataWriter.writerow(playerDistancesAlone[player])
-        dataWriter.writerow(playerDistancesHeld[player])                
-        dataWriter.writerow(playerTimeAlone[player])
-        dataWriter.writerow(playerTimeHeld[player])
+        # dataWriter.writerow(playerDistances[player])
+        # dataWriter.writerow(playerDistancesAlone[player])
+        # dataWriter.writerow(playerDistancesHeld[player])                
+        # dataWriter.writerow(playerTimeAlone[player])
+        # dataWriter.writerow(playerTimeHeld[player])
         dataWriter.writerow(playerReceives[player])
-        dataWriter.writerow(playerKeeps[player])
+        #dataWriter.writerow(playerKeeps[player])
         dataWriter.writerow(playerGoals[player])
         dataWriter.writerow(playerGoalLocations[player])
         dataWriter.writerow(playerPasses[player])
@@ -214,7 +214,7 @@ def runSimulations():
             DataList = []
             #self.formationCombo(i,j)
             print(i, j)
-            for k in range(10):
+            for k in range(1):
                 match(i,j, DataList)
             dump(DataList, i, j)
         
