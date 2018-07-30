@@ -49,6 +49,8 @@ def shots(dataSet):
         defFormation = matchup[offEnd + 2:defEnd + 1]
         data = dataSet[matchup]
         if offFormation not in shotsByFormation.keys():
+            shotsTaken[offFormation] = 0
+            shotsMade[offFormation] = 0
             shotsByFormation[offFormation] = {}
         for point in data.keys():
             if 'number of goal attempts' in point:
@@ -62,7 +64,7 @@ def shots(dataSet):
                             
                 except:
                     taken = sum(data[point])
-                    shotsTaken[offFormation] = taken
+                    #shotsTaken[offFormation] = taken
                     offRangeTaken[offFormation] = [[defFormation, taken], [defFormation, taken]]
                      
             elif 'number of goals' in point:
@@ -76,7 +78,7 @@ def shots(dataSet):
                         offRangeMade[offFormation][1] = [defFormation, made]
                 except:
                     made = sum(data[point])
-                    shotsMade[offFormation] = made
+                    #shotsMade[offFormation] = made
                     shotsByFormation[offFormation][defFormation] = made
                     offRangeMade[offFormation] = [[defFormation, made], [defFormation, made]]
 
@@ -164,9 +166,10 @@ def shotMapData(dataSet, formation):
                         attemptList = attempts[i]
                         goalPoint = player + 'number of goals'
                         goals = data[goalPoint][i]
+                        print(attemptList)
                         for attempt in attemptList:
                             defMap[tuple(attempt)] = 'o'
-                        if goals > 0:
+                        if len(attemptList) > 0 and goals > 0:
                             defMap[tuple(attempt)] = 'x'
                             
     return shotsMap
