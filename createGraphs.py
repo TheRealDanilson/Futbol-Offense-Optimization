@@ -207,9 +207,10 @@ def heatMap():
     i = 0
     z = np.zeros((6,6))
     fig, ax = plt.subplots()
-    for tup in lst:
-        offFormation = tup[0]
-        offDict = tup[1]
+    offFormationOrder = shotsByFormation.keys()
+    defFormationOrder = tuple(lst)[0][1].keys()
+    for offFormation in offFormationOrder:
+        offDict = shotsByFormation[offFormation]
         j = 0
         total = sum(offDict.values())
         for shot in offDict.values():
@@ -223,12 +224,13 @@ def heatMap():
         i += 1
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(shotsByFormation.keys())
-    ax.set_yticklabels(shotsByFormation[tup[0]].keys())
+    ax.set_xticklabels(offFormationOrder)
+    ax.set_yticklabels(defFormationOrder)
     ax.set_title('Shot percentages by formation')
     
     plt.imshow(z.T, cmap = 'RdYlGn')
     plt.colorbar()
+    return offFormationOrder, defFormationOrder
     #X, Y = np.meshgrid(xedges, yedges)
     #ax.pcolormesh(X, Y, heatmap.T)
         
@@ -242,9 +244,8 @@ def passingHeat():
     i = 0
     z = np.zeros((6,6))
     fig, ax = plt.subplots()
-    for tup in lst:
-        offFormation = tup[0]
-        offDict = tup[1]
+    for offFormation in offFormationOrder:
+        offDict = passInformationInverted[offFormation]
         j = 0
         total = sum(offDict.values())
         for passes in offDict.values():
@@ -258,8 +259,8 @@ def passingHeat():
         i += 1
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(passInformationInverted.keys())
-    ax.set_yticklabels(passInformationInverted[tup[0]].keys())
+    ax.set_xticklabels(offFormationOrder)
+    ax.set_yticklabels(defFormationOrder)
     ax.set_title('Pass percentages by formation')
     
     plt.imshow(z.T, cmap = 'RdYlGn')
@@ -274,9 +275,8 @@ def interceptionHeat():
     i = 0
     z = np.zeros((6,6))
     fig, ax = plt.subplots()
-    for tup in lst:
-        defFormation = tup[0]
-        defDict = tup[1]
+    for defFormation in defFormationOrder:
+        defDict = interceptionInformationInverted[defFormation]
         j = 0
         total = sum(defDict.values())
         for interceptions in defDict.values():
@@ -290,8 +290,8 @@ def interceptionHeat():
         i += 1
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(interceptionInformationInverted.keys())
-    ax.set_yticklabels(interceptionInformationInverted[tup[0]].keys())
+    ax.set_xticklabels(defFormationOrder)
+    ax.set_yticklabels(offFormationOrder)
     ax.set_title('Interception percentages by formation')
     
     plt.imshow(z.T, cmap = 'RdYlGn')
@@ -311,6 +311,7 @@ def invertDict(dct):
 
 
 #Using readData
+
 dataSet = readDataFiles()
 shotsTaken, shotsMade, rangeTaken, rangeMade, shotsByFormation = shots(dataSet)
 passInformation = passes(dataSet)
@@ -323,7 +324,7 @@ best = bestFormation(dataSet)
 shotsMap = shotMapData(dataSet, best)
 shotMapMissed()
 shotMapMade()
-heatMap()
+offFormationOrder, defFormationOrder = heatMap()
 passingHeat()
 interceptionHeat()
 plt.show()
