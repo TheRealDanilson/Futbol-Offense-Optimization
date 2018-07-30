@@ -166,7 +166,7 @@ def shotMapData(dataSet, formation):
                         attemptList = attempts[i]
                         goalPoint = player + 'number of goals'
                         goals = data[goalPoint][i]
-                        print(attemptList)
+                        #print(attemptList)
                         for attempt in attemptList:
                             defMap[tuple(attempt)] = 'o'
                         if len(attemptList) > 0 and goals > 0:

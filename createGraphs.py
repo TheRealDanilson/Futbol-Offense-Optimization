@@ -19,7 +19,7 @@ def barLabels(ax, rects):
     """
     for rect in rects:
         height = rect.get_height()
-        ax.text(rect.get_x() + rect.get_width()/2., rect.get_y() + .5 + height, \
+        ax.text(rect.get_x() + rect.get_width()/2., rect.get_y() + height, \
                 '%d' % int(height), ha='center', va= 'bottom')
 
 
@@ -62,13 +62,13 @@ def formationPasses():
     
     for offFormation in passInformation[list(passInformation.keys())[0]]:
         formationLabels += [offFormation]
-    print(formationLabels)
+    #print(formationLabels)
 
     N = len(formationLabels)        
     ind = np.arange(N)
     width = .5
     
-    print(passInformation.items())
+    #print(passInformation.items())
 
     allPasses = [None]*N
     i = 0
@@ -81,7 +81,7 @@ def formationPasses():
             except:
                 allPasses[i] = [num]
         i += 1
-    print(allPasses)    
+    #print(allPasses)    
     
         
     fig, ax = plt.subplots()
@@ -158,13 +158,13 @@ def formationInterceptions():
     
     for defFormation in interceptionInformation[list(interceptionInformation.keys())[0]]:
         formationLabels += [defFormation]
-    print(formationLabels)
+    #print(formationLabels)
 
     N = len(formationLabels)        
     ind = np.arange(N)
     width = .5
     
-    print(interceptionInformation.items())
+    #print(interceptionInformation.items())
 
     allInterceptions = [None]*N
     i = 0
@@ -177,7 +177,7 @@ def formationInterceptions():
             except:
                 allInterceptions[i] = [num]
         i += 1
-    print(allInterceptions)    
+    #print(allInterceptions)    
     
         
     fig, ax = plt.subplots()
