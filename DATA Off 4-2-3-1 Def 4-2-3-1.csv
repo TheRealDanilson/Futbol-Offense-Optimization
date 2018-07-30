@@ -1,166 +1,166 @@
-Game won?;1;0;0;1;1;0;0;0;1;1
-Distance Ball Traveled;63.65610000000042;101.93459999999968;398.6121000000018;116.2633500000008;93.6295500000001;40.87874999999995;70.97839999999985;17.11269999999991;155.30119999999994;118.21494999999925
-Distance Ball Traveled Alone;63.65610000000042;101.93459999999968;398.6121000000018;116.2633500000008;93.6295500000001;40.87874999999995;70.97839999999985;17.11269999999991;155.30119999999994;118.21494999999925
-Distance Ball was held;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
-Time steps the ball was alone;1027;2016;9328;2073;1589;776;1136;331;2832;2128
-Time steps the ball was held;551;425;1781;457;68;232;675;1;2097;531
-Offender RB distance traveled;47.340000000000344;69.35000000000068;315.86999999998733;75.90000000000099;45.75000000000083;30.240000000000016;54.3300000000006;9.959999999999981;144.39000000000308;79.7700000000013
-Offender RB distance traveled without ball;47.340000000000344;64.07000000000048;308.4299999999909;75.90000000000099;45.75000000000083;30.240000000000016;54.3300000000006;9.959999999999981;144.39000000000308;79.7700000000013
-Offender RB distance traveled with ball;0;5.279999999999983;7.439999999999984;0;0;0;0;0;0;0
-Offender RB time steps without ball;1578;2264;10856;2530;1656;1008;1811;332;4928;2659
-Offender RB time steps with ball;0;177;253;0;1;0;0;0;1;0
-Offender RB receive locations;[];[(-11.600032100121693, 37.0814459032906)];[(-39.377076897465884, 36.41479062154539), (-26.63920101804886, 47.5439259248638), (-39.86945023070019, 47.020820344383196), (-29.316186551678996, 25.509619852066212), (-29.706536136024113, 27.33929408143755)];[];[(-16.11714231790177, 38.051977897907015)];[];[];[];[(-32.197156124520845, 53.0509085699843)];[]
-Offender RB number of keeps;0;176;248;0;0;0;0;0;0;0
-Offender RB number of goals;0;0;0;0;0;0;0;0;0;0
-Offender RB location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender RB number of passes;0;1;5;0;1;0;0;0;1;0
-Offender RB number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender RB locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender RCB distance traveled;47.34000000000026;73.23000000000123;328.40356178092037;72.74000000000042;49.709999999999845;30.23999999999992;54.3300000000006;9.959999999999992;142.33000000000416;79.77000000000135
-Offender RCB distance traveled without ball;37.65000000000022;73.23000000000123;326.33356178092055;65.84000000000013;49.709999999999845;30.23999999999992;51.69000000000058;9.959999999999992;116.2900000000021;79.77000000000135
-Offender RCB distance traveled with ball;9.689999999999971;0;2.070000000000017;6.900000000000008;0;0;2.6399999999999824;0;26.040000000000052;0
-Offender RCB time steps without ball;1255;2441;11038;2299;1657;1008;1723;332;4059;2659
-Offender RCB time steps with ball;323;0;71;231;0;0;88;0;870;0
-Offender RCB receive locations;[];[];[(-24.754565147854763, 48.545462875922915), (-20.469673649434025, 43.825120657371265)];[(-7.199141286861437, 39.9482564769863)];[];[];[];[];[(-25.655620964594913, 55.69273353165807), (-10.467572532761045, 43.2960298796259)];[]
-Offender RCB number of keeps;323;0;69;230;0;0;88;0;868;0
-Offender RCB number of goals;0;0;0;0;0;0;0;0;0;0
-Offender RCB location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender RCB number of passes;1;1;2;2;0;0;1;0;3;0
-Offender RCB number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender RCB locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender LCB distance traveled;47.34000000000028;72.77000000000132;323.07329122866474;75.90000000000103;49.7100000000001;27.59999999999996;54.33000000000055;9.95999999999996;147.87000000000407;79.77000000000126
-Offender LCB distance traveled without ball;47.34000000000028;72.77000000000132;321.0632912286664;75.90000000000103;49.7100000000001;20.72999999999995;54.33000000000055;9.95999999999996;147.87000000000407;77.34000000000111
-Offender LCB distance traveled with ball;0;0;2.010000000000001;0;0;6.8700000000000285;0;0;0;2.4300000000000117
-Offender LCB time steps without ball;1578;2441;11039;2530;1657;778;1811;332;4929;2578
-Offender LCB time steps with ball;0;0;70;0;0;230;0;0;0;81
-Offender LCB receive locations;[];[];[(-9.477018874304365, 44.63032033535287), (-25.35217248081282, 56.75353388333264), (-6.779910349259836, 27.744967063457374)];[];[];[(20.689320937527583, 58.70270088368098)];[];[];[];[]
-Offender LCB number of keeps;0;0;67;0;0;229;0;0;0;81
-Offender LCB number of goals;0;0;0;0;0;0;0;0;0;0
-Offender LCB location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender LCB number of passes;0;0;4;0;1;2;0;1;0;1
-Offender LCB number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender LCB locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender LB distance traveled;47.34000000000032;69.23000000000106;332.4144258552582;71.9200000000002;49.71000000000041;26.720000000000432;54.33000000000058;9.960000000000049;143.4700000000036;72.91000000000192
-Offender LB distance traveled without ball;47.34000000000032;69.23000000000106;332.4144258552582;71.9200000000002;49.71000000000041;26.720000000000432;54.33000000000058;9.960000000000049;140.9800000000035;69.46000000000164
-Offender LB distance traveled with ball;0;0;0;0;0;0;0;0;2.490000000000001;3.4500000000000046
-Offender LB time steps without ball;1578;2440;11109;2529;1657;1007;1811;332;4845;2542
-Offender LB time steps with ball;0;1;0;1;0;1;0;0;84;117
-Offender LB receive locations;[];[(10.1773505596354, 40.327405412709375)];[];[(11.464980132467108, 40.63312833014164)];[];[(27.979999999999528, 57.0)];[];[];[(-10.332621353323166, 52.83640364857968)];[(29.757515778318577, 57.03366942841148), (32.638704176047014, 47.241633767034955)]
-Offender LB number of keeps;0;0;0;0;0;0;0;0;83;115
-Offender LB number of goals;0;0;0;0;0;0;0;0;0;0
-Offender LB location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender LB number of passes;0;1;0;1;0;1;0;0;1;2
-Offender LB number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender LB locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender RDM distance traveled;45.40000000000036;73.23000000000134;326.60999999996574;74.66000000000133;49.71000000000053;30.239999999999963;54.33000000000087;9.960000000000049;143.61000000000467;76.25000000000149
-Offender RDM distance traveled without ball;43.03000000000032;73.23000000000134;323.99999999996754;74.66000000000133;49.71000000000053;30.239999999999963;54.33000000000087;9.960000000000049;140.94000000000455;76.25000000000149
-Offender RDM distance traveled with ball;2.369999999999966;0;2.6099999999999928;0;0;0;0;0;2.6700000000000044;0
-Offender RDM time steps without ball;1498;2441;11019;2529;1657;1008;1811;332;4838;2658
-Offender RDM time steps with ball;80;0;90;1;0;0;0;0;91;1
-Offender RDM receive locations;[(-15.517582546004315, 46.0424885136597)];[];[(-22.733737670501363, 43.46876941253117), (-27.833289722092186, 26.033031796375735), (-13.00064780811852, 20.14645100254909)];[(-11.617846347044205, 35.52763842096308)];[];[];[];[];[(-9.092487254305606, 40.2355330627971), (7.4193255743611415, 37.31231305048562)];[(16.027403500862516, 52.739501776288726)]
-Offender RDM number of keeps;79;0;87;0;0;0;0;0;89;0
-Offender RDM number of goals;0;0;0;0;0;0;0;0;0;0
-Offender RDM location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender RDM number of passes;1;0;3;1;0;0;0;0;2;1
-Offender RDM number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender RDM locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender LDM distance traveled;47.34000000000064;68.2900000000008;329.8841167044243;75.9000000000012;49.710000000000605;30.240000000000013;51.85000000000073;9.960000000000058;146.3300000000045;79.77000000000133
-Offender LDM distance traveled without ball;47.34000000000064;63.010000000000666;323.2841167044286;75.9000000000012;49.710000000000605;30.240000000000013;47.71000000000056;9.960000000000058;135.9500000000041;79.77000000000133
-Offender LDM distance traveled with ball;0;5.2799999999999985;6.599999999999973;0;0;0;4.1400000000000485;0;10.380000000000054;0
-Offender LDM time steps without ball;1578;2263;10888;2530;1657;1008;1672;332;4582;2659
-Offender LDM time steps with ball;0;178;221;0;0;0;139;0;347;0
-Offender LDM receive locations;[];[(2.783544847743473, 50.98421418929714), (8.330413186837676, 36.02034265026401)];[(-25.827917566364608, 35.70173478675379)];[];[];[];[(1.5752184102575262, 37.38344343183411)];[];[(8.880542283066488, 34.561532105751404)];[]
-Offender LDM number of keeps;0;176;220;0;0;0;138;0;346;0
-Offender LDM number of goals;0;0;0;0;0;0;0;0;0;0
-Offender LDM location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender LDM number of passes;0;2;1;0;0;0;1;0;1;0
-Offender LDM number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender LDM locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender RW distance traveled;47.340000000000614;66.99000000000092;318.42999999995834;72.22000000000105;49.710000000000655;30.240000000000524;54.33000000000082;9.960000000000022;144.4100000000016;76.11000000000139
-Offender RW distance traveled without ball;47.340000000000614;65.01000000000087;298.68999999997357;69.28000000000094;49.710000000000655;30.240000000000524;54.33000000000082;9.960000000000022;144.4100000000016;68.3700000000011
-Offender RW distance traveled with ball;0;1.9800000000000073;19.740000000000027;2.9400000000000035;0;0;0;0;0;7.740000000000003
-Offender RW time steps without ball;1578;2373;10447;2431;1657;1008;1811;332;4928;2400
-Offender RW time steps with ball;0;68;662;99;0;0;0;0;1;259
-Offender RW receive locations;[];[(-11.810016147142228, 38.620651708118885), (-20.198006446526897, 31.33870303293243)];[(-34.5856033864293, 35.28744059293094), (-39.79717646924385, 38.321271501023645), (-21.808831558842073, 35.64710709183576), (-33.89515575479914, 21.549378992449256)];[(-5.682094200622688, 29.96527360675432)];[];[];[];[];[(-7.316644758257803, 16.473439881658756)];[(2.649216539767972, 20.442563797292067)]
-Offender RW number of keeps;0;66;658;98;0;0;0;0;0;258
-Offender RW number of goals;0;0;0;0;0;0;0;0;1;1
-Offender RW location of goal shots;[];[];[];[];[];[];[];[];[(-7.316644758257803, 16.473439881658756)];[(-3.8893200381740263, 16.30260718692691)]
-Offender RW number of passes;0;2;4;1;0;0;0;0;1;1
-Offender RW number of goal attempts;0;0;0;0;0;0;0;0;1;1
-Offender RW locations of goal attempts;[];[];[];[];[];[];[];[];[(-7.346539944011829, 16.470934314111812)];[(-3.9192653286488586, 16.300796226303945)]
-Offender CAM distance traveled;47.34000000000084;73.23000000000177;299.7499999999714;69.5000000000011;47.0300000000009;30.239999999999867;45.769999999999804;6.640000000000011;147.87000000000438;76.67000000000118
-Offender CAM distance traveled without ball;47.34000000000084;73.23000000000177;296.9899999999739;65.84000000000096;47.0300000000009;30.239999999999867;32.449999999999356;6.640000000000011;147.87000000000438;76.67000000000118
-Offender CAM distance traveled with ball;0;0;2.76000000000001;3.659999999999979;0;0;13.32000000000004;0;0;0
-Offender CAM time steps without ball;1578;2441;11015;2406;1656;1008;1364;332;4929;2658
-Offender CAM time steps with ball;0;0;94;124;1;0;447;0;0;1
-Offender CAM receive locations;[];[];[(-27.68064445696165, 22.64278429964929), (-11.423592801899593, 20.135976619406364)];[(-8.91737287933148, 38.31472992015348), (-4.010751698193812, 17.518500697283404)];[(5.315192090887252, 28.95423810602745)];[];[(-5.116531558314701, 40.06412509241657), (-0.94245874279481, 32.81642722115283), (-1.2501485495639952, 23.933955940284882)];[];[];[(18.178838541375974, 42.80580276392118)]
-Offender CAM number of keeps;0;0;92;122;0;0;444;0;0;0
-Offender CAM number of goals;0;0;0;1;0;0;0;0;0;0
-Offender CAM location of goal shots;[];[];[];[(-4.6303932583833385, 16.152127244649076)];[];[];[];[];[];[]
-Offender CAM number of passes;0;0;2;2;1;0;3;0;0;1
-Offender CAM number of goal attempts;0;0;0;1;0;0;1;0;0;0
-Offender CAM locations of goal attempts;[];[];[];[(-4.622922391472993, 16.123072363000585)];[];[];[(-6.230304603950003, 14.104342590302178)];[];[];[]
-Offender LW distance traveled;43.52000000000054;73.23000000000171;329.1931218989115;75.90000000000181;49.710000000000825;30.240000000000045;54.33000000000092;9.95999999999999;147.87000000000415;79.77000000000099
-Offender LW distance traveled without ball;41.540000000000475;73.23000000000171;326.37312189891315;75.90000000000181;49.710000000000825;30.240000000000045;54.33000000000092;9.95999999999999;147.87000000000415;79.77000000000099
-Offender LW distance traveled with ball;1.9800000000000093;0;2.819999999999998;0;0;0;0;0;0;0
-Offender LW time steps without ball;1511;2441;11014;2530;1657;1008;1811;332;4929;2659
-Offender LW time steps with ball;67;0;95;0;0;0;0;0;0;0
-Offender LW receive locations;[(4.058621077812388, 34.68927896013041)];[];[(-6.868193436841112, 42.74247601804614)];[];[];[];[];[];[];[]
-Offender LW number of keeps;66;0;94;0;0;0;0;0;0;0
-Offender LW number of goals;0;0;0;0;0;0;0;0;0;0
-Offender LW location of goal shots;[];[];[];[];[];[];[];[];[];[]
-Offender LW number of passes;1;0;1;0;0;0;0;0;0;0
-Offender LW number of goal attempts;0;0;0;0;0;0;0;0;0;0
-Offender LW locations of goal attempts;[];[];[];[];[];[];[];[];[];[]
-Offender CF distance traveled;43.92000000000027;73.23000000000182;323.2676186182409;72.54000000000144;42.49000000000058;30.240000000000123;51.03000000000124;9.959999999999958;137.87000000000637;76.05000000000125
-Offender CF distance traveled without ball;41.52000000000018;73.23000000000182;316.63761861824497;72.54000000000144;40.570000000000505;30.240000000000123;51.03000000000124;9.959999999999958;116.87000000000559;73.92000000000117
-Offender CF distance traveled with ball;2.3999999999999977;0;6.629999999999983;0;1.920000000000011;0;0;0;21.000000000000068;2.1299999999999915
-Offender CF time steps without ball;1497;2441;10885;2529;1591;1008;1810;332;4226;2587
-Offender CF time steps with ball;81;0;224;1;66;0;1;0;703;72
-Offender CF receive locations;[(2.1840685480594666, 20.053730304387525)];[];[(-14.945527699004979, 27.34388248452767), (-17.888546654159335, 15.842690968192441), (-8.209657590214961, 16.8660089808534)];[(-1.7193714123454085, 25.629574509581868)];[(3.0642470527031365, 36.192741158109754), (-7.752772869868601, 24.819800962891275)];[];[(1.5924243787104762, 18.816041714895057)];[];[(-10.270681971099812, 33.56534126230256), (-3.6447113759002585, 33.69588093576107), (9.162000570909052, 23.11926957136179)];[(22.889370355146024, 28.99661228424247)]
-Offender CF number of keeps;80;0;221;0;64;0;0;0;700;71
-Offender CF number of goals;1;0;0;0;1;0;0;0;0;0
-Offender CF location of goal shots;[(3.6750342847255686, 18.57730987679643)];[];[];[];[(-6.798062641772801, 23.626080945578554)];[];[];[];[];[]
-Offender CF number of passes;1;0;3;1;2;0;1;0;3;1
-Offender CF number of goal attempts;1;0;0;0;1;0;0;0;0;0
-Offender CF locations of goal attempts;[(3.6729348567316005, 18.54738342692181)];[];[];[];[(-6.793907312912598, 23.596370118561058)];[];[];[];[];[]
-Defender LB distance traveled;47.34000000000057;73.23000000000127;333.26999999997196;75.90000000000167;49.710000000000676;30.240000000000087;54.33000000000103;9.959999999999951;147.87000000000342;79.77000000000186
-Defender LB interceptions;0;0;0;0;0;0;0;0;0;0
-Defender LB interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender LB number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender LCB distance traveled;47.34000000000094;73.23000000000188;333.2699999999463;75.90000000000208;49.710000000001095;30.24000000000022;54.33000000000128;9.959999999999988;147.87000000000415;79.77000000000209
-Defender LCB interceptions;0;0;0;0;0;0;0;0;0;0
-Defender LCB interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender LCB number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender RCB distance traveled;47.34000000000103;73.23000000000212;333.2699999999387;75.90000000000218;49.71000000000117;30.24000000000005;54.33000000000124;9.960000000000012;147.8700000000047;79.77000000000182
-Defender RCB interceptions;0;0;0;0;0;0;0;0;0;0
-Defender RCB interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender RCB number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender RB distance traveled;47.34000000000063;73.23000000000151;333.26999999994615;75.90000000000153;49.710000000000676;30.23999999999998;54.330000000000986;9.960000000000022;147.87000000000452;79.770000000001
-Defender RB interceptions;0;0;0;0;0;0;0;0;0;0
-Defender RB interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender RB number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender LDM distance traveled;47.34000000000076;73.2300000000018;333.2699999999494;75.90000000000208;49.710000000000996;30.24000000000019;54.3300000000011;9.960000000000019;147.87000000000435;79.77000000000194
-Defender LDM interceptions;0;0;0;0;0;0;0;0;0;0
-Defender LDM interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender LDM number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender RDM distance traveled;47.34000000000089;73.23000000000194;333.26999999994206;75.9000000000021;49.71000000000096;30.240000000000023;54.33000000000116;9.960000000000015;147.8700000000046;79.77000000000191
-Defender RDM interceptions;0;0;0;0;0;0;0;0;0;0
-Defender RDM interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender RDM number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender LW distance traveled;47.34000000000051;73.23000000000155;333.2699999999659;75.90000000000161;49.71000000000071;30.240000000000055;54.33000000000093;9.95999999999998;147.87000000000347;79.77000000000159
-Defender LW interceptions;0;0;0;0;0;0;0;0;0;0
-Defender LW interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender LW number of blocks;0;0;1;0;0;0;0;0;0;0
-Defender CAM distance traveled;47.340000000000565;73.23000000000174;333.26999999995667;75.90000000000165;49.710000000000846;30.23999999999999;54.33000000000104;9.959999999999983;147.87000000000415;79.77000000000152
-Defender CAM interceptions;0;0;0;0;0;0;0;1;0;0
-Defender CAM interception locations;[];[];[];[];[];[];[];[(2.9563773434207294, 41.38896051840014)];[];[]
-Defender CAM number of blocks;0;0;1;0;0;0;0;0;0;0
-Defender RW distance traveled;47.340000000000565;73.23000000000154;333.269999999949;75.90000000000161;49.71000000000081;30.240000000000045;54.330000000000844;9.960000000000015;147.87000000000415;79.77000000000116
-Defender RW interceptions;0;0;0;0;0;0;0;0;0;0
-Defender RW interception locations;[];[];[];[];[];[];[];[];[];[]
-Defender RW number of blocks;0;0;0;0;0;0;0;0;0;0
-Defender CF distance traveled;47.340000000000416;73.23000000000154;333.26999999995576;75.90000000000141;49.71000000000065;30.23999999999999;54.33000000000092;9.960000000000012;147.87000000000415;79.7700000000013
-Defender CF interceptions;0;1;1;0;0;1;0;0;0;0
-Defender CF interception locations;[];[(-12.302078529454105, 35.904326110224645)];[(1.300660875515887, 38.79098868080011)];[];[];[(13.062247396680435, 50.01255390279521)];[];[];[];[]
-Defender CF number of blocks;0;0;0;0;0;0;0;0;0;0
+Game won?;0
+Distance Ball Traveled;231.25479999999868
+Distance Ball Traveled Alone;231.25479999999868
+Distance Ball was held;0.0
+Time steps the ball was alone;4761
+Time steps the ball was held;2055
+Offender RB distance traveled;197.12000000000307
+Offender RB distance traveled without ball;179.24000000000513
+Offender RB distance traveled with ball;17.879999999999903
+Offender RB time steps without ball;6218
+Offender RB time steps with ball;598
+Offender RB receive locations;[(-29.507046392344925, 55.00470077413416), (-11.044524479002803, 39.55716932824656)]
+Offender RB number of keeps;596
+Offender RB number of goals;0
+Offender RB location of goal shots;[]
+Offender RB number of passes;2
+Offender RB number of goal attempts;0
+Offender RB locations of goal attempts;[]
+Offender RCB distance traveled;204.48000000000613
+Offender RCB distance traveled without ball;201.90000000000603
+Offender RCB distance traveled with ball;2.580000000000013
+Offender RCB time steps without ball;6730
+Offender RCB time steps with ball;86
+Offender RCB receive locations;[]
+Offender RCB number of keeps;86
+Offender RCB number of goals;0
+Offender RCB location of goal shots;[]
+Offender RCB number of passes;1
+Offender RCB number of goal attempts;0
+Offender RCB locations of goal attempts;[]
+Offender LCB distance traveled;203.96000000000606
+Offender LCB distance traveled without ball;199.16000000000588
+Offender LCB distance traveled with ball;4.800000000000006
+Offender LCB time steps without ball;6655
+Offender LCB time steps with ball;161
+Offender LCB receive locations;[(-5.673419464813826, 54.086652602892634)]
+Offender LCB number of keeps;160
+Offender LCB number of goals;0
+Offender LCB location of goal shots;[]
+Offender LCB number of passes;1
+Offender LCB number of goal attempts;0
+Offender LCB locations of goal attempts;[]
+Offender LB distance traveled;195.48000000000684
+Offender LB distance traveled without ball;179.73000000000624
+Offender LB distance traveled with ball;15.750000000000066
+Offender LB time steps without ball;6289
+Offender LB time steps with ball;527
+Offender LB receive locations;[(-10.1422432015905, 52.253903770939445), (3.1508347736982865, 31.12395895717548)]
+Offender LB number of keeps;525
+Offender LB number of goals;0
+Offender LB location of goal shots;[]
+Offender LB number of passes;2
+Offender LB number of goal attempts;0
+Offender LB locations of goal attempts;[]
+Offender RDM distance traveled;198.58798106520277
+Offender RDM distance traveled without ball;188.44798106520238
+Offender RDM distance traveled with ball;10.140000000000011
+Offender RDM time steps without ball;6476
+Offender RDM time steps with ball;340
+Offender RDM receive locations;[(-36.76748786755416, 51.60628821026922), (-15.547482227907443, 26.54496136565637)]
+Offender RDM number of keeps;338
+Offender RDM number of goals;0
+Offender RDM location of goal shots;[]
+Offender RDM number of passes;2
+Offender RDM number of goal attempts;0
+Offender RDM locations of goal attempts;[]
+Offender LDM distance traveled;201.3800000000048
+Offender LDM distance traveled without ball;199.46000000000473
+Offender LDM distance traveled with ball;1.9200000000000232
+Offender LDM time steps without ball;6751
+Offender LDM time steps with ball;65
+Offender LDM receive locations;[(-1.0356310695153486, 37.42469366492807)]
+Offender LDM number of keeps;64
+Offender LDM number of goals;0
+Offender LDM location of goal shots;[]
+Offender LDM number of passes;1
+Offender LDM number of goal attempts;0
+Offender LDM locations of goal attempts;[]
+Offender RW distance traveled;197.80000000000464
+Offender RW distance traveled without ball;197.80000000000464
+Offender RW distance traveled with ball;0
+Offender RW time steps without ball;6814
+Offender RW time steps with ball;2
+Offender RW receive locations;[(-20.46603216807515, 14.696312049405917), (-19.907502325069064, 20.077831731722373)]
+Offender RW number of keeps;0
+Offender RW number of goals;0
+Offender RW location of goal shots;[]
+Offender RW number of passes;2
+Offender RW number of goal attempts;0
+Offender RW locations of goal attempts;[]
+Offender CAM distance traveled;198.0400000000053
+Offender CAM distance traveled without ball;189.880000000005
+Offender CAM distance traveled with ball;8.159999999999977
+Offender CAM time steps without ball;6542
+Offender CAM time steps with ball;274
+Offender CAM receive locations;[(-6.046958935544476, 24.423352620674756), (-2.908969274664484, 26.052416343380585)]
+Offender CAM number of keeps;272
+Offender CAM number of goals;0
+Offender CAM location of goal shots;[]
+Offender CAM number of passes;2
+Offender CAM number of goal attempts;0
+Offender CAM locations of goal attempts;[]
+Offender LW distance traveled;204.48000000000678
+Offender LW distance traveled without ball;204.48000000000678
+Offender LW distance traveled with ball;0
+Offender LW time steps without ball;6816
+Offender LW time steps with ball;0
+Offender LW receive locations;[]
+Offender LW number of keeps;0
+Offender LW number of goals;0
+Offender LW location of goal shots;[]
+Offender LW number of passes;0
+Offender LW number of goal attempts;0
+Offender LW locations of goal attempts;[]
+Offender CF distance traveled;200.72000000000733
+Offender CF distance traveled without ball;200.72000000000733
+Offender CF distance traveled with ball;0
+Offender CF time steps without ball;6815
+Offender CF time steps with ball;1
+Offender CF receive locations;[(-4.151927253383023, 36.3977761246917)]
+Offender CF number of keeps;0
+Offender CF number of goals;0
+Offender CF location of goal shots;[]
+Offender CF number of passes;1
+Offender CF number of goal attempts;0
+Offender CF locations of goal attempts;[]
+Defender LB distance traveled;204.48000000000567
+Defender LB interceptions;0
+Defender LB interception locations;[]
+Defender LB number of blocks;0
+Defender LCB distance traveled;204.4800000000065
+Defender LCB interceptions;0
+Defender LCB interception locations;[]
+Defender LCB number of blocks;0
+Defender RCB distance traveled;204.4800000000069
+Defender RCB interceptions;0
+Defender RCB interception locations;[]
+Defender RCB number of blocks;0
+Defender RB distance traveled;204.48000000000667
+Defender RB interceptions;0
+Defender RB interception locations;[]
+Defender RB number of blocks;0
+Defender LDM distance traveled;204.48000000000627
+Defender LDM interceptions;0
+Defender LDM interception locations;[]
+Defender LDM number of blocks;0
+Defender RDM distance traveled;204.48000000000633
+Defender RDM interceptions;1
+Defender RDM interception locations;[(-2.303434957166257, 2.690273421330095)]
+Defender RDM number of blocks;0
+Defender LW distance traveled;204.4800000000057
+Defender LW interceptions;0
+Defender LW interception locations;[]
+Defender LW number of blocks;0
+Defender CAM distance traveled;204.48000000000627
+Defender CAM interceptions;0
+Defender CAM interception locations;[]
+Defender CAM number of blocks;1
+Defender RW distance traveled;204.4800000000065
+Defender RW interceptions;0
+Defender RW interception locations;[]
+Defender RW number of blocks;0
+Defender CF distance traveled;204.4800000000064
+Defender CF interceptions;0
+Defender CF interception locations;[]
+Defender CF number of blocks;0

@@ -153,9 +153,14 @@ class Player(object):
         position    position of the player instance
         Removes possession from player and shoots the ball to center of goal
         """
+        
+        if self.position[0] > 0:
+            r = 1
+        else:
+            r = -1
         if position[1] == 0 and abs(position[0]) < 4:
-            dX = position[0] - self.position[0] + (self.position[0]/10 + uniform(-5,5))
-            dY = position[1] - self.position[1] +self.position[1]/10
+            dX = position[0] - self.position[0] + self.position[0]/7 + r*self.position[1]/3 + uniform(-6,6)
+            dY = position[1] - self.position[1] 
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             try:
                 direction = (dX/magnitude, dY/magnitude)
@@ -529,7 +534,7 @@ class Offender(Player):
                 if self.hasBall():
                     weight *= 10
                 else:
-                    weight *= 10
+                    weight *= 20
                 return self.createVector(weight, direction)
             if objective is Objectives.ZONE_CENTER:
                 (dist, direction) = self.magnitudeAndDirection(self.game.playerDistZone(self))
@@ -572,7 +577,7 @@ class Offender(Player):
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
                         weight = -(500/(dist + 1))**2
                         if mate is nearestTeammate:
-                            weight *= 250
+                            weight *= 300
                         if self.hasBall():
                             weight *= 20
                         mateVector = self.createVector(weight, direction)
@@ -593,7 +598,7 @@ class Offender(Player):
             elif objective is Objectives.RANDOM:
                 if self.randomCount > RANDOM_TIME:
                     vector = (uniform(-1,1),uniform(-1,1))
-                    weight = 400
+                    weight = 500
                     self.randomVector = self.createVector(weight, vector)
                     self.randomCount = 0
                     return self.randomVector
@@ -652,7 +657,7 @@ class Defender(Player):
         ballDist = self.game.playerDistBall(self)
         playerPos = self.getPosition()
         (forget, direction) = self.magnitudeAndDirection(ballDist)
-        if forget <= 7.5 and playerPos[1] < 50:
+        if forget <= 5 and playerPos[1] < 50:
             weight = 10
             return self.createVector(weight, direction)
         else:
@@ -672,7 +677,7 @@ class Defender(Player):
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, opponent))
                         weight = -15/(dist + 1)
                         if opponent is nearestOpponent:
-                            weight *= -10
+                            weight *= -100
                         if self.hasBall():
                             weight *= -10
                         if playerPos[1] > 40:
@@ -700,9 +705,9 @@ class Defender(Player):
                 nearestTeammate = self.game.nearestTeammate(self)[0]
                 for mate in Team:
                         (dist, direction) = self.magnitudeAndDirection(self.game.playerDistPlayer(self, mate))
-                        weight = -(200/(dist + 1))**2
+                        weight = -(500/(dist + 1))**2
                         if mate is nearestTeammate:
-                            weight *= 250
+                            weight *= 300
                         if self.hasBall():
                             weight *= 10
                         mateVector = self.createVector(weight, direction)
