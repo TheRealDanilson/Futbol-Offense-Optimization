@@ -159,7 +159,7 @@ class Player(object):
         else:
             r = -1
         if position[1] == 0 and abs(position[0]) < 4:
-            dX = position[0] - self.position[0] + self.position[0]/5 + r*self.position[1]/5 + uniform(-8,8)
+            dX = position[0] - self.position[0] + self.position[0]/4 + r*self.position[1]/4+ uniform(-10,10)
             dY = position[1] - self.position[1] 
             magnitude = .5*(dX**2 + dY**2)**(0.5)
             try:
