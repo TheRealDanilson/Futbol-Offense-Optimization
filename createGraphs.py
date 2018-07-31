@@ -98,7 +98,7 @@ def formationPasses():
     
     graphLabels(ax,'Total Passes per Formation','Formations','Passes',ind, width, xTick = formationLabels)
     
-    ax.legend(allRects, tuple(passInformation.keys()),frameon=False, loc=(1, 1))
+    ax.legend(allRects, tuple(passInformation.keys()),frameon=False, loc=( 1))
 
     for i in allRects:
         barLabels(ax, i)
@@ -193,7 +193,7 @@ def formationInterceptions():
     
     graphLabels(ax,'Total Interceptions per Formation','Formations','Interceptions',ind, width, xTick = formationLabels)
     
-    ax.legend(allRects, tuple(interceptionInformation.keys()),frameon=False, loc=(1, 1))
+    ax.legend(allRects, tuple(interceptionInformation.keys()),frameon=True, loc=( 1))
 
     for i in allRects:
         barLabels(ax, i)
@@ -219,7 +219,7 @@ def heatMap():
             else:
                 zVal = int(shot/total * 1000)/10
             z[i][j] = zVal
-            ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
+            #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
         i += 1
     ax.set_xticks(np.arange(6))
@@ -228,7 +228,7 @@ def heatMap():
     ax.set_yticklabels(defFormationOrder)
     ax.set_title('Shot percentages by formation')
     
-    plt.imshow(z.T, cmap = 'RdYlGn')
+    plt.imshow(z.T, cmap = 'Blues')
     plt.colorbar()
     return offFormationOrder, defFormationOrder
     #X, Y = np.meshgrid(xedges, yedges)
@@ -254,7 +254,7 @@ def passingHeat():
             else:
                 zVal = int(passes/total * 1000)/10
             z[i][j] = zVal
-            ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
+            #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
         i += 1
     ax.set_xticks(np.arange(6))
@@ -263,7 +263,7 @@ def passingHeat():
     ax.set_yticklabels(defFormationOrder)
     ax.set_title('Pass percentages by formation')
     
-    plt.imshow(z.T, cmap = 'RdYlGn')
+    plt.imshow(z.T, cmap = 'Blues')
     plt.colorbar()
     
     
@@ -285,7 +285,7 @@ def interceptionHeat():
             else:
                 zVal = int(interceptions/total * 1000)/10
             z[i][j] = zVal
-            ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
+            #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
         i += 1
     ax.set_xticks(np.arange(6))
@@ -294,7 +294,7 @@ def interceptionHeat():
     ax.set_yticklabels(offFormationOrder)
     ax.set_title('Interception percentages by formation')
     
-    plt.imshow(z.T, cmap = 'RdYlGn')
+    plt.imshow(z.T, cmap = 'Blues')
     plt.colorbar()    
 
 
