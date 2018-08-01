@@ -214,12 +214,8 @@ def heatMap():
     for offFormation in offFormationOrder:
         offDict = shotsByFormation[offFormation]
         j = 0
-        total = sum(offDict.values())
         for shot in offDict.values():
-            if total ==0:
-                zVal = 0
-            else:
-                zVal = int(shot/total * 1000)/10
+            zVal = shot
             z[i][j] = zVal
             #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
@@ -233,12 +229,18 @@ def heatMap():
         defOrder += [deff[4:]]
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(offOrder)
-    ax.set_yticklabels(defOrder)
-    ax.set_title('Shot percentages by Offensive Formation', size=30, fontweight='bold', y = 1.04)
+    ax.set_xlabel('Offenses', size = 26)
+    ax.set_ylabel('Defenses', size = 26)
+    ax.set_xticklabels(offOrder, size=12)
+    ax.set_yticklabels(defOrder, size=12)
+    ax.xaxis.set_label_coords(0.5, -0.05)
+    ax.yaxis.set_label_coords(-.10, 0.5)
+    ax.set_title('Goals per Matchup', size=30, fontweight='bold', y = 1.04)
     
     plt.imshow(z.T, cmap = 'Blues')
-    plt.colorbar()
+    cbar = plt.colorbar()
+    cbar.ax.tick_params(labelsize=12)
+    #fig.savefig('test.svg', dpi=300)
     return offFormationOrder, defFormationOrder
     #X, Y = np.meshgrid(xedges, yedges)
     #ax.pcolormesh(X, Y, heatmap.T)
@@ -256,12 +258,8 @@ def passingHeat():
     for offFormation in offFormationOrder:
         offDict = passInformationInverted[offFormation]
         j = 0
-        total = sum(offDict.values())
         for passes in offDict.values():
-            if total ==0:
-                zVal = 0
-            else:
-                zVal = int(passes/total * 1000)/10
+            zVal = passes
             z[i][j] = zVal
             #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
@@ -274,12 +272,17 @@ def passingHeat():
         defOrder += [deff[4:]]
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(offOrder)
-    ax.set_yticklabels(defOrder)
-    ax.set_title('Pass percentages by Offensive Formation', size=30, fontweight='bold',  y = 1.04)
+    ax.set_xlabel('Offenses', size = 26)
+    ax.set_ylabel('Defenses', size = 26)
+    ax.set_xticklabels(offOrder, size=12)
+    ax.set_yticklabels(defOrder, size=12)
+    ax.xaxis.set_label_coords(0.5, -0.05)
+    ax.yaxis.set_label_coords(-.10, 0.5)
+    ax.set_title('Passes per Matchup', size=30, fontweight='bold',  y = 1.04)
     
     plt.imshow(z.T, cmap = 'Blues')
-    plt.colorbar()
+    cbar = plt.colorbar()
+    cbar.ax.tick_params(labelsize=12)
     
     
 def interceptionHeat():
@@ -293,12 +296,8 @@ def interceptionHeat():
     for defFormation in defFormationOrder:
         defDict = interceptionInformationInverted[defFormation]
         j = 0
-        total = sum(defDict.values())
         for interceptions in defDict.values():
-            if total ==0:
-                zVal = 0
-            else:
-                zVal = int(interceptions/total * 1000)/10
+            zVal = interceptions
             z[i][j] = zVal
             #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
@@ -311,11 +310,16 @@ def interceptionHeat():
         defOrder += [deff[4:]]
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(defOrder)
-    ax.set_yticklabels(offOrder)
-    tit = ax.set_title('Interception percentages by Defensive Formation', size=30, fontweight='bold', y = 1.04)
+    ax.set_xlabel('Defenses', size = 26)
+    ax.set_ylabel('Offenses', size = 26)
+    ax.set_xticklabels(defOrder, size=12)
+    ax.set_yticklabels(offOrder, size=12)
+    ax.xaxis.set_label_coords(0.5, -0.05)
+    ax.yaxis.set_label_coords(-.10, 0.5)
+    tit = ax.set_title('Interceptions per Matchup', size=30, fontweight='bold', y = 1.04)
     plt.imshow(z.T, cmap = 'Blues')
-    plt.colorbar()    
+    cbar = plt.colorbar()
+    cbar.ax.tick_params(labelsize=12) 
 
 
 def invertDict(dct):
