@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from matplotlib import rcParams
 from readData import *
 
 def graphLabels(ax,title,xAxis,yAxis,ind,width,xTick = ""):
@@ -222,11 +224,18 @@ def heatMap():
             #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
         i += 1
+   #prop = fm.FontProperties(fname='/usr/share/fonts/OTF/MyriadPro_Bold.otf')
+    offOrder = []
+    defOrder = []
+    for off in offFormationOrder:
+        offOrder += [off[4:]]
+    for deff in defFormationOrder:
+        defOrder += [deff[4:]]
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(offFormationOrder)
-    ax.set_yticklabels(defFormationOrder)
-    ax.set_title('Shot percentages by formation')
+    ax.set_xticklabels(offOrder)
+    ax.set_yticklabels(defOrder)
+    ax.set_title('Shot percentages by Offensive Formation', size=30, fontweight='bold', y = 1.04)
     
     plt.imshow(z.T, cmap = 'Blues')
     plt.colorbar()
@@ -257,11 +266,17 @@ def passingHeat():
             #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
         i += 1
+    offOrder = []
+    defOrder = []
+    for off in offFormationOrder:
+        offOrder += [off[4:]]
+    for deff in defFormationOrder:
+        defOrder += [deff[4:]]
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(offFormationOrder)
-    ax.set_yticklabels(defFormationOrder)
-    ax.set_title('Pass percentages by formation')
+    ax.set_xticklabels(offOrder)
+    ax.set_yticklabels(defOrder)
+    ax.set_title('Pass percentages by Offensive Formation', size=30, fontweight='bold',  y = 1.04)
     
     plt.imshow(z.T, cmap = 'Blues')
     plt.colorbar()
@@ -288,12 +303,17 @@ def interceptionHeat():
             #ax.text(i, j, str(zVal) + '%', ha='center', va='center', color='k', size=16)
             j += 1
         i += 1
+    offOrder = []
+    defOrder = []
+    for off in offFormationOrder:
+        offOrder += [off[4:]]
+    for deff in defFormationOrder:
+        defOrder += [deff[4:]]
     ax.set_xticks(np.arange(6))
     ax.set_yticks(np.arange(6))
-    ax.set_xticklabels(defFormationOrder)
-    ax.set_yticklabels(offFormationOrder)
-    ax.set_title('Interception percentages by formation')
-    
+    ax.set_xticklabels(defOrder)
+    ax.set_yticklabels(offOrder)
+    tit = ax.set_title('Interception percentages by Defensive Formation', size=30, fontweight='bold', y = 1.04)
     plt.imshow(z.T, cmap = 'Blues')
     plt.colorbar()    
 
@@ -311,6 +331,13 @@ def invertDict(dct):
 
 
 #Using readData
+font_dirs = ['/usr/share/fonts/OTF']
+font_files = fm.findSystemFonts(fontpaths=font_dirs)
+font_list = fm.createFontList(font_files)
+fm.fontManager.ttflist.extend(font_list)
+#print(rcParams)
+rcParams['font.family'] = 'Myriad Pro'
+
 
 dataSet = readDataFiles()
 shotsTaken, shotsMade, rangeTaken, rangeMade, shotsByFormation = shots(dataSet)
