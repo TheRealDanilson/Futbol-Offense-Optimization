@@ -1,0 +1,11 @@
+CLASS; PLAYER NAME; INITIAL POSITION; ZONE BOUNDS
+Off ; RB ; -35, 57 ; -35, -35, 47, 47
+Off ; RCB ; -10, 57 ; -10, -10, 50, 50
+Off ; LCB ; 10, 57 ; 10, 10, 50, 50
+Off ; LB ; 35, 57 ; 35, 35, 47, 47
+Off ; RWB ; -28, 40 ; -28, -28, 30, 30
+Off ; RAM ; -15, 45 ; -15, -15, 35, 35
+Off ; CDM ; 0, 47 ; 0, 0, 37, 37
+Off ; LAM ; 15, 45 ; 15, 15, 35, 35
+Off ; LWB ; 28, 40 ; 28, 28, 30, 30
+Off ; CF ; 0, 27 ; 0, 0, 17, 17
